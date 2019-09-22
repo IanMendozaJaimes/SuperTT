@@ -1,6 +1,6 @@
 # Prototipo de sistema para el reconocimiento de texto en imágenes y su traducción a LaTex.
 
-![Arquitectura](./media_markdown/example.PNG)
+![Arquitectura](https://github.com/IanMendozaJaimes/SuperTT/blob/master/media_markdown/exmaple.PNG?raw=true)
 
 #### Alumnos: 
  * [Barrera Pérez Carlos Tonatihu](https://github.com/tonabarrera)
