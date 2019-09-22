@@ -1,5 +1,7 @@
 # Prototipo de sistema para el reconocimiento de texto en imágenes y su traducción a LaTex.
 
+![Arquitectura](./media_markdown/example.PNG)
+
 #### Alumnos: 
  * [Barrera Pérez Carlos Tonatihu](https://github.com/tonabarrera)
  * [García Medina Juan Carlos](https://github.com/QApolo)
