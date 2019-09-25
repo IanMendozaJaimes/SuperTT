@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
     'proyectos.apps.ProyectosConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -85,10 +86,10 @@ WSGI_APPLICATION = 'supertt.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
-        'USER': 'ianMJ',
-        'PASSWORD': '',
+        'USER': 'postgres',
+        'PASSWORD': 'newcastle',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -112,6 +113,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+
+REST_FRAMEWORK = {
+        'PAGE_SIZE':  10
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
