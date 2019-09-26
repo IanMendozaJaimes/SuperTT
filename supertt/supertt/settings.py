@@ -86,12 +86,23 @@ WSGI_APPLICATION = 'supertt.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'tt_database',
+#         'USER': 'postgres',
+#         'PASSWORD': 'newcastle',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
-        'USER': 'postgres',
-        'PASSWORD': 'newcastle',
+        'USER': 'ianMJ',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -117,7 +128,10 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 REST_FRAMEWORK = {
-        'PAGE_SIZE':  10
+    'PAGE_SIZE':  10,
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+    ],
 }
 
 # Internationalization
