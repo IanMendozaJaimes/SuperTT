@@ -40,4 +40,17 @@
     <string name="label_mi_cuenta">Mi cuenta</string>
     <string name="label_mis_proyectos">Mis proyectos</string>
     <string name="label_cerrar_sesion">Cerrar sesión</string>
+    
+    <string name="msg1_datos_no_validos">Los datos introducidos no son validos.</string>
+    <string name="msg2_cuenta_no_verificada">La cuenta aun no ha sido verificada.</string>
+    <string name="msg3_correo_electronico_no_registrado">No existe una cuenta con el correo electrónico introducido..</string>
+    <string name="msg4_correo_electronico_ya_registrado"> El correo electrónico ya se ha utilizado.</string>
+    <string name="msg5_verifique_su_cuenta">Verifique su cuenta a través del correo electrónico que se le ha mandado.</string>
+    <string name="msg6_envio_correo_recuperacion"> Se ha enviado un correo electrónico para la recuperación de su contraseña.</string>
+    <string name="msg7_no_existe_proyectos_para_mostrar">No hay proyectos que se puedan mostrar.</string>
+    <string name="msg8_no_se_puede_mostrar_proyecto">En este momento no se puede mostrar el proyecto.</string>
+    <string name="msg9_operacion_exitosa">La operación se ha realizado con éxito.</string>
+    <string name="msg10_operacion_fallida">La operación no se pudo realizar.</string>
+    <string name="msg12_ingrese_nombre">Ingrese el nombre del proyecto.</string>
+    <string name="msg13_falta_informacion">Falta información necesaria para realizar la operación.</string>
 </resources>
