@@ -4,17 +4,19 @@
     <group android:checkableBehavior="single">
 
         <item
-            android:id="@+id/first"
+            android:id="@+id/nav_home"
+            android:icon="@drawable/ic_menu_home"
             android:title="@string/label_mis_proyectos" />
 
         <item
-            android:id="@+id/second"
+            android:id="@+id/nav_profile"
+            android:icon="@drawable/ic_menu_account"
             android:title="@string/label_mi_cuenta" />
     </group>
-
     <item android:title="">
         <menu>
-            <item android:title="@string/label_cerrar_sesion"/>
+            <item android:icon="@drawable/ic_menu_log_out"
+                android:title="@string/label_cerrar_sesion"/>
         </menu>
     </item>
 </menu>
