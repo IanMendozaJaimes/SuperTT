@@ -1,0 +1,30 @@
+{% extends "general.html" %}
+{% block content %}
+
+
+	
+	<section class="Login">
+		
+		<div class="Login_container">
+			<h1 class="Login_container_p">Nueva cuenta</h1>
+			<div class="Login_container_form">
+				<form method="post" action="/usuarios/registrarse">
+					{% csrf_token %}
+					<input type="text" name="nombre" placeholder="Nombre" class="text_form Login_container_text">
+					<input type="email" name="correo" placeholder="Correo" class="text_form Login_container_text">
+					<input type="password" name="contra" placeholder="Contraseña" class="text_form Login_container_text">
+					<input type="password" name="contraConf" placeholder="Confirmar contraseña" class="text_form Login_container_text">
+					<button type="submit" formmethod="post" name="registroBtn" class="btn_form Login_container_submit">
+						Registrarse
+					</button>
+					<div class="Login_container_line">
+						<div class="Login_container_line_l"></div>
+						<p>Si ya tienes una cuenta, <a href="/usuarios/login">inicia sesión</a>.</p>
+					</div>
+				</form>
+			</div>
+		</div>
+
+	</section>
+
+{% endblock %}

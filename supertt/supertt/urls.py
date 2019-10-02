@@ -20,10 +20,19 @@ from django.conf import settings
 from rest_framework.authtoken import views
 from django.conf.urls import url, include
 
+from django.conf.urls.static import static
+
+from proyectos.urls import get_proyects_urls
+
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('proyectos.urls')),
-    path('users/', include('users.urls')),
-]
+    path('usuarios/', include('users.urls')),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+urlpatterns += get_proyects_urls()
+
+

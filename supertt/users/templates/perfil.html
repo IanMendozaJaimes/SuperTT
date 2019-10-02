@@ -1,0 +1,53 @@
+{% extends "general.html" %}
+{% block content %}
+
+	<section class="Profile">
+		<div class="Profile_container">
+			<div class="Profile_container_avatar">
+				<div id="avatarLight" class="Profile_container_avatar_light"></div>
+				<div id="avatarDark" class="Profile_container_avatar_dark">
+					<p>Cambiar</p>
+				</div>
+				<div class="Profile_container_avatar_photo"></div>
+			</div>
+			<p class="Profile_container_email">Correo electrónico</p>
+			<form>
+				<input type="text" placeholder="Nombre" class="text_form Profile_container_text">
+				<div class="Profile_container_select">
+					<select class="Profile_container_studies">
+						<option>Grado de estudios</option>
+						<option>Licenciatura</option>
+						<option>Maestria</option>
+						<option>Doctorado</option>
+					</select>
+				</div>
+			</form>
+			<div class="Login_container_line">
+				<div class="Login_container_line_l"></div>
+			</div>
+			<div class="Profile_container_changeP">
+				<p class="Profile_container_changeP_p">Cambiar contraseña</p>
+				<form>
+					<input type="password" placeholder="Contraseña" class="text_form Profile_container_text">
+					<input type="password" placeholder="Confirmar contraseña" class="text_form Profile_container_text">
+					<button class="btn_form Profile_container_btn">
+						Cambiar contraseña
+					</button>
+				</form>
+			</div>
+		</div>
+	</section>
+
+	<script type="text/javascript">
+		var imgContainer = document.getElementById('avatarLight');
+		var imgDark = document.getElementById('avatarDark');
+		imgContainer.onmouseover = function(){
+			imgDark.classList.add('opacity_full');
+		};
+		imgContainer.onmouseout = function(){
+			imgDark.classList.remove('opacity_full');
+		};
+	</script>
+
+{% endblock %}
+

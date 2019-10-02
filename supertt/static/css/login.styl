@@ -1,0 +1,90 @@
+.Login
+	make_flex()
+	height 100vh
+	align-items center
+	text-align center
+	
+	& h1
+		remove_defaults()
+		margin-bottom 1em
+		font-size 1.7em
+	
+	&_container
+		min-width 400px
+		max-width 400px
+		
+		&_form
+			width 80%
+			display inline-block
+			
+			& form
+				make_flex()
+				flex-wrap wrap
+			
+		&_text
+			flex-basis 100%
+		
+		&_p
+			flex-basis 100%
+			flex-wrap wrap
+			make_flex()
+			
+			& p
+				flex-basis 100%
+				font-size 0.8em
+		
+		&_submit
+			background-color secondary_color_dark
+			border none
+			color white
+			margin 1em 0
+			flex-basis 100%
+			
+			&:hover
+				background-color secondary_color
+		
+		&_line
+			margin 1em 0
+			flex-basis 100%
+			
+			&_l 
+				remove_defaults()
+				width 80%
+				height 2px
+				border-radius 5px
+				background-color fill_color_dark
+				display inline-block
+				margin-bottom 0.5em
+			
+			& p
+				font-size 0.8em
+		
+		&_change
+			flex-basis 100%
+			
+			&:hover
+				background-color secondary_color_dark
+
+
+.Recuperacion
+	
+	&_container
+		make_flex()
+		flex-wrap wrap
+		
+		&_p
+			flex-basis 100%
+		
+		&_form
+			flex-basis 100%
+			make_flex()
+			flex-wrap wrap
+			
+			&_text
+				flex-basis 100%
+			
+
+			
+			
+		
+		
