@@ -8,7 +8,7 @@
     <!-- Para botones principalmente -->
     <color name="colorAccent">#9c0a64</color>
     <color name="colorAccentLight">#d14a92</color>
-    <color name="colorAccentDark">#69003a</color>
+    <color name="colorAccentDark">#69003A</color>
     <!-- Para texto principalmente -->
     <color name="colorPrimaryText">#ffffff</color>
     <color name="colorSecondaryText">#000000</color>

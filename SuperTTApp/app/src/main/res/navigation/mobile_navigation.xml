@@ -16,5 +16,4 @@
         android:name="com.equipo.superttapp.users.view.ProfileFragment"
         android:label="@string/menu_profile"
         tools:layout="@layout/fragment_profile" />
-
 </navigation>

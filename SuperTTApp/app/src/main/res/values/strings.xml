@@ -35,6 +35,8 @@
     <string name="label_mi_cuenta">Mi cuenta</string>
     <string name="label_mis_proyectos">Mis proyectos</string>
     <string name="label_cerrar_sesion">Cerrar sesión</string>
+    <string name="label_si">Sí</string>
+    <string name="label_no">No</string>
 
     <string name="msg1_datos_no_validos">Los datos introducidos no son validos.</string>
     <string name="msg2_cuenta_no_verificada">La cuenta aun no ha sido verificada.</string>
@@ -47,5 +49,8 @@
     <string name="msg9_operacion_exitosa">La operación se ha realizado con éxito.</string>
     <string name="msg10_operacion_fallida">La operación no se pudo realizar.</string>
     <string name="msg12_ingrese_nombre">Ingrese el nombre del proyecto.</string>
+    <string name="msg11_confirmacion_operacion_cerrar_sesion">¿Está seguro de cerrar sesión?</string>
     <string name="msg13_falta_informacion">Falta información necesaria para realizar la operación.</string>
+    <string name="label_calificacion">Calificación:</string>
+    <string name="label_fecha_modificacion">Fecha de modificación:</string>
 </resources>

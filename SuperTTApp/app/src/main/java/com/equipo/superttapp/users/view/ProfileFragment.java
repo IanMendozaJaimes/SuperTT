@@ -29,7 +29,6 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        Log.i(TAG, "----->AQUI fragento");
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
