@@ -53,4 +53,5 @@
     <string name="msg13_falta_informacion">Falta información necesaria para realizar la operación.</string>
     <string name="label_calificacion">Calificación:</string>
     <string name="label_fecha_modificacion">Fecha de modificación:</string>
+    <string name="label_guardar_cambios">Guardar cambios</string>
 </resources>
