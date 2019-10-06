@@ -54,4 +54,8 @@
     <string name="label_calificacion">Calificación:</string>
     <string name="label_fecha_modificacion">Fecha de modificación:</string>
     <string name="label_guardar_cambios">Guardar cambios</string>
+    <string name="btn_borrar">Borrar</string>
+    <string name="btn_calificar">Calificar</string>
+    <string name="label_borrar_proyecto">Borrar</string>
+    <string name="label_editar_proyecto">Editar</string>
 </resources>
