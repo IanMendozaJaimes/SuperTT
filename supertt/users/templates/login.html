@@ -4,9 +4,36 @@
 	<section class="Login">
 		
 		<div class="Login_container">
-			<p class="Login_container_p">Inicio de Sesión</p>
+			<h1 class="Login_container_p">Inicio de Sesión</h1>
+			<div class="Login_container_form">
+				<form>
+					<input type="email" placeholder="Correo" class="text_form Login_container_text">
+					<div class="Login_container_p">
+						<input type="password" placeholder="Contraseña" class="text_form Login_container_text">
+						<p>Olvidaste tu contraseña?, recuperala <a href="#">aqui</a>.</p>
+					</div>
+					<button class="btn_form Login_container_submit">
+						Iniciar sesión
+					</button>
+					<div class="Login_container_line">
+						<div class="Login_container_line_l"></div>
+						<p>Si no tienes una cuenta, tambien puedes crear una.</p>
+					</div>
+					<button id="btnR" class="btn_form Login_container_change">
+						Registrarse
+					</button>
+				</form>
+			</div>
 		</div>
 
 	</section>
+
+	<script type="text/javascript">
+		let btnRegistro = document.getElementById('btnR');
+		btnRegistro.onclick = function(e){
+			e.preventDefault();
+			window.location = '/usuarios/registrarse'
+		};
+	</script>
 
 {% endblock %}

@@ -1,0 +1,128 @@
+.Profile
+	make_flex()
+	margin 100px 0
+	text-align center
+	
+	&_container
+		min-width 400px
+		max-width 400px
+		make_flex()
+		flex-wrap wrap
+		
+		&_avatar
+			make_flex()
+			flex-basis 100%
+			height 200px
+			margin-bottom 30px
+			align-items center
+			position relative
+			z-index 1
+			
+			&_light
+				background-color rgba(0,0,0,0)
+				position absolute
+				height 200px
+				width 200px
+				border-radius 50%
+				z-index 3
+				cursor pointer
+				
+			
+			&_dark
+				make_flex()
+				background-color rgba(0, 0, 0, 0.7)
+				position absolute
+				height 200px
+				width 200px
+				border-radius 50%
+				align-content center
+				align-items center
+				color white
+				z-index 2
+				opacity 0
+				transition opacity 0.1s ease-out
+
+			&_photo
+				width 200px
+				height 200px
+				border-radius 50%
+				background-image get_link_image('avatarDefault.png')
+				background-color white
+				background-size cover
+				background-position center
+	
+		&_email
+			flex-basis 100%
+			margin-bottom 2em
+			
+		&_changeP
+			margin-top 2em
+		
+		& form
+			flex-basis 100%
+			make_flex()
+			flex-wrap wrap
+		
+		&_text
+			flex-basis 100%
+			
+		&_select
+			border thin solid fill_color_dark
+			height 40px
+			width 400px
+			overflow hidden
+			position relative
+			border-radius 5px
+			background-color white
+			margin 0.3em 0
+			
+			&::after
+				content "\025be"
+				display table-cell
+				padding-top 10px
+				width 30px
+				height 30px
+				position absolute
+				top 0
+				right 0
+				pointer-events none
+				background-color secondary_color
+				color white
+			
+		&_studies
+			flex-basis 100%
+			padding 10px
+			background transparent
+			font-size font_size
+			color font_color
+			border none
+			width 420px
+			height 40px
+			
+			&:hover
+				cursor pointer
+				background-color fill_color_dark
+			
+			&:focus
+				outline 0
+				border none
+				box-shadow none
+		
+		&_btn
+			flex-basis 100%
+			
+			&:hover
+				background-color secondary_color_dark
+
+
+.opacity_full
+	opacity 1
+
+
+				
+
+
+
+
+
+

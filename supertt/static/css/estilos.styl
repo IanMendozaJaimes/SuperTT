@@ -1,2 +1,152 @@
-.Login
-	background-color blue
+// variables
+font_size = 16px
+primary_color = #006699
+primary_color_light = #4e94ca
+primary_color_dark = #003c6b
+secondary_color = #ba0a76
+secondary_color_light = #f051a5
+secondary_color_dark = #85004a
+fill_color = #F5F5F6
+fill_color_dark = #e1e2e1;
+font_color = #373737
+
+// funciones
+remove_defaults()
+	margin 0
+	padding 0
+
+
+get_link_image(path)
+	url('/static/images/' + path)
+
+
+make_flex()
+	display flex
+	justify-content center
+
+
+body
+	background-color fill_color
+	font-family 'Roboto', sans-serif
+	color font_color
+	
+
+// declaracion de estilos
+header
+	background-color primary_color
+	color white
+	position fixed
+	top 0
+	left 0
+	right 0
+	min-heigth 50px
+	max-heigth 50px
+	padding 0 1em
+	display flex
+	height 50px
+	z-index 99
+
+
+.NavigationBar
+	display flex
+	width 100%
+	justify-content space-between
+	align-items center
+	
+	&_appname
+		flex-basis 40%
+		
+		&_p
+			margin-left 1.5em
+	
+	&_options
+		flex-basis 40%
+		max-width 400px
+		
+		&_ul
+			display flex
+			justify-content center
+			align-items center
+			remove_defaults()
+		
+		&_avatar
+			width 35px
+			height 35px
+			border-radius 50%
+			background-image get_link_image('avatarDefault.png')
+			background-color white
+			background-size cover
+			background-position center
+			margin-left 1em
+
+
+li
+	list-style none
+	remove_defaults()
+	
+	&:first-child
+			margin-right 0.5em
+	
+	&:last-child
+		display flex
+		align-items center
+	
+	& p
+		padding 0.5em
+		border-radius 5px
+	
+	& p:hover
+		cursor pointer
+		background-color primary_color_dark
+	
+p
+	remove_defaults()
+
+
+a 
+	color primary_color_light
+	text-decoration none
+
+	&:hover
+		color secondary_color
+		
+
+.text_form
+	padding 10px
+	border-radius 5px
+	border solid
+	border-color fill_color_dark
+	border-width thin
+	font-size font_size
+	margin 0.3em 0
+	color font_color
+
+
+.btn_form
+	remove_defaults()
+	padding 0.7em
+	background-color white
+	border-radius 5px
+	border solid
+	border-color fill_color_dark
+	border-width thin
+	font-size 1em
+	color font_color
+	
+	&:hover
+		cursor pointer
+		color white
+		background-color secondary_color_dark
+	
+	&:focus
+		outline none
+	
+
+// otros archivos que seran agregados al principal
+@import 'login'
+@import 'perfil'
+@import 'proyectos'
+
+
+
+	
