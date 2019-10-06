@@ -1,4 +1,4 @@
-package com.equipo.superttapp;
+package com.equipo.superttapp.util;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

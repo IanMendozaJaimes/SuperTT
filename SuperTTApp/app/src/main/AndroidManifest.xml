@@ -14,7 +14,6 @@
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity android:name=".users.view.ForgotPasswordActivity" />
-        <activity android:name=".users.view.ProfileActivity" />
         <activity android:name=".users.view.SignInActivity" />
         <activity android:name=".users.view.LoginActivity">
             <intent-filter>

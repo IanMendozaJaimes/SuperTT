@@ -16,9 +16,9 @@
             android:id="@+id/image_ecuacion"
             android:layout_width="match_parent"
             android:layout_height="200dp"
+            android:contentDescription="@string/imagen_de_la_ecuacion"
             android:scaleType="centerCrop"
-            android:src="@drawable/card_defecto"
-            android:contentDescription="Imagen de la ecuacion" />
+            android:src="@drawable/card_defecto" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -58,7 +58,16 @@
                 android:id="@+id/btn_borrar_traduccion"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/btn_borrar"/>
+                android:text="@string/btn_borrar" />
+
+            <TextView
+                android:id="@+id/tv_calificacion_traduccion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableEnd="@android:drawable/star_off"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:layout_marginStart="80dp"
+                android:text="CAL" />
         </LinearLayout>
 
     </LinearLayout>

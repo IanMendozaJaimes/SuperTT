@@ -110,9 +110,9 @@ obj/
 ehthumbs.db
 Thumbs.db
 
-# Legacy Eclipse project files
+# Legacy Eclipse proyecto files
 .classpath
-.project
+.proyecto
 .cproject
 .settings/
 
