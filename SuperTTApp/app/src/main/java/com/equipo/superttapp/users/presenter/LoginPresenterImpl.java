@@ -20,14 +20,15 @@ public class LoginPresenterImpl implements LoginPresenter{
         view.showProgressBar();
         loginFormModel = interactor.logIn(loginFormModel);
         if (loginFormModel.getResultCode().equals(ResultCodes.SUCCESS))
-            logInSuccess();
+            logInSuccess(loginFormModel);
         else
             logInError(loginFormModel);
     }
 
     @Override
-    public void logInSuccess() {
+    public void logInSuccess(LoginFormModel model) {
         view.hideProgressBar();
+        view.saveUser(model);
         view.goHome();
     }
 

@@ -1,6 +1,8 @@
 package com.equipo.superttapp.users.view;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -16,6 +18,7 @@ import com.equipo.superttapp.projects.view.MainActivity;
 import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.presenter.LoginPresenter;
 import com.equipo.superttapp.users.presenter.LoginPresenterImpl;
+import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -57,6 +60,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             etContra.onEditorAction(EditorInfo.IME_ACTION_DONE);
         });
         setTitle(R.string.label_login);
+        //PreferencesManager preferencesManager = new PreferencesManager(this,
+        //        PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        //if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
+        //        && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
+        //    goHome();
+        //}
     }
 
     @Override
@@ -87,7 +96,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
         if (loginFormModel.getResultCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg2_cuenta_no_verificada);
-        } else {
+        } else  {
             if (!loginFormModel.isValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
             }
@@ -102,5 +111,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void goHome() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    @Override
+    public void saveUser(LoginFormModel model) {
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        preferencesManager.saveValue(PreferencesManager.KEY_EMAIL, model.getEmail());
+        preferencesManager.saveValue(PreferencesManager.KEY_IS_LOGGED, true);
     }
 }
