@@ -30,7 +30,6 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="23dp"
         android:layout_marginEnd="10dp"
-        android:autofillHints=""
         android:ems="10"
         android:hint="@string/label_email"
         android:inputType="textEmailAddress"

@@ -1,27 +1,27 @@
 package com.equipo.superttapp.users.presenter;
 
-import com.equipo.superttapp.users.interactor.LoginInteractor;
-import com.equipo.superttapp.users.interactor.LoginInteractorImpl;
-import com.equipo.superttapp.users.model.LoginForm;
+import com.equipo.superttapp.users.interactor.UserInteractor;
+import com.equipo.superttapp.users.interactor.UserInteractorImpl;
+import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.view.LoginView;
 import com.equipo.superttapp.util.ResultCodes;
 
 public class LoginPresenterImpl implements LoginPresenter{
-    private LoginInteractor interactor;
+    private UserInteractor interactor;
     private LoginView view;
 
     public LoginPresenterImpl(LoginView loginView) {
         this.view = loginView;
-        this.interactor = new LoginInteractorImpl();
+        this.interactor = new UserInteractorImpl();
     }
     @Override
-    public void logIn(LoginForm loginForm) {
+    public void logIn(LoginFormModel loginFormModel) {
         view.showProgressBar();
-        loginForm = interactor.logIn(loginForm);
-        if (loginForm.getResultCode().equals(ResultCodes.SUCCESS))
+        loginFormModel = interactor.logIn(loginFormModel);
+        if (loginFormModel.getResultCode().equals(ResultCodes.SUCCESS))
             logInSuccess();
         else
-            logInError(loginForm);
+            logInError(loginFormModel);
     }
 
     @Override
@@ -31,7 +31,7 @@ public class LoginPresenterImpl implements LoginPresenter{
     }
 
     @Override
-    public void logInError(LoginForm error) {
+    public void logInError(LoginFormModel error) {
         view.hideProgressBar();
         view.loginError(error);
     }

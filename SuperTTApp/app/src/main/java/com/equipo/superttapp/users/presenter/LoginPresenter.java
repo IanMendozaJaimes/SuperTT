@@ -1,9 +1,9 @@
 package com.equipo.superttapp.users.presenter;
 
-import com.equipo.superttapp.users.model.LoginForm;
+import com.equipo.superttapp.users.model.LoginFormModel;
 
 public interface LoginPresenter {
-    void logIn(LoginForm form);
+    void logIn(LoginFormModel form);
     void logInSuccess();
-    void logInError(LoginForm error);
+    void logInError(LoginFormModel error);
 }

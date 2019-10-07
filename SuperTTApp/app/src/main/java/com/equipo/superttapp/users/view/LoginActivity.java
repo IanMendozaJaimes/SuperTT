@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.view.MainActivity;
-import com.equipo.superttapp.users.model.LoginForm;
+import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.presenter.LoginPresenter;
 import com.equipo.superttapp.users.presenter.LoginPresenterImpl;
 import com.equipo.superttapp.util.ResultCodes;
@@ -49,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
         tvRecuperarContra.setOnClickListener(v -> goForgotPassword());
         btnIniciarSesion.setOnClickListener(v -> {
-            LoginForm form = new LoginForm();
+            LoginFormModel form = new LoginFormModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
             presenter.logIn(form);
@@ -82,16 +82,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void loginError(LoginForm loginForm) {
+    public void loginError(LoginFormModel loginFormModel) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_main_activity),
                 R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
-        if (loginForm.getResultCode().equals(ResultCodes.RN006)) {
+        if (loginFormModel.getResultCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg2_cuenta_no_verificada);
         } else {
-            if (!loginForm.isValidEmail()) {
+            if (!loginFormModel.isValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
             }
-            if (!loginForm.isValidPassword()) {
+            if (!loginFormModel.isValidPassword()) {
                 etContra.setError(getText(R.string.msg1_datos_no_validos));
             }
         }
