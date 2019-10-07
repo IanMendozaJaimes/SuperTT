@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Super TT App</string>
+    <string name="app_name">TT Aplicación</string>
     <string name="title_activity_sign_in">Registrate</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
@@ -51,5 +51,6 @@
     <string name="title_activity_main">SuperTT</string>
     <string name="nav_header_desc">Header</string>
     <string name="imagen_de_la_ecuacion">Imagen de la ecuacion</string>
+    <string name="label_login">Iniciar sesión</string>
 
 </resources>

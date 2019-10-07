@@ -22,11 +22,6 @@ public class SignInActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
-        btnCrearCuenta.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(SignInActivity.this, "Crear cuenta", Toast.LENGTH_SHORT).show();
-            }
-        });
+        btnCrearCuenta.setOnClickListener(v -> Toast.makeText(SignInActivity.this, "Crear cuenta", Toast.LENGTH_SHORT).show());
     }
 }
