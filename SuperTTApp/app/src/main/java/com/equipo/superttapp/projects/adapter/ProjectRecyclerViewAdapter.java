@@ -1,6 +1,8 @@
 package com.equipo.superttapp.projects.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +10,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.model.Proyecto;
-import com.equipo.superttapp.projects.view.ProjectDetailFragment;
+import com.equipo.superttapp.projects.view.TraduccionListActivity;
 
 import java.util.List;
 
@@ -44,10 +45,9 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
         holder.tvCalificacion.setText(proyecto.getRate().toString());
         holder.cvProyecto.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), "HOLA", Toast.LENGTH_SHORT).show();
-            ProjectDetailFragment projectFragment = new ProjectDetailFragment();
-            AppCompatActivity actividad = (AppCompatActivity) v.getContext();
-            actividad.getSupportFragmentManager().beginTransaction()
-                    .replace(R.id.nav_host_fragment, projectFragment).addToBackStack(null).commit();
+            Intent intent = new Intent(v.getContext(), TraduccionListActivity.class);
+            intent.putExtra("TITULO", proyecto.getName());
+            v.getContext().startActivity(intent);
         });
     }
 
