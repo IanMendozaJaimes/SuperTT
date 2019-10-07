@@ -8,5 +8,5 @@ public interface LoginView {
     void showProgressBar();
     void hideProgressBar();
     void loginError(LoginFormModel error);
-    void goHome();
+    public void goHome();
 }

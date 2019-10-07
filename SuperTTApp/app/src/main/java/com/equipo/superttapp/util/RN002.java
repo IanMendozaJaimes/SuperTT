@@ -19,4 +19,16 @@ public class RN002 {
     public static boolean isPasswordValid(String password) {
         return password != null && password.trim().length() > 5;
     }
+
+    public static boolean isSecondPasswordValid(String password, String secondPassword) {
+        return isPasswordValid(secondPassword) && secondPassword.equals(password);
+    }
+
+    public static Boolean isNameValid(String name) {
+        return name != null && name.length() > 0;
+    }
+
+    public static Boolean isLastnameValid(String lastname) {
+        return lastname != null && lastname.length() > 0;
+    }
 }

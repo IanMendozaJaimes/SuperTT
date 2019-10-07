@@ -1,9 +1,11 @@
 package com.equipo.superttapp.users.model;
 
+import com.equipo.superttapp.util.ResultCodes;
+
 public class LoginFormModel {
     private String email;
     private String password;
-    private Integer resultCode;
+    private Integer resultCode = ResultCodes.ERROR;
     private Boolean isValidEmail = false;
     private Boolean isValidPassword = false;
 

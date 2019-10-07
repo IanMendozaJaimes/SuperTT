@@ -16,4 +16,10 @@ public class UserRepositoryImpl implements UserRepository {
         return resultado;
     }
 
+    @Override
+    public Integer createAccount(String email, String password, String nombre, String apellidos) {
+        Integer resultado = ResultCodes.RN003;
+        return resultado;
+    }
+
 }

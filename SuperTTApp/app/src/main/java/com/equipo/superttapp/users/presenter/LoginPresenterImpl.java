@@ -14,6 +14,7 @@ public class LoginPresenterImpl implements LoginPresenter{
         this.view = loginView;
         this.interactor = new UserInteractorImpl();
     }
+
     @Override
     public void logIn(LoginFormModel loginFormModel) {
         view.showProgressBar();

@@ -30,9 +30,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     Button btnRegistrate;
     @BindView(R.id.tv_recuperar_contra)
     TextView tvRecuperarContra;
-    @BindView(R.id.et_email)
+    @BindView(R.id.sign_in_et_email)
     EditText etCorreo;
-    @BindView(R.id.et_contra)
+    @BindView(R.id.sign_in_et_contra)
     EditText etContra;
     @BindView(R.id.pbLogin)
     ProgressBar pbLogin;
