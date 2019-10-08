@@ -7,4 +7,5 @@ public interface UserInteractor {
     LoginFormModel logIn(LoginFormModel loginFormModel);
     LoginFormModel sendEmail(LoginFormModel loginFormModel);
     SignInFormModel createAccount(SignInFormModel signInFormModel);
+    SignInFormModel updateAccount(SignInFormModel model);
 }

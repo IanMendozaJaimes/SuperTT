@@ -45,8 +45,26 @@ public class UserInteractorImpl implements UserInteractor {
         model.setValidName(RN002.isNameValid(model.getName()));
         model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
         if (model.isValidPassword() && model.isValidEmail() && model.isValidName()
-                && model.isValidName() && model.isValidLastName()) {
+                && model.isValidSecondPassword() && model.isValidLastName()) {
             resultado = repository.createAccount(model.getEmail(), model.getPassword(),
+                    model.getName(), model.getLastname());
+        }
+        model.setResultCode(resultado);
+        return model;
+    }
+
+    @Override
+    public SignInFormModel updateAccount(SignInFormModel model) {
+        Integer resultado = ResultCodes.ERROR;
+        model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
+        model.setValidEmail(RN002.isEmailValid(model.getEmail()));
+        model.setValidSecondPassword(RN002.isSecondPasswordValid(
+                model.getPassword(), model.getSecondPassword()));
+        model.setValidName(RN002.isNameValid(model.getName()));
+        model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
+        if (model.isValidPassword() && model.isValidEmail() && model.isValidName()
+                && model.isValidSecondPassword() && model.isValidLastName()) {
+            resultado = repository.updateAccount(model.getEmail(), model.getPassword(),
                     model.getName(), model.getLastname());
         }
         model.setResultCode(resultado);
