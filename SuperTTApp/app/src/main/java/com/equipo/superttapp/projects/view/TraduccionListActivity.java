@@ -14,6 +14,9 @@ import android.widget.Toast;
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.Traduccion;
+import com.equipo.superttapp.projects.presenter.TraduccionListPresenter;
+import com.equipo.superttapp.projects.presenter.TraduccionListPresenterImpl;
+import com.equipo.superttapp.util.BundleConstants;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -23,6 +26,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;
+    private TraduccionListPresenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +50,10 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         Bundle bundle = getIntent().getExtras();
-        String titulo = bundle.getString("TITULO");
+        String titulo = bundle.getString(BundleConstants.TITULO_KEY);
+        Integer idProyecto = bundle.getInt(BundleConstants.PROYECTO_ID);
+        presenter = new TraduccionListPresenterImpl();
+        presenter.findAllTraduccionesByProyecto(idProyecto);
         setTitle(titulo);
     }
 

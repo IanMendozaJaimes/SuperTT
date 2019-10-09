@@ -1,9 +1,9 @@
-package com.equipo.superttapp.projects.repository;
+package com.equipo.superttapp.projects.presenter;
 
 import com.equipo.superttapp.projects.model.Traduccion;
 
 import java.util.List;
 
-public interface TraduccionRepository {
+public interface TraduccionListPresenter {
     List<Traduccion> findAllTraduccionesByProyecto(Integer idProyecto);
 }

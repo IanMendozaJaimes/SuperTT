@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.model.Proyecto;
 import com.equipo.superttapp.projects.view.TraduccionListActivity;
+import com.equipo.superttapp.util.BundleConstants;
 
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
         holder.cvProyecto.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), "HOLA", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), TraduccionListActivity.class);
-            intent.putExtra("TITULO", proyecto.getName());
+            intent.putExtra(BundleConstants.TITULO_KEY, proyecto.getName());
             v.getContext().startActivity(intent);
         });
     }

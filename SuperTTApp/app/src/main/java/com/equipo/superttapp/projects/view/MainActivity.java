@@ -1,5 +1,7 @@
 package com.equipo.superttapp.projects.view;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.Toast;
@@ -14,7 +16,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.equipo.superttapp.R;
+import com.equipo.superttapp.users.view.LoginActivity;
 import com.equipo.superttapp.users.view.ProfileFragment;
+import com.equipo.superttapp.util.PreferencesManager;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity implements
@@ -59,12 +63,23 @@ public class MainActivity extends AppCompatActivity implements
                 break;
             case R.id.nav_log_out:
                 Toast.makeText(this, "Salir", Toast.LENGTH_SHORT).show();
+                logOut();
                 break;
             default:
                 throw new IllegalArgumentException("menu option not implemented!!");
         }
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    private void logOut() {
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)) {
+            preferencesManager.deleteValue(PreferencesManager.KEY_EMAIL);
+            preferencesManager.saveValue(PreferencesManager.KEY_IS_LOGGED, false);
+        }
+        startActivity(new Intent(this, LoginActivity.class));
     }
 
     private void showFragment(Class fragmentClass) {
