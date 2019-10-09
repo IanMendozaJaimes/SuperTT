@@ -19,7 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TraduccionListActivity extends AppCompatActivity {
+public class TraduccionListActivity extends AppCompatActivity implements TraduccionListView{
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;

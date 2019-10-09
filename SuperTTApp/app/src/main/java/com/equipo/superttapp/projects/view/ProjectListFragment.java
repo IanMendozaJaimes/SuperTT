@@ -1,6 +1,7 @@
 package com.equipo.superttapp.projects.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +16,7 @@ import com.equipo.superttapp.projects.adapter.ProjectRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.Proyecto;
 import com.equipo.superttapp.projects.presenter.ProjectListPresenter;
 import com.equipo.superttapp.projects.presenter.ProjectListPresenterImpl;
+import com.equipo.superttapp.util.PreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +24,7 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProjectListFragment extends Fragment implements ProjectListView{
+public class ProjectListFragment extends Fragment implements ProjectListView {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter projectAdapter;
@@ -70,11 +72,18 @@ public class ProjectListFragment extends Fragment implements ProjectListView{
         proyectos.add(proyecto);
         proyectos.add(proyecto);
         presenter = new ProjectListPresenterImpl();
-        projectAdapter = new ProjectRecyclerViewAdapter(proyectos, getActivity(), R.layout.item_project);
+        projectAdapter = new ProjectRecyclerViewAdapter(proyectos, getActivity(),
+                R.layout.item_project);
         recyclerView = view.findViewById(R.id.rv_project_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(projectAdapter);
         recyclerView.setLayoutManager(layoutManager);
+//        PreferencesManager preferencesManager = new PreferencesManager(getContext(),
+//                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+//        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
+//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
+//            String email = preferencesManager.getStringValue(PreferencesManager.KEY_EMAIL);
+//        }
         presenter.findAllProyectosByUser("email");
         return view;
     }
