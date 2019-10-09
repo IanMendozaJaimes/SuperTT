@@ -1,9 +1,10 @@
 package com.equipo.superttapp.users.view;
 
 import com.equipo.superttapp.users.model.SignInFormModel;
+import com.equipo.superttapp.util.BusinessResult;
 
 public interface SignInView {
     void showProgressBar();
     void hideProgressBar();
-    void showMessage(SignInFormModel result);
+    void showMessage(BusinessResult<SignInFormModel> result);
 }

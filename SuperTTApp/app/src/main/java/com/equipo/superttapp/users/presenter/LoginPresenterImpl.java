@@ -4,6 +4,7 @@ import com.equipo.superttapp.users.interactor.UserInteractor;
 import com.equipo.superttapp.users.interactor.UserInteractorImpl;
 import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.view.LoginView;
+import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 
 public class LoginPresenterImpl implements LoginPresenter{
@@ -18,23 +19,23 @@ public class LoginPresenterImpl implements LoginPresenter{
     @Override
     public void logIn(LoginFormModel loginFormModel) {
         view.showProgressBar();
-        loginFormModel = interactor.logIn(loginFormModel);
-        if (loginFormModel.getResultCode().equals(ResultCodes.SUCCESS))
-            logInSuccess(loginFormModel);
+        BusinessResult<LoginFormModel> resultado = interactor.logIn(loginFormModel);
+        if (resultado.getCode().equals(ResultCodes.SUCCESS))
+            logInSuccess(resultado);
         else
-            logInError(loginFormModel);
+            logInError(resultado);
     }
 
     @Override
-    public void logInSuccess(LoginFormModel model) {
+    public void logInSuccess(BusinessResult<LoginFormModel> resultado) {
         view.hideProgressBar();
-        view.saveUser(model);
+        view.saveUser(resultado.getResult());
         view.goHome();
     }
 
     @Override
-    public void logInError(LoginFormModel error) {
+    public void logInError(BusinessResult<LoginFormModel> resultado) {
         view.hideProgressBar();
-        view.loginError(error);
+        view.loginError(resultado);
     }
 }

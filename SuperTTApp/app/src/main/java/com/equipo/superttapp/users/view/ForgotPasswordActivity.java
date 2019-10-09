@@ -14,6 +14,7 @@ import com.equipo.superttapp.R;
 import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.presenter.ForgotPasswordPresenter;
 import com.equipo.superttapp.users.presenter.ForgotPasswordPresenterImpl;
+import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -49,15 +50,15 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
     }
 
     @Override
-    public void showMessage(LoginFormModel model) {
+    public void showMessage(BusinessResult<LoginFormModel> result) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activitu_forgot_password),
                 R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
-        if (model.getResultCode().equals(ResultCodes.RN006)) {
+        if (result.getCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg3_correo_electronico_no_registrado);
-        } else if (model.getResultCode().equals(ResultCodes.SUCCESS)) {
+        } else if (result.getCode().equals(ResultCodes.SUCCESS)) {
             snackbar.setText(R.string.msg6_envio_correo_recuperacion);
         } else {
-            if (!model.isValidEmail()) {
+            if (!result.getResult().isValidEmail()) {
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
             }
         }

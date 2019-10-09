@@ -18,6 +18,7 @@ import com.equipo.superttapp.projects.view.MainActivity;
 import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.presenter.LoginPresenter;
 import com.equipo.superttapp.users.presenter.LoginPresenterImpl;
+import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
@@ -52,6 +53,8 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
         tvRecuperarContra.setOnClickListener(v -> goForgotPassword());
         btnIniciarSesion.setOnClickListener(v -> {
+            etContra.setError(null);
+            etCorreo.setError(null);
             LoginFormModel form = new LoginFormModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
@@ -91,16 +94,16 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void loginError(LoginFormModel loginFormModel) {
+    public void loginError(BusinessResult<LoginFormModel> resultado) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_main_activity),
                 R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
-        if (loginFormModel.getResultCode().equals(ResultCodes.RN006)) {
+        if (resultado.getCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg2_cuenta_no_verificada);
         } else  {
-            if (!loginFormModel.isValidEmail()) {
+            if (!resultado.getResult().isValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
             }
-            if (!loginFormModel.isValidPassword()) {
+            if (!resultado.getResult().isValidPassword()) {
                 etContra.setError(getText(R.string.msg1_datos_no_validos));
             }
         }

@@ -5,7 +5,6 @@ import com.equipo.superttapp.util.ResultCodes;
 public class LoginFormModel {
     private String email;
     private String password;
-    private Integer resultCode = ResultCodes.ERROR;
     private Boolean isValidEmail = false;
     private Boolean isValidPassword = false;
 
@@ -23,14 +22,6 @@ public class LoginFormModel {
 
     public void setPassword(String password) {
         this.password = password;
-    }
-
-    public Integer getResultCode() {
-        return resultCode;
-    }
-
-    public void setResultCode(Integer resultCode) {
-        this.resultCode = resultCode;
     }
 
     public Boolean isValidEmail() {

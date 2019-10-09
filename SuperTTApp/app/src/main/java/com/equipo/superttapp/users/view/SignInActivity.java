@@ -14,6 +14,7 @@ import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.model.SignInFormModel;
 import com.equipo.superttapp.users.presenter.SignInPresenter;
 import com.equipo.superttapp.users.presenter.SignInPresenterImpl;
+import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
 
@@ -67,23 +68,23 @@ public class SignInActivity extends AppCompatActivity implements SignInView{
     }
 
     @Override
-    public void showMessage(SignInFormModel result) {
+    public void showMessage(BusinessResult<SignInFormModel> result) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_sign_in),
                 R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
-        if (result.getResultCode().equals(ResultCodes.RN003))
+        if (result.getCode().equals(ResultCodes.RN003))
             snackbar.setText(R.string.msg4_correo_electronico_ya_registrado);
-        else if (result.getResultCode().equals(ResultCodes.SUCCESS))
+        else if (result.getCode().equals(ResultCodes.SUCCESS))
             snackbar.setText(R.string.msg5_verifique_su_cuenta);
         else {
-            if (!result.isValidEmail())
+            if (!result.getResult().isValidEmail())
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.isValidPassword())
+            if (!result.getResult().isValidPassword())
                 etPassword.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.isValidSecondPassword())
+            if (!result.getResult().isValidSecondPassword())
                 etSecondPassword.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.isValidName())
+            if (!result.getResult().isValidName())
                 etName.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.isValidLastName())
+            if (!result.getResult().isValidLastName())
                 etLastname.setError(getText(R.string.msg1_datos_no_validos));
         }
         snackbar.show();

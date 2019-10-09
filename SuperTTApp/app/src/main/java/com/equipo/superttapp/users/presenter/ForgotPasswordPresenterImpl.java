@@ -4,6 +4,7 @@ import com.equipo.superttapp.users.interactor.UserInteractor;
 import com.equipo.superttapp.users.interactor.UserInteractorImpl;
 import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.view.ForgotPasswordView;
+import com.equipo.superttapp.util.BusinessResult;
 
 public class ForgotPasswordPresenterImpl implements ForgotPasswordPresenter{
     private UserInteractor interactor;
@@ -16,12 +17,12 @@ public class ForgotPasswordPresenterImpl implements ForgotPasswordPresenter{
     @Override
     public void sendEmail(LoginFormModel model) {
         view.showProgressBar();
-        model = interactor.sendEmail(model);
-        showMessage(model);
+        BusinessResult<LoginFormModel> result = interactor.sendEmail(model);
+        showMessage(result);
     }
 
     @Override
-    public void showMessage(LoginFormModel errorModel) {
+    public void showMessage(BusinessResult<LoginFormModel> errorModel) {
         view.hideProgressBar();
         view.showMessage(errorModel);
     }
