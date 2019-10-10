@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/cl_activity_sign_in"
     tools:context=".users.view.SignInActivity">
 
     <EditText
-        android:id="@+id/et_email"
+        android:id="@+id/sign_in_et_email"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -21,7 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_contra"
+        android:id="@+id/sign_in_et_contra"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -32,10 +33,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_email" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_et_email" />
 
     <EditText
-        android:id="@+id/et_confirmar_contra"
+        android:id="@+id/sign_in_et_confirmar_contra"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -46,10 +47,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_contra" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_et_contra" />
 
     <EditText
-        android:id="@+id/et_nombre"
+        android:id="@+id/sign_in_et_nombre"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -60,10 +61,10 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_confirmar_contra" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_et_confirmar_contra" />
 
     <EditText
-        android:id="@+id/et_apellido"
+        android:id="@+id/sign_in_et_apellido"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -74,7 +75,7 @@
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_nombre" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_et_nombre" />
 
     <Button
         android:id="@+id/btn_crear_cuenta"
@@ -86,6 +87,15 @@
         android:text="@string/btn_crear_cuenta"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_apellido" />
+        app:layout_constraintTop_toBottomOf="@+id/sign_in_et_apellido" />
+
+    <ProgressBar
+        android:id="@+id/pg_sign_in"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="23dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_crear_cuenta" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

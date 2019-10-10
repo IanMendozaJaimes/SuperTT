@@ -1,30 +1,31 @@
 package com.equipo.superttapp.projects.view;
 
-import android.content.DialogInterface;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 
 import com.equipo.superttapp.R;
+import com.equipo.superttapp.users.view.LoginActivity;
+import com.equipo.superttapp.users.view.ProfileFragment;
+import com.equipo.superttapp.util.PreferencesManager;
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements
+        NavigationView.OnNavigationItemSelectedListener {
     private Toolbar toolbar;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private AppBarConfiguration appBarConfiguration;
-    private NavController navController;
     public static final String TAG = MainActivity.class.getCanonicalName();
 
     @Override
@@ -35,36 +36,60 @@ public class MainActivity extends AppCompatActivity  {
         setSupportActionBar(toolbar);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
+                R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
         navigationView = findViewById(R.id.nav_view);
-
-        appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.nav_home, R.id.nav_profile
-        ).setDrawerLayout(drawerLayout).build();
-        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(navigationView, navController);
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            Log.i(TAG, "ENTRO");
-            Log.i(TAG, "Destino " + destination.getId() + " " + destination.getLabel());
-            /*if (destination.getId() == R.id.mobile_navigation) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setMessage(R.string.msg11_confirmacion_operacion_cerrar_sesion)
-                        .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                            Toast.makeText(this, "Cerrando sesión", Toast.LENGTH_SHORT).show();
-                        })
-                        .setNegativeButton(R.string.label_no, (dialog, which) -> {
-                            Toast.makeText(this, "Nada", Toast.LENGTH_SHORT).show();
-                        });
-                AlertDialog dialogo = builder.create();
-                dialogo.show();
-            }*/
-        });
+        navigationView.setNavigationItemSelectedListener(this);
+        MenuItem menuItem = navigationView.getMenu().getItem(0);
+        onNavigationItemSelected(menuItem);
+        menuItem.setChecked(true);
     }
 
     @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        Class fragment;
+        switch (menuItem.getItemId()) {
+            case R.id.nav_home:
+                fragment = ProjectListFragment.class;
+                showFragment(fragment);
+                setTitle(getString(R.string.menu_home));
+                break;
+            case R.id.nav_profile:
+                fragment = ProfileFragment.class;
+                showFragment(fragment);
+                setTitle(getString(R.string.menu_profile));
+                break;
+            case R.id.nav_log_out:
+                Toast.makeText(this, "Salir", Toast.LENGTH_SHORT).show();
+                logOut();
+                break;
+            default:
+                throw new IllegalArgumentException("menu option not implemented!!");
+        }
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+    }
+
+    private void logOut() {
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)) {
+            preferencesManager.deleteValue(PreferencesManager.KEY_EMAIL);
+            preferencesManager.saveValue(PreferencesManager.KEY_IS_LOGGED, false);
+        }
+        startActivity(new Intent(this, LoginActivity.class));
+    }
+
+    private void showFragment(Class fragmentClass) {
+        Fragment fragment = null;
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+        } catch (InstantiationException | IllegalAccessException e) {
+            e.printStackTrace();
+        }
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.nav_host_fragment, fragment).commit();
     }
 }

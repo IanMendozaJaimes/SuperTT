@@ -15,7 +15,9 @@
     </group>
     <item android:title="">
         <menu>
-            <item android:icon="@drawable/ic_menu_log_out"
+            <item
+                android:id="@+id/nav_log_out"
+                android:icon="@drawable/ic_menu_log_out"
                 android:title="@string/label_cerrar_sesion"/>
         </menu>
     </item>

@@ -1,11 +1,6 @@
 <resources>
-    <string name="app_name">Super TT App</string>
+    <string name="app_name">TT Aplicación</string>
     <string name="title_activity_sign_in">Registrate</string>
-    <string name="prompt_email">Email</string>
-    <string name="prompt_password">Password</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
@@ -20,30 +15,33 @@
     <string name="label_nombre">Nombre</string>
     <string name="label_confirmar_contra">Confirmar contraseña</string>
     <string name="btn_crear_cuenta">Crear cuenta</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
-
-    <string name="menu_home">Mis proyectos</string>
-    <string name="menu_profile">Perfil</string>
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="label_mi_cuenta">Mi cuenta</string>
     <string name="label_mis_proyectos">Mis proyectos</string>
     <string name="label_cerrar_sesion">Cerrar sesión</string>
     <string name="label_si">Sí</string>
     <string name="label_no">No</string>
+    <string name="label_calificacion">Calificación:</string>
+    <string name="label_fecha_modificacion">Fecha de modificación:</string>
+    <string name="label_guardar_cambios">Guardar cambios</string>
+    <string name="label_borrar_proyecto">Borrar</string>
+    <string name="label_editar_proyecto">Editar</string>
+    <string name="btn_borrar">Borrar</string>
+    <string name="btn_calificar">Calificar</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="menu_home">Mis proyectos</string>
+    <string name="menu_profile">Editar perfil</string>
+    <string name="title_activity_recuperar">Recuperar contraseña</string>
 
     <string name="msg1_datos_no_validos">Los datos introducidos no son validos.</string>
     <string name="msg2_cuenta_no_verificada">La cuenta aun no ha sido verificada.</string>
-    <string name="msg3_correo_electronico_no_registrado">No existe una cuenta con el correo electrónico introducido..</string>
+    <string name="msg3_correo_electronico_no_registrado">No existe una cuenta con el correo electrónico introducido.</string>
     <string name="msg4_correo_electronico_ya_registrado"> El correo electrónico ya se ha utilizado.</string>
     <string name="msg5_verifique_su_cuenta">Verifique su cuenta a través del correo electrónico que se le ha mandado.</string>
-    <string name="msg6_envio_correo_recuperacion"> Se ha enviado un correo electrónico para la recuperación de su contraseña.</string>
+    <string name="msg6_envio_correo_recuperacion">Se ha enviado un correo electrónico para la recuperación de su contraseña.</string>
     <string name="msg7_no_existe_proyectos_para_mostrar">No hay proyectos que se puedan mostrar.</string>
     <string name="msg8_no_se_puede_mostrar_proyecto">En este momento no se puede mostrar el proyecto.</string>
     <string name="msg9_operacion_exitosa">La operación se ha realizado con éxito.</string>
@@ -51,7 +49,9 @@
     <string name="msg12_ingrese_nombre">Ingrese el nombre del proyecto.</string>
     <string name="msg11_confirmacion_operacion_cerrar_sesion">¿Está seguro de cerrar sesión?</string>
     <string name="msg13_falta_informacion">Falta información necesaria para realizar la operación.</string>
-    <string name="label_calificacion">Calificación:</string>
-    <string name="label_fecha_modificacion">Fecha de modificación:</string>
-    <string name="label_guardar_cambios">Guardar cambios</string>
+    <string name="title_activity_main">SuperTT</string>
+    <string name="nav_header_desc">Header</string>
+    <string name="imagen_de_la_ecuacion">Imagen de la ecuacion</string>
+    <string name="label_login">Iniciar sesión</string>
+
 </resources>

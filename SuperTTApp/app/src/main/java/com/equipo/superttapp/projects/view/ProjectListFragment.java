@@ -1,33 +1,34 @@
 package com.equipo.superttapp.projects.view;
 
 
+import android.content.Context;
 import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.ProjectRecyclerViewAdapter;
-import com.equipo.superttapp.projects.model.Project;
+import com.equipo.superttapp.projects.model.Proyecto;
+import com.equipo.superttapp.projects.presenter.ProjectListPresenter;
+import com.equipo.superttapp.projects.presenter.ProjectListPresenterImpl;
+import com.equipo.superttapp.util.PreferencesManager;
 
-import java.time.Instant;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class ProjectListFragment extends Fragment {
+public class ProjectListFragment extends Fragment implements ProjectListView {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter projectAdapter;
+    private ProjectListPresenter presenter;
 
     public ProjectListFragment() {
         // Required empty public constructor
@@ -38,44 +39,52 @@ public class ProjectListFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view =  inflater.inflate(R.layout.fragment_project_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         layoutManager = new LinearLayoutManager(getContext());
-        List<Project> proyectos = new ArrayList<>();
-        Project project = new Project();
-        project.setName("Projecto 1");
-        project.setTextDate("01/05/2019");
-        project.updateDate();
-        project.setRate(4.4);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        proyectos.add(project);
-        projectAdapter = new ProjectRecyclerViewAdapter(proyectos, getActivity(), R.layout.item_project);
+        List<Proyecto> proyectos = new ArrayList<>();
+        Proyecto proyecto = new Proyecto();
+        proyecto.setName("Projecto 1");
+        proyecto.setTextDate("01/05/2019");
+        proyecto.updateDate();
+        proyecto.setRate(4.4);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        proyectos.add(proyecto);
+        presenter = new ProjectListPresenterImpl();
+        projectAdapter = new ProjectRecyclerViewAdapter(proyectos, getActivity(),
+                R.layout.item_project);
         recyclerView = view.findViewById(R.id.rv_project_list);
         recyclerView.setHasFixedSize(true);
         recyclerView.setAdapter(projectAdapter);
         recyclerView.setLayoutManager(layoutManager);
-
+//        PreferencesManager preferencesManager = new PreferencesManager(getContext(),
+//                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+//        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
+//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
+//            String email = preferencesManager.getStringValue(PreferencesManager.KEY_EMAIL);
+//        }
+        presenter.findAllProyectosByUser("email");
         return view;
     }
 

@@ -9,12 +9,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".projects.view.TraduccionListActivity"></activity>
         <activity
             android:name=".projects.view.MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".users.view.ForgotPasswordActivity" />
-        <activity android:name=".users.view.ProfileActivity" />
         <activity android:name=".users.view.SignInActivity" />
         <activity android:name=".users.view.LoginActivity">
             <intent-filter>

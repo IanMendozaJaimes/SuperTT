@@ -1,10 +1,10 @@
 package com.equipo.superttapp.projects.model;
 
-import com.equipo.superttapp.DateFormater;
+import com.equipo.superttapp.util.DateFormater;
 
 import java.util.Date;
 
-public class Project {
+public class Proyecto {
     private Integer id;
     private String name;
     private Date date;
