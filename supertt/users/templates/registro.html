@@ -10,9 +10,13 @@
 			<div class="Login_container_form">
 				<form method="post" action="/usuarios/registrarse">
 					{% csrf_token %}
-					<input type="text" name="nombre" placeholder="Nombre" class="text_form Login_container_text">
-					<input type="email" name="correo" placeholder="Correo" class="text_form Login_container_text">
+					<p id="msg_nombre" class="msg_validation_error"></p>
+					<input type="text" name="nombre" placeholder="Nombre" class="text_form Login_container_text" value="{{ nombre }}">
+					<p id="msg_correo" class="msg_validation_error"></p>
+					<input type="email" name="correo" placeholder="Correo" class="text_form Login_container_text" value="{{ correo }}">
+					<p id="msg_contra" class="msg_validation_error"></p>
 					<input type="password" name="contra" placeholder="Contraseña" class="text_form Login_container_text">
+					<p id="msg_contraConf" class="msg_validation_error"></p>
 					<input type="password" name="contraConf" placeholder="Confirmar contraseña" class="text_form Login_container_text">
 					<button type="submit" formmethod="post" name="registroBtn" class="btn_form Login_container_submit">
 						Registrarse

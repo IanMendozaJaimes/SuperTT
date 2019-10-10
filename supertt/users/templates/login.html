@@ -6,13 +6,17 @@
 		<div class="Login_container">
 			<h1 class="Login_container_p">Inicio de Sesión</h1>
 			<div class="Login_container_form">
-				<form>
-					<input type="email" placeholder="Correo" class="text_form Login_container_text">
+				<form method="post" action="/usuarios/login">
+					{% csrf_token %}
+					<p id="msg_baduser" class="msg_validation_error"></p>
+					<p id="msg_correo" class="msg_validation_error"></p>
+					<input type="email" name="correo" placeholder="Correo" class="text_form Login_container_text" value="{{ correo }}">
 					<div class="Login_container_p">
-						<input type="password" placeholder="Contraseña" class="text_form Login_container_text">
+						<p id="msg_contra" class="msg_validation_error"></p>
+						<input type="password" placeholder="Contraseña" class="text_form Login_container_text" name="contra">
 						<p>Olvidaste tu contraseña?, recuperala <a href="#">aqui</a>.</p>
 					</div>
-					<button class="btn_form Login_container_submit">
+					<button class="btn_form Login_container_submit" type="submit" formmethod="post">
 						Iniciar sesión
 					</button>
 					<div class="Login_container_line">
