@@ -53,7 +53,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         String titulo = bundle.getString(BundleConstants.TITULO_KEY);
         Integer idProyecto = bundle.getInt(BundleConstants.PROYECTO_ID);
         presenter = new TraduccionListPresenterImpl();
-        presenter.findAllTraduccionesByProyecto(idProyecto);
+       List<Traduccion> traducciones = presenter.findAllTraduccionesByProyecto(idProyecto);
         setTitle(titulo);
     }
 

@@ -84,7 +84,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
 //                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
 //            String email = preferencesManager.getStringValue(PreferencesManager.KEY_EMAIL);
 //        }
-        presenter.findAllProyectosByUser("email");
+        presenter.findAllProyectosByUser(1);
         return view;
     }
 

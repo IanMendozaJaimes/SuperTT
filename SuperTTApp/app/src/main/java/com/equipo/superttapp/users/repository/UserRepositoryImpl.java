@@ -6,7 +6,7 @@ import com.equipo.superttapp.util.ResultCodes;
 public class UserRepositoryImpl implements UserRepository {
     @Override
     public Integer login(String email, String password) {
-        Integer resultado = ResultCodes.ERROR;
+        Integer resultado = ResultCodes.SUCCESS;
         return resultado;
     }
 

@@ -1,7 +1,5 @@
 package com.equipo.superttapp.users.model;
 
-import com.equipo.superttapp.util.ResultCodes;
-
 public class LoginFormModel {
     private String email;
     private String password;

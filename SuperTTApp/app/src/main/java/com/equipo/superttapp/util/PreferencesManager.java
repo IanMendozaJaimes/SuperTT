@@ -8,9 +8,12 @@ public class PreferencesManager {
     private SharedPreferences.Editor editor;
     private Context context;
     public static final String DEFAULT_STRING = "DEFAULT_STRING";
-    public static final String KEY_EMAIL = "email";
     public static final String PREFERENCES_NAME = "preferencias-user";
     public static final String KEY_IS_LOGGED = "is-logged";
+    public static final String KEY_EMAIL = "email";
+    public static final String KEY_USER_ID = "user-id";
+
+
 
     public PreferencesManager(Context context, String preferencesName, int mode) {
         this.context = context;
