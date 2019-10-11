@@ -9,6 +9,32 @@
 	<title>{% block appname %}Nombre de la App{% endblock %}</title>
 </head>
 <body>
+	<div id="Messages">
+		{% if nMessages > 0 %}
+			{% for message in messages %}
+				{% if message.type == "alert" %}
+					<div id="m{{ message.id }}" class="Alert invisible">
+						<div class="Alert_message">
+							<div class="Alert_header">
+								<p>{{ message.header }}</p>
+							</div>
+							<div class="Alert_text">{{ message.text }}</div>
+							<div class="Alert_container_btn">
+								<button class="btn_form Alert_btn" onclick="close_alert(m{{ message.id }});">
+									{{ message.btn }}
+								</button>
+							</div>
+						</div>
+					</div>
+				{% elif message.type == "validation_error" %}
+					<div id="m{{ message.id }}" class="VError">
+						<input type="hidden" class="VError_text" value="{{ message.text }}">
+						<input type="hidden" class="VError_name" value="{{ message.name }}">
+					</div>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+	</div>
 	<header>
 		<nav class="NavigationBar">
 			<div class="NavigationBar_appname">
@@ -27,6 +53,8 @@
 			</div>
 		</nav>
 	</header>
-{% block content %}{% endblock %}
+	{% block content %}{% endblock %}
+
+	<script  type="text/javascript" src="{% static 'js/acciones.js' %}"></script>
 </body>
 </html>

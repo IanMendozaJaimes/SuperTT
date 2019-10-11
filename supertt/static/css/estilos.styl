@@ -80,6 +80,47 @@ header
 			margin-left 1em
 
 
+.Alert
+	position fixed
+	z-index 100
+	background-color rgba(0,0,0,0.6)
+	top 0
+	bottom 0
+	left 0
+	right 0
+	make_flex()
+	align-items center
+	opacity 0
+	transition opacity 0.2s ease-out
+	
+	&_header
+		background-color secondary_color
+		min-height 55px
+		max-height 65px
+		padding 25px
+		color white
+		display flex
+		align-items center
+		font-size 1.1em
+	
+	&_message
+		flex-basis 60%
+		max-width 400px
+		background-color fill_color_dark
+		
+	&_text
+		padding 25px
+		
+	&_container_btn
+		make_flex()
+		margin 15px 0
+	
+	&_btn
+		flex-basis 50%
+		max-width 150px
+
+
+
 li
 	list-style none
 	remove_defaults()
@@ -140,6 +181,28 @@ a
 	
 	&:focus
 		outline none
+		
+.invisible
+	display none
+	
+.visible
+	opacity 1
+
+
+.invalid_field
+	border-color #d12b2b
+
+.invalid_field::placeholder
+	color #d12b2b
+	opacity 1
+
+.msg_validation_error
+	font-size 12px
+	color #d12b2b
+	margin 0
+
+.msg_margin
+	margin-top 1em
 	
 
 // otros archivos que seran agregados al principal
