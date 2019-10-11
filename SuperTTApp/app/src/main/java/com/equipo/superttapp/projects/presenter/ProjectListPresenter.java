@@ -6,5 +6,5 @@ import com.equipo.superttapp.util.BusinessResult;
 import java.util.List;
 
 public interface ProjectListPresenter {
-    BusinessResult<Proyecto> findAllProyectosByUser(String user);
+    BusinessResult<Proyecto> findAllProyectosByUser(Integer user);
 }

@@ -5,5 +5,5 @@ import com.equipo.superttapp.projects.model.Proyecto;
 import java.util.List;
 
 public interface ProjectRepository {
-    List<Proyecto> findAllProyectosByUser(String user);
+    List<Proyecto> findAllProyectosByUser(Integer user);
 }

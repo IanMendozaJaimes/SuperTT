@@ -15,7 +15,7 @@ public class ProjectListPresenterImpl implements ProjectListPresenter {
     }
 
     @Override
-    public BusinessResult<Proyecto> findAllProyectosByUser(String user) {
+    public BusinessResult<Proyecto> findAllProyectosByUser(Integer user) {
         return interactor.findAllProyectosByUser(user);
     }
 }
