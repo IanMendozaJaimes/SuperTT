@@ -1,6 +1,6 @@
 package com.equipo.superttapp.projects.interactor;
 
-import com.equipo.superttapp.projects.model.Traduccion;
+import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.repository.TraduccionRepository;
 import com.equipo.superttapp.projects.repository.TraduccionRepositoryImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -13,8 +13,8 @@ public class TraduccionInteractorImpl implements TraduccionInteractor{
         repository = new TraduccionRepositoryImpl();
     }
     @Override
-    public BusinessResult<Traduccion> findAllTraduccionesByProyecto(Integer idProyecto) {
-        BusinessResult<Traduccion> result = new BusinessResult<>();
+    public BusinessResult<TraduccionModel> findAllTraduccionesByProyecto(Integer idProyecto) {
+        BusinessResult<TraduccionModel> result = new BusinessResult<>();
         result.setResults(repository.findAllTraduccionesByProyecto(idProyecto));
         result.setCode(ResultCodes.SUCCESS);
         return result;
