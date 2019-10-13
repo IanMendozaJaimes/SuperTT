@@ -1,7 +1,7 @@
 package com.equipo.superttapp.util;
 
-import com.equipo.superttapp.projects.model.Proyecto;
-import com.equipo.superttapp.projects.model.Traduccion;
+import com.equipo.superttapp.projects.data.ProyectoData;
+import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.users.model.Usuario;
 
 import java.util.List;
@@ -15,27 +15,27 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 
 public interface APIService {
-    // Crear proyecto
+    // Crear proyectoModel
     @POST("/proyectos")
-    Call<Proyecto> createProyecto(@Body Proyecto proyecto);
-    // Edicion de un proyecto
+    Call<ProyectoData> createProyecto(@Body ProyectoData proyectoModel);
+    // Edicion de un proyectoModel
     @PUT("/proyectos/{idProyecto}")
-    Call<Traduccion> editProyecto(@Path("idProyecto") Integer idProyecto, @Body Proyecto proyecto);
+    Call<ProyectoData> editProyecto(@Path("idProyecto") Integer idProyecto, @Body ProyectoData proyectoModel);
     // Elimina un proyecto
     @DELETE("/proyectos/{idProyecto}")
-    Call<Traduccion> deleteProyecto(@Path("idProyecto") Integer idProyecto);
+    Call<ProyectoData> deleteProyecto(@Path("idProyecto") Integer idProyecto);
     // Obtiene las traducciones asociadas a un proyecto
     @GET("/proyectos/{idProyecto}/traducciones")
-    Call<List<Traduccion>> getTraduccionesByProyecto(@Path("idProyecto") Integer idProyecto);
-    // Creacion de una traduccion
+    Call<List<TraduccionModel>> getTraduccionesByProyecto(@Path("idProyecto") Integer idProyecto);
+    // Creacion de una traduccionModel
     @POST("/traducciones")
-    Call<Traduccion> createTraduccion(@Body Traduccion traduccion);
-    // Edicion de un traduccion
+    Call<TraduccionModel> createTraduccion(@Body TraduccionModel traduccionModel);
+    // Edicion de un traduccionModel
     @PUT("/traducciones/{idTraducion}")
-    Call<Traduccion> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body Traduccion traduccion);
+    Call<TraduccionModel> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionModel traduccionModel);
     // Elimina una traduccion
     @DELETE("/traducciones/{idTraducion}")
-    Call<Traduccion> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
+    Call<TraduccionModel> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
     // Manda a crear un usuario
     @POST("/usuarios")
     Call<Usuario> createUsuario(@Body Usuario usuario);
@@ -50,5 +50,5 @@ public interface APIService {
     Call<Usuario> editUsuario(@Path("idUsuario") Integer id, @Body Usuario usuario);
     // Obtiene los proyectos asociados a un usuario
     @GET("/usuarios/{idUsuario}/proyectos")
-    Call<List<Proyecto>> getProyectosByUsuario(@Path("idUsuario") Integer idUsuario);
+    Call<List<ProyectoData>> getProyectosByUsuario(@Path("idUsuario") Integer idUsuario);
 }

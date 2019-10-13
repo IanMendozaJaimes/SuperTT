@@ -1,45 +1,35 @@
 {% extends 'general.html' %}
 {% block content %}
 
+	<div class="NewProyects invisible">
+		<div class="NewProyects_message">
+			<div class="NewProyects_header NewProyects_header_fixed">
+				<p>Nuevo proyecto</p>
+				<span id="NewProyects_cancel_btn" class="icon-cross NewProyects_cancel"></span>
+			</div>
+			<div class="NewProyects_newtext">
+				<p id="msg_badprojectname" class="msg_validation_error msg_validation_error_proyects"></p>
+				<input type="text" id="nuevo_proyecto_nombre" name="nuevo_proyecto" placeholder="Nombre del proyecto" class="NewProyects_newnombre text_form">
+				<button id="NewProyects_btn_create" class="NewProyects_newbtn btn_form">Crear</button>
+			</div>
+		</div>
+	</div>
+
 	<section class="Proyects">
 
 		<div class="Proyects_c">
 			<div class="Proyects_options">
-				<button class="btn_form Proyects_options_btn">Crear Proyecto</button>
+				<button id="Proyects_btn" class="btn_form Proyects_options_btn">Crear Proyecto</button>
 			</div>
 
 			<div class="Proyects_container">
-				
-				<div class="Proyects_container_proyect">
-					<p class="Proyects_container_proyect_name">Nombre del proyecto</p>
-					<p class="Proyects_container_proyect_date">27/10/2019</p>
-					<div class="Proyects_container_proyect_image"></div>
-				</div>
-
-				<div class="Proyects_container_proyect">
-					<p class="Proyects_container_proyect_name">Nombre del proyecto</p>
-					<p class="Proyects_container_proyect_date">27/10/2019</p>
-					<div class="Proyects_container_proyect_image"></div>
-				</div>
-
-				<div class="Proyects_container_proyect">
-					<p class="Proyects_container_proyect_name">Nombre del proyecto</p>
-					<p class="Proyects_container_proyect_date">27/10/2019</p>
-					<div class="Proyects_container_proyect_image"></div>
-				</div>
-
-				<div class="Proyects_container_proyect">
-					<p class="Proyects_container_proyect_name">Nombre del proyecto</p>
-					<p class="Proyects_container_proyect_date">27/10/2019</p>
-					<div class="Proyects_container_proyect_image"></div>
-				</div>
-
-				<div class="Proyects_container_proyect">
-					<p class="Proyects_container_proyect_name">Nombre del proyecto</p>
-					<p class="Proyects_container_proyect_date">27/10/2019</p>
-					<div class="Proyects_container_proyect_image"></div>
-				</div>
-
+				{% for proyecto in proyectos %}
+					<div class="Proyects_container_proyect" onclick="go_to_translations({{ proyecto.id }});">
+						<p class="Proyects_container_proyect_name">{{ proyecto.nombre }}</p>
+						<p class="Proyects_container_proyect_date">{{ proyecto.fechaModificacion }}</p>
+						<div class="Proyects_container_proyect_image"></div>
+					</div>
+				{% endfor %}
 			</div>
 		</div>
 		

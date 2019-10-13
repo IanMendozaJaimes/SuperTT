@@ -9,16 +9,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.equipo.superttapp.R;
-import com.equipo.superttapp.projects.model.Traduccion;
+import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.util.DateFormater;
 
 import java.util.List;
 
 public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<TraduccionRecyclerViewAdapter.ViewHolder> {
     private int resource;
-    private List<Traduccion> traducciones;
+    private List<TraduccionModel> traducciones;
 
-    public TraduccionRecyclerViewAdapter(int resource, List<Traduccion> traducciones) {
+    public TraduccionRecyclerViewAdapter(int resource, List<TraduccionModel> traducciones) {
         this.resource = resource;
         this.traducciones = traducciones;
     }
@@ -32,10 +32,10 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Traduccion traduccion = traducciones.get(position);
-        holder.tvCalificacion.setText(traduccion.getCalificacion().toString());
-        holder.tvEcuacion.setText(traduccion.getEcuacion());
-        holder.tvFecha.setText(DateFormater.convertDateToString(traduccion.getFecha()));
+        final TraduccionModel traduccionModel = traducciones.get(position);
+        holder.tvCalificacion.setText(traduccionModel.getCalificacion().toString());
+        holder.tvEcuacion.setText(traduccionModel.getEcuacion());
+        holder.tvFecha.setText(DateFormater.convertDateToString(traduccionModel.getFecha()));
     }
 
     @Override
