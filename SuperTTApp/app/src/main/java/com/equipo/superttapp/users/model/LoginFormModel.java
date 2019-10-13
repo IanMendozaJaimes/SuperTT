@@ -5,9 +5,9 @@ public class LoginFormModel {
     private String email;
     private String password;
     private String keyAuth;
+    private String name;
     private Boolean isValidEmail = false;
     private Boolean isValidPassword = false;
-
 
     public String getEmail() {
         return email;
@@ -55,5 +55,13 @@ public class LoginFormModel {
 
     public void setKeyAuth(String keyAuth) {
         this.keyAuth = keyAuth;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

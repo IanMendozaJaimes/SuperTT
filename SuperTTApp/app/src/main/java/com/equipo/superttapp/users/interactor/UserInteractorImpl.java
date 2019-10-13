@@ -32,6 +32,7 @@ public class UserInteractorImpl implements UserInteractor {
             resultado.setCode(usuarioData.getResponseCode());
             loginFormModel.setId(usuarioData.getId());
             loginFormModel.setKeyAuth(usuarioData.getKeyAuth());
+            loginFormModel.setName(usuarioData.getNombre());
         } else {
             resultado.setCode(ResultCodes.RN002);
         }

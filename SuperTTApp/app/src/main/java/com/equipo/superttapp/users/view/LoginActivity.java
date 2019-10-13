@@ -47,6 +47,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+            goHome();
+        }
         hideProgressBar();
         presenter = new LoginPresenterImpl(this);
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
@@ -60,12 +66,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             hideKeyboard();
         });
         setTitle(R.string.label_login);
-        PreferencesManager preferencesManager = new PreferencesManager(this,
-                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
-            goHome();
-        }
+
     }
 
     @Override
@@ -132,8 +133,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void saveUser(LoginFormModel model) {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        preferencesManager.saveValue(PreferencesManager.KEY_EMAIL, model.getEmail());
-        preferencesManager.saveValue(PreferencesManager.KEY_IS_LOGGED, true);
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
+        //preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
     }
 }

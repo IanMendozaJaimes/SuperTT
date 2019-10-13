@@ -32,7 +32,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="menu_home">Mis proyectoModels</string>
+    <string name="menu_home">Mis proyectos</string>
     <string name="menu_profile">Editar perfil</string>
     <string name="title_activity_recuperar">Recuperar contraseña</string>
 
@@ -53,5 +53,6 @@
     <string name="nav_header_desc">Header</string>
     <string name="imagen_de_la_ecuacion">Imagen de la ecuacion</string>
     <string name="label_login">Iniciar sesión</string>
+    <string name="label_confirmar_operacion">Confirmar operación</string>
 
 </resources>

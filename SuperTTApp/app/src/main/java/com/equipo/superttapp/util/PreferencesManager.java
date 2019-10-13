@@ -9,9 +9,10 @@ public class PreferencesManager {
     private Context context;
     public static final String DEFAULT_STRING = "DEFAULT_STRING";
     public static final String PREFERENCES_NAME = "preferencias-user";
-    public static final String KEY_IS_LOGGED = "is-logged";
-    public static final String KEY_EMAIL = "email";
+    public static final String KEY_USER_IS_LOGGED = "user-is-logged";
+    public static final String KEY_USER_EMAIL = "user-email";
     public static final String KEY_USER_ID = "user-id";
+    public static final String KEY_USER_NAME = "user-name";
 
 
 

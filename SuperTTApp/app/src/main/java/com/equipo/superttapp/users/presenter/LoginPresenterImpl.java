@@ -20,10 +20,10 @@ public class LoginPresenterImpl implements LoginPresenter{
     public void logIn(LoginFormModel loginFormModel) {
         view.showProgressBar();
         BusinessResult<LoginFormModel> resultado = interactor.logIn(loginFormModel);
-        if (resultado.getCode().equals(ResultCodes.SUCCESS))
+        //if (resultado.getCode().equals(ResultCodes.SUCCESS))
             logInSuccess(resultado);
-        else
-            logInError(resultado);
+       // else
+        //    logInError(resultado);
     }
 
     @Override

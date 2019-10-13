@@ -78,9 +78,9 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         recyclerView.setLayoutManager(layoutManager);
 //        PreferencesManager preferencesManager = new PreferencesManager(getContext(),
 //                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-//        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
-//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
-//            String email = preferencesManager.getStringValue(PreferencesManager.KEY_EMAIL);
+//        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+//            String email = preferencesManager.getStringValue(PreferencesManager.KEY_USER_EMAIL);
 //        }
         presenter.findAllProyectosByUser(1);
         return view;
