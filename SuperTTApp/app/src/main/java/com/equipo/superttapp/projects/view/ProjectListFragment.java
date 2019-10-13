@@ -1,7 +1,6 @@
 package com.equipo.superttapp.projects.view;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,10 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.ProjectRecyclerViewAdapter;
-import com.equipo.superttapp.projects.model.Proyecto;
+import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.presenter.ProjectListPresenter;
 import com.equipo.superttapp.projects.presenter.ProjectListPresenterImpl;
-import com.equipo.superttapp.util.PreferencesManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,38 +39,38 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         layoutManager = new LinearLayoutManager(getContext());
-        List<Proyecto> proyectos = new ArrayList<>();
-        Proyecto proyecto = new Proyecto();
-        proyecto.setName("Projecto 1");
-        proyecto.setTextDate("01/05/2019");
-        proyecto.updateDate();
-        proyecto.setRate(4.4);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
-        proyectos.add(proyecto);
+        List<ProyectoModel> proyectoModels = new ArrayList<>();
+        ProyectoModel proyectoModel = new ProyectoModel();
+        proyectoModel.setName("Projecto 1");
+        proyectoModel.setTextDate("01/05/2019");
+        proyectoModel.updateDate();
+        proyectoModel.setRate(4.4);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
+        proyectoModels.add(proyectoModel);
         presenter = new ProjectListPresenterImpl();
-        projectAdapter = new ProjectRecyclerViewAdapter(proyectos, getActivity(),
+        projectAdapter = new ProjectRecyclerViewAdapter(proyectoModels, getActivity(),
                 R.layout.item_project);
         recyclerView = view.findViewById(R.id.rv_project_list);
         recyclerView.setHasFixedSize(true);
@@ -84,7 +82,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
 //                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
 //            String email = preferencesManager.getStringValue(PreferencesManager.KEY_EMAIL);
 //        }
-        presenter.findAllProyectosByUser("email");
+        presenter.findAllProyectosByUser(1);
         return view;
     }
 

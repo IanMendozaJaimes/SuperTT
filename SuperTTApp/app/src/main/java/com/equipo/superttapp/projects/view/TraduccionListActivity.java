@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
-import com.equipo.superttapp.projects.model.Traduccion;
+import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.presenter.TraduccionListPresenter;
 import com.equipo.superttapp.projects.presenter.TraduccionListPresenterImpl;
 import com.equipo.superttapp.util.BundleConstants;
@@ -33,18 +33,18 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traduccion_list);
         layoutManager = new LinearLayoutManager(this);
-        List<Traduccion> traduccions = new ArrayList<>();
-        Traduccion traduccion = new Traduccion();
-        traduccion.setCalificacion(5);
-        traduccion.setEcuacion("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
+        List<TraduccionModel> traduccionModels = new ArrayList<>();
+        TraduccionModel traduccionModel = new TraduccionModel();
+        traduccionModel.setCalificacion(5);
+        traduccionModel.setEcuacion("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
                 "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
                 "consequat.");
-        traduccion.setFecha(new Date());
-        traduccions.add(traduccion);
-        traduccions.add(traduccion);
-        traduccions.add(traduccion);
-        traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion, traduccions);
+        traduccionModel.setFecha(new Date());
+        traduccionModels.add(traduccionModel);
+        traduccionModels.add(traduccionModel);
+        traduccionModels.add(traduccionModel);
+        traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion, traduccionModels);
         recyclerView = findViewById(R.id.rv_traduccion_list);
         recyclerView.setAdapter(traduccionAdapter);
         recyclerView.setLayoutManager(layoutManager);
@@ -53,7 +53,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         String titulo = bundle.getString(BundleConstants.TITULO_KEY);
         Integer idProyecto = bundle.getInt(BundleConstants.PROYECTO_ID);
         presenter = new TraduccionListPresenterImpl();
-        presenter.findAllTraduccionesByProyecto(idProyecto);
+       List<TraduccionModel> traducciones = presenter.findAllTraduccionesByProyecto(idProyecto);
         setTitle(titulo);
     }
 

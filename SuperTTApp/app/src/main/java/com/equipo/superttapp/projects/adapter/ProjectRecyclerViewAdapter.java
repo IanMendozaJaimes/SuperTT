@@ -2,7 +2,6 @@ package com.equipo.superttapp.projects.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,19 +13,19 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.equipo.superttapp.R;
-import com.equipo.superttapp.projects.model.Proyecto;
+import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.view.TraduccionListActivity;
 import com.equipo.superttapp.util.BundleConstants;
 
 import java.util.List;
 
 public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecyclerViewAdapter.ViewHolder> {
-    private List<Proyecto> proyectoList;
+    private List<ProyectoModel> proyectoModelList;
     private Activity activity;
     private int resource;
 
-    public ProjectRecyclerViewAdapter(List<Proyecto> proyectoList, Activity activity, int resource) {
-        this.proyectoList = proyectoList;
+    public ProjectRecyclerViewAdapter(List<ProyectoModel> proyectoModelList, Activity activity, int resource) {
+        this.proyectoModelList = proyectoModelList;
         this.activity = activity;
         this.resource = resource;
     }
@@ -40,21 +39,21 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        final Proyecto proyecto = this.proyectoList.get(position);
-        holder.tvName.setText(proyecto.getName());
-        holder.tvFecha.setText(proyecto.getTextDate());
-        holder.tvCalificacion.setText(proyecto.getRate().toString());
+        final ProyectoModel proyectoModel = this.proyectoModelList.get(position);
+        holder.tvName.setText(proyectoModel.getName());
+        holder.tvFecha.setText(proyectoModel.getTextDate());
+        holder.tvCalificacion.setText(proyectoModel.getRate().toString());
         holder.cvProyecto.setOnClickListener(v -> {
             Toast.makeText(v.getContext(), "HOLA", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), TraduccionListActivity.class);
-            intent.putExtra(BundleConstants.TITULO_KEY, proyecto.getName());
+            intent.putExtra(BundleConstants.TITULO_KEY, proyectoModel.getName());
             v.getContext().startActivity(intent);
         });
     }
 
     @Override
     public int getItemCount() {
-        return proyectoList.size();
+        return proyectoModelList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

@@ -4,7 +4,7 @@ import com.equipo.superttapp.util.DateFormater;
 
 import java.util.Date;
 
-public class Proyecto {
+public class ProyectoModel {
     private Integer id;
     private String name;
     private Date date;
