@@ -32,6 +32,12 @@ public class PreferencesManager {
         editor.apply();
     }
 
+    public void saveValue(String key, Integer value) {
+        editor = preferences.edit();
+        editor.putInt(key, value);
+        editor.apply();
+    }
+
     public String getStringValue(String key) {
         return preferences.getString(key, DEFAULT_STRING);
     }

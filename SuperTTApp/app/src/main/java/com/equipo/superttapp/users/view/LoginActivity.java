@@ -52,22 +52,32 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
         tvRecuperarContra.setOnClickListener(v -> goForgotPassword());
         btnIniciarSesion.setOnClickListener(v -> {
-            etContra.setError(null);
-            etCorreo.setError(null);
+            cleanErrors();
             LoginFormModel form = new LoginFormModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
             presenter.logIn(form);
-            etCorreo.onEditorAction(EditorInfo.IME_ACTION_DONE);
-            etContra.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            hideKeyboard();
         });
         setTitle(R.string.label_login);
-        //PreferencesManager preferencesManager = new PreferencesManager(this,
-        //        PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        //if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
-        //        && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
-        //    goHome();
-        //}
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
+            goHome();
+        }
+    }
+
+    @Override
+    public void cleanErrors() {
+        etContra.setError(null);
+        etCorreo.setError(null);
+    }
+
+    @Override
+    public void hideKeyboard() {
+        etCorreo.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        etContra.onEditorAction(EditorInfo.IME_ACTION_DONE);
     }
 
     @Override
@@ -95,10 +105,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void loginError(BusinessResult<LoginFormModel> resultado) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_main_activity),
-                R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
+                R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (resultado.getCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg2_cuenta_no_verificada);
-        } else  {
+        } else if (resultado.getCode().equals(ResultCodes.RN001)
+                || resultado.getCode().equals(ResultCodes.RN002) ) {
+            snackbar.setText(R.string.msg1_datos_no_validos);
             if (!resultado.getResult().isValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
             }
@@ -112,6 +124,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void goHome() {
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
@@ -121,5 +134,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
         preferencesManager.saveValue(PreferencesManager.KEY_EMAIL, model.getEmail());
         preferencesManager.saveValue(PreferencesManager.KEY_IS_LOGGED, true);
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
     }
 }

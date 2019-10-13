@@ -2,6 +2,7 @@ package com.equipo.superttapp.users.view;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
@@ -21,7 +22,7 @@ import com.google.android.material.snackbar.Snackbar;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class SignInActivity extends AppCompatActivity implements SignInView{
+public class SignInActivity extends AppCompatActivity implements SignInView {
 
     @BindView(R.id.btn_crear_cuenta)
     Button btnCrearCuenta;
@@ -47,14 +48,35 @@ public class SignInActivity extends AppCompatActivity implements SignInView{
         hideProgressBar();
         presenter = new SignInPresenterImpl(this);
         btnCrearCuenta.setOnClickListener(v -> {
+            cleanErrors();
             SignInFormModel model = new SignInFormModel();
             model.setName(etName.getText().toString());
             model.setLastname(etLastname.getText().toString());
-            model.setPassword(etSecondPassword.getText().toString());
+            model.setSecondPassword(etSecondPassword.getText().toString());
             model.setPassword(etPassword.getText().toString());
             model.setEmail(etEmail.getText().toString());
             presenter.signIn(model);
+            hideKeyboard();
         });
+        setTitle(R.string.title_activity_sign_in);
+    }
+
+    @Override
+    public void cleanErrors() {
+        etName.setError(null);
+        etLastname.setError(null);
+        etSecondPassword.setError(null);
+        etPassword.setError(null);
+        etEmail.setError(null);
+    }
+
+    @Override
+    public void hideKeyboard() {
+        etName.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        etLastname.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        etSecondPassword.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        etPassword.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        etEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
     }
 
     @Override
@@ -70,12 +92,13 @@ public class SignInActivity extends AppCompatActivity implements SignInView{
     @Override
     public void showMessage(BusinessResult<SignInFormModel> result) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_sign_in),
-                R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
+                R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.RN003))
             snackbar.setText(R.string.msg4_correo_electronico_ya_registrado);
         else if (result.getCode().equals(ResultCodes.SUCCESS))
             snackbar.setText(R.string.msg5_verifique_su_cuenta);
-        else {
+        else if (result.getCode().equals(ResultCodes.RN001)
+                || result.getCode().equals(ResultCodes.RN002)){
             if (!result.getResult().isValidEmail())
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
             if (!result.getResult().isValidPassword())
@@ -86,6 +109,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView{
                 etName.setError(getText(R.string.msg1_datos_no_validos));
             if (!result.getResult().isValidLastName())
                 etLastname.setError(getText(R.string.msg1_datos_no_validos));
+            snackbar.setText(R.string.msg1_datos_no_validos);
         }
         snackbar.show();
     }

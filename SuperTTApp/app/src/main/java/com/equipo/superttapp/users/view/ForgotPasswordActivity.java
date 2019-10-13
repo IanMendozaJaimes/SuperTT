@@ -39,7 +39,6 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
         hideProgressBar();
 
         presenter = new ForgotPasswordPresenterImpl(this);
-
         btnEnviarCorreoRecuperacion.setOnClickListener(v -> {
             etEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
             LoginFormModel model = new LoginFormModel();
@@ -52,15 +51,17 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
     @Override
     public void showMessage(BusinessResult<LoginFormModel> result) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activitu_forgot_password),
-                R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
+                R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg3_correo_electronico_no_registrado);
         } else if (result.getCode().equals(ResultCodes.SUCCESS)) {
             snackbar.setText(R.string.msg6_envio_correo_recuperacion);
-        } else {
+        } else if (result.getCode().equals(ResultCodes.RN001)
+                || result.getCode().equals(ResultCodes.RN002)){
             if (!result.getResult().isValidEmail()) {
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
             }
+            snackbar.setText(R.string.msg1_datos_no_validos);
         }
         snackbar.show();
     }

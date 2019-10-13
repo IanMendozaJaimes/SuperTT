@@ -2,7 +2,7 @@ package com.equipo.superttapp.util;
 
 import com.equipo.superttapp.projects.data.ProyectoData;
 import com.equipo.superttapp.projects.model.TraduccionModel;
-import com.equipo.superttapp.users.model.Usuario;
+import com.equipo.superttapp.users.data.UsuarioData;
 
 import java.util.List;
 
@@ -36,18 +36,18 @@ public interface APIService {
     // Elimina una traduccion
     @DELETE("/traducciones/{idTraducion}")
     Call<TraduccionModel> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
-    // Manda a crear un usuario
+    // Manda a crear un usuarioData
     @POST("/usuarios")
-    Call<Usuario> createUsuario(@Body Usuario usuario);
+    Call<UsuarioData> createUsuario(@Body UsuarioData usuarioData);
     // Para hacer login
     @POST("/usuarios/login")
-    Call<Usuario> loginUsuario(@Body Usuario usuario);
+    Call<UsuarioData> loginUsuario(@Body UsuarioData usuarioData);
     // Para hacer la recuperacion de contra
     @POST("/usuarios/recuperar")
-    Call<Usuario> recuperarUsuario(@Body Usuario usuario);
-    // Para editar usuario
+    Call<UsuarioData> recuperarUsuario(@Body UsuarioData usuarioData);
+    // Para editar usuarioData
     @PUT("/usuarios/{idUsuario}")
-    Call<Usuario> editUsuario(@Path("idUsuario") Integer id, @Body Usuario usuario);
+    Call<UsuarioData> editUsuario(@Path("idUsuario") Integer id, @Body UsuarioData usuarioData);
     // Obtiene los proyectos asociados a un usuario
     @GET("/usuarios/{idUsuario}/proyectos")
     Call<List<ProyectoData>> getProyectosByUsuario(@Path("idUsuario") Integer idUsuario);

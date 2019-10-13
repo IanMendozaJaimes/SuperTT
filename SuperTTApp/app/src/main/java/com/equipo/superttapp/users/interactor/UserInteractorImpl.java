@@ -2,6 +2,7 @@ package com.equipo.superttapp.users.interactor;
 
 import android.util.Log;
 
+import com.equipo.superttapp.users.data.UsuarioData;
 import com.equipo.superttapp.users.model.LoginFormModel;
 import com.equipo.superttapp.users.model.SignInFormModel;
 import com.equipo.superttapp.users.repository.UserRepository;
@@ -23,10 +24,17 @@ public class UserInteractorImpl implements UserInteractor {
         BusinessResult<LoginFormModel> resultado = new BusinessResult<>();
         loginFormModel.setValidPassword(RN002.isPasswordValid(loginFormModel.getPassword()));
         loginFormModel.setValidEmail(RN002.isEmailValid(loginFormModel.getEmail()));
-        Log.d(TAG, "email " + loginFormModel.isValidEmail());
-        if (loginFormModel.isValidEmail() && loginFormModel.isValidPassword())
-            resultado.setCode(repository.login(loginFormModel.getEmail(),
-                    loginFormModel.getPassword()));
+        if (loginFormModel.isValidEmail() && loginFormModel.isValidPassword()) {
+            UsuarioData usuarioData = new UsuarioData();
+            usuarioData.setEmail(loginFormModel.getEmail());
+            usuarioData.setPassword(loginFormModel.getPassword());
+            usuarioData = repository.login(usuarioData);
+            resultado.setCode(usuarioData.getResponseCode());
+            loginFormModel.setId(usuarioData.getId());
+            loginFormModel.setKeyAuth(usuarioData.getKeyAuth());
+        } else {
+            resultado.setCode(ResultCodes.RN002);
+        }
         resultado.setResult(loginFormModel);
         return resultado;
     }
@@ -35,8 +43,13 @@ public class UserInteractorImpl implements UserInteractor {
     public BusinessResult<LoginFormModel> sendEmail(LoginFormModel loginFormModel) {
         BusinessResult<LoginFormModel> resultado = new BusinessResult<>();
         loginFormModel.setValidEmail(RN002.isEmailValid(loginFormModel.getEmail()));
-        if (loginFormModel.isValidEmail())
-            resultado.setCode(repository.forgotPassword(loginFormModel.getEmail()));
+        if (loginFormModel.isValidEmail()) {
+            UsuarioData data = new UsuarioData();
+            data.setEmail(loginFormModel.getEmail());
+            resultado.setCode(repository.forgotPassword(data));
+        }
+        else
+            resultado.setCode(ResultCodes.RN002);
         resultado.setResult(loginFormModel);
         return resultado;
     }
@@ -50,10 +63,17 @@ public class UserInteractorImpl implements UserInteractor {
                 model.getPassword(), model.getSecondPassword()));
         model.setValidName(RN002.isNameValid(model.getName()));
         model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
+        Log.d(TAG, model.getSecondPassword() + " " + model.getPassword());
         if (model.isValidPassword() && model.isValidEmail() && model.isValidName()
                 && model.isValidSecondPassword() && model.isValidLastName()) {
-            result.setCode(repository.createAccount(model.getEmail(), model.getPassword(),
-                    model.getName(), model.getLastname()));
+            UsuarioData data = new UsuarioData();
+            data.setEmail(model.getEmail());
+            data.setNombre(model.getName());
+            data.setApellidos(model.getLastname());
+            data.setPassword(model.getPassword());
+            result.setCode(repository.createAccount(data));
+        } else {
+            result.setCode(ResultCodes.RN002);
         }
         result.setResult(model);
         return result;
@@ -70,8 +90,15 @@ public class UserInteractorImpl implements UserInteractor {
         model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
         if (model.isValidPassword() && model.isValidEmail() && model.isValidName()
                 && model.isValidSecondPassword() && model.isValidLastName()) {
-            result.setCode(repository.updateAccount(model.getEmail(), model.getPassword(),
-                    model.getName(), model.getLastname()));
+            UsuarioData data = new UsuarioData();
+            data.setId(model.getId());
+            data.setEmail(model.getEmail());
+            data.setNombre(model.getName());
+            data.setApellidos(model.getLastname());
+            data.setPassword(model.getPassword());
+            result.setCode(repository.updateAccount(data));
+        } else {
+            result.setCode(ResultCodes.RN002);
         }
         result.setResult(model);
         return result;
