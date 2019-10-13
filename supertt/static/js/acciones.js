@@ -62,5 +62,53 @@ function close_alert(id){
 	}, 300);
 }
 
+function go_to_translations(id){
+	window.location.href = '/proyectos/traducciones?id='+id;
+}
+
+
+NewProyects_cancel_btn.addEventListener('click', (event) => {
+	let new_proyect = document.querySelector('.NewProyects');
+	new_proyect.classList.remove('visible');
+	setTimeout(() => {
+		new_proyect.classList.add('invisible');
+	}, 100);
+});
+
+Proyects_btn.addEventListener('click', (event) => {
+	let new_proyect = document.querySelector('.NewProyects');
+	new_proyect.classList.remove('invisible');
+	setTimeout(() => {
+		new_proyect.classList.add('visible');
+	}, 100);
+});
+
+NewProyects_btn_create.addEventListener('click', (event) => {
+	console.log('uff me active')
+	let project_name = document.querySelector('#nuevo_proyecto_nombre').value;
+	let request = new XMLHttpRequest();
+	let form = new FormData();
+
+	form.append('nombreProyecto', project_name);
+
+	request.open('GET', '/proyectos/nuevo?nombre='+project_name.replace(' ', '%'), true);
+	request.onreadystatechange = function(aEvent){
+		if (request.readyState == 4) {
+			if(request.status == 200){
+				let req = JSON.parse(request.responseText);
+				console.log(req);
+			}
+		}
+	};
+
+	request.send(form);
+});
+
 
 show_messages();
+
+
+
+
+
+

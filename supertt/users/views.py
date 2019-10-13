@@ -4,6 +4,7 @@ from django.views.generic import TemplateView
 from .models import User
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password, make_password
+from django.contrib.auth.mixins import LoginRequiredMixin
 from general.messages import *
 
 import re
@@ -159,8 +160,19 @@ class SignUpView(TemplateView):
 
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
+	login_url = '/usuarios/login'
 	template_name = 'perfil.html'
+
+	def process_request(self, request, *args, **kwargs):
+		return render(request, self.template_name, 
+			{'nombre' : request.user.first_name + ' ' + request.user.last_name})
+
+	def get(self, request, *args, **kwargs):
+		return self.process_request(request, args, kwargs)
+
+	def post(self, request, *args, **kwargs):
+		return self.process_request(request, args, kwargs)
 
 
 class PasswordRecoverView(TemplateView):

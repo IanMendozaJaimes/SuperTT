@@ -4,7 +4,8 @@
 	<meta name="viewport" content="width=device-width, user-scalable=no">
 	{% load static %}
 	<link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}"> 
+	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
 	<title>{% block appname %}Nombre de la App{% endblock %}</title>
 </head>
@@ -40,17 +41,19 @@
 			<div class="NavigationBar_appname">
 				<p class="NavigationBar_appname_p">Nombre de la App</p>
 			</div>
+			{% if nombre != None %}
 			<div class="NavigationBar_options">
 				<ul class="NavigationBar_options_ul">
 					<li>
-						<p>Mis proyectos</p>
+						<p><a class="NavigationBar_options_ul_link" href="/proyectos/todos">Mis proyectos</a></p>
 					</li>
 					<li>
-						<p>Cuenta</p>
+						<p><a class="NavigationBar_options_ul_link" href="/usuarios/perfil">{{ nombre }}</a></p>
 						<div class="NavigationBar_options_avatar"></div>
 					</li>
 				</ul>
 			</div>
+			{% endif %}
 		</nav>
 	</header>
 	{% block content %}{% endblock %}
