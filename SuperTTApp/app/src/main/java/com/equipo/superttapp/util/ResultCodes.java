@@ -7,5 +7,6 @@ public class ResultCodes {
     public static final Integer RN002 = -1002;
     public static final Integer RN003 = -1003;
     public static final Integer RN006 = -1006;
-
+    public static final Integer RN008 = -1008;
+    public static final Integer RN009 = -1009;
 }

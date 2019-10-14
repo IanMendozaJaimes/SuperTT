@@ -15,8 +15,8 @@ public class TraduccionListPresenterImpl implements TraduccionListPresenter {
     }
 
     @Override
-    public List<TraduccionModel> findAllTraduccionesByProyecto(Integer idProyecto) {
+    public BusinessResult<TraduccionModel> findAllTraduccionesByProyecto(Integer idProyecto) {
         BusinessResult<TraduccionModel> result = interactor.findAllTraduccionesByProyecto(idProyecto);
-        return null;
+        return result;
     }
 }

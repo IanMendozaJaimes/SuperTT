@@ -2,6 +2,7 @@ package com.equipo.superttapp.projects.adapter;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,9 +45,9 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
         holder.tvFecha.setText(proyectoModel.getTextDate());
         holder.tvCalificacion.setText(proyectoModel.getRate().toString());
         holder.cvProyecto.setOnClickListener(v -> {
-            Toast.makeText(v.getContext(), "HOLA", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(v.getContext(), TraduccionListActivity.class);
             intent.putExtra(BundleConstants.TITULO_KEY, proyectoModel.getName());
+            intent.putExtra(BundleConstants.PROYECTO_ID, proyectoModel.getId());
             v.getContext().startActivity(intent);
         });
     }

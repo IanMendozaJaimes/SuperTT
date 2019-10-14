@@ -1,7 +1,7 @@
 package com.equipo.superttapp.util;
 
 import com.equipo.superttapp.projects.data.ProyectoData;
-import com.equipo.superttapp.projects.model.TraduccionModel;
+import com.equipo.superttapp.projects.data.TraduccionData;
 import com.equipo.superttapp.users.data.UsuarioData;
 
 import java.util.List;
@@ -26,16 +26,16 @@ public interface APIService {
     Call<ProyectoData> deleteProyecto(@Path("idProyecto") Integer idProyecto);
     // Obtiene las traducciones asociadas a un proyecto
     @GET("/proyectos/{idProyecto}/traducciones")
-    Call<List<TraduccionModel>> getTraduccionesByProyecto(@Path("idProyecto") Integer idProyecto);
+    Call<List<TraduccionData>> getTraduccionesByProyecto(@Path("idProyecto") Integer idProyecto);
     // Creacion de una traduccionModel
     @POST("/traducciones")
-    Call<TraduccionModel> createTraduccion(@Body TraduccionModel traduccionModel);
+    Call<TraduccionData> createTraduccion(@Body TraduccionData traduccionData);
     // Edicion de un traduccionModel
     @PUT("/traducciones/{idTraducion}")
-    Call<TraduccionModel> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionModel traduccionModel);
+    Call<TraduccionData> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionData traduccionData);
     // Elimina una traduccion
     @DELETE("/traducciones/{idTraducion}")
-    Call<TraduccionModel> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
+    Call<TraduccionData> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
     // Manda a crear un usuarioData
     @POST("/usuarios")
     Call<UsuarioData> createUsuario(@Body UsuarioData usuarioData);
