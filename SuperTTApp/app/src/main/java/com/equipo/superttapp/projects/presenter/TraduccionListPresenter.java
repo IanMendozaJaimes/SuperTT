@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TraduccionListPresenter {
     BusinessResult<TraduccionModel> findAllTraduccionesByProyecto(Integer idProyecto);
-    void changeProyectoNombre(ProyectoModel model);
     void deleteProyecto(Integer idProyecto);
+    void deleteTraduccion(Integer idTraduccion);
+    void calificarTraduccion(TraduccionModel model);
+    void changeProyectoNombre(ProyectoModel model);
 }
