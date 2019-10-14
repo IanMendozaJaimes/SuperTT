@@ -3,8 +3,7 @@ package com.equipo.superttapp.users.interactor;
 import android.util.Log;
 
 import com.equipo.superttapp.users.data.UsuarioData;
-import com.equipo.superttapp.users.model.LoginFormModel;
-import com.equipo.superttapp.users.model.SignInFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.repository.UserRepository;
 import com.equipo.superttapp.users.repository.UserRepositoryImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -20,31 +19,32 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public BusinessResult<LoginFormModel> logIn(LoginFormModel loginFormModel) {
-        BusinessResult<LoginFormModel> resultado = new BusinessResult<>();
-        loginFormModel.setValidPassword(RN002.isPasswordValid(loginFormModel.getPassword()));
-        loginFormModel.setValidEmail(RN002.isEmailValid(loginFormModel.getEmail()));
-        if (loginFormModel.isValidEmail() && loginFormModel.isValidPassword()) {
+    public BusinessResult<UsuarioModel> logIn(UsuarioModel usuarioModel) {
+        BusinessResult<UsuarioModel> resultado = new BusinessResult<>();
+        usuarioModel.setValidPassword(RN002.isPasswordValid(usuarioModel.getPassword()));
+        usuarioModel.setValidEmail(RN002.isEmailValid(usuarioModel.getEmail()));
+        if (usuarioModel.getValidEmail() && usuarioModel.getValidPassword()) {
             UsuarioData usuarioData = new UsuarioData();
-            usuarioData.setEmail(loginFormModel.getEmail());
-            usuarioData.setPassword(loginFormModel.getPassword());
+            usuarioData.setEmail(usuarioModel.getEmail());
+            usuarioData.setPassword(usuarioModel.getPassword());
             usuarioData = repository.login(usuarioData);
             resultado.setCode(usuarioData.getResponseCode());
-            loginFormModel.setId(usuarioData.getId());
-            loginFormModel.setKeyAuth(usuarioData.getKeyAuth());
-            loginFormModel.setName(usuarioData.getNombre());
+            usuarioModel.setId(usuarioData.getId());
+            usuarioModel.setKeyAuth(usuarioData.getKeyAuth());
+            usuarioModel.setName(usuarioData.getNombre());
+            usuarioModel.setLastname(usuarioData.getApellidos());
         } else {
             resultado.setCode(ResultCodes.RN002);
         }
-        resultado.setResult(loginFormModel);
+        resultado.setResult(usuarioModel);
         return resultado;
     }
 
     @Override
-    public BusinessResult<LoginFormModel> sendEmail(LoginFormModel loginFormModel) {
-        BusinessResult<LoginFormModel> resultado = new BusinessResult<>();
+    public BusinessResult<UsuarioModel> sendEmail(UsuarioModel loginFormModel) {
+        BusinessResult<UsuarioModel> resultado = new BusinessResult<>();
         loginFormModel.setValidEmail(RN002.isEmailValid(loginFormModel.getEmail()));
-        if (loginFormModel.isValidEmail()) {
+        if (loginFormModel.getValidEmail()) {
             UsuarioData data = new UsuarioData();
             data.setEmail(loginFormModel.getEmail());
             resultado.setCode(repository.forgotPassword(data));
@@ -56,8 +56,8 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public BusinessResult<SignInFormModel> createAccount(SignInFormModel model) {
-        BusinessResult<SignInFormModel> result = new BusinessResult<>();
+    public BusinessResult<UsuarioModel> createAccount(UsuarioModel model) {
+        BusinessResult<UsuarioModel> result = new BusinessResult<>();
         model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
         model.setValidEmail(RN002.isEmailValid(model.getEmail()));
         model.setValidSecondPassword(RN002.isSecondPasswordValid(
@@ -65,8 +65,8 @@ public class UserInteractorImpl implements UserInteractor {
         model.setValidName(RN002.isNameValid(model.getName()));
         model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
         Log.d(TAG, model.getSecondPassword() + " " + model.getPassword());
-        if (model.isValidPassword() && model.isValidEmail() && model.isValidName()
-                && model.isValidSecondPassword() && model.isValidLastName()) {
+        if (model.getValidPassword() && model.getValidEmail() && model.getValidName()
+                && model.getValidSecondPassword() && model.getValidLastName()) {
             UsuarioData data = new UsuarioData();
             data.setEmail(model.getEmail());
             data.setNombre(model.getName());
@@ -81,23 +81,45 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public  BusinessResult<SignInFormModel>  updateAccount(SignInFormModel model) {
-        BusinessResult<SignInFormModel> result = new BusinessResult<>();
-        model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
-        model.setValidEmail(RN002.isEmailValid(model.getEmail()));
-        model.setValidSecondPassword(RN002.isSecondPasswordValid(
-                model.getPassword(), model.getSecondPassword()));
+    public  BusinessResult<UsuarioModel>  updateAccount(UsuarioModel model) {
+        BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        if (model.getCurrentPassword() != null && model.getCurrentPassword().length() > 0) {
+            model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
+            model.setValidSecondPassword(RN002.isSecondPasswordValid(model.getPassword(),
+                    model.getSecondPassword()));
+            model.setValidCurrentPassword(RN002.isPasswordValid(model.getCurrentPassword()));
+            Log.i(TAG, "PRIMER IF");
+        } else  {
+            if ((model.getPassword() != null && model.getPassword().length() > 0)
+                    || (model.getSecondPassword() != null && model.getSecondPassword().length() > 0)) {
+                Log.i(TAG, "SEGUNDO IF");
+                model.setValidCurrentPassword(RN002.isPasswordValid(model.getCurrentPassword()));
+                model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
+                model.setValidSecondPassword(RN002.isSecondPasswordValid(model.getPassword(),
+                        model.getSecondPassword()));
+            } else {
+                model.setValidCurrentPassword(true);
+                model.setValidPassword(true);
+                model.setValidSecondPassword(true);
+            }
+        }
+
         model.setValidName(RN002.isNameValid(model.getName()));
         model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
-        if (model.isValidPassword() && model.isValidEmail() && model.isValidName()
-                && model.isValidSecondPassword() && model.isValidLastName()) {
+        model.setValidEmail(true);
+
+        if (model.getValidPassword() && model.getValidName() && model.getValidCurrentPassword()
+                && model.getValidSecondPassword() && model.getValidLastName()) {
             UsuarioData data = new UsuarioData();
             data.setId(model.getId());
-            data.setEmail(model.getEmail());
             data.setNombre(model.getName());
             data.setApellidos(model.getLastname());
             data.setPassword(model.getPassword());
+            data.setCurrentPassword(model.getCurrentPassword());
             result.setCode(repository.updateAccount(data));
+            if (result.getCode().equals(ResultCodes.RN002)) {
+                model.setValidCurrentPassword(false);
+            }
         } else {
             result.setCode(ResultCodes.RN002);
         }

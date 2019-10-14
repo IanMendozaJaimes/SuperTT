@@ -6,13 +6,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.equipo.superttapp.R;
-import com.equipo.superttapp.users.model.LoginFormModel;
-import com.equipo.superttapp.users.model.SignInFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.presenter.SignInPresenter;
 import com.equipo.superttapp.users.presenter.SignInPresenterImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -49,7 +47,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
         presenter = new SignInPresenterImpl(this);
         btnCrearCuenta.setOnClickListener(v -> {
             cleanErrors();
-            SignInFormModel model = new SignInFormModel();
+            UsuarioModel model = new UsuarioModel();
             model.setName(etName.getText().toString());
             model.setLastname(etLastname.getText().toString());
             model.setSecondPassword(etSecondPassword.getText().toString());
@@ -90,7 +88,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
     }
 
     @Override
-    public void showMessage(BusinessResult<SignInFormModel> result) {
+    public void showMessage(BusinessResult<UsuarioModel> result) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_sign_in),
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.RN003))
@@ -99,15 +97,15 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
             snackbar.setText(R.string.msg5_verifique_su_cuenta);
         else if (result.getCode().equals(ResultCodes.RN001)
                 || result.getCode().equals(ResultCodes.RN002)){
-            if (!result.getResult().isValidEmail())
+            if (!result.getResult().getValidEmail())
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.getResult().isValidPassword())
+            if (!result.getResult().getValidPassword())
                 etPassword.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.getResult().isValidSecondPassword())
+            if (!result.getResult().getValidSecondPassword())
                 etSecondPassword.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.getResult().isValidName())
+            if (!result.getResult().getValidName())
                 etName.setError(getText(R.string.msg1_datos_no_validos));
-            if (!result.getResult().isValidLastName())
+            if (!result.getResult().getValidLastName())
                 etLastname.setError(getText(R.string.msg1_datos_no_validos));
             snackbar.setText(R.string.msg1_datos_no_validos);
         }

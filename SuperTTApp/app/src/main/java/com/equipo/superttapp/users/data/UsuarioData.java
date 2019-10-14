@@ -17,6 +17,8 @@ public class UsuarioData {
     private Integer responseCode;
     @SerializedName("keyAuth")
     private String keyAuth;
+    @SerializedName("currentPassword")
+    private String currentPassword;
 
     public String getEmail() {
         return email;
@@ -72,5 +74,13 @@ public class UsuarioData {
 
     public void setKeyAuth(String keyAuth) {
         this.keyAuth = keyAuth;
+    }
+
+    public String getCurrentPassword() {
+        return currentPassword;
+    }
+
+    public void setCurrentPassword(String currentPassword) {
+        this.currentPassword = currentPassword;
     }
 }

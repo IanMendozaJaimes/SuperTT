@@ -4,17 +4,18 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 public class PreferencesManager {
+
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Context context;
     public static final String DEFAULT_STRING = "DEFAULT_STRING";
+    public static final int DEFAULT_INT = -1;
     public static final String PREFERENCES_NAME = "preferencias-user";
     public static final String KEY_USER_IS_LOGGED = "user-is-logged";
     public static final String KEY_USER_EMAIL = "user-email";
     public static final String KEY_USER_ID = "user-id";
     public static final String KEY_USER_NAME = "user-name";
-
-
+    public static final String KEY_USER_LAST_NAME = "user-last-name";
 
     public PreferencesManager(Context context, String preferencesName, int mode) {
         this.context = context;
@@ -41,6 +42,10 @@ public class PreferencesManager {
 
     public String getStringValue(String key) {
         return preferences.getString(key, DEFAULT_STRING);
+    }
+
+    public int getIntegerValue(String key) {
+        return preferences.getInt(key, DEFAULT_INT);
     }
 
     public Boolean getBooleanValue(String key) {

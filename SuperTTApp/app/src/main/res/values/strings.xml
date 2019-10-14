@@ -48,11 +48,13 @@
     <string name="msg10_operacion_fallida">La operación no se pudo realizar.</string>
     <string name="msg12_ingrese_nombre">Ingrese el nombre del proyectoModel.</string>
     <string name="msg11_confirmacion_operacion_cerrar_sesion">¿Está seguro de cerrar sesión?</string>
+    <string name="msg11_confirmacion_actualizar_perfil">¿Está seguro de actualizar su información?</string>
     <string name="msg13_falta_informacion">Falta información necesaria para realizar la operación.</string>
     <string name="title_activity_main">SuperTT</string>
     <string name="nav_header_desc">Header</string>
     <string name="imagen_de_la_ecuacion">Imagen de la ecuacion</string>
     <string name="label_login">Iniciar sesión</string>
     <string name="label_confirmar_operacion">Confirmar operación</string>
+    <string name="label_current_password">Contraseña actual</string>
 
 </resources>

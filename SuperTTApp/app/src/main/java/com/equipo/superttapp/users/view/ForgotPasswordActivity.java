@@ -6,12 +6,11 @@ import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.equipo.superttapp.R;
-import com.equipo.superttapp.users.model.LoginFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.presenter.ForgotPasswordPresenter;
 import com.equipo.superttapp.users.presenter.ForgotPasswordPresenterImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -41,7 +40,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
         presenter = new ForgotPasswordPresenterImpl(this);
         btnEnviarCorreoRecuperacion.setOnClickListener(v -> {
             etEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
-            LoginFormModel model = new LoginFormModel();
+            UsuarioModel model = new UsuarioModel();
             model.setEmail(etEmail.getText().toString());
             presenter.sendEmail(model);
         });
@@ -49,7 +48,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
     }
 
     @Override
-    public void showMessage(BusinessResult<LoginFormModel> result) {
+    public void showMessage(BusinessResult<UsuarioModel> result) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activitu_forgot_password),
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.RN006)) {
@@ -58,7 +57,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
             snackbar.setText(R.string.msg6_envio_correo_recuperacion);
         } else if (result.getCode().equals(ResultCodes.RN001)
                 || result.getCode().equals(ResultCodes.RN002)){
-            if (!result.getResult().isValidEmail()) {
+            if (!result.getResult().getValidEmail()) {
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
             }
             snackbar.setText(R.string.msg1_datos_no_validos);

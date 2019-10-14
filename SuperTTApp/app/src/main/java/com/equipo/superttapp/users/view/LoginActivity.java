@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.view.MainActivity;
-import com.equipo.superttapp.users.model.LoginFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.presenter.LoginPresenter;
 import com.equipo.superttapp.users.presenter.LoginPresenterImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -59,7 +59,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         tvRecuperarContra.setOnClickListener(v -> goForgotPassword());
         btnIniciarSesion.setOnClickListener(v -> {
             cleanErrors();
-            LoginFormModel form = new LoginFormModel();
+            UsuarioModel form = new UsuarioModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
             presenter.logIn(form);
@@ -104,7 +104,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void loginError(BusinessResult<LoginFormModel> resultado) {
+    public void loginError(BusinessResult<UsuarioModel> resultado) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_main_activity),
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (resultado.getCode().equals(ResultCodes.RN006)) {
@@ -112,10 +112,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         } else if (resultado.getCode().equals(ResultCodes.RN001)
                 || resultado.getCode().equals(ResultCodes.RN002) ) {
             snackbar.setText(R.string.msg1_datos_no_validos);
-            if (!resultado.getResult().isValidEmail()) {
+            if (!resultado.getResult().getValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
             }
-            if (!resultado.getResult().isValidPassword()) {
+            if (!resultado.getResult().getValidPassword()) {
                 etContra.setError(getText(R.string.msg1_datos_no_validos));
             }
         }
@@ -130,12 +130,13 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void saveUser(LoginFormModel model) {
+    public void saveUser(UsuarioModel model) {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
         preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
-        //preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
     }
 }
