@@ -10,6 +10,7 @@ public class ProyectoModel {
     private Date date;
     private String textDate;
     private Double rate;
+    private Boolean validName = false;
 
     public Integer getId() {
         return id;
@@ -57,5 +58,13 @@ public class ProyectoModel {
 
     public void updateDate() {
         setDate(DateFormater.convertStringToDate(this.textDate));
+    }
+
+    public Boolean getValidName() {
+        return validName;
+    }
+
+    public void setValidName(Boolean validName) {
+        this.validName = validName;
     }
 }

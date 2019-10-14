@@ -7,4 +7,7 @@ public interface TraduccionListView {
     void showMessage(BusinessResult<TraduccionModel> result);
     void showDeleteDialog();
     void showEditDialog();
+    void deleteProyectoSuccess();
+    void deleteProyectoError();
+    void changeProyectoSuccess();
 }

@@ -31,4 +31,8 @@ public class RN002 {
     public static Boolean isLastnameValid(String lastname) {
         return lastname != null && lastname.length() > 0;
     }
+
+    public static Boolean isProyectoNombreValid(String name) {
+        return isNameValid(name);
+    }
 }

@@ -9,6 +9,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -39,6 +40,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;
     private FloatingActionButton fabTradducion;
+    private Button btnBorrar;
     private TraduccionListPresenter presenter;
     private String nombreProyecto;
     private Integer idProyecto;
@@ -50,9 +52,10 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         setContentView(R.layout.activity_traduccion_list);
         recyclerView = findViewById(R.id.rv_traduccion_list);
         fabTradducion = findViewById(R.id.fab_add_traduccion);
+        btnBorrar = findViewById(R.id.btn_borrar_traduccion);
         layoutManager = new LinearLayoutManager(this);
         traduccionModels = new ArrayList<>();
-        presenter = new TraduccionListPresenterImpl();
+        presenter = new TraduccionListPresenterImpl(this);
         TraduccionModel traduccionModel = new TraduccionModel();
         traduccionModel.setCalificacion(5);
         traduccionModel.setEcuacion("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
@@ -98,6 +101,9 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.RN009)) {
             snackbar.setText(R.string.msg8_no_se_puede_mostrar_proyecto);
+        } else if (result.getCode().equals(ResultCodes.RN001)
+                || result.getCode().equals(ResultCodes.RN002)) {
+            snackbar.setText(R.string.msg1_datos_no_validos);
         }
         snackbar.show();
     }
@@ -108,14 +114,32 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                    // Borrar
-                    Intent intent = new Intent(this, MainActivity.class);
-                    finish();
-                    startActivity(intent);
+                    presenter.deleteProyecto(idProyecto);
+                    dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_no, (dialog, which) -> dialog.cancel());
         AlertDialog alerta = builder.create();
         alerta.show();
+    }
+
+    @Override
+    public void deleteProyectoSuccess() {
+        Intent intent = new Intent(this, MainActivity.class);
+        intent.putExtra(BundleConstants.OPERACION_BORRRAR_PROYECTO, true);
+        finish();
+        startActivity(intent);
+    }
+
+    @Override
+    public void deleteProyectoError() {
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_traduccion_list),
+                R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
+        snackbar.show();
+    }
+
+    @Override
+    public void changeProyectoSuccess() {
+        recuperarTraducciones();
     }
 
     @Override
@@ -127,9 +151,12 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                 .setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg12_ingrese_nombre)
                 .setPositiveButton(R.string.label_guardar_cambios, (dialog, which) -> {
-                    dialog.cancel();
                     EditText etNombre = view.findViewById(R.id.et_nombre_proyecto);
-                    setTitle("HOLA " + etNombre.getText().toString());
+                    ProyectoModel model = new ProyectoModel();
+                    model.setId(idProyecto);
+                    model.setName(etNombre.getText().toString());
+                    presenter.changeProyectoNombre(model);
+                    dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_cancelar, (dialog, which) -> dialog.cancel());
         AlertDialog alerta = builder.create();
