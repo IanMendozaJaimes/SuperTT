@@ -16,5 +16,7 @@ def get_proyects_urls():
 		path('proyectos/todos', ProyectsView.as_view()),
 		path('proyectos/traducciones', TranslationsView.as_view()),
 		path('proyectos/nuevo', crearProyectoView),
+		path('proyectos/cambiar', cambiarProyectoView),
+		path('proyectos/eliminar', eliminarProyectoView),
 	]
 

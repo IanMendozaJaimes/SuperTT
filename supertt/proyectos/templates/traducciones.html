@@ -1,118 +1,71 @@
 {% extends 'general.html' %}
 {% block content %}
 
+	<!-- <div class="TranslationMenu">
+		<div class="TranslationMenu_container">
+			<div class="TranslationMenu_container_info">
+				
+			</div>
+		</div>
+	</div> -->
+
+	<div class="NewProjects DeleteProjects invisible">
+		<div class="NewProjects_message">
+			<div class="NewProjects_header NewProjects_header_fixed">
+				<p>¿Eliminar proyecto?</p>
+				<span id="NewProjects_cancel_btn" class="icon-cross NewProjects_cancel"></span>
+			</div>
+			<div class="NewProjects_newtext">
+				<p>Esta acción no se puede deshacer, si aún asi desea eliminar este projecto, de clic en confirmar.</p>
+				<button id="NewProjects_btn_delete" class="NewProjects_newbtn btn_form" onclick="delete_project();">Eliminar projecto</button>
+			</div>
+		</div>
+	</div>
+
 	<section class="Translations">
 		<div class="Translations_container">
-			<div class="Translations_proyect">
-				<div class="Translations_proyect_description">
-					<p class="Translations_proyect_description_name">{{ proyecto.nombre }}</p>
-					<p class="Translations_proyect_description_cdate">Creado: {{ proyecto.fechaCreacion }}</p>
-					<p class="Translations_proyect_description_udate">Última modificación: {{ proyecto.fechaModificacion }}</p>		
+			<div class="Translations_project">
+				<div class="Translations_project_description">
+					<input type="hidden" value="{{ proyecto.id }}" id="project_id">
+					<p class="Translations_project_description_name">{{ proyecto.nombre }}</p>
+					<p id="msg_badprojectname" class="msg_validation_error invisible"></p>
+					<input type="text" class="text_form Translations_project_description_nametxt invisible" placeholder="Nombre del proyecto">
+					<p class="Translations_project_description_cdate">Creado: {{ proyecto.fechaCreacion }}</p>
+					<p class="Translations_project_description_udate">Última modificación: {{ proyecto.fechaModificacion }}</p>		
 				</div>
-				<div class="Translations_proyect_download">
-					<button class="btn_form Translations_proyect_download_btn">
+				<div class="Translations_project_options">
+					<button onclick="edit_project_name();" class="btn_form">Editar</button>
+					<button class="btn_form" onclick="show_delete_alert();">Eliminar</button>
+				</div>
+				<div class="Translations_project_download">
+					<button class="btn_form Translations_project_download_btn">
 						Descargar proyecto
 					</button>
 				</div>
 			</div>
 			
-			<div class="Translations_proyect_container">
-				<div class="Translations_proyect_container_translation">
-					<div class="Translations_proyect_container_image"></div>
-				</div>
-				<div class="Translations_proyect_container_info">
-					<p class="Translations_proyect_container_info_date">27/10/2019</p>
-					<div class="Translations_proyect_container_info_stars">
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
+			{% for traduccion in traducciones %}
+				<div class="Translations_project_container">
+					<input type="hidden" id="t_{{ traduccion.id }}" value="{{ traduccion.traduccion }}">
+					<div class="Translations_project_container_translation">
+						<div class="Translations_project_container_image"></div>
+					</div>
+					<div class="Translations_project_container_info">
+						<p class="Translations_project_container_info_date">{{ traduccion.fechaCreacion }}</p>
+						<div class="Translations_project_container_info_stars">
+							{{ traduccion.calificacion }}
+						</div>
+					</div>
+					<div class="Translations_project_container_example">
+						<p>{{ traduccion.traduccion }}</p>
+					</div>
+					<div class="Translations_project_container_copy">
+						<button id="btn_t_{{ traduccion.id }}" class="btn_form Translations_project_container_btn">
+							Copiar
+						</button>
 					</div>
 				</div>
-				<div class="Translations_proyect_container_example">
-					<p>\frac{exp^{2x}-2x^{3}+2}{ln(2x)} + log(x^{2} + 3)</p>
-				</div>
-				<div class="Translations_proyect_container_copy">
-					<button class="btn_form Translations_proyect_container_btn">
-						Copiar
-					</button>
-				</div>
-			</div>
-
-			<div class="Translations_proyect_container">
-				<div class="Translations_proyect_container_translation">
-					<div class="Translations_proyect_container_image"></div>
-				</div>
-				<div class="Translations_proyect_container_info">
-					<p class="Translations_proyect_container_info_date">27/10/2019</p>
-					<div class="Translations_proyect_container_info_stars">
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-					</div>
-				</div>
-				<div class="Translations_proyect_container_example">
-					<p>\frac{exp^{2x}-2x^{3}+2}{ln(2x)} + log(x^{2} + 3)</p>
-				</div>
-				<div class="Translations_proyect_container_copy">
-					<button class="btn_form Translations_proyect_container_btn">
-						Copiar
-					</button>
-				</div>
-			</div>
-
-			<div class="Translations_proyect_container">
-				<div class="Translations_proyect_container_translation">
-					<div class="Translations_proyect_container_image"></div>
-				</div>
-				<div class="Translations_proyect_container_info">
-					<p class="Translations_proyect_container_info_date">27/10/2019</p>
-					<div class="Translations_proyect_container_info_stars">
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-					</div>
-				</div>
-				<div class="Translations_proyect_container_example">
-					<p>\frac{exp^{2x}-2x^{3}+2}{ln(2x)} + log(x^{2} + 3)</p>
-				</div>
-				<div class="Translations_proyect_container_copy">
-					<button class="btn_form Translations_proyect_container_btn">
-						Copiar
-					</button>
-				</div>
-			</div>
-
-			<div class="Translations_proyect_container">
-				<div class="Translations_proyect_container_translation">
-					<div class="Translations_proyect_container_image"></div>
-				</div>
-				<div class="Translations_proyect_container_info">
-					<p class="Translations_proyect_container_info_date">27/10/2019</p>
-					<div class="Translations_proyect_container_info_stars">
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-						<span>s</span>
-					</div>
-				</div>
-				<div class="Translations_proyect_container_example">
-					<p>\frac{exp^{2x}-2x^{3}+2}{ln(2x)} + log(x^{2} + 3)</p>
-				</div>
-				<div class="Translations_proyect_container_copy">
-					<button class="btn_form Translations_proyect_container_btn">
-						Copiar
-					</button>
-				</div>
-			</div>
-
-
+			{% endfor %}
 
 		</div>	
 	</section>

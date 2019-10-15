@@ -10,17 +10,20 @@
 				</div>
 				<div class="Profile_container_avatar_photo"></div>
 			</div>
-			<p class="Profile_container_email">Correo electrónico</p>
+			<p class="Profile_container_email">{{ correo }}</p>
 			<form>
-				<input type="text" placeholder="Nombre" class="text_form Profile_container_text">
+				<p id="msg_nombre" class="msg_validation_error invisible"></p>
+				<input type="text" placeholder="Nombre" class="text_form Profile_container_text" value="{{ nombre }}">
 				<div class="Profile_container_select">
 					<select class="Profile_container_studies">
-						<option>Grado de estudios</option>
-						<option>Licenciatura</option>
-						<option>Maestria</option>
-						<option>Doctorado</option>
+						{% for opcion in opciones %}
+							<option value="{{ opcion.id }}">{{ opcion.grado }}</option>
+						{% endfor %}
 					</select>
 				</div>
+				<button class="btn_form Profile_container_btn_one" onclick="save_profile_changes(event);">
+					Guardar cambios
+				</button>
 			</form>
 			<div class="Login_container_line">
 				<div class="Login_container_line_l"></div>
@@ -28,9 +31,11 @@
 			<div class="Profile_container_changeP">
 				<p class="Profile_container_changeP_p">Cambiar contraseña</p>
 				<form>
-					<input type="password" placeholder="Contraseña" class="text_form Profile_container_text">
-					<input type="password" placeholder="Confirmar contraseña" class="text_form Profile_container_text">
-					<button class="btn_form Profile_container_btn">
+					<p id="msg_contra" class="msg_validation_error invisible"></p>
+					<input type="password" id="contra" placeholder="Nueva contraseña" class="text_form Profile_container_text">
+					<p id="msg_contraDos" class="msg_validation_error"></p>
+					<input type="password" id="contraDos" placeholder="Confirmar nueva contraseña" class="text_form Profile_container_text">
+					<button class="btn_form Profile_container_btn" onclick="change_password(event);">
 						Cambiar contraseña
 					</button>
 				</form>

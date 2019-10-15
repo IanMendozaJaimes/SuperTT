@@ -59,5 +59,24 @@
 	{% block content %}{% endblock %}
 
 	<script  type="text/javascript" src="{% static 'js/acciones.js' %}"></script>
+
+	{% if proyecto.id != None %}
+		<script type="text/javascript">
+			function copy() {
+				let txt = document.createElement('textarea');
+				document.body.appendChild(txt);
+				txt.textContent = 'id.value;'
+				console.log(txt.value)
+				txt.select();
+				document.execCommand("copy");
+				txt.remove();
+			}
+
+			{% for traduccion in traducciones %}
+				document.querySelector("#btn_t_{{ traduccion.id }}").addEventListener("click", copy);
+			{% endfor %}
+		</script>
+	{% endif %}
+
 </body>
 </html>
