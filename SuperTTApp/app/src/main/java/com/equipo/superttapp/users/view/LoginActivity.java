@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.view.MainActivity;
-import com.equipo.superttapp.users.model.LoginFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.presenter.LoginPresenter;
 import com.equipo.superttapp.users.presenter.LoginPresenterImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -47,27 +47,38 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+            goHome();
+        }
         hideProgressBar();
         presenter = new LoginPresenterImpl(this);
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
         tvRecuperarContra.setOnClickListener(v -> goForgotPassword());
         btnIniciarSesion.setOnClickListener(v -> {
-            etContra.setError(null);
-            etCorreo.setError(null);
-            LoginFormModel form = new LoginFormModel();
+            cleanErrors();
+            UsuarioModel form = new UsuarioModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
             presenter.logIn(form);
-            etCorreo.onEditorAction(EditorInfo.IME_ACTION_DONE);
-            etContra.onEditorAction(EditorInfo.IME_ACTION_DONE);
+            hideKeyboard();
         });
         setTitle(R.string.label_login);
-        //PreferencesManager preferencesManager = new PreferencesManager(this,
-        //        PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        //if (preferencesManager.keyExists(PreferencesManager.KEY_IS_LOGGED)
-        //        && preferencesManager.getBooleanValue(PreferencesManager.KEY_IS_LOGGED)) {
-        //    goHome();
-        //}
+
+    }
+
+    @Override
+    public void cleanErrors() {
+        etContra.setError(null);
+        etCorreo.setError(null);
+    }
+
+    @Override
+    public void hideKeyboard() {
+        etCorreo.onEditorAction(EditorInfo.IME_ACTION_DONE);
+        etContra.onEditorAction(EditorInfo.IME_ACTION_DONE);
     }
 
     @Override
@@ -93,16 +104,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     }
 
     @Override
-    public void loginError(BusinessResult<LoginFormModel> resultado) {
+    public void loginError(BusinessResult<UsuarioModel> resultado) {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_main_activity),
-                R.string.msg1_datos_no_validos, Snackbar.LENGTH_LONG);
+                R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (resultado.getCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg2_cuenta_no_verificada);
-        } else  {
-            if (!resultado.getResult().isValidEmail()) {
+        } else if (resultado.getCode().equals(ResultCodes.RN001)
+                || resultado.getCode().equals(ResultCodes.RN002) ) {
+            snackbar.setText(R.string.msg1_datos_no_validos);
+            if (!resultado.getResult().getValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
             }
-            if (!resultado.getResult().isValidPassword()) {
+            if (!resultado.getResult().getValidPassword()) {
                 etContra.setError(getText(R.string.msg1_datos_no_validos));
             }
         }
@@ -112,14 +125,18 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void goHome() {
         Intent intent = new Intent(this, MainActivity.class);
+        finish();
         startActivity(intent);
     }
 
     @Override
-    public void saveUser(LoginFormModel model) {
+    public void saveUser(UsuarioModel model) {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        preferencesManager.saveValue(PreferencesManager.KEY_EMAIL, model.getEmail());
-        preferencesManager.saveValue(PreferencesManager.KEY_IS_LOGGED, true);
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
     }
 }

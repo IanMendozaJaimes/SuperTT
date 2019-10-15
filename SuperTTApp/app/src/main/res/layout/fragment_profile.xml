@@ -44,11 +44,11 @@
 
         <Button
             android:id="@+id/profile_btn_guardar"
-            style="@style/Widget.AppCompat.Button"
+            style="@style/Widget.AppCompat.Button.Colored"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="23dp"
             android:layout_marginEnd="10dp"
             android:text="@string/label_guardar_cambios"
             app:layout_constraintEnd_toEndOf="parent"
@@ -61,14 +61,16 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
             android:layout_marginTop="23dp"
+
             android:layout_marginEnd="10dp"
             android:ems="10"
+            android:focusable="false"
             android:hint="@string/label_email"
             android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_et_apellidos" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/profile_et_contra"
@@ -83,14 +85,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile_et_email" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_et_current_password" />
 
         <EditText
             android:id="@+id/profile_et_nombre"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="45dp"
             android:layout_marginStart="10dp"
-            android:layout_marginTop="46dp"
+            android:layout_marginTop="23dp"
             android:layout_marginEnd="10dp"
             android:ems="10"
             android:hint="@string/label_nombre"
@@ -98,7 +100,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/profile_et_email" />
 
         <ProgressBar
             android:id="@+id/pb_profile"
@@ -108,6 +110,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profile_btn_guardar" />
+
+        <EditText
+            android:id="@+id/profile_et_current_password"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="23dp"
+            android:layout_marginEnd="10dp"
+            android:ems="10"
+            android:hint="@string/label_current_password"
+            android:inputType="textPassword"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profile_et_apellidos" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

@@ -65,7 +65,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
             if (response.isSuccessful())
                 code = ResultCodes.SUCCESS;
         } catch (IOException | NetworkOnMainThreadException e) {
-            Log.e(TAG, "updateProyecto ", e);
+            Log.e(TAG, "createProyecto ", e);
         }
         return code;
     }

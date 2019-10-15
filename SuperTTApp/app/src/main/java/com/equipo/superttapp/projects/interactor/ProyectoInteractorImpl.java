@@ -5,6 +5,7 @@ import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.repository.ProjectRepository;
 import com.equipo.superttapp.projects.repository.ProjectRepositoryImpl;
 import com.equipo.superttapp.util.BusinessResult;
+import com.equipo.superttapp.util.RN002;
 import com.equipo.superttapp.util.ResultCodes;
 
 import java.util.ArrayList;
@@ -47,11 +48,17 @@ public class ProyectoInteractorImpl implements ProyectoInteractor {
     public BusinessResult<ProyectoModel> updateProyecto(ProyectoModel model) {
         ProyectoData proyectoData = new ProyectoData();
         BusinessResult<ProyectoModel> result = new BusinessResult<>();
-        proyectoData.setCalificacion(model.getRate());
-        proyectoData.setFecha(model.getTextDate());
+        //proyectoData.setCalificacion(model.getRate());
+        //proyectoData.setFecha(model.getTextDate());
         proyectoData.setId(model.getId());
-        proyectoData.setNombre(model.getName());
-        result.setCode(repository.updateProyecto(proyectoData));
+        model.setValidName(RN002.isProyectoNombreValid(model.getName()));
+        if (model.getValidName()) {
+            proyectoData.setNombre(model.getName());
+            result.setCode(repository.updateProyecto(proyectoData));
+        } else {
+            result.setCode(ResultCodes.RN002);
+        }
+
         return result;
     }
 

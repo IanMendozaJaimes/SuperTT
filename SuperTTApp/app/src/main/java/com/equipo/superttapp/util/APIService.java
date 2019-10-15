@@ -1,8 +1,8 @@
 package com.equipo.superttapp.util;
 
 import com.equipo.superttapp.projects.data.ProyectoData;
-import com.equipo.superttapp.projects.model.TraduccionModel;
-import com.equipo.superttapp.users.model.Usuario;
+import com.equipo.superttapp.projects.data.TraduccionData;
+import com.equipo.superttapp.users.data.UsuarioData;
 
 import java.util.List;
 
@@ -26,28 +26,28 @@ public interface APIService {
     Call<ProyectoData> deleteProyecto(@Path("idProyecto") Integer idProyecto);
     // Obtiene las traducciones asociadas a un proyecto
     @GET("/proyectos/{idProyecto}/traducciones")
-    Call<List<TraduccionModel>> getTraduccionesByProyecto(@Path("idProyecto") Integer idProyecto);
+    Call<List<TraduccionData>> getTraduccionesByProyecto(@Path("idProyecto") Integer idProyecto);
     // Creacion de una traduccionModel
     @POST("/traducciones")
-    Call<TraduccionModel> createTraduccion(@Body TraduccionModel traduccionModel);
+    Call<TraduccionData> createTraduccion(@Body TraduccionData traduccionData);
     // Edicion de un traduccionModel
     @PUT("/traducciones/{idTraducion}")
-    Call<TraduccionModel> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionModel traduccionModel);
+    Call<TraduccionData> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionData traduccionData);
     // Elimina una traduccion
     @DELETE("/traducciones/{idTraducion}")
-    Call<TraduccionModel> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
-    // Manda a crear un usuario
+    Call<TraduccionData> deleteTraduccion(@Path("idTraducion") Integer idTraducion);
+    // Manda a crear un usuarioData
     @POST("/usuarios")
-    Call<Usuario> createUsuario(@Body Usuario usuario);
+    Call<UsuarioData> createUsuario(@Body UsuarioData usuarioData);
     // Para hacer login
     @POST("/usuarios/login")
-    Call<Usuario> loginUsuario(@Body Usuario usuario);
+    Call<UsuarioData> loginUsuario(@Body UsuarioData usuarioData);
     // Para hacer la recuperacion de contra
     @POST("/usuarios/recuperar")
-    Call<Usuario> recuperarUsuario(@Body Usuario usuario);
-    // Para editar usuario
+    Call<UsuarioData> recuperarUsuario(@Body UsuarioData usuarioData);
+    // Para editar usuarioData
     @PUT("/usuarios/{idUsuario}")
-    Call<Usuario> editUsuario(@Path("idUsuario") Integer id, @Body Usuario usuario);
+    Call<UsuarioData> editUsuario(@Path("idUsuario") Integer id, @Body UsuarioData usuarioData);
     // Obtiene los proyectos asociados a un usuario
     @GET("/usuarios/{idUsuario}/proyectos")
     Call<List<ProyectoData>> getProyectosByUsuario(@Path("idUsuario") Integer idUsuario);

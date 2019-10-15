@@ -2,7 +2,7 @@ package com.equipo.superttapp.users.presenter;
 
 import com.equipo.superttapp.users.interactor.UserInteractor;
 import com.equipo.superttapp.users.interactor.UserInteractorImpl;
-import com.equipo.superttapp.users.model.SignInFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.view.SignInView;
 import com.equipo.superttapp.util.BusinessResult;
 
@@ -16,14 +16,14 @@ public class SignInPresenterImpl implements SignInPresenter {
     }
 
     @Override
-    public void signIn(SignInFormModel model) {
+    public void signIn(UsuarioModel model) {
         view.showProgressBar();
-        BusinessResult<SignInFormModel> result = interactor.createAccount(model);
+        BusinessResult<UsuarioModel> result = interactor.createAccount(model);
         showMessage(result);
     }
 
     @Override
-    public void showMessage(BusinessResult<SignInFormModel> result) {
+    public void showMessage(BusinessResult<UsuarioModel> result) {
         view.hideProgressBar();
         view.showMessage(result);
     }
