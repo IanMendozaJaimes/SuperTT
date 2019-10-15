@@ -19,7 +19,7 @@ def get_proyects_urls():
 		path('proyectos/nuevo', crearProyectoView),
 		path('proyectos/create', create_project_view),
 		path('proyectos/<id>/delete', delete_project_view),
-		path('usuario/<usuario>/proyectos', detail_project_view),
+		path('usuarios/<usuario>/proyectos', detail_project_view),
 		path('proyectos/<idpro>/update', edit_project_view),
 		
 		path('traducciones/create', create_translation_view),

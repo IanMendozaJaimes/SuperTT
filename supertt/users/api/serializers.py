@@ -14,7 +14,7 @@ class SerializadorRegistro(serializers.ModelSerializer):
         account = User(
             email = self.validated_data['email'],
         )
-        password = self.validated_data['password1']
+        password = self.validated_data['password']
         password2 = self.validated_data['password2']
 
         if password != password2:
