@@ -134,7 +134,8 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'PAGE_SIZE':  10,
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+        'rest_framework.permissions.DjangoModelPermissions',
+        'rest_framework.authentication.TokenAuthentication',
     ],
 }
 

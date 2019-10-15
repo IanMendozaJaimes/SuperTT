@@ -24,7 +24,7 @@ def get_proyects_urls():
 		
 		path('traducciones/create', create_translation_view),
 		path('traducciones/<id>/delete', delete_translation_view),
-		path('traducciones/<idpro>/traducciones', detail_translation_view),
+		path('proyectos/<idpro>/traducciones', detail_translation_view),
 		path('traducciones/<idpro>/update', edit_translation_view),
 		
 	]

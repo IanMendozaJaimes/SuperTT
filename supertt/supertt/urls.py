@@ -23,6 +23,7 @@ from django.conf.urls import url, include
 from django.conf.urls.static import static
 
 from proyectos.urls import get_proyects_urls
+from users.api.urls import get_user_urls
 
 
 
@@ -34,5 +35,6 @@ urlpatterns = [
 
 
 urlpatterns += get_proyects_urls()
+urlpatterns += get_user_urls()
 
 
