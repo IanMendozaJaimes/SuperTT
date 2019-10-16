@@ -21,7 +21,7 @@ public class ProyectoInteractorImpl implements ProyectoInteractor {
     @Override
     public BusinessResult<ProyectoModel> findAllProyectosByUser(Integer user) {
         BusinessResult<ProyectoModel> resultado = new BusinessResult<>();
-        List<ProyectoData> proyectos = repository.findAllProyectosByUser(user);
+        List<ProyectoData> proyectos = new ArrayList<>();
         List<ProyectoModel> proyectoModels = new ArrayList<>();
         for (ProyectoData proyecto : proyectos) {
             ProyectoModel proyectoModel = new ProyectoModel();

@@ -1,11 +1,19 @@
 package com.equipo.superttapp.projects.data;
 
+import com.google.gson.annotations.SerializedName;
+
 public class TraduccionData {
+    @SerializedName("id")
     private Integer id;
+    @SerializedName("idProyecto")
     private Integer idProyecto;
+    @SerializedName("fecha")
     private String fecha;
+    @SerializedName("ecuacion")
     private String ecuacion;
+    @SerializedName("calificacion")
     private Integer calificacion;
+    @SerializedName("url")
     private String url;
 
     public Integer getId() {
