@@ -16,7 +16,7 @@
     <string name="label_confirmar_contra">Confirmar contraseña</string>
     <string name="btn_crear_cuenta">Crear cuenta</string>
     <string name="label_mi_cuenta">Mi cuenta</string>
-    <string name="label_mis_proyectos">Mis proyectoModels</string>
+    <string name="label_mis_proyectos">Mis proyecto</string>
     <string name="label_cerrar_sesion">Cerrar sesión</string>
     <string name="label_si">Sí</string>
     <string name="label_no">No</string>
@@ -32,7 +32,7 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
     <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="menu_home">Mis proyectoModels</string>
+    <string name="menu_home">Mis proyectos</string>
     <string name="menu_profile">Editar perfil</string>
     <string name="title_activity_recuperar">Recuperar contraseña</string>
 
@@ -42,16 +42,22 @@
     <string name="msg4_correo_electronico_ya_registrado"> El correo electrónico ya se ha utilizado.</string>
     <string name="msg5_verifique_su_cuenta">Verifique su cuenta a través del correo electrónico que se le ha mandado.</string>
     <string name="msg6_envio_correo_recuperacion">Se ha enviado un correo electrónico para la recuperación de su contraseña.</string>
-    <string name="msg7_no_existe_proyectos_para_mostrar">No hay proyectoModels que se puedan mostrar.</string>
-    <string name="msg8_no_se_puede_mostrar_proyecto">En este momento no se puede mostrar el proyectoModel.</string>
+    <string name="msg7_no_existe_proyectos_para_mostrar">No hay proyectos que se puedan mostrar.</string>
+    <string name="msg8_no_se_puede_mostrar_proyecto">En este momento no se puede mostrar el proyecto.</string>
     <string name="msg9_operacion_exitosa">La operación se ha realizado con éxito.</string>
     <string name="msg10_operacion_fallida">La operación no se pudo realizar.</string>
-    <string name="msg12_ingrese_nombre">Ingrese el nombre del proyectoModel.</string>
+    <string name="msg12_ingrese_nombre">Ingrese el nombre del proyecto.</string>
     <string name="msg11_confirmacion_operacion_cerrar_sesion">¿Está seguro de cerrar sesión?</string>
+    <string name="msg11_confirmacion_actualizar_perfil">¿Está seguro de actualizar su información?</string>
     <string name="msg13_falta_informacion">Falta información necesaria para realizar la operación.</string>
     <string name="title_activity_main">SuperTT</string>
     <string name="nav_header_desc">Header</string>
     <string name="imagen_de_la_ecuacion">Imagen de la ecuacion</string>
     <string name="label_login">Iniciar sesión</string>
+    <string name="label_confirmar_operacion">Confirmar operación</string>
+    <string name="label_current_password">Contraseña actual</string>
+    <string name="msg11_confirmacion_operacion_borrar_proyecto">¿Está seguro de borrar el proyecto?</string>
+    <string name="label_cancelar">Cancelar</string>
+    <string name="label_nombre_proyecto">Nombre del proyecto</string>
 
 </resources>

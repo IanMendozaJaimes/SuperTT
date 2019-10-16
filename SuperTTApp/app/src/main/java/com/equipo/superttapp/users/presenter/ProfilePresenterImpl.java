@@ -2,9 +2,10 @@ package com.equipo.superttapp.users.presenter;
 
 import com.equipo.superttapp.users.interactor.UserInteractor;
 import com.equipo.superttapp.users.interactor.UserInteractorImpl;
-import com.equipo.superttapp.users.model.SignInFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.view.ProfileView;
 import com.equipo.superttapp.util.BusinessResult;
+import com.equipo.superttapp.util.ResultCodes;
 
 public class ProfilePresenterImpl implements ProfilePresenter{
     private UserInteractor interactor;
@@ -16,14 +17,16 @@ public class ProfilePresenterImpl implements ProfilePresenter{
     }
 
     @Override
-    public void updateAccount(SignInFormModel model) {
+    public void updateAccount(UsuarioModel model) {
         view.showProgressBar();
-        BusinessResult<SignInFormModel> result = interactor.updateAccount(model);
+        BusinessResult<UsuarioModel> result = interactor.updateAccount(model);
+        if (result.getCode().equals(ResultCodes.SUCCESS))
+            view.saveUser(result.getResult());
         showMessage(result);
     }
 
     @Override
-    public void showMessage(BusinessResult<SignInFormModel> result) {
+    public void showMessage(BusinessResult<UsuarioModel> result) {
         view.hideProgressBar();
         view.showMessage(result);
     }

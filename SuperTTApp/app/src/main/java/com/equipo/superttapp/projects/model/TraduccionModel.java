@@ -8,6 +8,7 @@ public class TraduccionModel {
     private Date fecha;
     private String ecuacion;
     private Integer calificacion;
+    private String url;
 
     public Integer getId() {
         return id;
@@ -47,5 +48,13 @@ public class TraduccionModel {
 
     public void setCalificacion(Integer calificacion) {
         this.calificacion = calificacion;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 }

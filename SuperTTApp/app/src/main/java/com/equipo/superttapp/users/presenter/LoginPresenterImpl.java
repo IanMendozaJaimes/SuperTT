@@ -2,10 +2,9 @@ package com.equipo.superttapp.users.presenter;
 
 import com.equipo.superttapp.users.interactor.UserInteractor;
 import com.equipo.superttapp.users.interactor.UserInteractorImpl;
-import com.equipo.superttapp.users.model.LoginFormModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.view.LoginView;
 import com.equipo.superttapp.util.BusinessResult;
-import com.equipo.superttapp.util.ResultCodes;
 
 public class LoginPresenterImpl implements LoginPresenter{
     private UserInteractor interactor;
@@ -17,24 +16,24 @@ public class LoginPresenterImpl implements LoginPresenter{
     }
 
     @Override
-    public void logIn(LoginFormModel loginFormModel) {
+    public void logIn(UsuarioModel loginFormModel) {
         view.showProgressBar();
-        BusinessResult<LoginFormModel> resultado = interactor.logIn(loginFormModel);
-        if (resultado.getCode().equals(ResultCodes.SUCCESS))
+        BusinessResult<UsuarioModel> resultado = interactor.logIn(loginFormModel);
+        //if (resultado.getCode().equals(ResultCodes.SUCCESS))
             logInSuccess(resultado);
-        else
-            logInError(resultado);
+       // else
+        //    logInError(resultado);
     }
 
     @Override
-    public void logInSuccess(BusinessResult<LoginFormModel> resultado) {
+    public void logInSuccess(BusinessResult<UsuarioModel> resultado) {
         view.hideProgressBar();
         view.saveUser(resultado.getResult());
         view.goHome();
     }
 
     @Override
-    public void logInError(BusinessResult<LoginFormModel> resultado) {
+    public void logInError(BusinessResult<UsuarioModel> resultado) {
         view.hideProgressBar();
         view.loginError(resultado);
     }

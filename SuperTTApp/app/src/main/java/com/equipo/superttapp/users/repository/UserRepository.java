@@ -1,8 +1,10 @@
 package com.equipo.superttapp.users.repository;
 
+import com.equipo.superttapp.users.data.UsuarioData;
+
 public interface UserRepository {
-    Integer login(String email, String password);
-    Integer forgotPassword(String email);
-    Integer createAccount(String email, String password, String nombre, String apellidos);
-    Integer updateAccount(String email, String password, String nombre, String apellidos);
+    UsuarioData login(UsuarioData usuarioData);
+    Integer forgotPassword(UsuarioData usuarioData);
+    Integer createAccount(UsuarioData usuarioData);
+    Integer updateAccount(UsuarioData usuarioData);
 }

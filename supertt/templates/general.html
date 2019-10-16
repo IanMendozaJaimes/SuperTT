@@ -62,10 +62,11 @@
 
 	{% if proyecto.id != None %}
 		<script type="text/javascript">
-			function copy() {
+			function copy(event) {
+				let id = event.target.id.replace('btn_t_', 't_');
 				let txt = document.createElement('textarea');
 				document.body.appendChild(txt);
-				txt.textContent = 'id.value;'
+				txt.textContent = document.getElementById(id).value;
 				console.log(txt.value)
 				txt.select();
 				document.execCommand("copy");
