@@ -1,8 +1,8 @@
-proyect_width = 230px
-proyect_height = 280px
-proyect_padding = 20px
+project_width = 230px
+project_height = 280px
+project_padding = 20px
 
-.Proyects
+.Projects
 	margin-top 120px
 	make_flex()
 	
@@ -22,11 +22,11 @@ proyect_padding = 20px
 		make_flex()
 		flex-wrap wrap
 		
-		&_proyect
-			padding proyect_padding
+		&_project
+			padding project_padding
 			background-color fill_color_dark
-			width proyect_width
-			min-height proyect_height
+			width project_width
+			min-height project_height
 			color font_color
 			make_flex()
 			flex-wrap wrap
@@ -50,12 +50,12 @@ proyect_padding = 20px
 				background-image get_link_image('imagenProyecto.jpg')
 				background-size cover
 				background-position center
-				width proyect_width
-				height proyect_width
+				width project_width
+				height project_width
 				margin-top 20px
 
 
-.NewProyects
+.NewProjects
 	
 	&_header_fixed
 		justify-content space-between
@@ -94,17 +94,32 @@ proyect_padding = 20px
 		flex-basis 80%
 		
 
-	&_proyect
+	&_project
 		make_flex()
 		justify-content space-around
 		margin-bottom 3em
 		
+		&_options
+			flex-basis 20%
+			make_flex()
+			align-items flex-start
+			
+			& button
+				flex-basis 40%
+				
+				&:first-child
+					margin-right 10px
+		
 		&_description
-			flex-basis 70%
+			flex-basis 50%
 			
 			&_name
 				font-size 1.3em
 				margin-bottom 0.5em
+				
+			&_nametxt
+				margin 0 0 0.5em 0
+				width 80%
 		
 		&_download
 			flex-basis 30%
@@ -152,6 +167,43 @@ proyect_padding = 20px
 				
 			&_btn
 				flex-basis 70%;
+				
+
+.TranslationMenu
+	position fixed
+	top 0
+	bottom 0
+	right 0
+	left 0
+	background-color rgba(0,0,0,0.6)
+	z-index 120
+	make_flex()
+	justify-content right
+	
+	&_container
+		height 100vh
+		flex-basis 40%
+		min-width 320px
+		background-color fill_color
+
+
+#NewProjects_btn_delete
+	margin 15px 0
+	flex-basis 50%
+
+
+.add_project
+	width 0
+	opacity 0
+	padding 0
+	margin 0
+	transition all 0.8s ease-out
+	
+.add_project_animate
+	width min-content
+	opacity 1
+	padding project_padding
+	margin 1.5em
 
 
 

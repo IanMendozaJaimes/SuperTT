@@ -59,7 +59,7 @@ header {
   margin-left: 1em;
 }
 .Alert,
-.NewProyects {
+.NewProjects {
   position: fixed;
   z-index: 100;
   background-color: rgba(0,0,0,0.6);
@@ -74,7 +74,7 @@ header {
   transition: opacity 0.2s ease-out;
 }
 .Alert_header,
-.NewProyects_header {
+.NewProjects_header {
   background-color: #ba0a76;
   min-height: 55px;
   max-height: 65px;
@@ -85,23 +85,23 @@ header {
   font-size: 1.1em;
 }
 .Alert_message,
-.NewProyects_message {
+.NewProjects_message {
   flex-basis: 60%;
   max-width: 400px;
   background-color: #e1e2e1;
 }
 .Alert_text,
-.NewProyects_text {
+.NewProjects_text {
   padding: 25px;
 }
 .Alert_container_btn,
-.NewProyects_container_btn {
+.NewProjects_container_btn {
   display: flex;
   justify-content: center;
   margin: 15px 0;
 }
 .Alert_btn,
-.NewProyects_btn {
+.NewProjects_btn {
   flex-basis: 50%;
   max-width: 150px;
 }
@@ -184,8 +184,9 @@ a:hover {
   color: #d12b2b;
   margin: 0;
 }
-.msg_validation_error_proyects {
+.msg_validation_error_projects {
   flex-basis: 100%;
+  text-align: center;
 }
 .msg_margin {
   margin-top: 1em;
@@ -393,38 +394,41 @@ a:hover {
   border: none;
   box-shadow: none;
 }
-.Profile_container_btn {
+.Profile_container_btn,
+.Profile_container_btn_one {
   flex-basis: 100%;
+  margin-top: 0.5em;
 }
-.Profile_container_btn:hover {
+.Profile_container_btn:hover,
+.Profile_container_btn_one:hover {
   background-color: #85004a;
 }
 .opacity_full {
   opacity: 1;
 }
-.Proyects {
+.Projects {
   margin-top: 120px;
   display: flex;
   justify-content: center;
 }
-.Proyects_c {
+.Projects_c {
   max-width: 1000px;
   flex-basis: 80%;
 }
-.Proyects_options {
+.Projects_options {
   display: flex;
   justify-content: flex-end;
   margin-bottom: 1em;
 }
-.Proyects_options_btn {
+.Projects_options_btn {
   margin-right: 1.5em;
 }
-.Proyects_container {
+.Projects_container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
 }
-.Proyects_container_proyect {
+.Projects_container_project {
   padding: 20px;
   background-color: #e1e2e1;
   width: 230px;
@@ -436,20 +440,20 @@ a:hover {
   align-content: flex-start;
   margin: 1.5em;
 }
-.Proyects_container_proyect:hover {
+.Projects_container_project:hover {
   cursor: pointer;
   box-shadow: 0 0 5px #808080;
 }
-.Proyects_container_proyect_name {
+.Projects_container_project_name {
   flex-basis: 100%;
   font-size: 1em;
 }
-.Proyects_container_proyect_date {
+.Projects_container_project_date {
   font-size: 0.8em;
   flex-basis: 100%;
   margin-top: 0.4em;
 }
-.Proyects_container_proyect_image {
+.Projects_container_project_image {
   background-image: url("/static/images/imagenProyecto.jpg");
   background-size: cover;
   background-position: center;
@@ -457,18 +461,18 @@ a:hover {
   height: 230px;
   margin-top: 20px;
 }
-.NewProyects_header_fixed {
+.NewProjects_header_fixed {
   justify-content: space-between;
 }
-.NewProyects_cancel {
+.NewProjects_cancel {
   border-radius: 5px;
   padding: 10px;
 }
-.NewProyects_cancel:hover {
+.NewProjects_cancel:hover {
   cursor: pointer;
   background-color: #85004a;
 }
-.NewProyects_newtext {
+.NewProjects_newtext {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -476,14 +480,14 @@ a:hover {
   flex-wrap: wrap;
   padding: 20px 10px;
 }
-.NewProyects_newnombre {
+.NewProjects_newnombre {
   flex-basis: 60%;
   color: #373737;
 }
-.NewProyects_newbtn {
+.NewProjects_newbtn {
   flex-basis: 30%;
 }
-.NewProyects_p {
+.NewProjects_p {
   flex-basis: 100%;
 }
 .Translations {
@@ -495,27 +499,43 @@ a:hover {
   max-width: 1000px;
   flex-basis: 80%;
 }
-.Translations_proyect {
+.Translations_project {
   display: flex;
   justify-content: center;
   justify-content: space-around;
   margin-bottom: 3em;
 }
-.Translations_proyect_description {
-  flex-basis: 70%;
+.Translations_project_options {
+  flex-basis: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
 }
-.Translations_proyect_description_name {
+.Translations_project_options button {
+  flex-basis: 40%;
+}
+.Translations_project_options button:first-child {
+  margin-right: 10px;
+}
+.Translations_project_description {
+  flex-basis: 50%;
+}
+.Translations_project_description_name {
   font-size: 1.3em;
   margin-bottom: 0.5em;
 }
-.Translations_proyect_download {
+.Translations_project_description_nametxt {
+  margin: 0 0 0.5em 0;
+  width: 80%;
+}
+.Translations_project_download {
   flex-basis: 30%;
   display: flex;
   justify-content: center;
   justify-content: flex-end;
   align-items: flex-start;
 }
-.Translations_proyect_container {
+.Translations_project_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -524,37 +544,72 @@ a:hover {
   height: 100px;
   background-color: #e1e2e1;
 }
-.Translations_proyect_container:hover {
+.Translations_project_container:hover {
   cursor: pointer;
   box-shadow: 0 0 5px #808080;
 }
-.Translations_proyect_container:last-child {
+.Translations_project_container:last-child {
   margin-bottom: 3em;
 }
-.Translations_proyect_container_translation {
+.Translations_project_container_translation {
   flex-basis: 20%;
 }
-.Translations_proyect_container_image {
+.Translations_project_container_image {
   width: 100px;
   height: 100px;
   background-image: url("/static/images/imagenProyecto.jpg");
   background-size: cover;
   background-position: center;
 }
-.Translations_proyect_container_info {
+.Translations_project_container_info {
   flex-basis: 25%;
 }
-.Translations_proyect_container_example {
+.Translations_project_container_example {
   flex-basis: 25%;
   max-height: 100px;
   overflow: none;
 }
-.Translations_proyect_container_copy {
+.Translations_project_container_copy {
   flex-basis: 30%;
   display: flex;
   justify-content: center;
   justify-content: flex-end;
 }
-.Translations_proyect_container_btn {
+.Translations_project_container_btn {
   flex-basis: 70%;
+}
+.TranslationMenu {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0,0,0,0.6);
+  z-index: 120;
+  display: flex;
+  justify-content: center;
+  justify-content: right;
+}
+.TranslationMenu_container {
+  height: 100vh;
+  flex-basis: 40%;
+  min-width: 320px;
+  background-color: #f5f5f6;
+}
+#NewProjects_btn_delete {
+  margin: 15px 0;
+  flex-basis: 50%;
+}
+.add_project {
+  width: 0;
+  opacity: 0;
+  padding: 0;
+  margin: 0;
+  transition: all 0.8s ease-out;
+}
+.add_project_animate {
+  width: min-content;
+  opacity: 1;
+  padding: 20px;
+  margin: 1.5em;
 }

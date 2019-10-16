@@ -1,49 +1,10 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.views.generic import TemplateView
-from .models import User
-from django.core.exceptions import ObjectDoesNotExist
 from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
-from general.messages import *
-
-import re
-
-
-class Validator():
-
-	def are_the_same(self, a, b):
-		if a != b:
-			return False
-		return True 
-
-	def field(self, field):
-		if field is None:
-			return False
-		if len(field) == 0:
-			return False
-		return True
-
-	def user_exists(self, user):
-		try:
-			u = User.objects.get(email=user)
-			return True
-		except ObjectDoesNotExist:
-			return False
-
-	def name(self, name):
-		r = re.findall(r'[a-zA-Z ]+', name)
-		if len(r) != 1:
-			return False
-		return True
-
-	def email(self, mail):
-		if ' ' in mail or len(mail) == 0:
-			return False
-		if re.search(r'\w+@\w+(\.\w+)+', mail) is None:
-			return False
-		return True
-
+from django.http import JsonResponse
+from general.util import *
 
 
 class LoginView(TemplateView):
@@ -165,8 +126,13 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 	template_name = 'perfil.html'
 
 	def process_request(self, request, *args, **kwargs):
+		opciones = Estudios.objects.all();
 		return render(request, self.template_name, 
-			{'nombre' : request.user.first_name + ' ' + request.user.last_name})
+			{
+				'nombre': request.user.first_name + ' ' + request.user.last_name,
+				'correo': request.user.email,
+				'opciones': opciones,
+			})
 
 	def get(self, request, *args, **kwargs):
 		return self.process_request(request, args, kwargs)
@@ -177,5 +143,61 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 
 class PasswordRecoverView(TemplateView):
 	template_name = 'recuperacion.html'
+
+
+
+def CambiarUsuarioView(request):
+	v = Validator()
+	m = Message()
+	nom = request.GET['nombre']
+	opcion = request.GET['estudios']
+	correo = request.user.email
+
+	if not v.field(nom):
+		m.add_validation_error(REQUIRED_FIELD, 'nombre')
+	elif not v.name(nom):
+		m.add_validation_error(INVALID_NAME, 'nombre')
+
+	if m.get_len() == 0:
+		User.objects.filter(email=correo).update(first_name=nom, estudios=int(opcion))
+		return JsonResponse({'err':{}})
+
+	return JsonResponse({'err':m.get_messages()})
+
+
+
+def CambiarContraView(request):
+	v = Validator()
+	m = Message()
+
+	contra = request.GET['contra']
+	contraDos = request.GET['contraDos']
+	correo = request.user.email
+
+	if not v.field(contra):
+		m.add_validation_error(REQUIRED_FIELD, 'contra')
+
+	if not v.field(contraDos):
+		m.add_validation_error(REQUIRED_FIELD, 'contraDos')
+
+	if not v.are_the_same(contra, contraDos):
+		m.add_validation_error(PASSWORDS_ARE_NOT_THE_SAME, 'contraDos')
+
+
+	if m.get_len() == 0:
+		contra = make_password(contra)
+		User.objects.filter(email=correo).update(password=contra)
+		user = User.objects.get(email=correo)
+		login(request, user)
+		return JsonResponse({'err':{}})
+
+	return JsonResponse({'err':m.get_messages()})
+
+
+
+
+
+
+
 
 
