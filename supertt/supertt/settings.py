@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'proyectos.apps.ProyectosConfig',
     'rest_framework',
     'rest_framework.authtoken',
+    #'oauth2_provider',
 ]
 
 MIDDLEWARE = [
@@ -135,7 +136,12 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.TokenAuthentication',
-    ]
+    ],
+    'DEFAULT_PERMISSION_CLASSES': [
+        #'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    
 }
 
 # Internationalization
