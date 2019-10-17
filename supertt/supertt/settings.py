@@ -26,7 +26,9 @@ SECRET_KEY = 'p2-y3m0s9o*i9jgxl!)_4_z%7aj+1k0j*@)8s1_!y#x$w+0er9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '10.100.77.214'
+]
 
 
 # Application definition
@@ -88,19 +90,28 @@ WSGI_APPLICATION = 'supertt.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'tt_database',
-        'USER': 'postgres',
-        'PASSWORD': 'newcastle',
-        'HOST': '127.0.0.1',
-        'PORT': '5432',
-    }
-}
-AUTHENTICATION_BACKENDS = (
-    'django.contrib.auth.backends.ModelBackend',
-)
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'tt_database',
+#         'USER': 'postgres',
+#         'PASSWORD': 'postgres',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'tt_database',
+#         'USER': 'postgres',
+#         'PASSWORD': 'newcastle',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',
@@ -111,6 +122,19 @@ AUTHENTICATION_BACKENDS = (
 #         'PORT': '5432',
 #     }
 # }
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+)
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tt_database',
+        'USER': 'ianMJ',
+        'PASSWORD': '',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators

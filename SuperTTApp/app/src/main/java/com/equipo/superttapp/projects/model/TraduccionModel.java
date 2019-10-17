@@ -8,7 +8,7 @@ public class TraduccionModel {
     private Date fecha;
     private String ecuacion;
     private Integer calificacion;
-    private String url;
+    private String url = "http://";
 
     public Integer getId() {
         return id;

@@ -36,4 +36,14 @@ public class TraduccionInteractorImpl implements TraduccionInteractor{
 
         return result;
     }
+
+    @Override
+    public BusinessResult<TraduccionModel> deleteTraduccion(Integer idTraduccion) {
+        return null;
+    }
+
+    @Override
+    public BusinessResult<TraduccionModel> updateTraduccion(TraduccionModel model) {
+        return null;
+    }
 }

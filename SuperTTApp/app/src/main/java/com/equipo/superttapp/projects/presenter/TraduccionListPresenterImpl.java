@@ -33,7 +33,7 @@ public class TraduccionListPresenterImpl implements TraduccionListPresenter {
     public void changeProyectoNombre(ProyectoModel model) {
         BusinessResult<ProyectoModel> result = proyectoInteractor.updateProyecto(model);
         if (result.getCode().equals(ResultCodes.SUCCESS))
-            view.changeProyectoSuccess();
+            view.changeProyectoSuccess(result);
         else {
             BusinessResult<TraduccionModel> error = new BusinessResult<>();
             error.setCode(result.getCode());
@@ -49,5 +49,19 @@ public class TraduccionListPresenterImpl implements TraduccionListPresenter {
             view.deleteProyectoSuccess();
         else
             view.deleteProyectoError();
+    }
+
+    @Override
+    public void deleteTraduccion(Integer idTraduccion) {
+        BusinessResult<TraduccionModel> result = interactor.deleteTraduccion(idTraduccion);
+        if (result.getCode().equals(ResultCodes.SUCCESS)) {
+            view.deleteTraduccionSuccess();
+        } else
+            view.showMessage(result);
+    }
+
+    @Override
+    public void calificarTraduccion(TraduccionModel model) {
+
     }
 }

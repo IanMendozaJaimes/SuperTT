@@ -133,10 +133,10 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void saveUser(UsuarioModel model) {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
+        //preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, 9);
+        //preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
+        //preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
     }
 }
