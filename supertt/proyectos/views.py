@@ -185,9 +185,9 @@ def create_project_view(request):
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     
 
-@api_view(['PUT', ])
+@api_view(['PUT', 'DELETE'])
 @permission_classes((IsAuthenticated,))
-def edit_project_view(request, idpro):
+def methods_project_view(request, idpro):
     try:
         proj = Proyecto.objects.get(id= idpro)
     except Proyecto.DoesNotExist:
@@ -201,15 +201,7 @@ def edit_project_view(request, idpro):
             data["success"] = "update sucessful"
             return Response(data =data)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
-@api_view(['DELETE', ])
-@permission_classes((IsAuthenticated,))
-def delete_project_view(request, id):
-    try:
-        proj = Proyecto.objects.get(id= id)
-    except Proyecto.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
-    if request.method == "DELETE":
+    elif request.method == 'DELETE':
         operation = proj.delete()
         data = {}
         if operation:
@@ -217,6 +209,22 @@ def delete_project_view(request, id):
         else:
             data["failure"] = "delete failed"
         return Response(data = data)
+
+# @api_view(['DELETE', ])
+# @permission_classes((IsAuthenticated,))
+# def delete_project_view(request, id):
+#     try:
+#         proj = Proyecto.objects.get(id= id)
+#     except Proyecto.DoesNotExist:
+#         return Response(status=status.HTTP_404_NOT_FOUND)
+#     if request.method == "DELETE":
+#         operation = proj.delete()
+#         data = {}
+#         if operation:
+#             data["sucess"] = "delete successful"
+#         else:
+#             data["failure"] = "delete failed"
+#         return Response(data = data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,])
@@ -241,13 +249,13 @@ def detail_project_view(request, usuario):
 
 @api_view(['POST', ])
 @permission_classes([IsAuthenticated])
-def methods_translation_view(request): #request must include idproyecto
+def create_translation_view(request): #request must include idproyecto in body
     usr = request.user
     data = {}
     try:
         pro = Proyecto.objects.get(id=request.data.get('idproyecto'))
     except Proyecto.DoesNotExist:
-        data['failure'] = "Invalid [projectid: {}] to save translation in".format(request.data.get('idproyecto'))
+        data['failure'] = "Invalid [idproyecto: {}] to save translation in".format(request.data.get('idproyecto'))
         return Response(data=data)
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr, nombre=request.data.get('nombre') , calificacion = 0.0, archivo = "", traduccion="")
 

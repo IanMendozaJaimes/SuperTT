@@ -11,6 +11,6 @@ url_patterns = [
 
 def get_user_urls():
 	return [
-		path('users/register', registration_view),
+		path('users', registration_view),
 		path('users/login', obtain_auth_token),
 	]
