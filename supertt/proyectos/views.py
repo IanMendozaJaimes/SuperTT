@@ -192,6 +192,9 @@ def methods_project_view(request, idpro):
         proj = Proyecto.objects.get(id= idpro)
     except Proyecto.DoesNotExist:
         return Response(status=status.HTTP_404_NOT_FOUND)
+    usr = request.user
+    if usr != proj.usuario:
+        return Response("Project with id {} does not belong to user with id {}".format(proj.usuario, usr), status=status.HTTP_403_FORBIDDEN)
     if request.method == "PUT":
         serializer = SerializadorProyecto(proj, data=request.data)
         data = {}
@@ -237,7 +240,7 @@ def detail_project_view(request, usuario):
     user = request.user
 
     print("user {}:= {}".format(user.id, usuario))
-    
+    #user validation
     if (str(usuario) != str(request.user.id)) or (proj.count() > 0 and request.user.id != proj[0].usuario.id):
         return Response({"response": "Token: does not belong to user with id: {} ".format( usuario)})
 
@@ -257,6 +260,9 @@ def create_translation_view(request): #request must include idproyecto in body
     except Proyecto.DoesNotExist:
         data['failure'] = "Invalid [idproyecto: {}] to save translation in".format(request.data.get('idproyecto'))
         return Response(data=data)
+    #validate user
+    if usr != pro.usuario:
+        return Response("Project with id {} does not belong to user with id {}".format(pro.id, usr.id), status=status.HTTP_403_FORBIDDEN)
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr, nombre=request.data.get('nombre') , calificacion = 0.0, archivo = "", traduccion="")
 
     if request.method == "POST":
@@ -274,10 +280,14 @@ def methods_translation_view(request, idtraduccion):
         trans = Traduccion.objects.get(id= idtraduccion)
     except Traduccion.DoesNotExist:
         return Response("Not Found",status=status.HTTP_404_NOT_FOUND)
-    
     user = request.user
-    if trans.usuario != user:
-        return Response({"response": "Token: {} does not belong to user with id: {} ".format(request.Authorization, user)})
+
+    #validate user is the owner of the project/translation
+    if request.user != trans.usuario:
+        return Response("Translation with id {} does not belong to user with id {}".format(trans.id, user.id), status=status.HTTP_403_FORBIDDEN)
+
+    #if trans.usuario != user:
+        #return Response({"response": "Token: {} does not belong to user with id: {} ".format(request.Authorization, user)})
 
     if request.method == "PUT":
         serializer = SerializadorTraduccion(trans, data=request.data)
@@ -314,7 +324,7 @@ def methods_translation_view(request, idtraduccion):
 #         return Response(data = data)
 
 @api_view(['GET'])
-@permission_classes((permissions.AllowAny,))
+@permission_classes((permissions.IsAuthenticated,))
 def detail_translation_view(request, idpro):
     
     try:
@@ -323,7 +333,7 @@ def detail_translation_view(request, idpro):
         return Response(status=status.HTTP_404_NOT_FOUND)
         
     if request.method == "GET":
-        serializer = TraductionSerializer(trans, many=True)
+        serializer = SerializadorTraduccion(trans, many=True)
         return Response(serializer.data)
 
 
