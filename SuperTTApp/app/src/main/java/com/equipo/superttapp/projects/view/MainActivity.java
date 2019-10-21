@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.equipo.superttapp.users.view.LoginActivity;
 import com.equipo.superttapp.users.view.ProfileFragment;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity implements
         NavigationView.OnNavigationItemSelectedListener {
@@ -32,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements
     public static final String TAG = MainActivity.class.getCanonicalName();
     private TextView tvNombre;
     private TextView tvEmail;
+    private ImageView imageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements
         View headerView = navigationView.getHeaderView(0);
         tvNombre = headerView.findViewById(R.id.nav_header_tv_nombre);
         tvEmail = headerView.findViewById(R.id.nav_header_tv_correo);
+        imageView = headerView.findViewById(R.id.imageView);
         setSupportActionBar(toolbar);
 
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar,
@@ -60,10 +64,13 @@ public class MainActivity extends AppCompatActivity implements
                 && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
             String email = preferencesManager.getStringValue(PreferencesManager.KEY_USER_EMAIL);
             String nombre = preferencesManager.getStringValue(PreferencesManager.KEY_USER_NAME);
+            String image = preferencesManager.getStringValue(PreferencesManager.KEY_USER_IMAGE);
             Log.i(TAG, "email " + email + " nombre " + nombre);
             tvNombre.setText(nombre);
             tvEmail.setText(email);
+            Picasso.get().load(image).error(R.drawable.usuario_defecto).into(imageView);
         }
+
     }
 
     @Override

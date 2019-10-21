@@ -6,10 +6,8 @@ import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.util.BusinessResult;
 
 public interface ProyectoInteractor {
-    BusinessResult<ProyectoModel> findAllProyectosByUser(Integer user);
     MutableLiveData<BusinessResult<ProyectoModel>> deleteProyecto(Integer idProyecto, String token);
     MutableLiveData<BusinessResult<ProyectoModel>> updateProyecto(ProyectoModel model, String token);
-    BusinessResult<ProyectoModel> createProyecto(ProyectoModel model, Integer idUsuario);
-
+    MutableLiveData<BusinessResult<ProyectoModel>>createProyecto(ProyectoModel model, String token);
     MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(int i, String s);
 }

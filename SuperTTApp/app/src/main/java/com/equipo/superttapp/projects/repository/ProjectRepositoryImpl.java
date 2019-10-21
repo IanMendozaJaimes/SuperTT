@@ -117,15 +117,30 @@ public class ProjectRepositoryImpl implements ProjectRepository{
     }
 
     @Override
-    public Integer createProyecto(ProyectoData proyectoData) {
-        Integer code = ResultCodes.ERROR;
+    public MutableLiveData<BusinessResult<ProyectoModel>> createProyecto(ProyectoData proyectoData, String token) {
+        MutableLiveData<BusinessResult<ProyectoModel>> resultado = new MutableLiveData<>();
         try {
-            Response<ProyectoData> response = service.createProyecto(proyectoData).execute();
-            if (response.isSuccessful())
-                code = ResultCodes.SUCCESS;
-        } catch (IOException | NetworkOnMainThreadException e) {
+            service.editProyecto(proyectoData.getId(), proyectoData, token).enqueue(new Callback<ProyectoData>() {
+                @Override
+                public void onResponse(Call<ProyectoData> call, Response<ProyectoData> response) {
+                    Log.i(TAG, "createProyecto-onResponse " + response.body());
+                    BusinessResult<ProyectoModel> businessResult = new BusinessResult<>();
+                    if (response.isSuccessful()) {
+                        businessResult.setCode(ResultCodes.SUCCESS);
+                    }
+                    resultado.setValue(businessResult);
+                }
+
+                @Override
+                public void onFailure(Call<ProyectoData> call, Throwable t) {
+                    Log.e(TAG, "createProyecto-onFailure ", t);
+                    BusinessResult<ProyectoModel> model = new BusinessResult<>();
+                    resultado.setValue(model);
+                }
+            });
+        } catch (NetworkOnMainThreadException e) {
             Log.e(TAG, "createProyecto ", e);
         }
-        return code;
+        return resultado;
     }
 }

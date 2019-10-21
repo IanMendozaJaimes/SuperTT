@@ -5,7 +5,7 @@ import android.content.SharedPreferences;
 
 public class PreferencesManager {
 
-    public static final String KEY_USER_TOKEN = "user-token";
+
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Context context;
@@ -17,6 +17,8 @@ public class PreferencesManager {
     public static final String KEY_USER_ID = "user-id";
     public static final String KEY_USER_NAME = "user-name";
     public static final String KEY_USER_LAST_NAME = "user-last-name";
+    public static final String KEY_USER_TOKEN = "user-token";
+    public static final String KEY_USER_IMAGE ="user-image";
 
     public PreferencesManager(Context context, String preferencesName, int mode) {
         this.context = context;

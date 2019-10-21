@@ -17,6 +17,11 @@ public class ProyectsListViewModel extends ViewModel {
         return data;
     }
 
+    public MutableLiveData<BusinessResult<ProyectoModel>> createProyecto(ProyectoModel model, String key) {
+        data = interactor.createProyecto(model, key);
+        return data;
+    }
+
     public void setData(MutableLiveData<BusinessResult<ProyectoModel>> data) {
         this.data = data;
     }

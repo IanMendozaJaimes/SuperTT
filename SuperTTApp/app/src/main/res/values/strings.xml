@@ -59,5 +59,6 @@
     <string name="msg11_confirmacion_operacion_borrar_proyecto">¿Está seguro de borrar el proyecto?</string>
     <string name="label_cancelar">Cancelar</string>
     <string name="label_nombre_proyecto">Nombre del proyecto</string>
+    <string name="label_crear_proyecto">Crear proyecto</string>
 
 </resources>

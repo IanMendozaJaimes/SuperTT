@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -20,6 +22,7 @@ import com.equipo.superttapp.projects.viewmodel.ProyectsListViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -33,6 +36,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter projectAdapter;
     private List<ProyectoModel> proyectoModelList;
+    private FloatingActionButton fabCreate;
     private static final String TAG = ProjectListFragment.class.getCanonicalName();
     ProyectsListViewModel proyectsListViewModel;
 
@@ -47,6 +51,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_project_list, container, false);
         recyclerView = view.findViewById(R.id.rv_project_list);
+        fabCreate = view.findViewById(R.id.fab_create_proyecto);
         layoutManager = new LinearLayoutManager(getContext());
         proyectoModelList = new ArrayList<>();
         projectAdapter = new ProjectRecyclerViewAdapter(proyectoModelList, getActivity(),
@@ -56,7 +61,35 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         recyclerView.setAdapter(projectAdapter);
         recyclerView.setLayoutManager(layoutManager);
         proyectsListViewModel = ViewModelProviders.of(this).get(ProyectsListViewModel.class);
+        fabCreate.setOnClickListener(v -> crearProyecto());
         return view;
+    }
+
+    public void crearProyecto() {
+        LayoutInflater inflater = this.getLayoutInflater();
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        final View view = inflater.inflate(R.layout.dialog_edit_proyecto, null);
+        builder.setView(view)
+                .setTitle(R.string.label_crear_proyecto)
+                .setMessage(R.string.msg12_ingrese_nombre)
+                .setPositiveButton(R.string.label_guardar_cambios, (dialog, which) -> {
+                    EditText etNombre = view.findViewById(R.id.et_nombre_proyecto);
+                    ProyectoModel model = new ProyectoModel();
+                    model.setName(etNombre.getText().toString());
+                    model.setIdUsuario(1);
+                    String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+                    proyectsListViewModel.createProyecto(model, key).observe(this,
+                            proyectoModelBusinessResult -> {
+                                if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS))
+                                    recuperarTodosProyectos();
+                                else
+                                    showMessage(proyectoModelBusinessResult);
+                            });
+                    dialog.cancel();
+                })
+                .setNegativeButton(R.string.label_cancelar, (dialog, which) -> dialog.cancel());
+        AlertDialog alerta = builder.create();
+        alerta.show();
     }
 
     @Override

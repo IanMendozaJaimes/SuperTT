@@ -52,6 +52,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
             goHome();
         }
+        goHome();
         hideProgressBar();
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
@@ -147,5 +148,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         // preferencesManager.saveValue(PreferencesManager.KEY_USER_TOKEN, model.getKeyAuth());
         //preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
         //preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
+        //preferencesManager.saveValue(PreferencesManager.KEY_USER_IMAGE, model.getImage());
     }
 }
