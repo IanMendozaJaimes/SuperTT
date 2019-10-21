@@ -2,6 +2,8 @@ package com.equipo.superttapp.users.interactor;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.equipo.superttapp.users.data.UsuarioData;
 import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.repository.UserRepository;
@@ -19,45 +21,48 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public BusinessResult<UsuarioModel> logIn(UsuarioModel usuarioModel) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> logIn(UsuarioModel usuarioModel) {
         BusinessResult<UsuarioModel> resultado = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         usuarioModel.setValidPassword(RN002.isPasswordValid(usuarioModel.getPassword()));
         usuarioModel.setValidEmail(RN002.isEmailValid(usuarioModel.getEmail()));
         if (usuarioModel.getValidEmail() && usuarioModel.getValidPassword()) {
             UsuarioData usuarioData = new UsuarioData();
             usuarioData.setEmail(usuarioModel.getEmail());
             usuarioData.setPassword(usuarioModel.getPassword());
-            usuarioData = repository.login(usuarioData);
-            resultado.setCode(usuarioData.getResponseCode());
-            usuarioModel.setId(usuarioData.getId());
-            usuarioModel.setKeyAuth(usuarioData.getKeyAuth());
-            usuarioModel.setName(usuarioData.getNombre());
-            usuarioModel.setLastname(usuarioData.getApellidos());
+            mutableLiveData = repository.login(usuarioData);
         } else {
             resultado.setCode(ResultCodes.RN002);
+            resultado.setResult(usuarioModel);
+            mutableLiveData.setValue(resultado);
         }
-        resultado.setResult(usuarioModel);
-        return resultado;
+
+        return mutableLiveData;
     }
 
     @Override
-    public BusinessResult<UsuarioModel> sendEmail(UsuarioModel loginFormModel) {
-        BusinessResult<UsuarioModel> resultado = new BusinessResult<>();
+    public MutableLiveData<BusinessResult<UsuarioModel>> sendEmail(UsuarioModel loginFormModel) {
+        BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         loginFormModel.setValidEmail(RN002.isEmailValid(loginFormModel.getEmail()));
         if (loginFormModel.getValidEmail()) {
             UsuarioData data = new UsuarioData();
             data.setEmail(loginFormModel.getEmail());
-            resultado.setCode(repository.forgotPassword(data));
+            mutableLiveData = repository.forgotPassword(data);
         }
-        else
-            resultado.setCode(ResultCodes.RN002);
-        resultado.setResult(loginFormModel);
-        return resultado;
+        else {
+            result.setCode(ResultCodes.RN002);
+            result.setResult(loginFormModel);
+            mutableLiveData.setValue(result);
+        }
+
+        return mutableLiveData;
     }
 
     @Override
-    public BusinessResult<UsuarioModel> createAccount(UsuarioModel model) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> createAccount(UsuarioModel model) {
         BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
         model.setValidEmail(RN002.isEmailValid(model.getEmail()));
         model.setValidSecondPassword(RN002.isSecondPasswordValid(
@@ -72,27 +77,28 @@ public class UserInteractorImpl implements UserInteractor {
             data.setNombre(model.getName());
             data.setApellidos(model.getLastname());
             data.setPassword(model.getPassword());
-            result.setCode(repository.createAccount(data));
+            mutableLiveData = repository.createAccount(data);
         } else {
             result.setCode(ResultCodes.RN002);
+            result.setResult(model);
+            mutableLiveData.setValue(result);
         }
-        result.setResult(model);
-        return result;
+
+        return mutableLiveData;
     }
 
     @Override
-    public  BusinessResult<UsuarioModel>  updateAccount(UsuarioModel model) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> updateAccount(UsuarioModel model, String token) {
         BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         if (model.getCurrentPassword() != null && model.getCurrentPassword().length() > 0) {
             model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
             model.setValidSecondPassword(RN002.isSecondPasswordValid(model.getPassword(),
                     model.getSecondPassword()));
             model.setValidCurrentPassword(RN002.isPasswordValid(model.getCurrentPassword()));
-            Log.i(TAG, "PRIMER IF");
         } else  {
             if ((model.getPassword() != null && model.getPassword().length() > 0)
                     || (model.getSecondPassword() != null && model.getSecondPassword().length() > 0)) {
-                Log.i(TAG, "SEGUNDO IF");
                 model.setValidCurrentPassword(RN002.isPasswordValid(model.getCurrentPassword()));
                 model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
                 model.setValidSecondPassword(RN002.isSecondPasswordValid(model.getPassword(),
@@ -116,14 +122,16 @@ public class UserInteractorImpl implements UserInteractor {
             data.setApellidos(model.getLastname());
             data.setPassword(model.getPassword());
             data.setCurrentPassword(model.getCurrentPassword());
-            result.setCode(repository.updateAccount(data));
-            if (result.getCode().equals(ResultCodes.RN002)) {
-                model.setValidCurrentPassword(false);
+            mutableLiveData = repository.updateAccount(data, token);
+            if (mutableLiveData.getValue().getCode().equals(ResultCodes.RN002)) {
+                mutableLiveData.getValue().getResult().setValidCurrentPassword(false);
             }
         } else {
             result.setCode(ResultCodes.RN002);
+            result.setResult(model);
+            mutableLiveData.setValue(result);
         }
-        result.setResult(model);
-        return result;
+
+        return mutableLiveData;
     }
 }

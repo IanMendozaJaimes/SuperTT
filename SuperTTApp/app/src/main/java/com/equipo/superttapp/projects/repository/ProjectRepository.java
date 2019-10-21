@@ -3,12 +3,12 @@ package com.equipo.superttapp.projects.repository;
 import androidx.lifecycle.MutableLiveData;
 
 import com.equipo.superttapp.projects.data.ProyectoData;
-
-import java.util.List;
+import com.equipo.superttapp.projects.model.ProyectoModel;
+import com.equipo.superttapp.util.BusinessResult;
 
 public interface ProjectRepository {
-    MutableLiveData<List<ProyectoData>> findAllProyectosByUser(Integer user);
-    Integer deleteProyecto(Integer idProyecto);
-    Integer updateProyecto(ProyectoData proyectoData);
-    Integer createProyecto(ProyectoData proyectoData);
+    MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(Integer id, String token);
+    MutableLiveData<BusinessResult<ProyectoModel>> deleteProyecto(Integer idProyecto, String token);
+    MutableLiveData<BusinessResult<ProyectoModel>> updateProyecto(ProyectoData proyectoData, String token);
+    MutableLiveData<BusinessResult<ProyectoModel>> createProyecto(ProyectoData proyectoData, String token);
 }

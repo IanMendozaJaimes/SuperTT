@@ -3,9 +3,7 @@ package com.equipo.superttapp.users.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,11 +13,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.ProfilePresenter;
-import com.equipo.superttapp.users.presenter.ProfilePresenterImpl;
+import com.equipo.superttapp.users.viewmodel.ProfileViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
@@ -49,8 +47,8 @@ public class ProfileFragment extends Fragment implements ProfileView {
     EditText etName;
     @BindView(R.id.profile_et_apellidos)
     EditText etLastname;
-    private ProfilePresenter presenter;
     private PreferencesManager preferencesManager;
+    ProfileViewModel profileViewModel;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -61,20 +59,19 @@ public class ProfileFragment extends Fragment implements ProfileView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
-        presenter = new ProfilePresenterImpl(this);
         hideProgressBar();
         if (preferencesManager == null)
             preferencesManager = new PreferencesManager(getContext(),
                     PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
         populateUserForm();
-        btnConfirmar.setOnClickListener(v -> {
-            showConfirmationDialog();
-        });
+        profileViewModel = ViewModelProviders.of(this).get(ProfileViewModel.class);
+        btnConfirmar.setOnClickListener(v -> showConfirmationDialog());
         return view;
     }
 
     public void actualizarPerfil() {
         cleanErrors();
+        String token = "";
         UsuarioModel model = new UsuarioModel();
         model.setId(preferencesManager.getIntegerValue(PreferencesManager.KEY_USER_ID));
         model.setEmail(etEmail.getText().toString());
@@ -83,7 +80,14 @@ public class ProfileFragment extends Fragment implements ProfileView {
         model.setName(etName.getText().toString());
         model.setSecondPassword(etSecondPassword.getText().toString());
         model.setCurrentPassword(etCurrentPassword.getText().toString());
-        presenter.updateAccount(model);
+        profileViewModel.updateAccount(model, token).observe(this, usuarioModelBusinessResult -> {
+            if(usuarioModelBusinessResult.getResult().equals(ResultCodes.SUCCESS)) {
+                saveUser(usuarioModelBusinessResult.getResult());
+            }
+            showMessage(usuarioModelBusinessResult);
+        });
+
+
         hidekeyboard();
     }
 
@@ -100,7 +104,6 @@ public class ProfileFragment extends Fragment implements ProfileView {
             etLastname.setText(lastName);
             etName.setText(nombre);
         }
-
     }
 
     @Override
@@ -173,5 +176,6 @@ public class ProfileFragment extends Fragment implements ProfileView {
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
         preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
     }
 }

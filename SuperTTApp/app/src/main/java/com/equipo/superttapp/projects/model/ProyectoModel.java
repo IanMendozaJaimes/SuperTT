@@ -11,6 +11,7 @@ public class ProyectoModel {
     private String textDate;
     private Double rate;
     private Boolean validName = false;
+    private Integer idUsuario;
 
     public Integer getId() {
         return id;
@@ -66,5 +67,13 @@ public class ProyectoModel {
 
     public void setValidName(Boolean validName) {
         this.validName = validName;
+    }
+
+    public Integer getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(Integer idUsuario) {
+        this.idUsuario = idUsuario;
     }
 }

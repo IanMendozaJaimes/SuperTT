@@ -8,11 +8,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.SignInPresenter;
-import com.equipo.superttapp.users.presenter.SignInPresenterImpl;
+import com.equipo.superttapp.users.viewmodel.SignInViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
@@ -36,7 +36,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
     EditText etName;
     @BindView(R.id.sign_in_et_apellido)
     EditText etLastname;
-    SignInPresenter presenter;
+    SignInViewModel signInViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +44,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
         setContentView(R.layout.activity_sign_in);
         ButterKnife.bind(this);
         hideProgressBar();
-        presenter = new SignInPresenterImpl(this);
+        signInViewModel = ViewModelProviders.of(this).get(SignInViewModel.class);
         btnCrearCuenta.setOnClickListener(v -> {
             cleanErrors();
             UsuarioModel model = new UsuarioModel();
@@ -53,7 +53,11 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
             model.setSecondPassword(etSecondPassword.getText().toString());
             model.setPassword(etPassword.getText().toString());
             model.setEmail(etEmail.getText().toString());
-            presenter.signIn(model);
+            showProgressBar();
+            signInViewModel.createAccount(model).observe(this, usuarioModelBusinessResult -> {
+                showMessage(usuarioModelBusinessResult);
+                hideProgressBar();
+            });
             hideKeyboard();
         });
         setTitle(R.string.title_activity_sign_in);

@@ -7,11 +7,11 @@ public class ProyectoData {
     private Integer id;
     @SerializedName("nombre")
     private String nombre;
-    @SerializedName("fecha")
+    @SerializedName("fechaModificacion")
     private String fecha;
     @SerializedName("calificacion")
     private Double calificacion;
-    @SerializedName("idUsuario")
+    @SerializedName("usuario")
     private Integer idUsuario;
 
     public ProyectoData() {
