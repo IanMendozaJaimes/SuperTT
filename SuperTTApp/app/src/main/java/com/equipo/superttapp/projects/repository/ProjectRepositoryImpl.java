@@ -120,7 +120,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
     public MutableLiveData<BusinessResult<ProyectoModel>> createProyecto(ProyectoData proyectoData, String token) {
         MutableLiveData<BusinessResult<ProyectoModel>> resultado = new MutableLiveData<>();
         try {
-            service.editProyecto(proyectoData.getId(), proyectoData, token).enqueue(new Callback<ProyectoData>() {
+            service.createProyecto(proyectoData, token).enqueue(new Callback<ProyectoData>() {
                 @Override
                 public void onResponse(Call<ProyectoData> call, Response<ProyectoData> response) {
                     Log.i(TAG, "createProyecto-onResponse " + response.body());

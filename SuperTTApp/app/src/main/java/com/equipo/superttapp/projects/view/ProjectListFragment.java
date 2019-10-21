@@ -82,8 +82,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
                             proyectoModelBusinessResult -> {
                                 if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS))
                                     recuperarTodosProyectos();
-                                else
-                                    showMessage(proyectoModelBusinessResult);
+                                showMessage(proyectoModelBusinessResult);
                             });
                     dialog.cancel();
                 })
@@ -95,26 +94,29 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     @Override
     public void onStart() {
         super.onStart();
+        Log.i(TAG, "onStart()");
         recuperarTodosProyectos();
     }
 
     public void recuperarTodosProyectos() {
         PreferencesManager preferencesManager = new PreferencesManager(getContext(),
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+//        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+        if (true) {
             int idUsuario = preferencesManager.getIntegerValue(PreferencesManager.KEY_USER_ID);
             String keyUser = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
             Integer id = 1;
             String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+            Log.i(TAG, "recuperarTodosProyectos() " + key);
             proyectsListViewModel.findUserProyects(id, key).observe(this, proyectodata -> {
                 Log.i(TAG, "recuperarTodosProyectos() " + proyectodata.getCode());
                 if (proyectodata.getCode().equals(ResultCodes.SUCCESS)) {
                     proyectoModelList.clear();
                     proyectoModelList.addAll(proyectodata.getResults());
                     projectAdapter.notifyDataSetChanged();
-                }
-                showMessage(proyectodata);
+                } else
+                    showMessage(proyectodata);
             });
         }
     }
@@ -125,8 +127,9 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.RN008)) {
             snackbar.setText(R.string.msg7_no_existe_proyectos_para_mostrar);
+        } else if (result.getCode().equals(ResultCodes.SUCCESS)) {
+            snackbar.setText(R.string.msg9_operacion_exitosa);
         }
-        if (!result.getCode().equals(ResultCodes.SUCCESS))
-            snackbar.show();
+        snackbar.show();
     }
 }

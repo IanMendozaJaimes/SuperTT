@@ -18,7 +18,7 @@ import retrofit2.http.Path;
 public interface APIService {
     // Crear proyectoModel
     @POST("/proyectos")
-    Call<ProyectoData> createProyecto(@Body ProyectoData proyectoModel);
+    Call<ProyectoData> createProyecto(@Body ProyectoData proyectoModel, @Header("Authorization") String token);
     // Edicion de un proyectoModel
     @PUT("/proyectos/{idProyecto}")
     Call<ProyectoData> editProyecto(@Path("idProyecto") Integer idProyecto, @Body ProyectoData proyectoModel, @Header("Authorization") String token);

@@ -49,6 +49,7 @@ public class ProyectoInteractorImpl implements ProyectoInteractor {
         MutableLiveData<BusinessResult<ProyectoModel>> data = new MutableLiveData<>();
         proyectoData.setNombre(model.getName());
         proyectoData.setIdUsuario(model.getIdUsuario());
+        proyectoData.setCalificacion(0d);
         model.setValidName(RN002.isProyectoNombreValid(model.getName()));
         if (model.getValidName()) {
             data = repository.createProyecto(proyectoData, token);
