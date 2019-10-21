@@ -58,13 +58,16 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         presenter = new TraduccionListPresenterImpl(this);
         TraduccionModel traduccionModel = new TraduccionModel();
         traduccionModel.setCalificacion(5);
+        traduccionModel.setId(-1);
         traduccionModel.setEcuacion("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
                 "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
                 "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
                 "consequat.");
+        traduccionModel.setUrl("http://");
         traduccionModel.setFecha(new Date());
         traduccionModels.add(traduccionModel);
-        traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion, traduccionModels);
+        traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion,
+                traduccionModels, this);
 
         recyclerView.setAdapter(traduccionAdapter);
         recyclerView.setLayoutManager(layoutManager);
@@ -138,8 +141,21 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     }
 
     @Override
-    public void changeProyectoSuccess() {
-        recuperarTraducciones();
+    public void calfificarTraduccionSucess() {
+
+    }
+
+    @Override
+    public void deleteTraduccionSuccess() {
+
+    }
+
+    @Override
+    public void changeProyectoSuccess(BusinessResult<ProyectoModel> result) {
+        setTitle(result.getResult().getName());
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_traduccion_list),
+                R.string.msg9_operacion_exitosa, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 
     @Override
@@ -161,6 +177,18 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                 .setNegativeButton(R.string.label_cancelar, (dialog, which) -> dialog.cancel());
         AlertDialog alerta = builder.create();
         alerta.show();
+    }
+
+    @Override
+    public void borrarTraduccion(Integer idTraduccion) {
+        presenter.deleteTraduccion(idTraduccion);
+    }
+
+    @Override
+    public void calificarTraduccion(Integer idTraduccion) {
+        TraduccionModel model = new TraduccionModel();
+        // Dialogo para capturar la traduccion
+        presenter.calificarTraduccion(model);
     }
 
     @Override

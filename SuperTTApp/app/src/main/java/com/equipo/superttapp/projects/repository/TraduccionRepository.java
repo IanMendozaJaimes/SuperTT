@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface TraduccionRepository {
     List<TraduccionData> findAllTraduccionesByProyecto(Integer idProyecto);
+    Integer deleteTraduccion(Integer idTraduccion);
+    Integer updateTraduccion(TraduccionData data);
 }

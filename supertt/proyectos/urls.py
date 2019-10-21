@@ -14,21 +14,24 @@ urlpatterns = [
 
 def get_proyects_urls():
 	return [
+		#proyectos
 		path('proyectos/todos', ProyectsView.as_view()),
 		path('proyectos/traducciones', TranslationsView.as_view()),
 		path('proyectos/nuevo', crearProyectoView),
 		path('proyectos/descargar', CreateProyectFile),
-
-		path('proyectos/cambiar', cambiarProyectoView),
 		path('proyectos/eliminar', eliminarProyectoView),
-		path('proyectos/create', create_project_view),
-		path('proyectos/<idpro>/delete', delete_project_view),
+		path('proyectos/cambiar', cambiarProyectoView),
+
+		#-------------REST API VIEWS-------------
+		#proyectos
+		path('proyectos', create_project_view),
+		path('proyectos/<idpro>', methods_project_view),
 		path('usuarios/<usuario>/proyectos', detail_project_view),
-		path('proyectos/<idpro>/update', edit_project_view),
-		
-		path('traducciones/create', create_translation_view),
-		path('traducciones/<id>/delete', delete_translation_view),
+
+		#traducciones
+		path('traducciones', create_translation_view),
+		path('traducciones/<idtraduccion>', methods_translation_view),
 		path('proyectos/<idpro>/traducciones', detail_translation_view),
-		path('traducciones/<idpro>/update', edit_translation_view),
+		#path('traducciones/<id>/delete', delete_translation_view),
 	]
 

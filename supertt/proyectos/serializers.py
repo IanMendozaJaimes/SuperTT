@@ -6,11 +6,11 @@ class SerializadorProyecto(serializers.ModelSerializer):
 	class Meta:
 	    model = Proyecto
 	    fields = ('id', 'usuario','nombre','fechaModificacion', 'fechaCreacion', 'calificacion')
-class TraductionSerializer(serializers.ModelSerializer):
+class SerializadorTraduccion(serializers.ModelSerializer):
 	
 	class Meta:
 		model = Traduccion
-		fields = ('usuario')
+		fields = ('id', 'proyecto', 'usuario', 'nombre', 'calificacion', 'archivo', 'traduccion')
 
 
 	# 	proyecto = models.ForeignKey(Proyecto, models.SET_NULL, blank=True, null=True)

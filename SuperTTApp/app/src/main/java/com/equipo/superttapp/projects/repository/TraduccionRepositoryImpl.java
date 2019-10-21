@@ -28,4 +28,14 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
         }
         return proyectos;
     }
+
+    @Override
+    public Integer deleteTraduccion(Integer idTraduccion) {
+        return null;
+    }
+
+    @Override
+    public Integer updateTraduccion(TraduccionData data) {
+        return null;
+    }
 }

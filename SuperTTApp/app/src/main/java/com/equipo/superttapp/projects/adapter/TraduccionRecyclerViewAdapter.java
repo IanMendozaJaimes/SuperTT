@@ -3,6 +3,8 @@ package com.equipo.superttapp.projects.adapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,16 +12,20 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.model.TraduccionModel;
+import com.equipo.superttapp.projects.view.TraduccionListView;
 import com.equipo.superttapp.util.DateFormater;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
 public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<TraduccionRecyclerViewAdapter.ViewHolder> {
     private int resource;
     private List<TraduccionModel> traducciones;
+    private TraduccionListView view;
 
-    public TraduccionRecyclerViewAdapter(int resource, List<TraduccionModel> traducciones) {
+    public TraduccionRecyclerViewAdapter(int resource, List<TraduccionModel> traducciones, TraduccionListView view) {
         this.resource = resource;
+        this.view = view;
         this.traducciones = traducciones;
     }
 
@@ -36,6 +42,11 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
         holder.tvCalificacion.setText(traduccionModel.getCalificacion().toString());
         holder.tvEcuacion.setText(traduccionModel.getEcuacion());
         holder.tvFecha.setText(DateFormater.convertDateToString(traduccionModel.getFecha()));
+        Picasso.get().load(traduccionModel.getUrl()).error(R.drawable.card_defecto)
+                .into(holder.imvBackground);
+        holder.btnBorrarTraduccion
+                .setOnClickListener(v -> view.borrarTraduccion(traduccionModel.getId()));
+        holder.btnCalificarTraduccion.setOnClickListener(v -> view.calificarTraduccion(traduccionModel.getId()));
     }
 
     @Override
@@ -47,11 +58,17 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
         TextView tvFecha;
         TextView tvEcuacion;
         TextView tvCalificacion;
+        ImageView imvBackground;
+        Button btnBorrarTraduccion;
+        Button btnCalificarTraduccion;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFecha = itemView.findViewById(R.id.tv_fecha_traduccion);
             tvEcuacion = itemView.findViewById(R.id.tv_ecuacion_texto);
             tvCalificacion = itemView.findViewById(R.id.tv_calificacion_traduccion);
+            imvBackground = itemView.findViewById(R.id.image_ecuacion);
+            btnBorrarTraduccion = itemView.findViewById(R.id.btn_borrar_traduccion);
+            btnCalificarTraduccion = itemView.findViewById(R.id.bn_calificar_traduccion);
         }
     }
 }
