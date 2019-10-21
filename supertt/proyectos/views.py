@@ -279,7 +279,9 @@ def methods_translation_view(request, idtraduccion):
     try:
         trans = Traduccion.objects.get(id= idtraduccion)
     except Traduccion.DoesNotExist:
-        return Response("Not Found",status=status.HTTP_404_NOT_FOUND)
+        data = {}
+        data['codeStatus'] = "-1"
+        return Response(data, status=status.HTTP_404_NOT_FOUND)
     user = request.user
 
     #validate user is the owner of the project/translation
@@ -335,6 +337,3 @@ def detail_translation_view(request, idpro):
     if request.method == "GET":
         serializer = SerializadorTraduccion(trans, many=True)
         return Response(serializer.data)
-
-
-       

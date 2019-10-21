@@ -47,7 +47,7 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(_('email address'), unique=True)
+    email = models.EmailField(_('email address'), unique=True, blank=True)
     estudios = models.OneToOneField(Estudios, on_delete=models.SET_NULL, blank=True, null=True)
     imagen_perfil = models.TextField()
 

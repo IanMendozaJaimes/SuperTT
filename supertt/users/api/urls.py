@@ -1,5 +1,5 @@
 from django.urls import path
-from users.api.views import registration_view
+from users.api.views import registration_view, edit_user_view
 from rest_framework.authtoken.views import obtain_auth_token
 
 app_name = 'users'
@@ -13,4 +13,5 @@ def get_user_urls():
 	return [
 		path('users', registration_view),
 		path('users/login', obtain_auth_token),
+		path('users/<idUsuario>', edit_user_view)
 	]

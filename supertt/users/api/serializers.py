@@ -22,3 +22,9 @@ class SerializadorRegistro(serializers.ModelSerializer):
         account.set_password(password)
         account.save()
         return account
+class SerializadorUsuario(serializers.ModelSerializer):
+
+    class Meta:
+        model = User
+        fields = ('id', 'email', 'estudios', 'password', 'imagen_perfil')
+    
