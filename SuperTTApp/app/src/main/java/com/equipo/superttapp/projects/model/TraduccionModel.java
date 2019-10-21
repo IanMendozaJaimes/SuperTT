@@ -1,7 +1,5 @@
 package com.equipo.superttapp.projects.model;
 
-import java.util.Date;
-
 public class TraduccionModel {
     private Integer id;
     private Integer idProyecto;

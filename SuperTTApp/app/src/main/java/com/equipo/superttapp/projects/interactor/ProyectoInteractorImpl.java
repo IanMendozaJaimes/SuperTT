@@ -4,7 +4,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.equipo.superttapp.projects.data.ProyectoData;
 import com.equipo.superttapp.projects.model.ProyectoModel;
-import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.repository.ProjectRepository;
 import com.equipo.superttapp.projects.repository.ProjectRepositoryImpl;
 import com.equipo.superttapp.util.BusinessResult;

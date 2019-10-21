@@ -2,15 +2,10 @@ package com.equipo.superttapp.projects.interactor;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.equipo.superttapp.projects.data.TraduccionData;
 import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.repository.TraduccionRepository;
 import com.equipo.superttapp.projects.repository.TraduccionRepositoryImpl;
 import com.equipo.superttapp.util.BusinessResult;
-import com.equipo.superttapp.util.ResultCodes;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class TraduccionInteractorImpl implements TraduccionInteractor{
     private TraduccionRepository repository;

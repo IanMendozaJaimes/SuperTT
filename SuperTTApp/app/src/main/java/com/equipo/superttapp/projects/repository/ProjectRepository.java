@@ -6,8 +6,6 @@ import com.equipo.superttapp.projects.data.ProyectoData;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.util.BusinessResult;
 
-import java.util.List;
-
 public interface ProjectRepository {
     MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(Integer id, String token);
     MutableLiveData<BusinessResult<ProyectoModel>> deleteProyecto(Integer idProyecto, String token);

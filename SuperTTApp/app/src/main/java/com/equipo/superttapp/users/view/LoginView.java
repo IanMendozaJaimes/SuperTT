@@ -8,7 +8,6 @@ public interface LoginView {
     void hideKeyboard();
     void goCreateAccount();
     void goForgotPassword();
-    void showProgressBar();
     void hideProgressBar();
     void loginError(BusinessResult<UsuarioModel> resultado);
     void goHome();

@@ -47,7 +47,7 @@ public interface APIService {
     @POST("/usuarios/recuperar")
     Call<UsuarioData> recuperarUsuario(@Body UsuarioData usuarioData);
     // Para editar usuarioData
-    @PUT("/usuarios/{idUsuario}")
+    @PUT("/users/{idUsuario}")
     Call<UsuarioData> editUsuario(@Path("idUsuario") Integer id, @Body UsuarioData usuarioData, @Header("Authorization") String key);
     // Obtiene los proyectos asociados a un usuario
     @GET("/usuarios/{idUsuario}/proyectos")

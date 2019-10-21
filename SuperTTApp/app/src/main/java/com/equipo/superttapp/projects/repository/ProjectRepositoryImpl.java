@@ -6,9 +6,7 @@ import android.util.Log;
 import androidx.lifecycle.MutableLiveData;
 
 import com.equipo.superttapp.projects.data.ProyectoData;
-import com.equipo.superttapp.projects.data.TraduccionData;
 import com.equipo.superttapp.projects.model.ProyectoModel;
-import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.util.APIService;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;

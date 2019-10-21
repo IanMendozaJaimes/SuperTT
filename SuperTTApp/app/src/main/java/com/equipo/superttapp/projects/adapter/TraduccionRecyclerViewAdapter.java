@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.view.TraduccionListView;
-import com.equipo.superttapp.util.DateFormater;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;

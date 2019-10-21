@@ -56,8 +56,9 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public BusinessResult<UsuarioModel> createAccount(UsuarioModel model) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> createAccount(UsuarioModel model) {
         BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
         model.setValidEmail(RN002.isEmailValid(model.getEmail()));
         model.setValidSecondPassword(RN002.isSecondPasswordValid(
@@ -72,12 +73,14 @@ public class UserInteractorImpl implements UserInteractor {
             data.setNombre(model.getName());
             data.setApellidos(model.getLastname());
             data.setPassword(model.getPassword());
-            result.setCode(repository.createAccount(data));
+            mutableLiveData = repository.createAccount(data);
         } else {
             result.setCode(ResultCodes.RN002);
+            result.setResult(model);
+            mutableLiveData.setValue(result);
         }
-        result.setResult(model);
-        return result;
+
+        return mutableLiveData;
     }
 
     @Override

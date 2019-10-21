@@ -6,8 +6,6 @@ import android.util.Log;
 
 import androidx.lifecycle.MutableLiveData;
 
-import com.equipo.superttapp.projects.data.ProyectoData;
-import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.users.data.UsuarioData;
 import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.util.APIService;
@@ -77,13 +75,29 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public Integer createAccount(UsuarioData usuarioData) {
-        Integer resultado = ResultCodes.ERROR;
+    public MutableLiveData<BusinessResult<UsuarioModel>> createAccount(UsuarioData usuarioData) {
+        MutableLiveData<BusinessResult<UsuarioModel>> resultado = new MutableLiveData<>();
         try {
-            Response<UsuarioData> response = service.createUsuario(usuarioData).execute();
-            if (response.isSuccessful() && response.body() != null)
-                resultado = response.body().getResponseCode();
-        } catch (IOException | NetworkOnMainThreadException e) {
+            service.createUsuario(usuarioData).enqueue(new Callback<UsuarioData>() {
+                @Override
+                public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
+                    Log.i(TAG, "createAccount-onResponse " + response);
+                    BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
+                    if (response.isSuccessful()) {
+                        businessResult.setCode(ResultCodes.SUCCESS);
+                    }
+                    resultado.setValue(businessResult);
+                }
+
+                @Override
+                public void onFailure(Call<UsuarioData> call, Throwable t) {
+                    Log.e(TAG, "createAccount-onFailure ", t);
+                    BusinessResult<UsuarioModel> model = new BusinessResult<>();
+                    model.setCode(ResultCodes.ERROR);
+                    resultado.setValue(model);
+                }
+            });
+        } catch (NetworkOnMainThreadException e) {
             Log.e(TAG, "createAccount ", e);
         }
         return resultado;
