@@ -264,7 +264,7 @@ def create_translation_view(request): #request must include idproyecto in body
     if usr != pro.usuario:
         return Response("Project with id {} does not belong to user with id {}".format(pro.id, usr.id), status=status.HTTP_403_FORBIDDEN)
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
-
+    trans.nombre = str(trans.fechaCreacion)
     if request.method == "POST":
         serializer = SerializadorTraduccion(trans, data = request.data)
 
