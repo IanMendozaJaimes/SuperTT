@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.utils.translation import ugettext_lazy as _
+from django.conf import settings
 
 from django.conf import settings
 from django.db.models.signals import post_save
@@ -47,15 +48,21 @@ class UserManager(BaseUserManager):
 
 class User(AbstractUser):
     username = None
-    email = models.EmailField(_('email address'), unique=True, blank=True)
-    estudios = models.OneToOneField(Estudios, on_delete=models.SET_NULL, blank=True, null=True)
-    imagen_perfil = models.TextField()
+    email = models.EmailField(_('email address'), unique=True)
+    is_active = models.BooleanField(default=False)
+    estudios = models.ForeignKey(Estudios, on_delete=models.SET_NULL, blank=True, null=True)
+    imagen_perfil = models.TextField(default='avatarDefault.png')
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []
 
     objects = UserManager()
 
+
+class UserHashes(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    hash = models.CharField(max_length=200)
+    proposito = models.IntegerField()
 	
 @receiver(post_save, sender=settings.AUTH_USER_MODEL)
 def create_auth_token(sender, instance= None, created=False, **kwargs):

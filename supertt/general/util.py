@@ -1,30 +1,53 @@
 import pytz
 import re
+import smtplib
 
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
 from datetime import datetime
+
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
 
 from users.models import *
 from proyectos.models import *
 
 
-SEND_EMAIL = """Para concluir el registro, por favor verifica tu cuenta a través del mensaje
-				que hemos enviado a tu correo."""
 
+# Coinciden con la documentacion
+USER_IS_NOT_ACTIVE = """La cuenta aún no ha sido verificada."""
+
+EMAIL_ALREADY_TAKEN = """El correo electrónico ya se ha utilizado."""
+
+SEND_EMAIL = """Verifique su cuenta a través del correo electrónico que se le ha mandado."""
+
+SEND_EMAIL_PASSWORD = """Se ha enviado un correo electrónico para la recuperación de su contraseña."""
+
+
+# No coinciden con la documentacion
 REQUIRED_FIELD = """Por favor, rellena este campo."""
+
+PASSWORDS_ARE_NOT_THE_SAME = """Las contraseñas no coinciden."""
+
+PROYECT_ALREADY_EXISTS = """Ya existe un proyecto con ese nombre."""
+
+USER_HAS_BEEN_VALIDATED = """Tu cuenta ha sido validada. Ahora puede iniciar sesión."""
+
+PASSWORD_CHANGED = """La contraseña ha sido cambiada. Ahora puede iniciar sesión normalmente con su nueva contraseña."""
+
+VALIDATE = 1
+
+CHANGE_PASSWORD = 2
+
+
+# En desacuerdo con la documentacion
+INVALID_LOGIN = """El correo o la contraseña son incorrectos."""
 
 INVALID_NAME = """El nombre solo puede contener caracteres alfabéticos."""
 
 INVALID_EMAIL = """El correo ingresado no es valido."""
 
-EMAIL_ALREADY_TAKEN = """El correo introducido ya está en uso."""
-
-PASSWORDS_ARE_NOT_THE_SAME = """Las contraseñas no coinciden."""
-
-INVALID_LOGIN = """El correo o la contraseña son incorrectos."""
-
-PROYECT_ALREADY_EXISTS = """Ya existe un proyecto con ese nombre."""
 
 
 class Message():
@@ -106,6 +129,57 @@ class Validator():
 		if re.search(r'\w+@\w+(\.\w+)+', mail) is None:
 			return False
 		return True
+
+
+
+class Email():
+
+	def __init__(self):
+		self.s = smtplib.SMTP(host=settings.SMTP_HOST, port=settings.SMTP_PORT)
+		self.s.ehlo()
+		self.s.starttls()
+		self.s.ehlo()
+		self.s.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
+
+
+	def close(self):
+		self.s.quit()
+
+
+	def get_template(self, template):
+		tem = ''
+		
+		with open(template, 'r') as t:
+			tem = t.read()
+
+		return tem
+
+	def send_validation_email(self, addressee, aname, link):
+		msg = MIMEMultipart()
+		msg['From'] = settings.SMTP_USER
+		msg['To'] = addressee
+		msg['Subject'] = 'Validación de su cuenta.'
+		
+		message = self.get_template(settings.BASE_DIR+'/general/validation_message.html')
+		message = message.replace('PERSON_NAME', aname)
+		message = message.replace('LINK', link)
+		msg.attach(MIMEText(message, 'html'))
+
+		self.s.send_message(msg)
+
+
+	def send_change_password_email(self, addressee, aname, link):
+		msg = MIMEMultipart()
+		msg['From'] = settings.SMTP_USER
+		msg['To'] = addressee
+		msg['Subject'] = 'Recuperación de contraseña.'
+		
+		message = self.get_template(settings.BASE_DIR+'/general/change_password.html')
+		message = message.replace('PERSON_NAME', aname)
+		message = message.replace('LINK', link)
+		msg.attach(MIMEText(message, 'html'))
+
+		self.s.send_message(msg)
 
 
 

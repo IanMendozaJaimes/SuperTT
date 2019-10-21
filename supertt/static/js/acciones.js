@@ -40,6 +40,7 @@ function process_validation_error(node){
 		element.classList.add('invalid_field');
 	p.innerHTML = node.children[0].value;
 	p.classList.add('msg_margin');
+	p.classList.remove('invisible');
 
 }
 
@@ -60,6 +61,17 @@ function close_alert(id){
 	setTimeout( () => {
 		id.classList.add('invisible');
 	}, 300);
+}
+
+function show_aside_message(text){
+	let am = document.querySelector('#aside_message');
+	let p = document.querySelector('#aside_message_p');
+
+	p.innerHTML = text;
+	am.classList.add('aside_message_show');
+	setTimeout(() => {
+		am.classList.remove('aside_message_show');
+	}, 2000);
 }
 
 function go_to_translations(id){
@@ -210,7 +222,8 @@ function save_profile_changes(event){
 				let req = JSON.parse(request.responseText);
 
 				if(Object.entries(req.err).length === 0){
-					console.log('yastas');
+					document.querySelector('#a_user_name').innerHTML = nombre.value;
+					show_aside_message('Cambios guardados.');
 				}
 				else{
 					let perr = document.getElementById('msg_nombre');
@@ -243,7 +256,7 @@ function change_password(event){
 				let req = JSON.parse(request.responseText);
 
 				if(Object.entries(req.err).length === 0){
-					console.log('yastas');
+					show_aside_message('Cambios guardados.');
 				}
 				else{
 					for(let i = 0; i < req.err.messages.length; i++){
@@ -261,21 +274,58 @@ function change_password(event){
 
 }
 
-NewProjects_cancel_btn.addEventListener('click', (event) => {
-	hidde_new_projects();
-});
+
+function choose_file(){
+	let f = document.getElementById('Profile_input_file');
+	f.click();
+}
 
 
-Projects_btn.addEventListener('click', (event) => {
+function upload_photo(){
+	let form = new FormData();
+	let request = new XMLHttpRequest();
+	let fc = document.getElementById('Profile_input_file');
+	let token = document.querySelector('input[name=csrfmiddlewaretoken]');
+
+	form.append('foto', fc.files[0]);
+	form.append('csrfmiddlewaretoken', token.value);
+
+	request.open('POST', '/usuarios/cambiarFoto', true);
+
+	request.onreadystatechange = function(aEvent){
+		if (request.readyState == 4) {
+			if(request.status == 200){
+				let req = JSON.parse(request.responseText);
+
+				if(Object.entries(req.err).length === 0){
+					setTimeout(() => {
+						console.log(req.url_imagen);
+						document.querySelector('.Profile_container_avatar_photo').style.backgroundImage = "url("+req.url_imagen+")";
+						document.querySelector('.NavigationBar_options_avatar').style.backgroundImage = "url("+req.url_imagen+")";
+					}, 2000);
+				}
+				else{
+					console.log('no se pudo')
+				}
+			}
+		}
+	};
+
+	request.send(form);
+	document.querySelector('.Profile_container_avatar_photo').style.backgroundImage = "url(/media/loading.svg)";
+}
+
+
+function show_new_projects_dialog(){
 	let new_proyect = document.querySelector('.NewProjects');
 	new_proyect.classList.remove('invisible');
 	setTimeout(() => {
 		new_proyect.classList.add('visible');
 	}, 100);
-});
+}
 
 
-NewProjects_btn_create.addEventListener('click', (event) => {
+function create_new_project(){
 	let new_project = document.querySelector('#nuevo_proyecto_nombre');
 	let project_name = new_project.value;
 	let request = new XMLHttpRequest();
@@ -305,8 +355,40 @@ NewProjects_btn_create.addEventListener('click', (event) => {
 	};
 
 	request.send(form);
-});
+}
 
+function download_project(){
+	let pid = document.querySelector('#project_id');
+	let pname = document.querySelector('#project_name');
+	let token = document.querySelector('input[name=csrfmiddlewaretoken]');
+	let request = new XMLHttpRequest();
+	let form = new FormData();
+
+	form.append('proyecto', pid.value);
+	form.append('proyecto_nombre', pname.value);
+	form.append('csrfmiddlewaretoken', token.value);
+
+	request.open('POST', '/proyectos/descargar', true);
+
+	request.onreadystatechange = function(aEvent){
+		if (request.readyState == 4) {
+			if(request.status == 200){
+				let req = JSON.parse(request.responseText);
+
+				if(Object.entries(req.err).length === 0){
+					console.log(req.url_file);
+					window.location.href=req.url_file;
+				}
+				else{
+					console.log('no se pudo')
+				}
+			}
+		}
+	};
+
+	request.send(form);
+
+}
 
 show_messages();
 
