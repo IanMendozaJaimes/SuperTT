@@ -11,12 +11,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.view.MainActivity;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.LoginPresenter;
-import com.equipo.superttapp.users.presenter.LoginPresenterImpl;
+import com.equipo.superttapp.users.presenter.LoginViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
@@ -39,8 +39,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     EditText etContra;
     @BindView(R.id.pbLogin)
     ProgressBar pbLogin;
-
-    LoginPresenter presenter;
+    LoginViewModel loginViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +53,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             goHome();
         }
         hideProgressBar();
-        presenter = new LoginPresenterImpl(this);
+        loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
         tvRecuperarContra.setOnClickListener(v -> goForgotPassword());
         btnIniciarSesion.setOnClickListener(v -> {
@@ -62,7 +61,15 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             UsuarioModel form = new UsuarioModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
-            presenter.logIn(form);
+            loginViewModel.login(form).observe(this, usuarioModelBusinessResult -> {
+                if (usuarioModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
+                    saveUser(usuarioModelBusinessResult.getResult());
+                    goHome();
+                } else {
+                    loginError(usuarioModelBusinessResult);
+                }
+
+            });
             hideKeyboard();
         });
         setTitle(R.string.label_login);
@@ -136,6 +143,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         //preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
         preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, 9);
+        // preferencesManager.saveValue(PreferencesManager.KEY_USER_TOKEN, model.getKeyAuth());
         //preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
         //preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
     }

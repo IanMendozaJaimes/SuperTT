@@ -3,9 +3,7 @@ package com.equipo.superttapp.users.view;
 
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,14 +13,10 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
-import com.equipo.superttapp.projects.viewmodel.ProyectsListViewModel;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.ProfilePresenter;
-import com.equipo.superttapp.users.presenter.ProfilePresenterImpl;
 import com.equipo.superttapp.users.presenter.ProfileViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
@@ -53,7 +47,6 @@ public class ProfileFragment extends Fragment implements ProfileView {
     EditText etName;
     @BindView(R.id.profile_et_apellidos)
     EditText etLastname;
-    private ProfilePresenter presenter;
     private PreferencesManager preferencesManager;
     ProfileViewModel profileViewModel;
 
@@ -66,7 +59,6 @@ public class ProfileFragment extends Fragment implements ProfileView {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
         ButterKnife.bind(this, view);
-        presenter = new ProfilePresenterImpl(this);
         hideProgressBar();
         if (preferencesManager == null)
             preferencesManager = new PreferencesManager(getContext(),

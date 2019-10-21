@@ -9,7 +9,7 @@ public class UsuarioData {
     private String nombre;
     @SerializedName("apellido")
     private String apellidos;
-    @SerializedName("email")
+    @SerializedName("username")
     private String email;
     @SerializedName("password")
     private String password;

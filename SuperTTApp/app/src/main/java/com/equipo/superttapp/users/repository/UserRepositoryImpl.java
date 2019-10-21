@@ -24,19 +24,43 @@ import retrofit2.Response;
 public class UserRepositoryImpl implements UserRepository {
     private APIService service = ServiceGenerator.createService(APIService.class);
     private static final String TAG = UserRepositoryImpl.class.getCanonicalName();
+
     @Override
-    public UsuarioData login(UsuarioData usuarioData) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> login(UsuarioData usuarioData) {
+        MutableLiveData<BusinessResult<UsuarioModel>> resultado = new MutableLiveData<>();
         try {
-            Response<UsuarioData> response = service.loginUsuario(usuarioData).execute();
-            if (response.isSuccessful())
-                usuarioData = response.body();
-            else
-                usuarioData.setResponseCode(ResultCodes.ERROR);
-        } catch (IOException | NetworkOnMainThreadException e) {
-            Log.e(TAG, "login ", e);
-            usuarioData.setResponseCode(ResultCodes.ERROR);
+            service.loginUsuario(usuarioData).enqueue(new Callback<UsuarioData>() {
+                @Override
+                public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
+                    Log.i(TAG, "login-onResponse " + response);
+                    BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
+                    if (response.isSuccessful()) {
+                        businessResult.setCode(ResultCodes.SUCCESS);
+                        UsuarioModel model = new UsuarioModel();
+                        model.setName(usuarioData.getNombre());
+                        model.setEmail(usuarioData.getEmail());
+                        model.setLastname(usuarioData.getApellidos());
+                        model.setId(usuarioData.getId());
+                        model.setKeyAuth(usuarioData.getKeyAuth());
+                        businessResult.setResult(model);
+                    }
+                    resultado.setValue(businessResult);
+                }
+
+                @Override
+                public void onFailure(Call<UsuarioData> call, Throwable t) {
+                    Log.e(TAG, "login-onFailure ", t);
+                    BusinessResult<UsuarioModel> model = new BusinessResult<>();
+                    model.setCode(ResultCodes.ERROR);
+                    resultado.setValue(model);
+                }
+
+
+            });
+        } catch (NetworkOnMainThreadException e) {
+            Log.e(TAG, "updateAccount ", e);
         }
-        return usuarioData;
+        return resultado;
     }
 
     @Override

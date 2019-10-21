@@ -21,25 +21,23 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public BusinessResult<UsuarioModel> logIn(UsuarioModel usuarioModel) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> logIn(UsuarioModel usuarioModel) {
         BusinessResult<UsuarioModel> resultado = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         usuarioModel.setValidPassword(RN002.isPasswordValid(usuarioModel.getPassword()));
         usuarioModel.setValidEmail(RN002.isEmailValid(usuarioModel.getEmail()));
         if (usuarioModel.getValidEmail() && usuarioModel.getValidPassword()) {
             UsuarioData usuarioData = new UsuarioData();
             usuarioData.setEmail(usuarioModel.getEmail());
             usuarioData.setPassword(usuarioModel.getPassword());
-            usuarioData = repository.login(usuarioData);
-            resultado.setCode(usuarioData.getResponseCode());
-            usuarioModel.setId(usuarioData.getId());
-            usuarioModel.setKeyAuth(usuarioData.getKeyAuth());
-            usuarioModel.setName(usuarioData.getNombre());
-            usuarioModel.setLastname(usuarioData.getApellidos());
+            mutableLiveData = repository.login(usuarioData);
         } else {
             resultado.setCode(ResultCodes.RN002);
+            resultado.setResult(usuarioModel);
+            mutableLiveData.setValue(resultado);
         }
-        resultado.setResult(usuarioModel);
-        return resultado;
+
+        return mutableLiveData;
     }
 
     @Override
