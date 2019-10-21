@@ -8,7 +8,7 @@ import com.equipo.superttapp.util.BusinessResult;
 
 public interface UserRepository {
     MutableLiveData<BusinessResult<UsuarioModel>> login(UsuarioData usuarioData);
-    Integer forgotPassword(UsuarioData usuarioData);
+    MutableLiveData<BusinessResult<UsuarioModel>> forgotPassword(UsuarioData usuarioData);
     MutableLiveData<BusinessResult<UsuarioModel>> createAccount(UsuarioData usuarioData);
     MutableLiveData<BusinessResult<UsuarioModel>> updateAccount(UsuarioData usuarioData, String token);
 }

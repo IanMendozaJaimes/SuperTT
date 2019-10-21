@@ -41,18 +41,22 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public BusinessResult<UsuarioModel> sendEmail(UsuarioModel loginFormModel) {
-        BusinessResult<UsuarioModel> resultado = new BusinessResult<>();
+    public MutableLiveData<BusinessResult<UsuarioModel>> sendEmail(UsuarioModel loginFormModel) {
+        BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         loginFormModel.setValidEmail(RN002.isEmailValid(loginFormModel.getEmail()));
         if (loginFormModel.getValidEmail()) {
             UsuarioData data = new UsuarioData();
             data.setEmail(loginFormModel.getEmail());
-            resultado.setCode(repository.forgotPassword(data));
+            mutableLiveData = repository.forgotPassword(data);
         }
-        else
-            resultado.setCode(ResultCodes.RN002);
-        resultado.setResult(loginFormModel);
-        return resultado;
+        else {
+            result.setCode(ResultCodes.RN002);
+            result.setResult(loginFormModel);
+            mutableLiveData.setValue(result);
+        }
+
+        return mutableLiveData;
     }
 
     @Override

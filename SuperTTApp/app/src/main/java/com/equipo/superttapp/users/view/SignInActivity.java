@@ -12,7 +12,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.SignInViewModel;
+import com.equipo.superttapp.users.viewmodel.SignInViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
@@ -53,8 +53,10 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
             model.setSecondPassword(etSecondPassword.getText().toString());
             model.setPassword(etPassword.getText().toString());
             model.setEmail(etEmail.getText().toString());
+            showProgressBar();
             signInViewModel.createAccount(model).observe(this, usuarioModelBusinessResult -> {
                 showMessage(usuarioModelBusinessResult);
+                hideProgressBar();
             });
             hideKeyboard();
         });

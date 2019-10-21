@@ -16,7 +16,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.view.MainActivity;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.LoginViewModel;
+import com.equipo.superttapp.users.viewmodel.LoginViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
@@ -61,6 +61,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
             UsuarioModel form = new UsuarioModel();
             form.setEmail(etCorreo.getText().toString());
             form.setPassword(etContra.getText().toString());
+            showProgressBar();
             loginViewModel.login(form).observe(this, usuarioModelBusinessResult -> {
                 if (usuarioModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
                     saveUser(usuarioModelBusinessResult.getResult());
@@ -68,7 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 } else {
                     loginError(usuarioModelBusinessResult);
                 }
-
+                hideProgressBar();
             });
             hideKeyboard();
         });
@@ -103,6 +104,11 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     @Override
     public void hideProgressBar() {
         pbLogin.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void showProgressBar() {
+        pbLogin.setVisibility(View.VISIBLE);
     }
 
     @Override

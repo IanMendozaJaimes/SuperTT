@@ -52,25 +52,39 @@ public class UserRepositoryImpl implements UserRepository {
                     model.setCode(ResultCodes.ERROR);
                     resultado.setValue(model);
                 }
-
-
             });
         } catch (NetworkOnMainThreadException e) {
-            Log.e(TAG, "updateAccount ", e);
+            Log.e(TAG, "login ", e);
         }
         return resultado;
     }
 
     @Override
-    public Integer forgotPassword(UsuarioData usuarioData) {
-        Integer resultado = ResultCodes.ERROR;
+    public MutableLiveData<BusinessResult<UsuarioModel>> forgotPassword(UsuarioData usuarioData) {
+        MutableLiveData<BusinessResult<UsuarioModel>> resultado = new MutableLiveData<>();
         try {
-            Response<UsuarioData> response = service.recuperarUsuario(usuarioData).execute();
-            if (response.isSuccessful() && response.body() != null)
-                resultado = response.body().getResponseCode();
-        } catch (IOException | NetworkOnMainThreadException e) {
+            service.recuperarUsuario(usuarioData).enqueue(new Callback<UsuarioData>() {
+                @Override
+                public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
+                    Log.i(TAG, "forgotPassword-onResponse " + response);
+                    BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
+                    if (response.isSuccessful()) {
+                        businessResult.setCode(ResultCodes.SUCCESS);
+                    }
+                    resultado.setValue(businessResult);
+                }
+
+                @Override
+                public void onFailure(Call<UsuarioData> call, Throwable t) {
+                    Log.e(TAG, "forgotPassword-onFailure ", t);
+                    BusinessResult<UsuarioModel> model = new BusinessResult<>();
+                    resultado.setValue(model);
+                }
+            });
+        } catch (NetworkOnMainThreadException e) {
             Log.e(TAG, "forgotPassword ", e);
         }
+
         return resultado;
     }
 

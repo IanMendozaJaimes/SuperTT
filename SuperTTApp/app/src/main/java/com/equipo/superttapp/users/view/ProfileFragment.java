@@ -17,7 +17,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.ProfileViewModel;
+import com.equipo.superttapp.users.viewmodel.ProfileViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
