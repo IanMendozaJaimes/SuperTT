@@ -24,12 +24,6 @@ public class TraduccionListPresenterImpl implements TraduccionListPresenter {
     }
 
     @Override
-    public BusinessResult<TraduccionModel> findAllTraduccionesByProyecto(Integer idProyecto) {
-        BusinessResult<TraduccionModel> result = interactor.findAllTraduccionesByProyecto(idProyecto);
-        return result;
-    }
-
-    @Override
     public void changeProyectoNombre(ProyectoModel model) {
         BusinessResult<ProyectoModel> result = proyectoInteractor.updateProyecto(model);
         if (result.getCode().equals(ResultCodes.SUCCESS))
@@ -39,29 +33,6 @@ public class TraduccionListPresenterImpl implements TraduccionListPresenter {
             error.setCode(result.getCode());
             view.showMessage(error);
         }
-
-    }
-
-    @Override
-    public void deleteProyecto(Integer idProyecto) {
-        BusinessResult<ProyectoModel> result = proyectoInteractor.deleteProyecto(idProyecto);
-        if (result.getCode().equals(ResultCodes.SUCCESS))
-            view.deleteProyectoSuccess();
-        else
-            view.deleteProyectoError();
-    }
-
-    @Override
-    public void deleteTraduccion(Integer idTraduccion) {
-        BusinessResult<TraduccionModel> result = interactor.deleteTraduccion(idTraduccion);
-        if (result.getCode().equals(ResultCodes.SUCCESS)) {
-            view.deleteTraduccionSuccess();
-        } else
-            view.showMessage(result);
-    }
-
-    @Override
-    public void calificarTraduccion(TraduccionModel model) {
 
     }
 }

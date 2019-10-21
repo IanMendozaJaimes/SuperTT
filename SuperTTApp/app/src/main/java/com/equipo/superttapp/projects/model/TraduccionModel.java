@@ -5,7 +5,7 @@ import java.util.Date;
 public class TraduccionModel {
     private Integer id;
     private Integer idProyecto;
-    private Date fecha;
+    private String fecha;
     private String ecuacion;
     private Integer calificacion;
     private String url = "http://";
@@ -26,11 +26,11 @@ public class TraduccionModel {
         this.idProyecto = idProyecto;
     }
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

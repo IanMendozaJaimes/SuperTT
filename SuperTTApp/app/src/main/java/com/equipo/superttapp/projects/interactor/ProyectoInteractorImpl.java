@@ -1,7 +1,10 @@
 package com.equipo.superttapp.projects.interactor;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.equipo.superttapp.projects.data.ProyectoData;
 import com.equipo.superttapp.projects.model.ProyectoModel;
+import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.repository.ProjectRepository;
 import com.equipo.superttapp.projects.repository.ProjectRepositoryImpl;
 import com.equipo.superttapp.util.BusinessResult;
@@ -38,10 +41,10 @@ public class ProyectoInteractorImpl implements ProyectoInteractor {
     }
 
     @Override
-    public BusinessResult<ProyectoModel> deleteProyecto(Integer idProyecto) {
-        BusinessResult<ProyectoModel> result = new BusinessResult<>();
-        result.setCode(repository.deleteProyecto(idProyecto));
-        return result;
+    public MutableLiveData<BusinessResult<ProyectoModel>> deleteProyecto(Integer idProyecto, String token){
+        MutableLiveData<BusinessResult<ProyectoModel>> data = new MutableLiveData<>();
+        data = repository.deleteProyecto(idProyecto, token);
+        return data;
     }
 
     @Override
@@ -73,5 +76,10 @@ public class ProyectoInteractorImpl implements ProyectoInteractor {
         proyectoData.setIdUsuario(idUsuario);
         result.setCode(repository.createProyecto(proyectoData));
         return result;
+    }
+
+    @Override
+    public MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(int i, String s) {
+        return repository.findAllProyectosByUser(i, s);
     }
 }

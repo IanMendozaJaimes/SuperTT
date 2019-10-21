@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 
 public class PreferencesManager {
 
+    public static final String KEY_USER_TOKEN = "user-token";
     private SharedPreferences preferences;
     private SharedPreferences.Editor editor;
     private Context context;

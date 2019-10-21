@@ -9,10 +9,7 @@ public interface TraduccionListView {
     void showDeleteDialog();
     void showEditDialog();
     void borrarTraduccion(Integer idTraduccion);
-    void calificarTraduccion(Integer idTraduccion);
     void deleteProyectoSuccess();
     void deleteProyectoError();
-    void calfificarTraduccionSucess();
-    void deleteTraduccionSuccess();
     void changeProyectoSuccess(BusinessResult<ProyectoModel> result);
 }

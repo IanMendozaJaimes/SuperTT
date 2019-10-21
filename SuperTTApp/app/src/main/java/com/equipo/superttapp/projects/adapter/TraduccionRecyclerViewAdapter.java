@@ -41,12 +41,11 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
         final TraduccionModel traduccionModel = traducciones.get(position);
         holder.tvCalificacion.setText(traduccionModel.getCalificacion().toString());
         holder.tvEcuacion.setText(traduccionModel.getEcuacion());
-        holder.tvFecha.setText(DateFormater.convertDateToString(traduccionModel.getFecha()));
+        holder.tvFecha.setText(traduccionModel.getFecha());
         Picasso.get().load(traduccionModel.getUrl()).error(R.drawable.card_defecto)
                 .into(holder.imvBackground);
         holder.btnBorrarTraduccion
                 .setOnClickListener(v -> view.borrarTraduccion(traduccionModel.getId()));
-        holder.btnCalificarTraduccion.setOnClickListener(v -> view.calificarTraduccion(traduccionModel.getId()));
     }
 
     @Override
@@ -60,7 +59,6 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
         TextView tvCalificacion;
         ImageView imvBackground;
         Button btnBorrarTraduccion;
-        Button btnCalificarTraduccion;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             tvFecha = itemView.findViewById(R.id.tv_fecha_traduccion);
@@ -68,7 +66,6 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
             tvCalificacion = itemView.findViewById(R.id.tv_calificacion_traduccion);
             imvBackground = itemView.findViewById(R.id.image_ecuacion);
             btnBorrarTraduccion = itemView.findViewById(R.id.btn_borrar_traduccion);
-            btnCalificarTraduccion = itemView.findViewById(R.id.bn_calificar_traduccion);
         }
     }
 }

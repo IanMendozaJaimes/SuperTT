@@ -28,7 +28,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '10.100.77.214',
-    'localhost'
+    'localhost',
+    '0.0.0.0',
+    '192.168.1.82'
 ]
 
 
@@ -107,7 +109,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
         'USER': 'postgres',
-        'PASSWORD': 'newcastle',
+        'PASSWORD': 'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
