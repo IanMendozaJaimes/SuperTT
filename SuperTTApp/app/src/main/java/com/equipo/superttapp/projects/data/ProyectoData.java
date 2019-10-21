@@ -11,7 +11,7 @@ public class ProyectoData {
     private String fecha;
     @SerializedName("calificacion")
     private Double calificacion;
-    @SerializedName("idUsuario")
+    @SerializedName("usuario")
     private Integer idUsuario;
 
     public ProyectoData() {

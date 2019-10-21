@@ -25,8 +25,6 @@ import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.presenter.TraducccionListViewModel;
-import com.equipo.superttapp.projects.presenter.TraduccionListPresenter;
-import com.equipo.superttapp.projects.presenter.TraduccionListPresenterImpl;
 import com.equipo.superttapp.util.BundleConstants;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
@@ -43,7 +41,6 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private RecyclerView.Adapter traduccionAdapter;
     private FloatingActionButton fabTradducion;
     private Button btnBorrar;
-    private TraduccionListPresenter presenter;
     private String nombreProyecto;
     private Integer idProyecto;
     private Double calificacionProyecto;
@@ -60,7 +57,6 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         btnBorrar = findViewById(R.id.btn_borrar_traduccion);
         layoutManager = new LinearLayoutManager(this);
         traduccionModels = new ArrayList<>();
-        presenter = new TraduccionListPresenterImpl(this);
         traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion,
                 traduccionModels, this);
 
@@ -134,7 +130,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                                 if (proyectoResult.getCode().equals(ResultCodes.SUCCESS))
                                     deleteProyectoSuccess();
                                 else
-                                    deleteProyectoError();
+                                    operationError();
                             });
                     dialog.cancel();
                 })
@@ -152,7 +148,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     }
 
     @Override
-    public void deleteProyectoError() {
+    public void operationError() {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_traduccion_list),
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         snackbar.show();
@@ -179,7 +175,16 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     ProyectoModel model = new ProyectoModel();
                     model.setId(idProyecto);
                     model.setName(etNombre.getText().toString());
-                    presenter.changeProyectoNombre(model);
+                    model.setRate(calificacionProyecto);
+                    model.setIdUsuario(1);
+                    String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+                    traducionListViewModel.updateProyecto(model, key).observe(this,
+                            proyectoModelBusinessResult -> {
+                        if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
+                            changeProyectoSuccess(proyectoModelBusinessResult);
+                        } else
+                            operationError();
+                    });
                     dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_cancelar, (dialog, which) -> dialog.cancel());

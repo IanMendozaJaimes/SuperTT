@@ -21,7 +21,7 @@ public interface APIService {
     Call<ProyectoData> createProyecto(@Body ProyectoData proyectoModel);
     // Edicion de un proyectoModel
     @PUT("/proyectos/{idProyecto}")
-    Call<ProyectoData> editProyecto(@Path("idProyecto") Integer idProyecto, @Body ProyectoData proyectoModel);
+    Call<ProyectoData> editProyecto(@Path("idProyecto") Integer idProyecto, @Body ProyectoData proyectoModel, @Header("Authorization") String token);
     // Elimina un proyecto
     @DELETE("/proyectos/{idProyecto}")
     Call<ProyectoData> deleteProyecto(@Path("idProyecto") Integer idProyecto, @Header("Authorization") String key);

@@ -9,8 +9,8 @@ import com.equipo.superttapp.util.BusinessResult;
 import java.util.List;
 
 public interface ProjectRepository {
-    MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(Integer id, String key);
+    MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(Integer id, String token);
     MutableLiveData<BusinessResult<ProyectoModel>> deleteProyecto(Integer idProyecto, String token);
-    Integer updateProyecto(ProyectoData proyectoData);
+    MutableLiveData<BusinessResult<ProyectoModel>>  updateProyecto(ProyectoData proyectoData, String token);
     Integer createProyecto(ProyectoData proyectoData);
 }

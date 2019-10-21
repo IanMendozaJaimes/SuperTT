@@ -48,21 +48,22 @@ public class ProyectoInteractorImpl implements ProyectoInteractor {
     }
 
     @Override
-    public BusinessResult<ProyectoModel> updateProyecto(ProyectoModel model) {
+    public MutableLiveData<BusinessResult<ProyectoModel>> updateProyecto(ProyectoModel model, String token) {
         ProyectoData proyectoData = new ProyectoData();
-        BusinessResult<ProyectoModel> result = new BusinessResult<>();
-        //proyectoData.setCalificacion(model.getRate());
-        //proyectoData.setFecha(model.getTextDate());
+        MutableLiveData<BusinessResult<ProyectoModel>> data = new MutableLiveData<>();
+        proyectoData.setCalificacion(model.getRate());
+        proyectoData.setNombre(model.getName());
         proyectoData.setId(model.getId());
+        proyectoData.setIdUsuario(model.getIdUsuario());
         model.setValidName(RN002.isProyectoNombreValid(model.getName()));
         if (model.getValidName()) {
-            proyectoData.setNombre(model.getName());
-            result.setCode(repository.updateProyecto(proyectoData));
+            data = repository.updateProyecto(proyectoData, token);
         } else {
+            BusinessResult<ProyectoModel> result = new BusinessResult<>();
             result.setCode(ResultCodes.RN002);
+            data.setValue(result);
         }
-
-        return result;
+        return data;
     }
 
     @Override

@@ -25,6 +25,7 @@ import retrofit2.Response;
 public class ProjectRepositoryImpl implements ProjectRepository{
     private APIService service = ServiceGenerator.createService(APIService.class);
     private static final String TAG = ProjectRepositoryImpl.class.getCanonicalName();
+
     @Override
     public MutableLiveData<BusinessResult<ProyectoModel>> findAllProyectosByUser(Integer id, String key) {
         MutableLiveData<BusinessResult<ProyectoModel>> proyectoDataMutableLiveData = new MutableLiveData<>();
@@ -82,23 +83,39 @@ public class ProjectRepositoryImpl implements ProjectRepository{
                 }
             });
         } catch (NetworkOnMainThreadException e) {
-            Log.e(TAG, "findAllProyectosByUser ", e);
+            Log.e(TAG, "deleteProyecto ", e);
         }
         return resultado;
     }
 
     @Override
-    public Integer updateProyecto(ProyectoData proyectoData) {
-        Integer code = ResultCodes.ERROR;
+    public MutableLiveData<BusinessResult<ProyectoModel>> updateProyecto(ProyectoData proyectoData, String token) {
+        MutableLiveData<BusinessResult<ProyectoModel>> resultado = new MutableLiveData<>();
         try {
-            Response<ProyectoData> response = service.editProyecto(proyectoData.getId(),
-                    proyectoData).execute();
-            if (response.isSuccessful())
-                code = ResultCodes.SUCCESS;
-        } catch (IOException | NetworkOnMainThreadException e) {
-            Log.e(TAG, "updateProyecto ", e);
+            service.editProyecto(proyectoData.getId(), proyectoData, token).enqueue(new Callback<ProyectoData>() {
+                @Override
+                public void onResponse(Call<ProyectoData> call, Response<ProyectoData> response) {
+                    Log.i(TAG, "updateProyecto-onResponse " + response.body());
+                    BusinessResult<ProyectoModel> businessResult = new BusinessResult<>();
+                    businessResult.setCode(ResultCodes.SUCCESS);
+                    ProyectoModel model = new ProyectoModel();
+                    model.setName(proyectoData.getNombre());
+                    businessResult.setResult(model);
+                    resultado.setValue(businessResult);
+                }
+
+                @Override
+                public void onFailure(Call<ProyectoData> call, Throwable t) {
+                    Log.e(TAG, "updateProyecto-onFailure ", t);
+                    BusinessResult<ProyectoModel> model = new BusinessResult<>();
+                    model.setCode(ResultCodes.ERROR);
+                    resultado.setValue(model);
+                }
+            });
+        } catch (NetworkOnMainThreadException e) {
+            Log.e(TAG, "findAllProyectosByUser ", e);
         }
-        return code;
+        return resultado;
     }
 
     @Override

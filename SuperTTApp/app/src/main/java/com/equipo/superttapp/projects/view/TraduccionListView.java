@@ -10,6 +10,6 @@ public interface TraduccionListView {
     void showEditDialog();
     void borrarTraduccion(Integer idTraduccion);
     void deleteProyectoSuccess();
-    void deleteProyectoError();
+    void operationError();
     void changeProyectoSuccess(BusinessResult<ProyectoModel> result);
 }

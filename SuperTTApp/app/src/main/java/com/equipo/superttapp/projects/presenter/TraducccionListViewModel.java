@@ -32,6 +32,11 @@ public class TraducccionListViewModel extends ViewModel {
         return dataProyecto;
     }
 
+    public MutableLiveData<BusinessResult<ProyectoModel>> updateProyecto(ProyectoModel proyectoModel, String key) {
+        dataProyecto = proyectoInteractor.updateProyecto(proyectoModel, key);
+        return dataProyecto;
+    }
+
     public void setData(MutableLiveData<BusinessResult<TraduccionModel>> data) {
         this.data = data;
     }
