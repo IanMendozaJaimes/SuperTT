@@ -42,8 +42,11 @@ class ProyectsView(LoginRequiredMixin, TemplateView):
         data = list(map(change_time_zone, data))
 
         return render(request, self.template_name, 
-            {'nombre' : request.user.first_name + ' ' + request.user.last_name,
-             'proyectos': data })
+            {
+                'nombre' : request.user.first_name + ' ' + request.user.last_name,
+                'avatar': 'imgUsuario/'+request.user.imagen_perfil,
+                'proyectos': data,
+            })
 
 
     def get(self, request, *args, **kwargs):
@@ -76,6 +79,7 @@ class TranslationsView(LoginRequiredMixin, TemplateView):
 
             return render(request, self.template_name, {
                 'nombre' : request.user.first_name + ' ' + request.user.last_name,
+                'avatar': 'imgUsuario/'+request.user.imagen_perfil,
                 'proyecto': p,
                 'traducciones': translations,
             })
@@ -129,6 +133,32 @@ def crearProyectoView(request):
         return JsonResponse(p)
 
     return JsonResponse({'err':m.get_messages()})
+
+
+def CreateProyectFile(request):
+    if request.method == 'POST':
+        user = request.user
+        proyecto = request.POST['proyecto']
+        traducciones = Traduccion.objects.filter(proyecto=proyecto)
+        nombre = request.POST['proyecto_nombre'].replace(' ', '_') + user.first_name.replace(' ', '_') 
+        
+        texto = ''
+        for t in traducciones:
+            texto += t.traduccion + '\n\n'
+
+        archivo = ''
+        with open(settings.BASE_DIR+'/general/project_file.tex', 'r') as file:
+            archivo = file.read()
+
+        archivo = archivo.replace('DOCUMENT_CONTENT', texto)
+
+        with open(settings.BASE_DIR+'/static/files/'+nombre+'.tex', 'w') as file:
+            file.write(archivo)
+
+        return JsonResponse({'err':{}, 'url_file':settings.SITE_URL+'static/files/'+nombre+'.tex'})
+
+    else:
+        return JsonResponse({'err':{'bad_method':'bad'}})
 
 
 def cambiarProyectoView(request):

@@ -11,4 +11,9 @@ urlpatterns = [
     path('recuperacion', PasswordRecoverView.as_view()),
     path('cambiar', CambiarUsuarioView),
     path('cambiarContra', CambiarContraView),
+    path('cambiarFoto', CambiarFotoView),
+    path('validar', ValidarUsuarioView),
+    path('enviarEmailRecuparacion', EnviarCorreoRecuperacionView),
+    path('contrasena', RecuperarContraView),
+    path('cambiarC', CambiarCView.as_view()),
 ]

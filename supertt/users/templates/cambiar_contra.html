@@ -1,0 +1,24 @@
+{% extends 'general.html' %}
+{% block content %}
+
+	<section class="Login">
+		<div class="Login_container Recuperacion_container">
+			<h1 class="Login_container_p Recuperacion_container_p">Cambiar contraseña</h1>
+			<form class="Recuperacion_container_form" method="post" action="/usuarios/cambiarC">
+				{% csrf_token %}
+				<p class="Recuperacion_container_form_p" style="flex-basis: 100%;">Escriba su nueva contraseña.</p>
+				
+				<p id="msg_contra" class="msg_validation_error"></p>
+				<input type="password" placeholder="Contraseña" class="text_form Recuperacion_container_form_text" name="contra">
+
+				<p id="msg_contraDos" class="msg_validation_error"></p>
+				<input type="password" placeholder="Confirmación de contraseña" class="text_form Recuperacion_container_form_text" name="contraDos">
+
+				<button class="btn_form Recuperacion_container_form_text">
+					Guardar
+				</button>
+			</form>
+		</div>
+	</section>
+
+{% endblock %}
