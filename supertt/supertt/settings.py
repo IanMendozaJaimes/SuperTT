@@ -26,13 +26,13 @@ SECRET_KEY = 'p2-y3m0s9o*i9jgxl!)_4_z%7aj+1k0j*@)8s1_!y#x$w+0er9'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+
 ALLOWED_HOSTS = [
     '10.100.77.214',
     'localhost',
     '0.0.0.0',
     '192.168.1.82'
 ]
-
 
 # Application definition
 
@@ -75,6 +75,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -193,6 +194,18 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
 ]
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
+
+
+# To send emails
+SMTP_HOST = 'smtp.gmail.com'
+SMTP_USER = 'ttapplicacion@gmail.com'
+SMTP_PASSWORD = '#ContraDelTT1'
+SMTP_PORT = 587
+SITE_URL = 'http://localhost:8000/'
 
 
 

@@ -13,10 +13,10 @@
 		<div class="NewProjects_message">
 			<div class="NewProjects_header NewProjects_header_fixed">
 				<p>¿Eliminar proyecto?</p>
-				<span id="NewProjects_cancel_btn" class="icon-cross NewProjects_cancel"></span>
+				<span id="NewProjects_cancel_btn" class="icon-cross NewProjects_cancel" onclick="hidde_new_projects();"></span>
 			</div>
 			<div class="NewProjects_newtext">
-				<p>Esta acción no se puede deshacer, si aún asi desea eliminar este projecto, de clic en confirmar.</p>
+				<p>Esta seguro(a) de eliminar el proyecto {{ proyecto.nombre }}.</p>
 				<button id="NewProjects_btn_delete" class="NewProjects_newbtn btn_form" onclick="delete_project();">Eliminar projecto</button>
 			</div>
 		</div>
@@ -27,6 +27,7 @@
 			<div class="Translations_project">
 				<div class="Translations_project_description">
 					<input type="hidden" value="{{ proyecto.id }}" id="project_id">
+					<input type="hidden" value="{{ proyecto.nombre }}" id="project_name">
 					<p class="Translations_project_description_name">{{ proyecto.nombre }}</p>
 					<p id="msg_badprojectname" class="msg_validation_error invisible"></p>
 					<input type="text" class="text_form Translations_project_description_nametxt invisible" placeholder="Nombre del proyecto">
@@ -38,7 +39,8 @@
 					<button class="btn_form" onclick="show_delete_alert();">Eliminar</button>
 				</div>
 				<div class="Translations_project_download">
-					<button class="btn_form Translations_project_download_btn">
+					{% csrf_token %}
+					<button class="btn_form Translations_project_download_btn" onclick="download_project();">
 						Descargar proyecto
 					</button>
 				</div>

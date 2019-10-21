@@ -4,8 +4,11 @@
 	<section class="Login">
 		<div class="Login_container Recuperacion_container">
 			<h1 class="Login_container_p Recuperacion_container_p">Recuperar Contraseña</h1>
-			<form class="Recuperacion_container_form">
-				<input type="email" placeholder="Correo de recuperación" class="text_form Recuperacion_container_form_text">
+			<form class="Recuperacion_container_form" method="post" action="/usuarios/enviarEmailRecuparacion">
+				{% csrf_token %}
+				<p class="Recuperacion_container_form_p">Introduzca el correo con el que se registro.</p>
+				<p id="msg_correo" class="msg_validation_error invisible"></p>
+				<input type="email" placeholder="Correo de recuperación" class="text_form Recuperacion_container_form_text" name="correo">
 				<button class="btn_form Recuperacion_container_form_text">
 					Enviar enlace de Recuperación
 				</button>

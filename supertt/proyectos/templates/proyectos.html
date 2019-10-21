@@ -5,12 +5,12 @@
 		<div class="NewProjects_message">
 			<div class="NewProjects_header NewProjects_header_fixed">
 				<p>Nuevo proyecto</p>
-				<span id="NewProjects_cancel_btn" class="icon-cross NewProjects_cancel"></span>
+				<span id="NewProjects_cancel_btn" class="icon-cross NewProjects_cancel" onclick="hidde_new_projects();"></span>
 			</div>
 			<div class="NewProjects_newtext">
 				<p id="msg_badprojectname" class="msg_validation_error msg_validation_error_projects invisible"></p>
 				<input type="text" id="nuevo_proyecto_nombre" name="nuevo_proyecto" placeholder="Nombre del proyecto" class="NewProjects_newnombre text_form">
-				<button id="NewProjects_btn_create" class="NewProjects_newbtn btn_form">Crear</button>
+				<button id="NewProjects_btn_create" class="NewProjects_newbtn btn_form" onclick="create_new_project();">Crear</button>
 			</div>
 		</div>
 	</div>
@@ -19,7 +19,7 @@
 
 		<div class="Projects_c">
 			<div class="Projects_options">
-				<button id="Projects_btn" class="btn_form Projects_options_btn">Crear Proyecto</button>
+				<button id="Projects_btn" class="btn_form Projects_options_btn" onclick="show_new_projects_dialog();">Crear Proyecto</button>
 			</div>
 
 			<div class="Projects_container">

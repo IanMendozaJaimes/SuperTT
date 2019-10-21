@@ -105,6 +105,36 @@ header {
   flex-basis: 50%;
   max-width: 150px;
 }
+.AMessage {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  width: 250px;
+  padding: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  height: 60px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px #808080;
+  margin-bottom: 10vh;
+  margin-right: -300px;
+  transition: all 0.4s ease-out;
+}
+.AMessage_icon_container {
+  flex-basis: 30%;
+  text-align: center;
+  font-size: 2em;
+  color: #008000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.AMessage_text {
+  flex-basis: 70%;
+  font-size: 1.1em;
+}
 li {
   list-style: none;
   margin: 0;
@@ -172,6 +202,11 @@ a:hover {
 .visible {
   opacity: 1;
 }
+.hide {
+  width: 0;
+  opacity: 0;
+  position: absolute;
+}
 .invalid_field {
   border-color: #d12b2b;
 }
@@ -190,6 +225,12 @@ a:hover {
 }
 .msg_margin {
   margin-top: 1em;
+}
+.Recuperacion_container_form_p {
+  margin: 1em;
+}
+.aside_message_show {
+  margin-right: 15px;
 }
 .Login {
   display: flex;
@@ -331,7 +372,6 @@ a:hover {
   width: 200px;
   height: 200px;
   border-radius: 50%;
-  background-image: url("/static/images/avatarDefault.png");
   background-color: #fff;
   background-size: cover;
   background-position: center;

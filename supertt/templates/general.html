@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/normalize.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
-	<title>{% block appname %}Nombre de la App{% endblock %}</title>
+	<title>{% block appname %}TT App{% endblock %}</title>
 </head>
 <body>
 	<div id="Messages">
@@ -35,11 +35,19 @@
 				{% endif %}
 			{% endfor %}
 		{% endif %}
+		<div id="aside_message" class="AMessage">
+			<div class="AMessage_icon_container">
+				<span class="icon-checkmark"></span>
+			</div>
+			<div class="AMessage_text">
+				<p id="aside_message_p"></p>
+			</div>
+		</div>
 	</div>
 	<header>
 		<nav class="NavigationBar">
 			<div class="NavigationBar_appname">
-				<p class="NavigationBar_appname_p">Nombre de la App</p>
+				<p class="NavigationBar_appname_p">TT App</p>
 			</div>
 			{% if nombre != None %}
 			<div class="NavigationBar_options">
@@ -48,8 +56,8 @@
 						<p><a class="NavigationBar_options_ul_link" href="/proyectos/todos">Mis proyectos</a></p>
 					</li>
 					<li>
-						<p><a class="NavigationBar_options_ul_link" href="/usuarios/perfil">{{ nombre }}</a></p>
-						<div class="NavigationBar_options_avatar"></div>
+						<p><a id="a_user_name" class="NavigationBar_options_ul_link" href="/usuarios/perfil">{{ nombre }}</a></p>
+						<div class="NavigationBar_options_avatar" style="background-image:url('{{MEDIA_URL}}{{avatar}}');"></div>
 					</li>
 				</ul>
 			</div>
@@ -71,6 +79,7 @@
 				txt.select();
 				document.execCommand("copy");
 				txt.remove();
+				show_aside_message('Texto copiado al portapapeles.');
 			}
 
 			{% for traduccion in traducciones %}

@@ -129,6 +129,35 @@ header
 		max-width 150px
 
 
+.AMessage
+	position fixed
+	bottom 0
+	right 0
+	width 250px
+	padding 1em
+	make_flex()
+	align-items center
+	background-color white
+	height 60px
+	border-radius 5px
+	box-shadow 0 0 10px gray
+	margin-bottom 10vh
+	margin-right -300px
+	transition all 0.4s ease-out
+	
+	&_icon_container
+		flex-basis 30%
+		text-align center
+		font-size 2em
+		color green
+		display flex
+		justify-content center
+		align-items center
+	
+	&_text
+		flex-basis 70%
+		font-size 1.1em
+
 
 li
 	list-style none
@@ -197,6 +226,11 @@ a
 .visible
 	opacity 1
 
+.hide
+	width 0
+	opacity 0
+	position absolute
+
 
 .invalid_field
 	border-color #d12b2b
@@ -216,6 +250,14 @@ a
 
 .msg_margin
 	margin-top 1em
+	
+
+.Recuperacion_container_form_p
+	margin 1em
+
+
+.aside_message_show
+	margin-right 15px
 	
 
 // otros archivos que seran agregados al principal

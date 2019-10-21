@@ -4,23 +4,28 @@
 	<section class="Profile">
 		<div class="Profile_container">
 			<form enctype="multipart/form-data">
-				<input type="file" name="archivo">
+				{% csrf_token %}
+				<input type="file" name="archivo" id="Profile_input_file" class="invisible" onchange="upload_photo();">
 			</form>
 			<div class="Profile_container_avatar">
-				<div id="avatarLight" class="Profile_container_avatar_light"></div>
+				<div id="avatarLight" class="Profile_container_avatar_light" onclick="choose_file();"></div>
 				<div id="avatarDark" class="Profile_container_avatar_dark">
 					<p>Cambiar</p>
 				</div>
-				<div class="Profile_container_avatar_photo"></div>
+				<div class="Profile_container_avatar_photo" style="background-image:url('{{MEDIA_URL}}{{avatar}}');"></div>
 			</div>
 			<p class="Profile_container_email">{{ correo }}</p>
 			<form>
 				<p id="msg_nombre" class="msg_validation_error invisible"></p>
-				<input type="text" placeholder="Nombre" class="text_form Profile_container_text" value="{{ nombre }}">
+				<input type="text" placeholder="Nombre" class="text_form Profile_container_text" value="{{nombre}}">
 				<div class="Profile_container_select">
 					<select class="Profile_container_studies">
 						{% for opcion in opciones %}
-							<option value="{{ opcion.id }}">{{ opcion.grado }}</option>
+							{% if op_selected == opcion.id %}
+								<option selected="selected" value="{{ opcion.id }}">{{ opcion.grado }}</option>
+							{% else %}
+								<option value="{{ opcion.id }}">{{ opcion.grado }}</option>
+							{% endif %}
 						{% endfor %}
 					</select>
 				</div>
