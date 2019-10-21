@@ -1,4 +1,4 @@
-package com.equipo.superttapp.projects.presenter;
+package com.equipo.superttapp.projects.viewmodel;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

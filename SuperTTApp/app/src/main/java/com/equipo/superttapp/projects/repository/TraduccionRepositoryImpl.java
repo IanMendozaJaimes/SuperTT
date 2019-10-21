@@ -86,9 +86,4 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
         }
         return resultado;
     }
-
-    @Override
-    public Integer updateTraduccion(TraduccionData data) {
-        return null;
-    }
 }

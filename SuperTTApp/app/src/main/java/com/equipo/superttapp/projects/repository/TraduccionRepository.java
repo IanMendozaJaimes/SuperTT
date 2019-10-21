@@ -11,5 +11,4 @@ import java.util.List;
 public interface TraduccionRepository {
     MutableLiveData<BusinessResult<TraduccionModel>> findAllTraduccionesByProyecto(Integer idProyecto, String key);
     MutableLiveData<BusinessResult<TraduccionModel>> deleteTraduccion(Integer idTraduccion, String token);
-    Integer updateTraduccion(TraduccionData data);
 }

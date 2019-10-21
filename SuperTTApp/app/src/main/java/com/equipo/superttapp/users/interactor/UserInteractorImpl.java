@@ -2,6 +2,8 @@ package com.equipo.superttapp.users.interactor;
 
 import android.util.Log;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.equipo.superttapp.users.data.UsuarioData;
 import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.repository.UserRepository;
@@ -81,18 +83,17 @@ public class UserInteractorImpl implements UserInteractor {
     }
 
     @Override
-    public  BusinessResult<UsuarioModel>  updateAccount(UsuarioModel model) {
+    public MutableLiveData<BusinessResult<UsuarioModel>> updateAccount(UsuarioModel model, String token) {
         BusinessResult<UsuarioModel> result = new BusinessResult<>();
+        MutableLiveData<BusinessResult<UsuarioModel>> mutableLiveData = new MutableLiveData<>();
         if (model.getCurrentPassword() != null && model.getCurrentPassword().length() > 0) {
             model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
             model.setValidSecondPassword(RN002.isSecondPasswordValid(model.getPassword(),
                     model.getSecondPassword()));
             model.setValidCurrentPassword(RN002.isPasswordValid(model.getCurrentPassword()));
-            Log.i(TAG, "PRIMER IF");
         } else  {
             if ((model.getPassword() != null && model.getPassword().length() > 0)
                     || (model.getSecondPassword() != null && model.getSecondPassword().length() > 0)) {
-                Log.i(TAG, "SEGUNDO IF");
                 model.setValidCurrentPassword(RN002.isPasswordValid(model.getCurrentPassword()));
                 model.setValidPassword(RN002.isPasswordValid(model.getPassword()));
                 model.setValidSecondPassword(RN002.isSecondPasswordValid(model.getPassword(),
@@ -116,14 +117,16 @@ public class UserInteractorImpl implements UserInteractor {
             data.setApellidos(model.getLastname());
             data.setPassword(model.getPassword());
             data.setCurrentPassword(model.getCurrentPassword());
-            result.setCode(repository.updateAccount(data));
-            if (result.getCode().equals(ResultCodes.RN002)) {
-                model.setValidCurrentPassword(false);
+            mutableLiveData = repository.updateAccount(data, token);
+            if (mutableLiveData.getValue().getCode().equals(ResultCodes.RN002)) {
+                mutableLiveData.getValue().getResult().setValidCurrentPassword(false);
             }
         } else {
             result.setCode(ResultCodes.RN002);
+            result.setResult(model);
+            mutableLiveData.setValue(result);
         }
-        result.setResult(model);
-        return result;
+
+        return mutableLiveData;
     }
 }

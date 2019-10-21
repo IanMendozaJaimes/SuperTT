@@ -24,7 +24,7 @@ import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.model.TraduccionModel;
-import com.equipo.superttapp.projects.presenter.TraducccionListViewModel;
+import com.equipo.superttapp.projects.viewmodel.TraducccionListViewModel;
 import com.equipo.superttapp.util.BundleConstants;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;

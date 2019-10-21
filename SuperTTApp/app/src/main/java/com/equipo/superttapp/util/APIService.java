@@ -41,14 +41,14 @@ public interface APIService {
     @POST("/usuarios")
     Call<UsuarioData> createUsuario(@Body UsuarioData usuarioData);
     // Para hacer login
-    @POST("/usuarios/login")
+    @POST("/users/login")
     Call<UsuarioData> loginUsuario(@Body UsuarioData usuarioData);
     // Para hacer la recuperacion de contra
     @POST("/usuarios/recuperar")
     Call<UsuarioData> recuperarUsuario(@Body UsuarioData usuarioData);
     // Para editar usuarioData
     @PUT("/usuarios/{idUsuario}")
-    Call<UsuarioData> editUsuario(@Path("idUsuario") Integer id, @Body UsuarioData usuarioData);
+    Call<UsuarioData> editUsuario(@Path("idUsuario") Integer id, @Body UsuarioData usuarioData, @Header("Authorization") String key);
     // Obtiene los proyectos asociados a un usuario
     @GET("/usuarios/{idUsuario}/proyectos")
     Call<List<ProyectoData>> getProyectosByUsuario(@Path("idUsuario") Integer idUsuario, @Header("Authorization") String key);

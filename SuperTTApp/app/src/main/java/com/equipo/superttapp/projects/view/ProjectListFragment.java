@@ -16,7 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.ProjectRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
-import com.equipo.superttapp.projects.presenter.ProyectsListViewModel;
+import com.equipo.superttapp.projects.viewmodel.ProyectsListViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
