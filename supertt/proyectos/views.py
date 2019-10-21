@@ -263,7 +263,7 @@ def create_translation_view(request): #request must include idproyecto in body
     #validate user
     if usr != pro.usuario:
         return Response("Project with id {} does not belong to user with id {}".format(pro.id, usr.id), status=status.HTTP_403_FORBIDDEN)
-    trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr, nombre=request.data.get('nombre') , calificacion = 0.0, archivo = "", traduccion="")
+    trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
 
     if request.method == "POST":
         serializer = SerializadorTraduccion(trans, data = request.data)
@@ -302,10 +302,10 @@ def methods_translation_view(request, idtraduccion):
         operation = trans.delete()
         data = {}
         if operation:
-            data["sucess"] = "delete successful"
+            data["resultCode"] = "1"
         else:
-            data["failure"] = "delete failed"
-        return Response(serializer.errors, status = status.HTTP_404_NOT_FOUND)
+            data["resultCode"] = "-1"
+        return Response(data = data)
 
 # @api_view(['DELETE', ])
 # @permission_classes((permissions.AllowAny,))
