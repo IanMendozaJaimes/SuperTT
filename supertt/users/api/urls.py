@@ -1,5 +1,5 @@
 from django.urls import path
-from users.api.views import registration_view, edit_user_view
+from users.api.views import registration_view, edit_user_view, login_view
 from rest_framework.authtoken.views import obtain_auth_token
 
 app_name = 'users'
@@ -12,6 +12,7 @@ url_patterns = [
 def get_user_urls():
 	return [
 		path('users', registration_view),
-		path('users/login', obtain_auth_token),
+		path('users/login', login_view),
 		path('users/<idUsuario>', edit_user_view)
+		#recover password
 	]
