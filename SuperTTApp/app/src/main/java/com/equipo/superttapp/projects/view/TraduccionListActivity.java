@@ -1,6 +1,6 @@
 package com.equipo.superttapp.projects.view;
 
-import android.content.DialogInterface;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,6 +16,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,28 +24,29 @@ import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.model.TraduccionModel;
-import com.equipo.superttapp.projects.presenter.TraduccionListPresenter;
-import com.equipo.superttapp.projects.presenter.TraduccionListPresenterImpl;
+import com.equipo.superttapp.projects.viewmodel.TraducccionListViewModel;
 import com.equipo.superttapp.util.BundleConstants;
 import com.equipo.superttapp.util.BusinessResult;
+import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-public class TraduccionListActivity extends AppCompatActivity implements TraduccionListView{
+public class TraduccionListActivity extends AppCompatActivity implements TraduccionListView {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;
     private FloatingActionButton fabTradducion;
     private Button btnBorrar;
-    private TraduccionListPresenter presenter;
     private String nombreProyecto;
     private Integer idProyecto;
+    private Double calificacionProyecto;
     private List<TraduccionModel> traduccionModels;
+    private static final String TAG = TraduccionListActivity.class.getCanonicalName();
+    TraducccionListViewModel traducionListViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,17 +57,6 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         btnBorrar = findViewById(R.id.btn_borrar_traduccion);
         layoutManager = new LinearLayoutManager(this);
         traduccionModels = new ArrayList<>();
-        presenter = new TraduccionListPresenterImpl(this);
-        TraduccionModel traduccionModel = new TraduccionModel();
-        traduccionModel.setCalificacion(5);
-        traduccionModel.setId(-1);
-        traduccionModel.setEcuacion("Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod\n" +
-                "tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,\n" +
-                "quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo\n" +
-                "consequat.");
-        traduccionModel.setUrl("http://");
-        traduccionModel.setFecha(new Date());
-        traduccionModels.add(traduccionModel);
         traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion,
                 traduccionModels, this);
 
@@ -73,12 +64,15 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         Bundle bundle = getIntent().getExtras();
-        nombreProyecto = bundle.getString(BundleConstants.TITULO_KEY);
-        idProyecto = bundle.getInt(BundleConstants.PROYECTO_ID);
+        if (bundle != null) {
+            nombreProyecto = bundle.getString(BundleConstants.PROYECTO_NOMBRE);
+            idProyecto = bundle.getInt(BundleConstants.PROYECTO_ID);
+            calificacionProyecto = bundle.getDouble(BundleConstants.PROYECTO_CALIFICACION);
+        }
         setTitle(nombreProyecto);
-        fabTradducion.setOnClickListener(v -> {
-            Toast.makeText(this, "Agregar traduccion", Toast.LENGTH_SHORT).show();
-        });
+        fabTradducion.setOnClickListener(v -> Toast.makeText(this,
+                "Agregar traduccion", Toast.LENGTH_SHORT).show());
+        traducionListViewModel = ViewModelProviders.of(this).get(TraducccionListViewModel.class);
     }
 
     @Override
@@ -88,13 +82,22 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     }
 
     public void recuperarTraducciones() {
-        BusinessResult<TraduccionModel> result = presenter.findAllTraduccionesByProyecto(idProyecto);
-        if (result.getCode().equals(ResultCodes.SUCCESS)) {
-            traduccionModels.clear();
-            traduccionModels.addAll(result.getResults());
-            traduccionAdapter.notifyDataSetChanged();
-        } else {
-            showMessage(result);
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+            String keyUser = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
+            String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+            traducionListViewModel.findTraducciones(idProyecto, key).observe(this, traducciones -> {
+                Log.i(TAG, "recuperarTraducciones() " + traducciones.getCode());
+                if (traducciones.getCode().equals(ResultCodes.SUCCESS)) {
+                    traduccionModels.clear();
+                    traduccionModels.addAll(traducciones.getResults());
+                    traduccionAdapter.notifyDataSetChanged();
+                } else {
+                    showMessage(traducciones);
+                }
+            });
         }
     }
 
@@ -107,17 +110,28 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         } else if (result.getCode().equals(ResultCodes.RN001)
                 || result.getCode().equals(ResultCodes.RN002)) {
             snackbar.setText(R.string.msg1_datos_no_validos);
+        } else if (result.getCode().equals(ResultCodes.SUCCESS)) {
+            snackbar.setText(R.string.msg9_operacion_exitosa);
         }
         snackbar.show();
     }
 
     @Override
     public void showDeleteDialog() {
+        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                    presenter.deleteProyecto(idProyecto);
+                    traducionListViewModel.deleteProyecto(idProyecto, key).observe(this,
+                            proyectoResult -> {
+                                Log.i(TAG, "deleteProyecto() "
+                                        + proyectoResult.getCode());
+                                if (proyectoResult.getCode().equals(ResultCodes.SUCCESS))
+                                    deleteProyectoSuccess();
+                                else
+                                    operationError();
+                            });
                     dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_no, (dialog, which) -> dialog.cancel());
@@ -134,20 +148,10 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     }
 
     @Override
-    public void deleteProyectoError() {
+    public void operationError() {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_traduccion_list),
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         snackbar.show();
-    }
-
-    @Override
-    public void calfificarTraduccionSucess() {
-
-    }
-
-    @Override
-    public void deleteTraduccionSuccess() {
-
     }
 
     @Override
@@ -171,7 +175,16 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     ProyectoModel model = new ProyectoModel();
                     model.setId(idProyecto);
                     model.setName(etNombre.getText().toString());
-                    presenter.changeProyectoNombre(model);
+                    model.setRate(calificacionProyecto);
+                    model.setIdUsuario(1);
+                    String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+                    traducionListViewModel.updateProyecto(model, key).observe(this,
+                            proyectoModelBusinessResult -> {
+                        if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
+                            changeProyectoSuccess(proyectoModelBusinessResult);
+                        } else
+                            operationError();
+                    });
                     dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_cancelar, (dialog, which) -> dialog.cancel());
@@ -181,14 +194,23 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void borrarTraduccion(Integer idTraduccion) {
-        presenter.deleteTraduccion(idTraduccion);
-    }
-
-    @Override
-    public void calificarTraduccion(Integer idTraduccion) {
-        TraduccionModel model = new TraduccionModel();
-        // Dialogo para capturar la traduccion
-        presenter.calificarTraduccion(model);
+        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.label_confirmar_operacion)
+                .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
+                .setPositiveButton(R.string.label_si, (dialog, which) -> {
+                    traducionListViewModel.deleteTraduccion(idTraduccion, key).observe(this,
+                            traduccionModelBusinessResult -> {
+                                Log.i(TAG, "borrarTraduccion() "
+                                        + traduccionModelBusinessResult.getCode());
+                                showMessage(traduccionModelBusinessResult);
+                                recuperarTraducciones();
+                            });
+                    dialog.cancel();
+                })
+                .setNegativeButton(R.string.label_no, (dialog, which) -> dialog.cancel());
+        AlertDialog alerta = builder.create();
+        alerta.show();
     }
 
     @Override

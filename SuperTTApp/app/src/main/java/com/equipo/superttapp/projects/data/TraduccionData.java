@@ -7,13 +7,13 @@ public class TraduccionData {
     private Integer id;
     @SerializedName("idProyecto")
     private Integer idProyecto;
-    @SerializedName("fecha")
+    @SerializedName("nombre")
     private String fecha;
-    @SerializedName("ecuacion")
+    @SerializedName("traduccion")
     private String ecuacion;
     @SerializedName("calificacion")
     private Integer calificacion;
-    @SerializedName("url")
+    @SerializedName("archivo")
     private String url;
 
     public Integer getId() {

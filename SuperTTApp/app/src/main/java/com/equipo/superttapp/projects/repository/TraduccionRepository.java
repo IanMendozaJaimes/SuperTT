@@ -1,12 +1,11 @@
 package com.equipo.superttapp.projects.repository;
 
-import com.equipo.superttapp.projects.data.TraduccionData;
-import com.equipo.superttapp.projects.model.TraduccionModel;
+import androidx.lifecycle.MutableLiveData;
 
-import java.util.List;
+import com.equipo.superttapp.projects.model.TraduccionModel;
+import com.equipo.superttapp.util.BusinessResult;
 
 public interface TraduccionRepository {
-    List<TraduccionData> findAllTraduccionesByProyecto(Integer idProyecto);
-    Integer deleteTraduccion(Integer idTraduccion);
-    Integer updateTraduccion(TraduccionData data);
+    MutableLiveData<BusinessResult<TraduccionModel>> findAllTraduccionesByProyecto(Integer idProyecto, String key);
+    MutableLiveData<BusinessResult<TraduccionModel>> deleteTraduccion(Integer idTraduccion, String token);
 }

@@ -8,11 +8,11 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.users.model.UsuarioModel;
-import com.equipo.superttapp.users.presenter.ForgotPasswordPresenter;
-import com.equipo.superttapp.users.presenter.ForgotPasswordPresenterImpl;
+import com.equipo.superttapp.users.viewmodel.ForgotPasswordViewModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
@@ -28,7 +28,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
     EditText etEmail;
     @BindView(R.id.pb_forgot_password)
     ProgressBar progressBar;
-    ForgotPasswordPresenter presenter;
+    ForgotPasswordViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,13 +36,16 @@ public class ForgotPasswordActivity extends AppCompatActivity implements ForgotP
         setContentView(R.layout.activity_forgot_password);
         ButterKnife.bind(this);
         hideProgressBar();
-
-        presenter = new ForgotPasswordPresenterImpl(this);
+        viewModel = ViewModelProviders.of(this).get(ForgotPasswordViewModel.class);
         btnEnviarCorreoRecuperacion.setOnClickListener(v -> {
             etEmail.onEditorAction(EditorInfo.IME_ACTION_DONE);
             UsuarioModel model = new UsuarioModel();
             model.setEmail(etEmail.getText().toString());
-            presenter.sendEmail(model);
+            showProgressBar();
+            viewModel.sendEmail(model).observe(this, usuarioModelBusinessResult -> {
+                showMessage(usuarioModelBusinessResult);
+                hideProgressBar();
+            });
         });
         setTitle(R.string.title_activity_recuperar);
     }
