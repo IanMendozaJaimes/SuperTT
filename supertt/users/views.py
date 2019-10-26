@@ -124,6 +124,8 @@ class SignUpView(TemplateView):
 			m.add_alert(SEND_EMAIL, 'Tu cuenta se registro exitosamente!')
 			request.session['resp'] = m.get_messages()
 
+			token = Token.objects.get(user=new_user.id).key
+
 			h = hashlib.sha1(request.POST['correo'].encode('utf-8')).hexdigest()
 			uh = UserHashes(user=new_user, hash=h, proposito=VALIDATE)
 			uh.save()
