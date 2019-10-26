@@ -18,7 +18,7 @@ class SerializadorRegistro(serializers.ModelSerializer):
         password2 = self.validated_data['password2']
 
         if password != password2:
-            raise serializers.ValidationError({'password': 'Contraseñas deben coincidir'})
+            raise serializers.ValidationError({'resultCode': 'match_password'})
         account.set_password(password)
         account.save()
         return account

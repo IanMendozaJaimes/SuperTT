@@ -204,15 +204,20 @@ def eliminarProyectoView(request):
 def create_project_view(request):
 
     usr = request.user#Account.objects.get(pk=1) ##later request.user
-    proj = Proyecto(usuario = User(id=usr), nombre=request.data.get('nombre') , calificacion = 0.0)
 
+    ### Verify this validation
+    try:
+        proj = Proyecto(usuario = User(id=usr), nombre=request.data.get('nombre') , calificacion = 0.0)
+    except not Proyecto.DoesNotExist: 
+        return Response({"resultCode": "-1"})
+    
     if request.method == "POST":
         serializer = SerializadorProyecto(proj, data = request.data)
 
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        return Response({"resultCode": "-1001"}, status = status.HTTP_400_BAD_REQUEST)
     
 
 @api_view(['PUT', 'DELETE'])
@@ -221,7 +226,7 @@ def methods_project_view(request, idpro):
     try:
         proj = Proyecto.objects.get(id= idpro)
     except Proyecto.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+        return Response({"resultCode": -1}, status=status.HTTP_404_NOT_FOUND)
     usr = request.user
     if usr != proj.usuario:
         return Response("Project with id {} does not belong to user with id {}".format(proj.usuario, usr), status=status.HTTP_403_FORBIDDEN)
@@ -238,9 +243,9 @@ def methods_project_view(request, idpro):
         operation = proj.delete()
         data = {}
         if operation:
-            data["sucess"] = "delete successful"
+            data["resultCode"] = "1"
         else:
-            data["failure"] = "delete failed"
+            data["resultCode"] = "-1"
         return Response(data = data)
 
 # @api_view(['DELETE', ])
@@ -310,7 +315,7 @@ def methods_translation_view(request, idtraduccion):
         trans = Traduccion.objects.get(id= idtraduccion)
     except Traduccion.DoesNotExist:
         data = {}
-        data['codeStatus'] = "-1"
+        data['resultCode'] = "-1"
         return Response(data, status=status.HTTP_404_NOT_FOUND)
     user = request.user
 
