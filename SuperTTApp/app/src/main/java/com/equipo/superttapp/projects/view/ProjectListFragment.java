@@ -54,6 +54,10 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         fabCreate = view.findViewById(R.id.fab_create_proyecto);
         layoutManager = new LinearLayoutManager(getContext());
         proyectoModelList = new ArrayList<>();
+        ProyectoModel modelo= new ProyectoModel();
+        modelo.setName("HOLA");
+        modelo.setRate(5d);
+        proyectoModelList.add(modelo);
         projectAdapter = new ProjectRecyclerViewAdapter(proyectoModelList, getActivity(),
                 R.layout.item_project);
 
@@ -76,8 +80,8 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
                     EditText etNombre = view.findViewById(R.id.et_nombre_proyecto);
                     ProyectoModel model = new ProyectoModel();
                     model.setName(etNombre.getText().toString());
-                    model.setIdUsuario(1);
-                    String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+                    model.setIdUsuario(14);
+                    String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
                     proyectsListViewModel.createProyecto(model, key).observe(this,
                             proyectoModelBusinessResult -> {
                                 if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS))
@@ -106,8 +110,8 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         if (true) {
             int idUsuario = preferencesManager.getIntegerValue(PreferencesManager.KEY_USER_ID);
             String keyUser = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
-            Integer id = 1;
-            String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+            Integer id = 14;
+            String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
             Log.i(TAG, "recuperarTodosProyectos() " + key);
             proyectsListViewModel.findUserProyects(id, key).observe(this, proyectodata -> {
                 Log.i(TAG, "recuperarTodosProyectos() " + proyectodata.getCode());

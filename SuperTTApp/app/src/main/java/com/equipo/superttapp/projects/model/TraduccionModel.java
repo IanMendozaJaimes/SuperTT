@@ -5,7 +5,7 @@ public class TraduccionModel {
     private Integer idProyecto;
     private String fecha;
     private String ecuacion;
-    private Integer calificacion;
+    private Double calificacion;
     private String url = "http://";
 
     public Integer getId() {
@@ -40,11 +40,11 @@ public class TraduccionModel {
         this.ecuacion = ecuacion;
     }
 
-    public Integer getCalificacion() {
+    public Double getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(Integer calificacion) {
+    public void setCalificacion(Double calificacion) {
         this.calificacion = calificacion;
     }
 
