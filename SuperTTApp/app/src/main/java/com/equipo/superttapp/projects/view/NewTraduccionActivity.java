@@ -62,7 +62,7 @@ public class NewTraduccionActivity extends AppCompatActivity {
             photoPath = bundle.getString(PHOTO_KEY);
             Picasso.get().load("file:"+photoPath).into(imvPreview);
         }
-
+        setTitle(R.string.title_activity_new_traduccion);
         askPermissions();
     }
 
