@@ -307,7 +307,7 @@ def create_translation_view(request): #request must include idproyecto in body
         file = request.FILES['file']
     except:
         return Response('Request has no resource file attached') #return resultCode: -1
-    folderName = str(pro.id) + str(pro.nombre)
+    folderName = str(pro.id)
 
     parentFolderName = str(pro.usuario.id)
     mediatype = request.data.get('mediatype')
@@ -322,13 +322,6 @@ def create_translation_view(request): #request must include idproyecto in body
     path_file = path_file + "/" + folderName 
     if not os.path.exists(path_file):
         os.mkdir(path_file)
-    
-    image_file = open(path_file +"/"+"traduccion" + "." + mediatype, "wb")
-    
-    for chunk in file.chunks():
-        image_file.write(chunk)
-        image_file.close()
-
 
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
     trans.nombre = str(trans.fechaCreacion)
@@ -337,8 +330,17 @@ def create_translation_view(request): #request must include idproyecto in body
 
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST) 
+
+            idTraduccion = str(trans.id)
+            image_file = open(path_file +"/"+ idTraduccion+ "." + mediatype, "wb")
+            
+            for chunk in file.chunks():
+                image_file.write(chunk)
+                image_file.close()
+            return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
+        return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
+  
+ 
 
 @api_view(['PUT', 'DELETE'])
 @permission_classes((permissions.IsAuthenticated,))
