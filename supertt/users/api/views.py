@@ -25,9 +25,12 @@ from general.util import *
 @permission_classes([permissions.AllowAny])
 def registration_view(request):#correo usado 10003, error -1, suyccess 1
     if request.method == 'POST':
+        print(request.data)
         serializer = SerializadorRegistro(data = request.data)
+        print(request.data.get('nombre'))
         data = {}
         if serializer.is_valid():
+            print(request.data['nombre'])
             account = serializer.save()
             data['resultCode'] = 1
             data['email'] = account.email
@@ -40,6 +43,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
             uh.save()
 
             url = settings.SITE_URL + 'usuarios/validar?token=' + h
+            print(url)
 
             e = Email()
             e.send_validation_email(request.POST['email'],request.POST['nombre'],url)
@@ -85,8 +89,14 @@ def login_view(request, *args, **kwargs):
             data = {}
         if serializer.is_valid():
             token, created = Token.objects.get_or_create(user=usr)
-            data.update({'user': usr.email})
+            data.update({'email': usr.email})
             data.update({'token': token.key})
+
+            data.update({'idUsuario': usr.id})
+            data.update({'apellido': usr.last_name})
+            data.update({'nombre': usr.first_name})
+            data.update({'urlImg': usr.imagen_perfil})
+            #email, token, idusuario, apellido, nombre, urlImg
             data['codeStatus'] = '1'
             return Response(data =data)
         else:
