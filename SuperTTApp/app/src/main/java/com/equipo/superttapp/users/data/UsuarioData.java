@@ -13,11 +13,11 @@ public class UsuarioData {
     private String email;
     @SerializedName("password")
     private String password;
-    @SerializedName("codeStatus")
-    private String responseCode;
+    @SerializedName("resultCode")
+    private Integer responseCode;
     @SerializedName("token")
     private String keyAuth;
-    @SerializedName("currentPassword")
+    @SerializedName("password2")
     private String currentPassword;
     @SerializedName("urlImg")
     private String image;
@@ -62,11 +62,11 @@ public class UsuarioData {
         this.apellidos = apellidos;
     }
 
-    public String getResponseCode() {
+    public Integer getResponseCode() {
         return responseCode;
     }
 
-    public void setResponseCode(String responseCode) {
+    public void setResponseCode(Integer responseCode) {
         this.responseCode = responseCode;
     }
 

@@ -69,7 +69,6 @@ public class UserInteractorImpl implements UserInteractor {
                 model.getPassword(), model.getSecondPassword()));
         model.setValidName(RN002.isNameValid(model.getName()));
         model.setValidLastName(RN002.isLastnameValid(model.getLastname()));
-        Log.d(TAG, model.getSecondPassword() + " " + model.getPassword());
         if (model.getValidPassword() && model.getValidEmail() && model.getValidName()
                 && model.getValidSecondPassword() && model.getValidLastName()) {
             UsuarioData data = new UsuarioData();
@@ -77,6 +76,7 @@ public class UserInteractorImpl implements UserInteractor {
             data.setNombre(model.getName());
             data.setApellidos(model.getLastname());
             data.setPassword(model.getPassword());
+            data.setCurrentPassword(model.getPassword());
             mutableLiveData = repository.createAccount(data);
         } else {
             result.setCode(ResultCodes.RN002);

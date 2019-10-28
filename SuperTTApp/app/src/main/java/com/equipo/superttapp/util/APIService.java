@@ -46,18 +46,18 @@ public interface APIService {
     @DELETE("/traducciones/{idTraducion}")
     Call<TraduccionData> deleteTraduccion(@Path("idTraducion") Integer idTraducion, @Header("Authorization") String token);
     // Manda a crear un usuarioData
-    @POST("/usuarios")
+    @POST("/users")
     Call<UsuarioData> createUsuario(@Body UsuarioData usuarioData);
     // Para hacer login
     @POST("/users/login")
     Call<UsuarioData> loginUsuario(@Body UsuarioData usuarioData);
     // Para hacer la recuperacion de contra
-    @POST("/usuarios/recuperar")
+    @POST("/users/recuperar")
     Call<UsuarioData> recuperarUsuario(@Body UsuarioData usuarioData);
     // Para editar usuarioData
     @PUT("/users/{idUsuario}")
     Call<UsuarioData> editUsuario(@Path("idUsuario") Integer id, @Body UsuarioData usuarioData, @Header("Authorization") String key);
     // Obtiene los proyectos asociados a un usuario
-    @GET("/usuarios/{idUsuario}/proyectos")
+    @GET("/users/{idUsuario}/proyectos")
     Call<List<ProyectoData>> getProyectosByUsuario(@Path("idUsuario") Integer idUsuario, @Header("Authorization") String key);
 }

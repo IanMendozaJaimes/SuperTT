@@ -2,6 +2,7 @@ package com.equipo.superttapp.projects.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +13,7 @@ import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.repository.TraduccionRepository;
 import com.equipo.superttapp.projects.repository.TraduccionRepositoryImpl;
 import com.equipo.superttapp.util.Constants;
+import com.equipo.superttapp.util.PreferencesManager;
 import com.squareup.picasso.Picasso;
 
 import java.io.ByteArrayOutputStream;
@@ -36,6 +38,7 @@ public class NewTraduccionActivity extends AppCompatActivity {
     ImageView imvPreview;
     @BindView(R.id.btnUpload)
     Button btnUpload;
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,12 @@ public class NewTraduccionActivity extends AppCompatActivity {
             idProyecto = bundle.getInt(Constants.PROYECTO_ID);
             photoPath = bundle.getString(Constants.TRADUCCION_PATH);
             Picasso.get().load("file:"+photoPath).into(imvPreview);
+        }
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+            token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
         }
         setTitle(R.string.title_activity_new_traduccion);
     }
@@ -79,7 +88,6 @@ public class NewTraduccionActivity extends AppCompatActivity {
 
         RequestBody proyecto = RequestBody.create(String.valueOf(idProyecto),
                 MediaType.parse("text/plain"));
-        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
-        repository.uploadTraduccion(proyecto, image, key);
+        repository.uploadTraduccion(proyecto, image, token);
     }
 }

@@ -32,18 +32,18 @@ public class UserRepositoryImpl implements UserRepository {
                 public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
                     BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
                     UsuarioModel model = new UsuarioModel();
-                    if (response.isSuccessful() && response.body() != null
-                            && response.body().getId() != null) {
-                        businessResult.setCode(ResultCodes.SUCCESS);
-                        model.setName(response.body().getNombre());
-                        model.setEmail(response.body().getEmail());
-                        model.setLastname(response.body().getApellidos());
-                        model.setId(response.body().getId());
-                        model.setKeyAuth(response.body().getKeyAuth());
-                        model.setImage(response.body().getImage());
-                        businessResult.setResult(model);
-                    } else {
-                        businessResult.setCode(ResultCodes.RN001);
+                    if (response.isSuccessful() && response.body() != null) {
+                        businessResult.setCode(response.body().getResponseCode());
+                        if (businessResult.getCode().equals(ResultCodes.SUCCESS)) {
+                            businessResult.setCode(ResultCodes.SUCCESS);
+                            model.setName(response.body().getNombre());
+                            model.setEmail(response.body().getEmail());
+                            model.setLastname(response.body().getApellidos());
+                            model.setId(response.body().getId());
+                            model.setKeyAuth(response.body().getKeyAuth());
+                            model.setImage(response.body().getImage());
+                            businessResult.setResult(model);
+                        }
                     }
                     businessResult.setResult(model);
                     resultado.setValue(businessResult);
@@ -101,8 +101,8 @@ public class UserRepositoryImpl implements UserRepository {
                 public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
                     Log.i(TAG, "createAccount-onResponse " + response);
                     BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
-                    if (response.isSuccessful()) {
-                        businessResult.setCode(ResultCodes.SUCCESS);
+                    if (response.isSuccessful() && response.body() != null) {
+                        businessResult.setCode(response.body().getResponseCode());
                     }
                     resultado.setValue(businessResult);
                 }
