@@ -28,7 +28,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = [
-    '10.100.71.182',
+    '10.100.68.152',
     'localhost',
     '0.0.0.0',
     '192.168.1.82'
@@ -206,7 +206,7 @@ SMTP_HOST = 'smtp.gmail.com'
 SMTP_USER = 'ttapplicacion@gmail.com'
 SMTP_PASSWORD = '#ContraDelTT1'
 SMTP_PORT = 587
-SITE_URL = 'http://10.100.72.207:8000/'
+SITE_URL = 'http://10.100.68.152:8000/'
 
 
 

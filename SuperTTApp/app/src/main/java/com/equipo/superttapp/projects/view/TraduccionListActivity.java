@@ -84,10 +84,9 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     public void recuperarTraducciones() {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+        if (true) {
             String keyUser = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
-            String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+            String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
             traducionListViewModel.findTraducciones(idProyecto, key).observe(this, traducciones -> {
                 Log.i(TAG, "recuperarTraducciones() " + traducciones.getCode());
                 if (traducciones.getCode().equals(ResultCodes.SUCCESS)) {
@@ -118,7 +117,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void showDeleteDialog() {
-        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+        String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
@@ -176,8 +175,8 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     model.setId(idProyecto);
                     model.setName(etNombre.getText().toString());
                     model.setRate(calificacionProyecto);
-                    model.setIdUsuario(1);
-                    String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+                    model.setIdUsuario(14);
+                    String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
                     traducionListViewModel.updateProyecto(model, key).observe(this,
                             proyectoModelBusinessResult -> {
                         if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
@@ -194,7 +193,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void borrarTraduccion(Integer idTraduccion) {
-        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+        String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
