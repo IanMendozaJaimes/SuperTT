@@ -1,21 +1,24 @@
 package com.equipo.superttapp.projects.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.FileProvider;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -32,29 +35,35 @@ import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.io.File;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TraduccionListActivity extends AppCompatActivity implements TraduccionListView {
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;
-    private FloatingActionButton fabTradducion;
-    private Button btnBorrar;
+    private FloatingActionButton fabTraduccion;
     private String nombreProyecto;
     private Integer idProyecto;
     private Double calificacionProyecto;
     private List<TraduccionModel> traduccionModels;
     private static final String TAG = TraduccionListActivity.class.getCanonicalName();
     TraducccionListViewModel traducionListViewModel;
+    private String photoPathTemp;
+    private static final String APP_DOMAIN = "com.equipo.superttapp.fileprovider";
+    private static final int TAKE_PICTURE = 1;
+    private static final String PHOTO_KEY = "IMAGE_PATH_TEMP";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_traduccion_list);
         recyclerView = findViewById(R.id.rv_traduccion_list);
-        fabTradducion = findViewById(R.id.fab_add_traduccion);
-        btnBorrar = findViewById(R.id.btn_borrar_traduccion);
+        fabTraduccion = findViewById(R.id.fab_add_traduccion);
         layoutManager = new LinearLayoutManager(this);
         traduccionModels = new ArrayList<>();
         traduccionAdapter = new TraduccionRecyclerViewAdapter(R.layout.item_traduccion,
@@ -70,8 +79,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
             calificacionProyecto = bundle.getDouble(BundleConstants.PROYECTO_CALIFICACION);
         }
         setTitle(nombreProyecto);
-        fabTradducion.setOnClickListener(v -> Toast.makeText(this,
-                "Agregar traduccion", Toast.LENGTH_SHORT).show());
+        fabTraduccion.setOnClickListener(v -> onFabTraduccionClick());
         traducionListViewModel = ViewModelProviders.of(this).get(TraducccionListViewModel.class);
     }
 
@@ -81,13 +89,52 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         recuperarTraducciones();
     }
 
+    public void onFabTraduccionClick() {
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        if (intent.resolveActivity(this.getPackageManager()) != null) {
+            File photoFile = null;
+            try {
+                photoFile = createImagefile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            if (photoFile != null) {
+                Uri photoUri = FileProvider.getUriForFile(this, APP_DOMAIN, photoFile);
+                intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
+                Log.d(TAG, "photoPathTemp " + photoPathTemp);
+                Log.d(TAG, "photoUri " + photoUri);
+                startActivityForResult(intent, TAKE_PICTURE);
+            }
+        }
+    }
+
+    private File createImagefile() throws IOException {
+        String timeStamp = new SimpleDateFormat("yyyyMMdd_HH-mm-ss").format(new Date());
+        String imageName = "JPG_" + timeStamp + "_";
+        File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File photo = File.createTempFile(imageName, ".jpg", storageDir);
+        photoPathTemp = photo.getAbsolutePath();
+        return photo;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
+            Intent i = new Intent(this, NewTraduccionActivity.class);
+            i.putExtra(PHOTO_KEY, photoPathTemp);
+            startActivity(i);
+        }
+    }
+
     public void recuperarTraducciones() {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+//        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+        if (true) {
             String keyUser = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
-            String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+            String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
             traducionListViewModel.findTraducciones(idProyecto, key).observe(this, traducciones -> {
                 Log.i(TAG, "recuperarTraducciones() " + traducciones.getCode());
                 if (traducciones.getCode().equals(ResultCodes.SUCCESS)) {
@@ -118,7 +165,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void showDeleteDialog() {
-        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+        String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
@@ -176,8 +223,8 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     model.setId(idProyecto);
                     model.setName(etNombre.getText().toString());
                     model.setRate(calificacionProyecto);
-                    model.setIdUsuario(1);
-                    String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+                    model.setIdUsuario(14);
+                    String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
                     traducionListViewModel.updateProyecto(model, key).observe(this,
                             proyectoModelBusinessResult -> {
                         if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
@@ -194,7 +241,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void borrarTraduccion(Integer idTraduccion) {
-        String key = "Token 8a1b6290aa20003bc5730d49e11b244100d69002";
+        String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)

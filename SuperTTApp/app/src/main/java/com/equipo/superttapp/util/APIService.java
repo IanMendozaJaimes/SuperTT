@@ -6,13 +6,17 @@ import com.equipo.superttapp.users.data.UsuarioData;
 
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
+import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface APIService {
@@ -31,6 +35,11 @@ public interface APIService {
     // Creacion de una traduccionModel
     @POST("/traducciones")
     Call<TraduccionData> createTraduccion(@Body TraduccionData traduccionData);
+    // Subir imagen
+    @Multipart
+    @POST("/traducciones/upload")
+    Call<TraduccionData> uploadTraduccion(@Part("idUsuario") RequestBody idUsuario,
+                                          @Part("idProyecto") RequestBody idProyecto, @Part MultipartBody.Part image);
     // Edicion de un traduccionModel
     @PUT("/traducciones/{idTraducion}")
     Call<TraduccionData> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionData traduccionData);
