@@ -15,6 +15,7 @@ public class UsuarioModel {
     private Boolean validEmail = false;
     private Boolean validPassword = false;
     private Boolean validCurrentPassword = false;
+    private String image;
 
     public String getEmail() {
         return email;
@@ -126,5 +127,13 @@ public class UsuarioModel {
 
     public void setValidCurrentPassword(Boolean validCurrentPassword) {
         this.validCurrentPassword = validCurrentPassword;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

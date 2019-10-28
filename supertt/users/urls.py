@@ -16,4 +16,5 @@ urlpatterns = [
     path('enviarEmailRecuparacion', EnviarCorreoRecuperacionView),
     path('contrasena', RecuperarContraView),
     path('cambiarC', CambiarCView.as_view()),
+    path('logout', LogoutView)
 ]

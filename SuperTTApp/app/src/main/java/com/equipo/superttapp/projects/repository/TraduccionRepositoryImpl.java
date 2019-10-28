@@ -15,6 +15,8 @@ import com.equipo.superttapp.util.ServiceGenerator;
 import java.util.ArrayList;
 import java.util.List;
 
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,7 +32,7 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
             service.getTraduccionesByProyecto(idProyecto, key).enqueue(new Callback<List<TraduccionData>>() {
                 @Override
                 public void onResponse(Call<List<TraduccionData>> call, Response<List<TraduccionData>> response) {
-                    Log.i(TAG, "onResponse " + response.body().size());
+                    Log.i(TAG, "findAllTraduccionesByProyecto-onResponse " + response.body());
                     BusinessResult<TraduccionModel> model = new BusinessResult<>();
                     List<TraduccionModel> modelos = new ArrayList<>();
                     model.setCode(ResultCodes.SUCCESS);
@@ -50,10 +52,11 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
                 public void onFailure(Call<List<TraduccionData>> call, Throwable t) {
                     BusinessResult<TraduccionModel> model = new BusinessResult<>();
                     proyectoDataMutableLiveData.setValue(model);
+                    Log.i(TAG, "findAllTraduccionesByProyecto-onFailure ", t);
                 }
             });
         } catch (NetworkOnMainThreadException e) {
-            Log.e(TAG, "findAllProyectosByUser ", e);
+            Log.e(TAG, "findAllTraduccionesByProyecto ", e);
         }
         return proyectoDataMutableLiveData;
     }
@@ -65,7 +68,6 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
             service.deleteTraduccion(idTraduccion, token).enqueue(new Callback<TraduccionData>() {
                 @Override
                 public void onResponse(Call<TraduccionData> call, Response<TraduccionData> response) {
-                    Log.i(TAG, "onResponse " + response.body());
                     BusinessResult<TraduccionModel> model = new BusinessResult<>();
                     model.setCode(ResultCodes.SUCCESS);
                     resultado.setValue(model);
@@ -80,6 +82,34 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
             });
         } catch (NetworkOnMainThreadException e) {
             Log.e(TAG, "findAllProyectosByUser ", e);
+        }
+        return resultado;
+    }
+
+    @Override
+    public MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idProyecto, MultipartBody.Part image, String token) {
+        MutableLiveData<BusinessResult<TraduccionModel>> resultado = new MutableLiveData<>();
+        try {
+            service.uploadTraduccion(idProyecto, image, token).enqueue(new Callback<TraduccionData>() {
+                @Override
+                public void onResponse(Call<TraduccionData> call, Response<TraduccionData> response) {
+                    Log.i(TAG, "uploadTraduccion-onResponse " + response.isSuccessful() + " "
+                            + response.body());
+                    BusinessResult<TraduccionModel> model = new BusinessResult<>();
+                    if (response.isSuccessful()) {
+                        model.setCode(ResultCodes.SUCCESS);
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<TraduccionData> call, Throwable t) {
+                    Log.e(TAG, "uploadTraduccion-onFailure ", t);
+                    BusinessResult<TraduccionModel> model = new BusinessResult<>();
+                    resultado.setValue(model);
+                }
+            });
+        } catch (NetworkOnMainThreadException e) {
+            Log.e(TAG, "uploadTraduccion ", e);
         }
         return resultado;
     }

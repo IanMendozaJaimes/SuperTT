@@ -61,13 +61,17 @@ header
 	
 	&_options
 		flex-basis 40%
-		max-width 400px
+		max-width 500px
 		
 		&_ul
 			display flex
 			justify-content center
 			align-items center
 			remove_defaults()
+			
+			&_avatar
+				display flex
+				margin-right 2em
 			
 			&_link
 				text-decoration none
@@ -76,6 +80,19 @@ header
 				
 				&:hover
 					color white
+					
+			&_form
+				display flex
+				align-items center
+				justify-content center
+			
+			&_logout
+				padding 0.5em
+				border-radius 5px
+				
+				&:hover
+					cursor pointer
+					background-color primary_color_dark
 		
 		&_avatar
 			width 35px

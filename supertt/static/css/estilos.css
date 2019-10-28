@@ -31,7 +31,7 @@ header {
 }
 .NavigationBar_options {
   flex-basis: 40%;
-  max-width: 400px;
+  max-width: 500px;
 }
 .NavigationBar_options_ul {
   display: flex;
@@ -40,6 +40,10 @@ header {
   margin: 0;
   padding: 0;
 }
+.NavigationBar_options_ul_avatar {
+  display: flex;
+  margin-right: 2em;
+}
 .NavigationBar_options_ul_link {
   text-decoration: none;
   opacity: 1;
@@ -47,6 +51,19 @@ header {
 }
 .NavigationBar_options_ul_link:hover {
   color: #fff;
+}
+.NavigationBar_options_ul_form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.NavigationBar_options_ul_logout {
+  padding: 0.5em;
+  border-radius: 5px;
+}
+.NavigationBar_options_ul_logout:hover {
+  cursor: pointer;
+  background-color: #003c6b;
 }
 .NavigationBar_options_avatar {
   width: 35px;

@@ -31,7 +31,8 @@ ALLOWED_HOSTS = [
     '10.100.68.152',
     'localhost',
     '0.0.0.0',
-    '192.168.1.82'
+    '192.168.1.82',
+    '10.100.67.209'
 ]
 
 # Application definition
@@ -207,6 +208,8 @@ SMTP_USER = 'ttapplicacion@gmail.com'
 SMTP_PASSWORD = '#ContraDelTT1'
 SMTP_PORT = 587
 SITE_URL = 'http://10.100.68.152:8000/'
+
+IMG_DEFAULT = 'avatarDefault.png'
 
 
 

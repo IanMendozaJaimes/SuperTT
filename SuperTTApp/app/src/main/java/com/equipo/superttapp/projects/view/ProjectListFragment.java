@@ -39,6 +39,8 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     private FloatingActionButton fabCreate;
     private static final String TAG = ProjectListFragment.class.getCanonicalName();
     ProyectsListViewModel proyectsListViewModel;
+    private Integer idUsuario;
+    private String token;
 
     public ProjectListFragment() {
         // Required empty public constructor
@@ -62,6 +64,16 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
         recyclerView.setLayoutManager(layoutManager);
         proyectsListViewModel = ViewModelProviders.of(this).get(ProyectsListViewModel.class);
         fabCreate.setOnClickListener(v -> crearProyecto());
+
+        PreferencesManager preferencesManager = new PreferencesManager(getContext(),
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+            idUsuario = preferencesManager.getIntegerValue(PreferencesManager.KEY_USER_ID);
+            token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
+            Log.d(TAG, "onCreateView idUsuario=" + idUsuario + " token=" + token);
+        }
+
         return view;
     }
 
@@ -76,9 +88,14 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
                     EditText etNombre = view.findViewById(R.id.et_nombre_proyecto);
                     ProyectoModel model = new ProyectoModel();
                     model.setName(etNombre.getText().toString());
+<<<<<<< HEAD
                     model.setIdUsuario(14);
                     String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
                     proyectsListViewModel.createProyecto(model, key).observe(this,
+=======
+                    model.setIdUsuario(idUsuario);
+                    proyectsListViewModel.createProyecto(model, token).observe(this,
+>>>>>>> 5d468c62af1d2321752cfeaa74941de0da59bd8b
                             proyectoModelBusinessResult -> {
                                 if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS))
                                     recuperarTodosProyectos();
@@ -94,10 +111,10 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     @Override
     public void onStart() {
         super.onStart();
-        Log.i(TAG, "onStart()");
         recuperarTodosProyectos();
     }
 
+<<<<<<< HEAD
     public void recuperarTodosProyectos() {
         PreferencesManager preferencesManager = new PreferencesManager(getContext(),
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -119,6 +136,17 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
                     showMessage(proyectodata);
             });
         }
+=======
+    private void recuperarTodosProyectos() {
+        proyectsListViewModel.findUserProyects(idUsuario, token).observe(this, proyectodata -> {
+            if (proyectodata.getCode().equals(ResultCodes.SUCCESS)) {
+                proyectoModelList.clear();
+                proyectoModelList.addAll(proyectodata.getResults());
+                projectAdapter.notifyDataSetChanged();
+            } else
+                showMessage(proyectodata);
+        });
+>>>>>>> 5d468c62af1d2321752cfeaa74941de0da59bd8b
     }
 
     @Override

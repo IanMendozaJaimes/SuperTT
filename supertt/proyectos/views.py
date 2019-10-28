@@ -29,6 +29,8 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 
 from users.models import User
+import os
+
 # Create your views here.
 
 class ProyectsView(LoginRequiredMixin, TemplateView):
@@ -209,7 +211,7 @@ def create_project_view(request):
     try:
         proj = Proyecto(usuario = User(id=usr), nombre=request.data.get('nombre') , calificacion = 0.0)
     except not Proyecto.DoesNotExist: 
-        return Response({"resultCode": "-1"})
+        return Response({"resultCode": -1})
     
     if request.method == "POST":
         serializer = SerializadorProyecto(proj, data = request.data)
@@ -217,7 +219,7 @@ def create_project_view(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"resultCode": "-1001"}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({"resultCode": -1001}, status = status.HTTP_400_BAD_REQUEST)
     
 
 @api_view(['PUT', 'DELETE'])
@@ -236,33 +238,19 @@ def methods_project_view(request, idpro):
        
         if serializer.is_valid():
             serializer.save()
-            data["success"] = "update sucessful"
-            return Response(data =data)
+            data["resultCode"] = 1
+        else:
+            data["resultCode"] = -1
+            return Response(data = data)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         operation = proj.delete()
         data = {}
         if operation:
-            data["resultCode"] = "1"
+            data["resultCode"] = 1
         else:
-            data["resultCode"] = "-1"
+            data["resultCode"] = -1
         return Response(data = data)
-
-# @api_view(['DELETE', ])
-# @permission_classes((IsAuthenticated,))
-# def delete_project_view(request, id):
-#     try:
-#         proj = Proyecto.objects.get(id= id)
-#     except Proyecto.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == "DELETE":
-#         operation = proj.delete()
-#         data = {}
-#         if operation:
-#             data["sucess"] = "delete successful"
-#         else:
-#             data["failure"] = "delete failed"
-#         return Response(data = data)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated,])
@@ -275,6 +263,7 @@ def detail_project_view(request, usuario):
     user = request.user
 
     print("user {}:= {}".format(user.id, usuario))
+
     #user validation
     if (str(usuario) != str(request.user.id)) or (proj.count() > 0 and request.user.id != proj[0].usuario.id):
         return Response({"response": "Token: does not belong to user with id: {} ".format( usuario)})
@@ -284,6 +273,21 @@ def detail_project_view(request, usuario):
         return Response(serializer.data)
 
 #--------------views translations
+
+#keep in mind
+#-------------example------------
+#getting extension from file
+
+# u_file = request.FILES['file']            
+# extension = u_file.split(".")[1].lower()
+
+# if(handle_uploaded_song(file)):
+#     path = '%s' % u_file
+#     ruta =  "http://example.com/static/canciones/%s" % path
+#     usuario = Usuario.objects.get(pk=request.session['persona'])
+#     song = Cancion(autor=usuario, cancion=ruta)
+#     song.save()
+#     return HttpResponse(content_type)
 
 @api_view(['POST', ])
 @permission_classes([IsAuthenticated])
@@ -298,6 +302,34 @@ def create_translation_view(request): #request must include idproyecto in body
     #validate user
     if usr != pro.usuario:
         return Response("Project with id {} does not belong to user with id {}".format(pro.id, usr.id), status=status.HTTP_403_FORBIDDEN)
+    
+    try:
+        file = request.FILES['file']
+    except:
+        return Response('Request has no resource file attached') #return resultCode: -1
+    folderName = str(pro.id) + str(pro.nombre)
+
+    parentFolderName = str(pro.usuario.id)
+    mediatype = request.data.get('mediatype')
+
+    if not os.path.exists(settings.BASE_DIR+'/media'+"/proyectos"):
+        os.mkdir(settings.BASE_DIR+'/media'+"/proyectos")
+
+    path_file = settings.BASE_DIR+'/media/proyectos/' + parentFolderName
+    if not os.path.exists(path_file):
+        os.mkdir(path_file)
+
+    path_file = path_file + "/" + folderName 
+    if not os.path.exists(path_file):
+        os.mkdir(path_file)
+    
+    image_file = open(path_file +"/"+"traduccion" + "." + mediatype, "wb")
+    
+    for chunk in file.chunks():
+        image_file.write(chunk)
+        image_file.close()
+
+
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
     trans.nombre = str(trans.fechaCreacion)
     if request.method == "POST":
@@ -332,33 +364,19 @@ def methods_translation_view(request, idtraduccion):
        
         if serializer.is_valid():
             serializer.save()
-            data["success"] = "update sucessful"
+            data["resultCode"] = 1
             return Response(data =data)
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+        data["resultCode"] = -1
+        return Response(data = data, status = status.HTTP_400_BAD_REQUEST)
+
     elif request.method == 'DELETE':
         operation = trans.delete()
         data = {}
         if operation:
-            data["resultCode"] = "1"
+            data["resultCode"] = 1
         else:
-            data["resultCode"] = "-1"
+            data["resultCode"] = -1
         return Response(data = data)
-
-# @api_view(['DELETE', ])
-# @permission_classes((permissions.AllowAny,))
-# def delete_translation_view(request, id):
-#     try:
-#         trans = Traduccion.objects.get(id= id)
-#     except Traduccion.DoesNotExist:
-#         return Response(status=status.HTTP_404_NOT_FOUND)
-#     if request.method == "DELETE":
-#         operation = trans.delete()
-#         data = {}
-#         if operation:
-#             data["sucess"] = "delete successful"
-#         else:
-#             data["failure"] = "delete failed"
-#         return Response(data = data)
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))

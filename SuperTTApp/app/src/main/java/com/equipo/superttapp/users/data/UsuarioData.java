@@ -3,22 +3,24 @@ package com.equipo.superttapp.users.data;
 import com.google.gson.annotations.SerializedName;
 
 public class UsuarioData {
-    @SerializedName("id")
+    @SerializedName("idUsuario")
     private Integer id;
     @SerializedName("nombre")
     private String nombre;
     @SerializedName("apellido")
     private String apellidos;
-    @SerializedName("username")
+    @SerializedName("email")
     private String email;
     @SerializedName("password")
     private String password;
-    @SerializedName("responseCode")
+    @SerializedName("resultCode")
     private Integer responseCode;
-    @SerializedName("keyAuth")
+    @SerializedName("token")
     private String keyAuth;
-    @SerializedName("currentPassword")
+    @SerializedName("password2")
     private String currentPassword;
+    @SerializedName("urlImg")
+    private String image;
 
     public String getEmail() {
         return email;
@@ -82,5 +84,13 @@ public class UsuarioData {
 
     public void setCurrentPassword(String currentPassword) {
         this.currentPassword = currentPassword;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

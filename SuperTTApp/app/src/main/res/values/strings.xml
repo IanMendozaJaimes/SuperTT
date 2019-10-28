@@ -60,5 +60,8 @@
     <string name="label_cancelar">Cancelar</string>
     <string name="label_nombre_proyecto">Nombre del proyecto</string>
     <string name="label_crear_proyecto">Crear proyecto</string>
+    <string name="btn_subir_traduccion">Subir traduccion</string>
+    <string name="img_traduccion_descripcion">Imagen a subir</string>
+    <string name="title_activity_new_traduccion">Guardar traducción</string>
 
 </resources>

@@ -390,6 +390,10 @@ function download_project(){
 
 }
 
+function logout(){
+	document.getElementById("logout_form").submit();
+}
+
 show_messages();
 
 

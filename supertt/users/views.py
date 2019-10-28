@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.views.generic import TemplateView
 from django.contrib.auth.hashers import check_password, make_password
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -293,7 +293,8 @@ def CambiarFotoView(request):
 
 		User.objects.filter(email=email).update(imagen_perfil=name)
 
-		os.remove(settings.MEDIA_ROOT+'/imgUsuario/'+old)
+		if old != settings.IMG_DEFAULT:
+			os.remove(settings.MEDIA_ROOT+'/imgUsuario/'+old)
 
 		return JsonResponse({'err':{}, 'url_imagen':settings.MEDIA_URL+'imgUsuario/'+name})
 	except Exception as e:
@@ -360,6 +361,11 @@ def RecuperarContraView(request):
 	except Exception as e:
 		print('Un error:', e)
 		return redirect('/usuarios/login')
+
+
+def LogoutView(request):
+	logout(request)
+	return redirect('/usuarios/login')
 
 
 

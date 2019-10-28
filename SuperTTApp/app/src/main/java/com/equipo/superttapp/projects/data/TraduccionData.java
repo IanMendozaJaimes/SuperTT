@@ -12,7 +12,7 @@ public class TraduccionData {
     @SerializedName("traduccion")
     private String ecuacion;
     @SerializedName("calificacion")
-    private Integer calificacion;
+    private Double calificacion;
     @SerializedName("archivo")
     private String url;
 
@@ -48,11 +48,11 @@ public class TraduccionData {
         this.ecuacion = ecuacion;
     }
 
-    public Integer getCalificacion() {
+    public Double getCalificacion() {
         return calificacion;
     }
 
-    public void setCalificacion(Integer calificacion) {
+    public void setCalificacion(Double calificacion) {
         this.calificacion = calificacion;
     }
 

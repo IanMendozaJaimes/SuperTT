@@ -25,28 +25,32 @@ from general.util import *
 @permission_classes([permissions.AllowAny])
 def registration_view(request):#correo usado 10003, error -1, suyccess 1
     if request.method == 'POST':
+        print(request.POST)
         serializer = SerializadorRegistro(data = request.data)
+        print(request.data.get('nombre'))
         data = {}
         if serializer.is_valid():
-            account = serializer.save()
-            data['response'] = '1'
-            data['email'] = account.email
+            print(request.data['nombre'])
+            account = serializer.save(request.data)
+            data['resultCode'] = 1
+            #data['email'] = account.email
 
             token = Token.objects.get(user=account).key
-            data['token'] = token
+            #data['token'] = token
 
-            h = hashlib.sha1(request.POST['email'].encode('utf-8')).hexdigest()
+            h = hashlib.sha1(request.data['email'].encode('utf-8')).hexdigest()
             uh = UserHashes(user=account, hash=h, proposito=VALIDATE)
             uh.save()
 
             url = settings.SITE_URL + 'usuarios/validar?token=' + h
+            print(url)
 
             e = Email()
-            e.send_validation_email(request.POST['email'],request.POST['nombre'],url)
+            e.send_validation_email(request.data['email'],request.data['nombre'],url)
             e.close()
         else:
-            data = serializer.errors #data = {"resultCode": "-1001"}
-            data.update({"error":"customized"})
+            #data = serializer.errors #data = {"resultCode": "-1001"}
+            data.update({"resultCode": -1003})
         return Response(data)
 
 @api_view(['PUT'])
@@ -57,7 +61,7 @@ def edit_user_view(request, idUsuario):
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['resultCode'] = '1'
+            data['resultCode'] = 1
             return Response(data =data)
         else:
             data = serializer.errors 
@@ -71,26 +75,31 @@ def login_view(request, *args, **kwargs):
             try:
                 usr = User.objects.get(email=request.data['email'])
             except:
-                return Response({"resultCode":"invalidCredentials"})
+                return Response({"resultCode":-1001})
             
             pass_ok = check_password(request.data['password'], usr.password)
+            
             if not pass_ok:
-                return Response({"resultCode": "invalidPassword"})
+                return Response({"resultCode": -1001})
             
             if not usr.is_active:
-                return Response({"resultCode": "notActivated"})     
+                return Response({"resultCode": -1006})     
             print(usr.id)
             serializer = SerializadorUsuario(usr, data = request.data)
             data = {}
         if serializer.is_valid():
-            print("third")
             token, created = Token.objects.get_or_create(user=usr)
-            print("fourth")
-            data.update({'user': usr.email})
+            data.update({'email': usr.email})
             data.update({'token': token.key})
-            data['codeStatus'] = '1'
+
+            data.update({'idUsuario': usr.id})
+            data.update({'apellido': usr.last_name})
+            data.update({'nombre': usr.first_name})
+            data.update({'urlImg': usr.imagen_perfil})
+            #email, token, idusuario, apellido, nombre, urlImg
+            data['resultCode'] = 1
             return Response(data =data)
         else:
-            print("else")
-            data = serializer.errors 
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+            data['resultCode'] = -1
+            #data = serializer.errors
+        return Response(data, status = status.HTTP_400_BAD_REQUEST)
