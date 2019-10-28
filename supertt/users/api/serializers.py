@@ -7,7 +7,7 @@ class SerializadorRegistro(serializers.ModelSerializer):
     password2 = serializers.CharField(style = {'input_type': 'password'}, write_only= True)
     class Meta:
         model = User
-        fields = ('email','estudios', 'password', 'password2')
+        fields = ('email','estudios', 'first_name', 'password', 'password2')
         extra_kwargs = {
             'password': {'write_only': True}
         }
@@ -23,8 +23,9 @@ class SerializadorRegistro(serializers.ModelSerializer):
         password2 = self.validated_data['password2']
 
         encrypted_password = make_password(password)
+        print(self.data)
         account = User(
-            email = self.validated_data['email'], password = encrypted_password
+            email = self.validated_data['email'], password = encrypted_password, first_name = request.data.get('nombre')
         )
         
         if password != password2:
