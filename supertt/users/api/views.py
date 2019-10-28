@@ -50,7 +50,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
             e.close()
         else:
             data = serializer.errors #data = {"resultCode": "-1001"}
-            data.update({"resultCode": -10003})
+            data.update({"resultCode": -1003})
         return Response(data)
 
 @api_view(['PUT'])
@@ -97,8 +97,9 @@ def login_view(request, *args, **kwargs):
             data.update({'nombre': usr.first_name})
             data.update({'urlImg': usr.imagen_perfil})
             #email, token, idusuario, apellido, nombre, urlImg
-            data['codeStatus'] = '1'
+            data['resultCode'] = 1
             return Response(data =data)
         else:
-            data = serializer.errors
+            data['resultCode'] = -1
+            #data = serializer.errors
         return Response(data, status = status.HTTP_400_BAD_REQUEST)
