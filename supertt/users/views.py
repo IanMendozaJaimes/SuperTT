@@ -98,6 +98,11 @@ class SignUpView(TemplateView):
 		elif not v.name(data['nombre']):
 			m.add_validation_error(INVALID_NAME, 'nombre')
 
+		if not v.field(data['apellidos']):
+			m.add_validation_error(REQUIRED_FIELD, 'apellidos')
+		elif not v.name(data['apellidos']):
+			m.add_validation_error(INVALID_NAME, 'apellidos')
+
 		if not v.field(data['contra']):
 			m.add_validation_error(REQUIRED_FIELD, 'contra')
 
@@ -118,7 +123,8 @@ class SignUpView(TemplateView):
 		if err.get_len() == 0:
 			new_user = User(email=request.POST['correo'], 
 							password=make_password(request.POST['contra']), 
-							first_name=request.POST['nombre'])
+							first_name=request.POST['nombre'],
+							last_name=request.POST['apellidos'])
 			new_user.save()
 			m = Message()
 			m.add_alert(SEND_EMAIL, 'Tu cuenta se registro exitosamente!')
@@ -142,6 +148,7 @@ class SignUpView(TemplateView):
 			e.update({
 				'nombre': request.POST['nombre'],
 				'correo': request.POST['correo'],
+				'apellidos': request.POST['apellidos'],
 			})
 			return render(request, self.template_name, e)
 
@@ -156,7 +163,8 @@ class ProfileView(LoginRequiredMixin, TemplateView):
 		opciones = Estudios.objects.all();
 		return render(request, self.template_name, 
 			{
-				'nombre': request.user.first_name + ' ' + request.user.last_name,
+				'nombre': request.user.first_name,
+				'apellidos': request.user.last_name,
 				'correo': request.user.email,
 				'avatar': 'imgUsuario/'+request.user.imagen_perfil,
 				'opciones': opciones,
@@ -223,6 +231,7 @@ def CambiarUsuarioView(request):
 	v = Validator()
 	m = Message()
 	nom = request.GET['nombre']
+	apellidos = request.GET['apellidos']
 	opcion = request.GET['estudios']
 	correo = request.user.email
 
@@ -231,8 +240,15 @@ def CambiarUsuarioView(request):
 	elif not v.name(nom):
 		m.add_validation_error(INVALID_NAME, 'nombre')
 
+	if not v.field(apellidos):
+		m.add_validation_error(REQUIRED_FIELD, 'apellidos')
+	elif not v.name(apellidos):
+		m.add_validation_error(INVALID_NAME, 'apellidos')
+
 	if m.get_len() == 0:
-		User.objects.filter(email=correo).update(first_name=nom, estudios=int(opcion))
+		User.objects.filter(email=correo).update(first_name=nom,
+												 last_name=apellidos, 
+												 estudios=int(opcion))
 		return JsonResponse({'err':{}})
 
 	return JsonResponse({'err':m.get_messages()})

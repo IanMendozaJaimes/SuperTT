@@ -56,12 +56,11 @@
 						<p><a class="NavigationBar_options_ul_link" href="/proyectos/todos">Mis proyectos</a></p>
 					</li>
 					<li class="NavigationBar_options_ul_avatar">
-						<p><a id="a_user_name" class="NavigationBar_options_ul_link" href="/usuarios/perfil">{{ nombre }}</a></p>
+						<p><a id="a_user_name" class="NavigationBar_options_ul_link" href="/usuarios/perfil">{{ nombre }} {{ apellidos }}</a></p>
 						<div class="NavigationBar_options_avatar" style="background-image:url('{{MEDIA_URL}}{{avatar}}');"></div>
 					</li>
 					<li>
-						<form id="logout_form" method="post" action="/usuarios/logout" class="NavigationBar_options_ul_form">
-							{% csrf_token %}
+						<form id="logout_form" method="get" action="/usuarios/logout" class="NavigationBar_options_ul_form">
 							<span class="icon-exit NavigationBar_options_ul_logout" onclick="logout();"></span>
 						</form>
 					</li>

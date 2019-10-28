@@ -210,10 +210,12 @@ function save_profile_changes(event){
 	event.preventDefault();
 
 	let request = new XMLHttpRequest();
-	let nombre = document.querySelector('.Profile_container_text');
+	let nombre = document.querySelector('#Projects_container_nombre');
+	let apellidos = document.querySelector('#Projects_container_apellidos');
 	let estudios = document.querySelector('.Profile_container_studies');
 
 	request.open('GET', '/usuarios/cambiar?nombre='+nombre.value+
+										'&apellidos='+apellidos.value+
 										'&estudios='+estudios.value, true);
 
 	request.onreadystatechange = function(aEvent){
@@ -222,7 +224,7 @@ function save_profile_changes(event){
 				let req = JSON.parse(request.responseText);
 
 				if(Object.entries(req.err).length === 0){
-					document.querySelector('#a_user_name').innerHTML = nombre.value;
+					document.querySelector('#a_user_name').innerHTML = nombre.value + ' ' + apellidos.value;
 					show_aside_message('Cambios guardados.');
 				}
 				else{
