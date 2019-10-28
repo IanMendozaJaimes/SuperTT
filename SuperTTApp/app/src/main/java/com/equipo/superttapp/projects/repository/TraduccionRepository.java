@@ -11,7 +11,5 @@ import okhttp3.RequestBody;
 public interface TraduccionRepository {
     MutableLiveData<BusinessResult<TraduccionModel>> findAllTraduccionesByProyecto(Integer idProyecto, String key);
     MutableLiveData<BusinessResult<TraduccionModel>> deleteTraduccion(Integer idTraduccion, String token);
-    MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idUsuario,
-                                                                      RequestBody idProyecto,
-                                                                      MultipartBody.Part image);
+    MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idProyecto, MultipartBody.Part image, String token);
 }

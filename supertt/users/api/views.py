@@ -25,7 +25,7 @@ from general.util import *
 @permission_classes([permissions.AllowAny])
 def registration_view(request):#correo usado 10003, error -1, suyccess 1
     if request.method == 'POST':
-        print(request.data)
+        print(request.POST)
         serializer = SerializadorRegistro(data = request.data)
         print(request.data.get('nombre'))
         data = {}
@@ -38,7 +38,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
             token = Token.objects.get(user=account).key
             #data['token'] = token
 
-            h = hashlib.sha1(request.POST['email'].encode('utf-8')).hexdigest()
+            h = hashlib.sha1(request.data['email'].encode('utf-8')).hexdigest()
             uh = UserHashes(user=account, hash=h, proposito=VALIDATE)
             uh.save()
 
@@ -46,7 +46,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
             print(url)
 
             e = Email()
-            e.send_validation_email(request.POST['email'],request.POST['nombre'],url)
+            e.send_validation_email(request.data['email'],request.data['nombre'],url)
             e.close()
         else:
             #data = serializer.errors #data = {"resultCode": "-1001"}

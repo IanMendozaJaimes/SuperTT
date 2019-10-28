@@ -41,6 +41,8 @@ public class TraduccionRecyclerViewAdapter extends RecyclerView.Adapter<Traducci
         holder.tvCalificacion.setText(traduccionModel.getCalificacion().toString());
         holder.tvEcuacion.setText(traduccionModel.getEcuacion());
         holder.tvFecha.setText(traduccionModel.getFecha());
+        if (traduccionModel.getUrl().length() < 1)
+            traduccionModel.setUrl("http://");
         Picasso.get().load(traduccionModel.getUrl()).error(R.drawable.card_defecto)
                 .into(holder.imvBackground);
         holder.btnBorrarTraduccion

@@ -28,7 +28,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = [
-    '10.100.73.182',
+    '10.100.75.9',
     'localhost',
     '0.0.0.0',
     '192.168.1.82',
@@ -112,7 +112,7 @@ DATABASES = {
         'NAME': 'tt_database',
         'USER': 'postgres',
                 #'ianMJ',
-        'PASSWORD': 'newcastle',
+        'PASSWORD': 'postgres',
                     #'postgres'
                     #''
         'HOST': '127.0.0.1',

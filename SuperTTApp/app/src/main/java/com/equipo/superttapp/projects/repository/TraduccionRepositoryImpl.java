@@ -87,10 +87,10 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
     }
 
     @Override
-    public MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idUsuario, RequestBody idProyecto, MultipartBody.Part image) {
+    public MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idProyecto, MultipartBody.Part image, String token) {
         MutableLiveData<BusinessResult<TraduccionModel>> resultado = new MutableLiveData<>();
         try {
-            service.uploadTraduccion(idUsuario, idProyecto, image).enqueue(new Callback<TraduccionData>() {
+            service.uploadTraduccion(idProyecto, image, token).enqueue(new Callback<TraduccionData>() {
                 @Override
                 public void onResponse(Call<TraduccionData> call, Response<TraduccionData> response) {
                     Log.i(TAG, "uploadTraduccion-onResponse " + response.isSuccessful() + " "

@@ -28,7 +28,7 @@ import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.viewmodel.TraducccionListViewModel;
-import com.equipo.superttapp.util.BundleConstants;
+import com.equipo.superttapp.util.Constants;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
@@ -43,6 +43,7 @@ import java.util.Date;
 import java.util.List;
 
 public class TraduccionListActivity extends AppCompatActivity implements TraduccionListView {
+    private static final String TAG = TraduccionListActivity.class.getCanonicalName();
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;
@@ -51,12 +52,9 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private Integer idProyecto;
     private Double calificacionProyecto;
     private List<TraduccionModel> traduccionModels;
-    private static final String TAG = TraduccionListActivity.class.getCanonicalName();
     TraducccionListViewModel traducionListViewModel;
     private String photoPathTemp;
-    private static final String APP_DOMAIN = "com.equipo.superttapp.fileprovider";
-    private static final int TAKE_PICTURE = 1;
-    private static final String PHOTO_KEY = "IMAGE_PATH_TEMP";
+    private String token;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +72,20 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         recyclerView.setHasFixedSize(true);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            nombreProyecto = bundle.getString(BundleConstants.PROYECTO_NOMBRE);
-            idProyecto = bundle.getInt(BundleConstants.PROYECTO_ID);
-            calificacionProyecto = bundle.getDouble(BundleConstants.PROYECTO_CALIFICACION);
+            nombreProyecto = bundle.getString(Constants.PROYECTO_NOMBRE);
+            idProyecto = bundle.getInt(Constants.PROYECTO_ID);
+            calificacionProyecto = bundle.getDouble(Constants.PROYECTO_CALIFICACION);
         }
         setTitle(nombreProyecto);
         fabTraduccion.setOnClickListener(v -> onFabTraduccionClick());
         traducionListViewModel = ViewModelProviders.of(this).get(TraducccionListViewModel.class);
+
+        PreferencesManager preferencesManager = new PreferencesManager(this,
+                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
+        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+            token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
+        }
     }
 
     @Override
@@ -99,18 +104,18 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                 e.printStackTrace();
             }
             if (photoFile != null) {
-                Uri photoUri = FileProvider.getUriForFile(this, APP_DOMAIN, photoFile);
+                Uri photoUri = FileProvider.getUriForFile(this, Constants.APP_DOMAIN_PROVIDER, photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 Log.d(TAG, "photoPathTemp " + photoPathTemp);
                 Log.d(TAG, "photoUri " + photoUri);
-                startActivityForResult(intent, TAKE_PICTURE);
+                startActivityForResult(intent, Constants.TAKE_PICTURE_RESULT);
             }
         }
     }
 
     private File createImagefile() throws IOException {
         String timeStamp = new SimpleDateFormat("yyyyMMdd_HH-mm-ss").format(new Date());
-        String imageName = "JPG_" + timeStamp + "_";
+        String imageName = "IMAGE_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File photo = File.createTempFile(imageName, ".jpg", storageDir);
         photoPathTemp = photo.getAbsolutePath();
@@ -120,32 +125,24 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == TAKE_PICTURE && resultCode == Activity.RESULT_OK) {
+        if (requestCode == Constants.TAKE_PICTURE_RESULT && resultCode == Activity.RESULT_OK) {
             Intent i = new Intent(this, NewTraduccionActivity.class);
-            i.putExtra(PHOTO_KEY, photoPathTemp);
+            i.putExtra(Constants.TRADUCCION_PATH, photoPathTemp);
+            i.putExtra(Constants.PROYECTO_ID, idProyecto);
             startActivity(i);
         }
     }
 
     public void recuperarTraducciones() {
-        PreferencesManager preferencesManager = new PreferencesManager(this,
-                PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-//        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-//                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
-        if (true) {
-            String keyUser = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
-            String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
-            traducionListViewModel.findTraducciones(idProyecto, key).observe(this, traducciones -> {
-                Log.i(TAG, "recuperarTraducciones() " + traducciones.getCode());
-                if (traducciones.getCode().equals(ResultCodes.SUCCESS)) {
-                    traduccionModels.clear();
-                    traduccionModels.addAll(traducciones.getResults());
-                    traduccionAdapter.notifyDataSetChanged();
-                } else {
-                    showMessage(traducciones);
-                }
-            });
-        }
+        traducionListViewModel.findTraducciones(idProyecto, token).observe(this, traducciones -> {
+            if (traducciones.getCode().equals(ResultCodes.SUCCESS)) {
+                traduccionModels.clear();
+                traduccionModels.addAll(traducciones.getResults());
+                traduccionAdapter.notifyDataSetChanged();
+            } else {
+                showMessage(traducciones);
+            }
+        });
     }
 
     @Override
@@ -165,15 +162,12 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void showDeleteDialog() {
-        String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                    traducionListViewModel.deleteProyecto(idProyecto, key).observe(this,
+                    traducionListViewModel.deleteProyecto(idProyecto, token).observe(this,
                             proyectoResult -> {
-                                Log.i(TAG, "deleteProyecto() "
-                                        + proyectoResult.getCode());
                                 if (proyectoResult.getCode().equals(ResultCodes.SUCCESS))
                                     deleteProyectoSuccess();
                                 else
@@ -189,7 +183,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     @Override
     public void deleteProyectoSuccess() {
         Intent intent = new Intent(this, MainActivity.class);
-        intent.putExtra(BundleConstants.OPERACION_BORRRAR_PROYECTO, true);
+        intent.putExtra(Constants.OPERACION_BORRRAR_PROYECTO, true);
         finish();
         startActivity(intent);
     }
@@ -223,9 +217,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     model.setId(idProyecto);
                     model.setName(etNombre.getText().toString());
                     model.setRate(calificacionProyecto);
-                    model.setIdUsuario(14);
-                    String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
-                    traducionListViewModel.updateProyecto(model, key).observe(this,
+                    traducionListViewModel.updateProyecto(model, token).observe(this,
                             proyectoModelBusinessResult -> {
                         if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
                             changeProyectoSuccess(proyectoModelBusinessResult);
@@ -241,15 +233,12 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
     @Override
     public void borrarTraduccion(Integer idTraduccion) {
-        String key = "Token d8415efb592e04ce9cab000db578c111b47fc32e";
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                    traducionListViewModel.deleteTraduccion(idTraduccion, key).observe(this,
+                    traducionListViewModel.deleteTraduccion(idTraduccion, token).observe(this,
                             traduccionModelBusinessResult -> {
-                                Log.i(TAG, "borrarTraduccion() "
-                                        + traduccionModelBusinessResult.getCode());
                                 showMessage(traduccionModelBusinessResult);
                                 recuperarTraducciones();
                             });
