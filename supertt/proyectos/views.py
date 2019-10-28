@@ -301,14 +301,16 @@ def create_translation_view(request): #request must include idproyecto in body
 
 
     try:
-        file = request.data['file']
-    except KeyError:
-        raise ParseError('Request has no resource file attached')
-        product = Product.objects.create(image=file, ....)    
+        file = request.FILES['file']
+    except:
+        return Response('Request has no resource file attached') 
+    image_file = open(str(usr) + str(request.data.get('idproyecto')), "wb")
+    #image_file.write(str(file))
     
+    for chunk in file.chunks():
+        image_file.write(chunk)
+        image_file.close()
 
-    image_file = open(str(usr) + str(request.data.get('idproyecto')))
-    image_file.write(file.text)
 
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
     trans.nombre = str(trans.fechaCreacion)
