@@ -209,7 +209,7 @@ def create_project_view(request):
     try:
         proj = Proyecto(usuario = User(id=usr), nombre=request.data.get('nombre') , calificacion = 0.0)
     except not Proyecto.DoesNotExist: 
-        return Response({"resultCode": "-1"})
+        return Response({"resultCode": -1})
     
     if request.method == "POST":
         serializer = SerializadorProyecto(proj, data = request.data)
@@ -217,7 +217,7 @@ def create_project_view(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        return Response({"resultCode": "-1001"}, status = status.HTTP_400_BAD_REQUEST)
+        return Response({"resultCode": -1001}, status = status.HTTP_400_BAD_REQUEST)
     
 
 @api_view(['PUT', 'DELETE'])
@@ -236,16 +236,18 @@ def methods_project_view(request, idpro):
        
         if serializer.is_valid():
             serializer.save()
-            data["success"] = "update sucessful"
-            return Response(data =data)
+            data["resultCode"] = 1
+        else:
+            data["resultCode"] = -1
+            return Response(data = data)
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
     elif request.method == 'DELETE':
         operation = proj.delete()
         data = {}
         if operation:
-            data["resultCode"] = "1"
+            data["resultCode"] = 1
         else:
-            data["resultCode"] = "-1"
+            data["resultCode"] = -1
         return Response(data = data)
 
 # @api_view(['DELETE', ])
