@@ -309,7 +309,7 @@ def create_translation_view(request): #request must include idproyecto in body
         return Response('Request has no resource file attached') #return resultCode: -1
     folderName = str(pro.id) + str(pro.nombre)
 
-    parentFolderName = str(pro.usuario)
+    parentFolderName = str(pro.usuario.id)
     mediatype = request.data.get('mediatype')
 
     if not os.path.exists(settings.BASE_DIR+'/media'+"/proyectos"):
@@ -319,7 +319,7 @@ def create_translation_view(request): #request must include idproyecto in body
     if not os.path.exists(path_file):
         os.mkdir(path_file)
 
-    path_file = settings.BASE_DIR+'/files/' + parentFolderName + "/" + folderName 
+    path_file = path_file + "/" + folderName 
     if not os.path.exists(path_file):
         os.mkdir(path_file)
     
