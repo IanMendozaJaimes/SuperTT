@@ -14,7 +14,7 @@ class SerializadorRegistro(serializers.ModelSerializer):
     def save(self):
 
         try:
-            usr = User.objects.get(email=request.data['email'])
+            usr = User.objects.get(email=self.data['email'])
             raise Response({"resultCode": -1})
         except:
             pass
@@ -24,8 +24,10 @@ class SerializadorRegistro(serializers.ModelSerializer):
 
         encrypted_password = make_password(password)
         print(self.data)
+        
+        #, first_name = request.data.get('nombre')
         account = User(
-            email = self.validated_data['email'], password = encrypted_password, first_name = request.data.get('nombre')
+            email = self.validated_data['email'], password = encrypted_password
         )
         
         if password != password2:
