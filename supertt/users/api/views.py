@@ -31,12 +31,12 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
         data = {}
         if serializer.is_valid():
             print(request.data['nombre'])
-            account = serializer.save()
+            account = serializer.save(request.data)
             data['resultCode'] = 1
-            data['email'] = account.email
+            #data['email'] = account.email
 
             token = Token.objects.get(user=account).key
-            data['token'] = token
+            #data['token'] = token
 
             h = hashlib.sha1(request.POST['email'].encode('utf-8')).hexdigest()
             uh = UserHashes(user=account, hash=h, proposito=VALIDATE)
@@ -75,15 +75,15 @@ def login_view(request, *args, **kwargs):
             try:
                 usr = User.objects.get(email=request.data['email'])
             except:
-                return Response({"resultCode":"invalidCredentials"})
+                return Response({"resultCode":-1001})
             
             pass_ok = check_password(request.data['password'], usr.password)
             
             if not pass_ok:
-                return Response({"resultCode": "invalidPassword"})
+                return Response({"resultCode": -1001})
             
             if not usr.is_active:
-                return Response({"resultCode": "notActivated"})     
+                return Response({"resultCode": -1006})     
             print(usr.id)
             serializer = SerializadorUsuario(usr, data = request.data)
             data = {}
