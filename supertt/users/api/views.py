@@ -49,7 +49,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
             e.send_validation_email(request.POST['email'],request.POST['nombre'],url)
             e.close()
         else:
-            data = serializer.errors #data = {"resultCode": "-1001"}
+            #data = serializer.errors #data = {"resultCode": "-1001"}
             data.update({"resultCode": -1003})
         return Response(data)
 
