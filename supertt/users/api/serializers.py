@@ -18,17 +18,19 @@ class SerializadorRegistro(serializers.ModelSerializer):
             raise Response({"resultCode": -1})
         except:
             pass
-
-        account = User(
-            email = self.validated_data['email'],
-        )
+        
         password = self.validated_data['password']
         password2 = self.validated_data['password2']
 
+        encrypted_password = make_password(password)
+        account = User(
+            email = self.validated_data['email'], password = encrypted_password
+        )
+        
         if password != password2:
             raise serializers.ValidationError({'resultCode': 123456789})
-        
-        account.set_password(make_password(password))
+        print(encrypted_password)
+        #account.set_password(encrypted_password)
         account.save()
         return account
 class SerializadorUsuario(serializers.ModelSerializer):

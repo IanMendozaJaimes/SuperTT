@@ -74,6 +74,7 @@ def login_view(request, *args, **kwargs):
                 return Response({"resultCode":"invalidCredentials"})
             
             pass_ok = check_password(request.data['password'], usr.password)
+            
             if not pass_ok:
                 return Response({"resultCode": "invalidPassword"})
             
