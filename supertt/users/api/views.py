@@ -75,15 +75,15 @@ def login_view(request, *args, **kwargs):
             try:
                 usr = User.objects.get(email=request.data['email'])
             except:
-                return Response({"resultCode":"invalidCredentials"})
+                return Response({"resultCode":-1001})
             
             pass_ok = check_password(request.data['password'], usr.password)
             
             if not pass_ok:
-                return Response({"resultCode": "invalidPassword"})
+                return Response({"resultCode": -1001})
             
             if not usr.is_active:
-                return Response({"resultCode": "notActivated"})     
+                return Response({"resultCode": -1006})     
             print(usr.id)
             serializer = SerializadorUsuario(usr, data = request.data)
             data = {}
