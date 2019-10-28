@@ -31,12 +31,12 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
         data = {}
         if serializer.is_valid():
             print(request.data['nombre'])
-            account = serializer.save()
+            account = serializer.save(request.data)
             data['resultCode'] = 1
-            data['email'] = account.email
+            #data['email'] = account.email
 
             token = Token.objects.get(user=account).key
-            data['token'] = token
+            #data['token'] = token
 
             h = hashlib.sha1(request.POST['email'].encode('utf-8')).hexdigest()
             uh = UserHashes(user=account, hash=h, proposito=VALIDATE)

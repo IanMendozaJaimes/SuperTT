@@ -11,7 +11,7 @@ class SerializadorRegistro(serializers.ModelSerializer):
         extra_kwargs = {
             'password': {'write_only': True}
         }
-    def save(self):
+    def save(self, data):
 
         try:
             usr = User.objects.get(email=self.data['email'])
@@ -24,10 +24,10 @@ class SerializadorRegistro(serializers.ModelSerializer):
 
         encrypted_password = make_password(password)
         print(self.data)
-        
+
         #, first_name = request.data.get('nombre')
         account = User(
-            email = self.validated_data['email'], password = encrypted_password
+            email = self.validated_data['email'], password = encrypted_password, first_name = data.get('nombre'), last_name =  data.get('apellido')
         )
         
         if password != password2:
