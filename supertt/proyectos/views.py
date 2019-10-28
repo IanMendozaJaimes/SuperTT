@@ -298,6 +298,18 @@ def create_translation_view(request): #request must include idproyecto in body
     #validate user
     if usr != pro.usuario:
         return Response("Project with id {} does not belong to user with id {}".format(pro.id, usr.id), status=status.HTTP_403_FORBIDDEN)
+
+
+    try:
+        file = request.data['file']
+    except KeyError:
+        raise ParseError('Request has no resource file attached')
+        product = Product.objects.create(image=file, ....)    
+    
+
+    image_file = open(str(usr) + str(request.data.get('idproyecto')))
+    image_file.write(file.text)
+
     trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
     trans.nombre = str(trans.fechaCreacion)
     if request.method == "POST":

@@ -13,10 +13,10 @@ class Proyecto(models.Model):
 class Traduccion(models.Model):
 	proyecto = models.ForeignKey(Proyecto, models.SET_NULL, blank=True, null=True)
 	usuario = models.ForeignKey(User, models.SET_NULL, blank=True, null=True)
-	nombre = models.CharField(max_length=200)
-	calificacion = models.DecimalField(max_digits=3, decimal_places=2)
-	archivo = models.TextField()
-	traduccion = models.TextField()
+	nombre = models.CharField(max_length=200,blank=True)
+	calificacion = models.DecimalField(max_digits=3, decimal_places=2, blank=True)
+	archivo = models.TextField(blank=True)
+	traduccion = models.TextField(blank=True)
 	fechaCreacion = models.DateTimeField(auto_now_add=True, null=True)
 
 
