@@ -57,7 +57,7 @@ def edit_user_view(request, idUsuario):
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['resultCode'] = '1'
+            data['resultCode'] = 1
             return Response(data =data)
         else:
             data = serializer.errors 
