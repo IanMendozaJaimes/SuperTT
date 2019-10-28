@@ -29,7 +29,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['response'] = '1'
+            data['resultCode'] = 1
             data['email'] = account.email
 
             token = Token.objects.get(user=account).key
@@ -46,7 +46,7 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
             e.close()
         else:
             data = serializer.errors #data = {"resultCode": "-1001"}
-            data.update({"error":"customized"})
+            data.update({"resultCode": -10003})
         return Response(data)
 
 @api_view(['PUT'])
@@ -57,7 +57,7 @@ def edit_user_view(request, idUsuario):
         data = {}
         if serializer.is_valid():
             account = serializer.save()
-            data['resultCode'] = '1'
+            data['resultCode'] = 1
             return Response(data =data)
         else:
             data = serializer.errors 
@@ -83,14 +83,11 @@ def login_view(request, *args, **kwargs):
             serializer = SerializadorUsuario(usr, data = request.data)
             data = {}
         if serializer.is_valid():
-            print("third")
             token, created = Token.objects.get_or_create(user=usr)
-            print("fourth")
             data.update({'user': usr.email})
             data.update({'token': token.key})
             data['codeStatus'] = '1'
             return Response(data =data)
         else:
-            print("else")
-            data = serializer.errors 
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+            data = serializer.errors
+        return Response(data, status = status.HTTP_400_BAD_REQUEST)

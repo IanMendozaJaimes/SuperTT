@@ -1,6 +1,7 @@
 from users.models import User
 from rest_framework import serializers
 
+from django.contrib.auth.hashers import check_password, make_password
 class SerializadorRegistro(serializers.ModelSerializer):
 
     password2 = serializers.CharField(style = {'input_type': 'password'}, write_only= True)
@@ -11,6 +12,13 @@ class SerializadorRegistro(serializers.ModelSerializer):
             'password': {'write_only': True}
         }
     def save(self):
+
+        try:
+            usr = User.objects.get(email=request.data['email'])
+            raise Response({"resultCode": -1})
+        except:
+            pass
+
         account = User(
             email = self.validated_data['email'],
         )
@@ -18,8 +26,9 @@ class SerializadorRegistro(serializers.ModelSerializer):
         password2 = self.validated_data['password2']
 
         if password != password2:
-            raise serializers.ValidationError({'resultCode': 'match_password'})
-        account.set_password(password)
+            raise serializers.ValidationError({'resultCode': 123456789})
+        
+        account.set_password(make_password(password))
         account.save()
         return account
 class SerializadorUsuario(serializers.ModelSerializer):
