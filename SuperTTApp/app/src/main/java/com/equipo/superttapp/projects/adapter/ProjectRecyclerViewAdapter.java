@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.view.TraduccionListActivity;
-import com.equipo.superttapp.util.BundleConstants;
+import com.equipo.superttapp.util.Constants;
 
 import java.util.List;
 
@@ -44,9 +44,9 @@ public class ProjectRecyclerViewAdapter extends RecyclerView.Adapter<ProjectRecy
         holder.tvCalificacion.setText(proyectoModel.getRate().toString());
         holder.cvProyecto.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), TraduccionListActivity.class);
-            intent.putExtra(BundleConstants.PROYECTO_NOMBRE, proyectoModel.getName());
-            intent.putExtra(BundleConstants.PROYECTO_ID, proyectoModel.getId());
-            intent.putExtra(BundleConstants.PROYECTO_CALIFICACION, proyectoModel.getRate());
+            intent.putExtra(Constants.PROYECTO_NOMBRE, proyectoModel.getName());
+            intent.putExtra(Constants.PROYECTO_ID, proyectoModel.getId());
+            intent.putExtra(Constants.PROYECTO_CALIFICACION, proyectoModel.getRate());
             v.getContext().startActivity(intent);
         });
     }

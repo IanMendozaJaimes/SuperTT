@@ -37,9 +37,8 @@ public interface APIService {
     Call<TraduccionData> createTraduccion(@Body TraduccionData traduccionData);
     // Subir imagen
     @Multipart
-    @POST("/traducciones/upload")
-    Call<TraduccionData> uploadTraduccion(@Part("idUsuario") RequestBody idUsuario,
-                                          @Part("idProyecto") RequestBody idProyecto, @Part MultipartBody.Part image);
+    @POST("/traducciones")
+    Call<TraduccionData> uploadTraduccion(@Part("idproyecto") RequestBody idProyecto, @Part MultipartBody.Part image, @Header("Authorization") String token);
     // Edicion de un traduccionModel
     @PUT("/traducciones/{idTraducion}")
     Call<TraduccionData> editTraduccion(@Path("idTraducion") Integer idTraducion, @Body TraduccionData traduccionData);

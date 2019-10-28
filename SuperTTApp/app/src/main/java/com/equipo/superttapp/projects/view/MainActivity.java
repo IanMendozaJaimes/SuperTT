@@ -65,7 +65,9 @@ public class MainActivity extends AppCompatActivity implements
             String email = preferencesManager.getStringValue(PreferencesManager.KEY_USER_EMAIL);
             String nombre = preferencesManager.getStringValue(PreferencesManager.KEY_USER_NAME);
             String image = preferencesManager.getStringValue(PreferencesManager.KEY_USER_IMAGE);
-            Log.i(TAG, "email " + email + " nombre " + nombre);
+            Log.d(TAG, "email " + email + " nombre " + nombre + " imagen " + image);
+            if (image.length() < 1)
+                image = "http://";
             tvNombre.setText(nombre);
             tvEmail.setText(email);
             Picasso.get().load(image).error(R.drawable.usuario_defecto).into(imageView);
@@ -108,6 +110,8 @@ public class MainActivity extends AppCompatActivity implements
                         manager.deleteValue(PreferencesManager.KEY_USER_EMAIL);
                         manager.deleteValue(PreferencesManager.KEY_USER_ID);
                         manager.deleteValue(PreferencesManager.KEY_USER_NAME);
+                        manager.deleteValue(PreferencesManager.KEY_USER_LAST_NAME);
+                        manager.deleteValue(PreferencesManager.KEY_USER_IMAGE);
                         manager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, false);
                     }
                     finish();

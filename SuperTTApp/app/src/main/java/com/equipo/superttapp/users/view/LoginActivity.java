@@ -52,7 +52,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
             goHome();
         }
-        goHome();
         hideProgressBar();
         loginViewModel = ViewModelProviders.of(this).get(LoginViewModel.class);
         btnRegistrate.setOnClickListener(v -> goCreateAccount());
@@ -118,8 +117,9 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (resultado.getCode().equals(ResultCodes.RN006)) {
             snackbar.setText(R.string.msg2_cuenta_no_verificada);
-        } else if (resultado.getCode().equals(ResultCodes.RN001)
-                || resultado.getCode().equals(ResultCodes.RN002) ) {
+        } else if (resultado.getCode().equals(ResultCodes.RN001)) {
+            snackbar.setText(R.string.msg1_datos_no_validos);
+        } else if (resultado.getCode().equals(ResultCodes.RN002)) {
             snackbar.setText(R.string.msg1_datos_no_validos);
             if (!resultado.getResult().getValidEmail()) {
                 etCorreo.setError(getText(R.string.msg1_datos_no_validos));
@@ -142,12 +142,12 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void saveUser(UsuarioModel model) {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        //preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, 9);
-        // preferencesManager.saveValue(PreferencesManager.KEY_USER_TOKEN, model.getKeyAuth());
-        //preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
-        //preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
-        //preferencesManager.saveValue(PreferencesManager.KEY_USER_IMAGE, model.getImage());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_TOKEN, "Token "+ model.getKeyAuth());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
+        preferencesManager.saveValue(PreferencesManager.KEY_USER_IMAGE, model.getImage());
     }
 }
