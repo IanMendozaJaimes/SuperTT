@@ -313,7 +313,7 @@ def create_translation_view(request): #request must include idproyecto in body
     mediatype = request.data.get('mediatype')
 
     if not os.path.exists(settings.BASE_DIR+'/media'+"/proyectos"):
-        os.mkdir("./proyectos")
+        os.mkdir(settings.BASE_DIR+'/media'+"/proyectos")
 
     path_file = settings.BASE_DIR+'/media/proyectos/' + parentFolderName
     if not os.path.exists(path_file):
