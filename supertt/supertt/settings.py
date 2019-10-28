@@ -31,6 +31,7 @@ ALLOWED_HOSTS = [
     '10.100.75.9',
     'localhost',
     '0.0.0.0',
+    '127.0.0.1',
     '192.168.1.82',
     '10.100.67.209'
 ]
@@ -112,9 +113,9 @@ DATABASES = {
         'NAME': 'tt_database',
         'USER': 'postgres',
                 #'ianMJ',
-        'PASSWORD': 'postgres',
+        'PASSWORD': #'postgres',
                     #'postgres'
-                    #''
+                    'newcastle',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -209,7 +210,7 @@ SMTP_HOST = 'smtp.gmail.com'
 SMTP_USER = 'ttapplicacion@gmail.com'
 SMTP_PASSWORD = '#ContraDelTT1'
 SMTP_PORT = 587
-SITE_URL = 'http://localhost:8000/'
+SITE_URL = str(ALLOWED_HOSTS[-1])+':8000/'
 
 
 
