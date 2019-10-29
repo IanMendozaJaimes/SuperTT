@@ -29,11 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '10.100.68.152',
-    'localhost',
     '0.0.0.0',
-    '127.0.0.1',
+    'localhost',
     '192.168.1.82',
     '10.100.75.9', 
+    '127.0.0.1',
 ]
 
 # Application definition
@@ -124,13 +124,9 @@ DATABASES = {
         'NAME': 'tt_database',
         'USER': 'postgres',
                 #'ianMJ',
-<<<<<<< HEAD
-        'PASSWORD': 'postgres',
-=======
         'PASSWORD': #'postgres',
-                    #'postgres'
-                    'newcastle',
->>>>>>> 44992c80d5230de41dffb120e379f6d0a01c5809
+                    'postgres',
+                    #'newcastle',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
