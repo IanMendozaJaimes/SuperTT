@@ -30,6 +30,7 @@ from rest_framework.decorators import api_view
 
 from users.models import User
 import os
+import pytz
 
 # Create your views here.
 
@@ -332,7 +333,15 @@ def create_translation_view(request): #request must include idproyecto in body
 
         if serializer.is_valid():
             trans.save()
-            trans.nombre = str(trans.fechaCreacion)
+            print(type(trans.fechaCreacion))
+            
+            #s = datetime.fromtimestamp(int(trans.fechaCreacion)
+            #trans.nombre = str(s)
+            tz = pytz.timezone('America/Mexico_City')
+            t = timezone.localtime(trans.fechaCreacion, tz)
+
+            trans.nombre = str(str(t).split('.')[0])
+
             trans.save()
             idTraduccion = str(trans.id)
             
@@ -415,7 +424,7 @@ def detail_translation_view(request, idpro):
         #trans = trans[0]
         
     print("reaches3")
-    l = []
+
     if request.method == "GET":
         print("third")
         serializer = SerializadorTraduccion(trans, many=True)
