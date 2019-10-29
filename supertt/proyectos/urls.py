@@ -21,6 +21,7 @@ def get_proyects_urls():
 		path('proyectos/descargar', CreateProyectFile),
 		path('proyectos/eliminar', eliminarProyectoView),
 		path('proyectos/cambiar', cambiarProyectoView),
+		path('proyectos/calificar_traduccion', actualizarTraduccion),
 
 		#-------------REST API VIEWS-------------
 		#proyectos

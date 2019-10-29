@@ -55,7 +55,36 @@
 					<div class="Translations_project_container_info">
 						<p class="Translations_project_container_info_date">{{ traduccion.fechaCreacion }}</p>
 						<div class="Translations_project_container_info_stars">
-							{{ traduccion.calificacion }}
+							{% if traduccion.calificacion >= 1 %}
+								<span class="icon-star-empty star star-selected" id="star1_{{traduccion.id}}"></span>
+							{% else %}
+								<span class="icon-star-empty star" id="star1_{{traduccion.id}}"></span>
+							{% endif %}
+
+							{% if traduccion.calificacion >= 2 %}
+								<span class="icon-star-empty star star-selected" id="star2_{{traduccion.id}}"></span>
+							{% else %}
+								<span class="icon-star-empty star" id="star2_{{traduccion.id}}"></span>
+							{% endif %}
+
+							{% if traduccion.calificacion >= 3 %}
+								<span class="icon-star-empty star star-selected" id="star3_{{traduccion.id}}"></span>
+							{% else %}
+								<span class="icon-star-empty star" id="star3_{{traduccion.id}}"></span>
+							{% endif %}
+							
+							{% if traduccion.calificacion >= 4 %}
+								<span class="icon-star-empty star star-selected" id="star4_{{traduccion.id}}"></span>
+							{% else %}
+								<span class="icon-star-empty star" id="star4_{{traduccion.id}}"></span>
+							{% endif %}
+
+							{% if traduccion.calificacion >= 5 %}
+								<span class="icon-star-empty star star-selected" id="star5_{{traduccion.id}}"></span>
+							{% else %}
+								<span class="icon-star-empty star" id="star5_{{traduccion.id}}"></span>
+							{% endif %}
+
 						</div>
 					</div>
 					<div class="Translations_project_container_example">

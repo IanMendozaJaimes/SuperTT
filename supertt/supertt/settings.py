@@ -32,8 +32,8 @@ ALLOWED_HOSTS = [
     '0.0.0.0',
     'localhost',
     '192.168.1.82',
-    '10.100.75.9', 
-    '127.0.0.1',
+    '10.100.67.209',
+    'localhost',
 ]
 
 # Application definition
@@ -146,6 +146,22 @@ DATABASES = {
 #     }
 # }
 
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+# )
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tt_database',
+        'USER': #'ianMJ',
+                'postgres',
+        'PASSWORD': #'',
+                    'newcastle',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
 
@@ -211,7 +227,7 @@ SMTP_HOST = 'smtp.gmail.com'
 SMTP_USER = 'ttapplicacion@gmail.com'
 SMTP_PASSWORD = '#ContraDelTT1'
 SMTP_PORT = 587
-SITE_URL = str(ALLOWED_HOSTS[-1])+':8000/'
+SITE_URL = 'http://' + str(ALLOWED_HOSTS[-1])+':8000/'
 IMG_DEFAULT = 'avatarDefault.png'
 
 

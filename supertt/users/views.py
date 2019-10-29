@@ -338,8 +338,6 @@ def ValidarUsuarioView(request):
 	except:
 		return redirect('/usuarios/login')
 
-
-
 def EnviarCorreoRecuperacionView(request):
 	try:
 		email = request.POST['correo']
@@ -352,6 +350,8 @@ def EnviarCorreoRecuperacionView(request):
 		uh.save()
 
 		url = settings.SITE_URL + 'usuarios/contrasena?token=' + h
+
+		print('url:', url)
 
 		e = Email()
 		e.send_change_password_email(email, user.first_name, url)

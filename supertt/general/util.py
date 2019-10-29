@@ -50,7 +50,7 @@ INVALID_EMAIL = """El correo ingresado no es valido."""
 class ImageUtil:
 	def __init__(self):
 		self.pre = ""
-		self.HTTP_prefix = "http://"
+		self.HTTP_prefix = ""
 		if settings.SITE_URL[-1] != "/":
 			self.pre = "/"
 		self.relative_path = self.pre + "media/proyectos/"
@@ -186,6 +186,7 @@ class Email():
 		message = self.get_template(settings.BASE_DIR+'/general/change_password.html')
 		message = message.replace('PERSON_NAME', aname)
 		message = message.replace('LINK', link)
+		print('message:', message)
 		msg.attach(MIMEText(message, 'html'))
 
 		self.s.send_message(msg)

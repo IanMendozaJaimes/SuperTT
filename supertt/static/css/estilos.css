@@ -249,6 +249,14 @@ a:hover {
 .aside_message_show {
   margin-right: 15px;
 }
+.star {
+  font-size: 1.5em;
+  color: #ba0a76;
+  margin-right: 0.1em;
+}
+.star:hover:before {
+  content: "\e9d9";
+}
 .Login {
   display: flex;
   justify-content: center;
@@ -634,6 +642,12 @@ a:hover {
 }
 .Translations_project_container_btn {
   flex-basis: 70%;
+}
+.Translations_project_container_info_stars {
+  display: flex;
+  justify-content: center;
+  justify-content: left;
+  margin-top: 1em;
 }
 .TranslationMenu {
   position: fixed;

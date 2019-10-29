@@ -80,7 +80,7 @@ class TranslationsView(LoginRequiredMixin, TemplateView):
             }
             p = change_time_zone(p)
 
-            translations = list(Traduccion.objects.filter(proyecto=project))
+            translations = list(Traduccion.objects.filter(proyecto=project).order_by('id'))
 
             return render(request, self.template_name, {
                 'nombre': request.user.first_name,
@@ -198,6 +198,19 @@ def eliminarProyectoView(request):
     idp = request.GET['id']
     Proyecto.objects.filter(pk=idp).delete()
     return JsonResponse({'err':{}})
+
+
+def actualizarTraduccion(request):
+    try:
+        traduccion = Traduccion.objects.get(id=int(request.GET['id']))
+        user = request.user
+        if traduccion.usuario_id == user.id:
+            traduccion.calificacion = float(request.GET['grade'])
+            traduccion.save()
+            return JsonResponse({'err':{}})
+        return JsonResponse({'err':'no se pudo'})
+    except Exception as e:
+        return JsonResponse({'err':'no se pudo'})
 
 
 #============================ REST API VIEWS============================   
