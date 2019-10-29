@@ -57,7 +57,7 @@ class ImageUtil:
 			self.pre = "/"
 		self.relative_path = self.pre + "media/proyectos/"
 	def build_url(self, idUser, idProj, nameFile):
-		path = HTTP__prefix + settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)
+		path = self.HTTP_prefix + settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)
 		
 		print(path)
 		return path
