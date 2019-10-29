@@ -12,6 +12,8 @@
 					{% csrf_token %}
 					<p id="msg_nombre" class="msg_validation_error"></p>
 					<input type="text" name="nombre" placeholder="Nombre" class="text_form Login_container_text" value="{{ nombre }}">
+					<p id="msg_apellidos" class="msg_validation_error"></p>
+					<input type="text" name="apellidos" placeholder="Apellidos" class="text_form Login_container_text" value="{{ apellidos }}">
 					<p id="msg_correo" class="msg_validation_error"></p>
 					<input type="email" name="correo" placeholder="Correo" class="text_form Login_container_text" value="{{ correo }}">
 					<p id="msg_contra" class="msg_validation_error"></p>

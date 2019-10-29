@@ -17,7 +17,9 @@
 			<p class="Profile_container_email">{{ correo }}</p>
 			<form>
 				<p id="msg_nombre" class="msg_validation_error invisible"></p>
-				<input type="text" placeholder="Nombre" class="text_form Profile_container_text" value="{{nombre}}">
+				<input type="text" placeholder="Nombre" class="text_form Profile_container_text" id="Projects_container_nombre" value="{{nombre}}">
+				<p id="msg_apellidos" class="msg_validation_error invisible"></p>
+				<input type="text" placeholder="Apellidos" class="text_form Profile_container_text" id="Projects_container_apellidos" value="{{apellidos}}">
 				<div class="Profile_container_select">
 					<select class="Profile_container_studies">
 						{% for opcion in opciones %}

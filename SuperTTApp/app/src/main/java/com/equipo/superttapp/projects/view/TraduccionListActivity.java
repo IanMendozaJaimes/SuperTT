@@ -93,7 +93,6 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         super.onStart();
         recuperarTraducciones();
     }
-
     public void onFabTraduccionClick() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(this.getPackageManager()) != null) {

@@ -10,5 +10,5 @@ import com.equipo.superttapp.util.BusinessResult;
 public interface TraduccionInteractor {
     MutableLiveData<BusinessResult<TraduccionModel>> findAllTraduccionesByProyecto(Integer idProyecto, String key);
     MutableLiveData<BusinessResult<TraduccionModel>> deleteTraduccion(Integer idTraduccion, String token);
-    MutableLiveData<BusinessResult<TraduccionModel>> uplodadImage(TraduccionModel traduccionModel, String token, Bitmap bitmap);
+    MutableLiveData<BusinessResult<TraduccionModel>> uplodadImage(TraduccionModel traduccionModel, String token, Bitmap bitmappr);
 }
