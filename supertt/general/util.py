@@ -52,11 +52,12 @@ INVALID_EMAIL = """El correo ingresado no es valido."""
 class ImageUtil:
 	def __init__(self):
 		self.pre = ""
+		self.HTTP_prefix = "http://"
 		if settings.SITE_URL[-1] != "/":
 			self.pre = "/"
 		self.relative_path = self.pre + "media/proyectos/"
 	def build_url(self, idUser, idProj, nameFile):
-		path = settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)
+		path = self.HTTP_prefix + settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)
 		
 		print(path)
 		return path
