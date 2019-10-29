@@ -188,6 +188,7 @@ class Email():
 		message = self.get_template(settings.BASE_DIR+'/general/change_password.html')
 		message = message.replace('PERSON_NAME', aname)
 		message = message.replace('LINK', link)
+		print('message:', message)
 		msg.attach(MIMEText(message, 'html'))
 
 		self.s.send_message(msg)

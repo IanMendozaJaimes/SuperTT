@@ -29,11 +29,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '10.100.68.152',
-    'localhost',
     '0.0.0.0',
     '127.0.0.1',
     '192.168.1.82',
-    '10.100.67.209'
+    '10.100.67.209',
+    'localhost'
 ]
 
 # Application definition
@@ -122,16 +122,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
-<<<<<<< HEAD
-        'USER': 'postgres',
-                #'ianMJ',
-        'PASSWORD': #'postgres',
-                    #'postgres'
-                    'newcastle',
-=======
         'USER': 'ianMJ',
         'PASSWORD': '',
->>>>>>> 1dd16ae511678c37f9ac6efab23dc8b32ed9dedd
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
@@ -216,7 +208,7 @@ SMTP_HOST = 'smtp.gmail.com'
 SMTP_USER = 'ttapplicacion@gmail.com'
 SMTP_PASSWORD = '#ContraDelTT1'
 SMTP_PORT = 587
-SITE_URL = str(ALLOWED_HOSTS[-1])+':8000/'
+SITE_URL = 'http://' + str(ALLOWED_HOSTS[-1])+':8000/'
 IMG_DEFAULT = 'avatarDefault.png'
 
 

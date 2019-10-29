@@ -353,6 +353,8 @@ def EnviarCorreoRecuperacionView(request):
 
 		url = settings.SITE_URL + 'usuarios/contrasena?token=' + h
 
+		print('url:', url)
+
 		e = Email()
 		e.send_change_password_email(email, user.first_name, url)
 		e.close()

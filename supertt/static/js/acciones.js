@@ -396,6 +396,76 @@ function logout(){
 	document.getElementById("logout_form").submit();
 }
 
+
+function grade_translation(id, grade){
+	let request = new XMLHttpRequest();
+
+	request.open('GET', '/proyectos/calificar_traduccion?id='+id+'&grade='+grade,true);
+
+	request.onreadystatechange = function(aEvent){
+		if (request.readyState == 4) {
+			if(request.status == 200){
+				let req = JSON.parse(request.responseText);
+
+				if(Object.entries(req.err).length === 0){
+					console.log('actualizada')					
+				}
+				else{
+					console.log('no se pudo')
+				}
+			}
+		}
+	};
+
+	request.send();
+}
+
+
+function add_star_hover(){
+	let stars = document.querySelectorAll('.star');
+	for(let i = 0; i < stars.length; i++){
+		if(stars[i].classList.contains('star-selected')){
+			stars[i].classList.add('icon-star-full');
+		}
+		stars[i].addEventListener('mouseover', function(event){
+			let ids = event.target.id.split('_');
+			let tope = parseInt(ids[0].substring(4));
+			for(let j = 5; j > 0; j--){
+				if(j > tope)
+					document.getElementById('star'+j+'_'+ids[1]).classList.remove('icon-star-full');
+				else
+					document.getElementById('star'+j+'_'+ids[1]).classList.add('icon-star-full');
+			}
+		});
+		stars[i].addEventListener('mouseout', function(event){
+			let ids = event.target.id.split('_');
+			let tope = parseInt(ids[0].substring(4));
+			for(let j = 5; j > 0; j--){
+				let aux = document.getElementById('star'+j+'_'+ids[1]);
+				if(!aux.classList.contains('star-selected'))
+					aux.classList.remove('icon-star-full');
+				else
+					aux.classList.add('icon-star-full');
+			}
+		});
+		stars[i].addEventListener('click', function(event){
+			ids = event.target.id.split('_');
+			tope = parseInt(ids[0].substring(4));
+			for(let j = 5; j > 0; j--){
+				if(j > tope){
+					let aux = document.getElementById('star'+j+'_'+ids[1]);
+					aux.classList.remove('star-selected');
+					aux.classList.remove('icon-star-full');
+				}
+				else
+					document.getElementById('star'+j+'_'+ids[1]).classList.add('star-selected');
+			}
+			grade_translation(ids[1], tope);
+		});
+	}
+}
+
+
 show_messages();
 
 
