@@ -315,7 +315,7 @@ def create_translation_view(request): #request must include idproyecto in body
     mediatype = request.data.get('mediatype')
 
     if not os.path.exists(settings.BASE_DIR+'/media'+"/proyectos"):
-        os.mkdir(settings.BASE_DIR+'/media'+"/proyectos")
+        os.mkdir(settings.BASE_DIR +'/media'+"/proyectos")
 
     path_file = settings.BASE_DIR+'/media/proyectos/' + parentFolderName
     if not os.path.exists(path_file):
@@ -324,16 +324,23 @@ def create_translation_view(request): #request must include idproyecto in body
     path_file = path_file + "/" + folderName 
     if not os.path.exists(path_file):
         os.mkdir(path_file)
+    
+    trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr, archivo="" , calificacion = 0.0, traduccion="")
 
-    trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr , calificacion = 0.0, archivo = "", traduccion="")
-    trans.nombre = str(trans.fechaCreacion)
     if request.method == "POST":
         serializer = SerializadorTraduccion(trans, data = request.data)
 
         if serializer.is_valid():
-            serializer.save()
-
+            trans.save()
+            trans.nombre = str(trans.fechaCreacion)
+            trans.save()
             idTraduccion = str(trans.id)
+            
+            trans.archivo = str(idTraduccion) + "." + mediatype
+            serializer.save()
+ 
+            print(idTraduccion)
+            
             image_file = open(path_file +"/"+ idTraduccion+ "." + mediatype, "wb")
             
             for chunk in file.chunks():
@@ -388,9 +395,38 @@ def detail_translation_view(request, idpro):
     
     try:
         trans = Traduccion.objects.filter(proyecto = idpro)
-    except Traduccion.DoesNotExist:
-        return Response(status=status.HTTP_404_NOT_FOUND)
+    except:
+        print("a")
+        return Response(data = {"resultCode": -1},status=status.HTTP_404_NOT_FOUND)
+    try:
+        print("jala pls")
+        proj = Proyecto.objects.get(id = idpro)
+        print("jalo")
+        usr = proj.usuario
+        print("----------->"+str(usr))
+    except:
+        print("b")
+        return Response(data = {"resultCode": -1}, status=status.HTTP_404_NOT_FOUND)
+    print("reaches")
+
+    path_img = ImageUtil()
+    print("reaches2")
+    #if trans.count() > 0:
+        #trans = trans[0]
         
+    print("reaches3")
+    l = []
     if request.method == "GET":
+        print("third")
         serializer = SerializadorTraduccion(trans, many=True)
+        #data = serializer.d
+        data = serializer.data
+        print(serializer.data)
+        count = 0
+
+        for elem in serializer.data:
+            path = path_img.build_url(usr.id, str(idpro), elem['archivo'])
+            elem.update({"imgUrl": path})
+        print("fourth")
+        
         return Response(serializer.data)
