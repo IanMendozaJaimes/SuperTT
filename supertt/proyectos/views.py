@@ -46,7 +46,8 @@ class ProyectsView(LoginRequiredMixin, TemplateView):
 
         return render(request, self.template_name, 
             {
-                'nombre' : request.user.first_name + ' ' + request.user.last_name,
+                'nombre': request.user.first_name,
+                'apellidos': request.user.last_name,
                 'avatar': 'imgUsuario/'+request.user.imagen_perfil,
                 'proyectos': data,
             })
@@ -81,7 +82,8 @@ class TranslationsView(LoginRequiredMixin, TemplateView):
             translations = list(Traduccion.objects.filter(proyecto=project))
 
             return render(request, self.template_name, {
-                'nombre' : request.user.first_name + ' ' + request.user.last_name,
+                'nombre': request.user.first_name,
+                'apellidos': request.user.last_name,
                 'avatar': 'imgUsuario/'+request.user.imagen_perfil,
                 'proyecto': p,
                 'traducciones': translations,

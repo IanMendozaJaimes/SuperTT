@@ -87,18 +87,18 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
     }
 
     @Override
-    public MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idProyecto, MultipartBody.Part image, String token) {
+    public MutableLiveData<BusinessResult<TraduccionModel>> uploadTraduccion(RequestBody idProyecto, MultipartBody.Part image, RequestBody mediaType, String token) {
         MutableLiveData<BusinessResult<TraduccionModel>> resultado = new MutableLiveData<>();
         try {
-            service.uploadTraduccion(idProyecto, image, token).enqueue(new Callback<TraduccionData>() {
+            service.uploadTraduccion(idProyecto, mediaType, image, token).enqueue(new Callback<TraduccionData>() {
                 @Override
                 public void onResponse(Call<TraduccionData> call, Response<TraduccionData> response) {
-                    Log.i(TAG, "uploadTraduccion-onResponse " + response.isSuccessful() + " "
-                            + response.body());
                     BusinessResult<TraduccionModel> model = new BusinessResult<>();
-                    if (response.isSuccessful()) {
+                    if (response.isSuccessful() && response.body() != null
+                            && response.body().getResultCode().equals(ResultCodes.SUCCESS)) {
                         model.setCode(ResultCodes.SUCCESS);
                     }
+                    resultado.setValue(model);
                 }
 
                 @Override
@@ -110,6 +110,8 @@ public class TraduccionRepositoryImpl implements TraduccionRepository{
             });
         } catch (NetworkOnMainThreadException e) {
             Log.e(TAG, "uploadTraduccion ", e);
+            BusinessResult<TraduccionModel> model = new BusinessResult<>();
+            resultado.setValue(model);
         }
         return resultado;
     }

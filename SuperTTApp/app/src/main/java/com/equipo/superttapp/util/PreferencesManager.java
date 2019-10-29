@@ -3,6 +3,8 @@ package com.equipo.superttapp.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.equipo.superttapp.users.model.UsuarioModel;
+
 public class PreferencesManager {
 
 
@@ -41,6 +43,40 @@ public class PreferencesManager {
         editor = preferences.edit();
         editor.putInt(key, value);
         editor.apply();
+    }
+
+    public void saveUser(UsuarioModel model) {
+        saveValue(KEY_USER_EMAIL, model.getEmail());
+        saveValue(KEY_USER_IS_LOGGED, true);
+        saveValue(KEY_USER_ID, model.getId());
+        saveValue(KEY_USER_TOKEN, "Token "+ model.getKeyAuth());
+        saveValue(KEY_USER_NAME, model.getName());
+        saveValue(KEY_USER_LAST_NAME, model.getLastname());
+        saveValue(KEY_USER_IMAGE, model.getImage());
+    }
+
+    public UsuarioModel getUser() {
+        UsuarioModel model = new UsuarioModel();
+        model.setEmail(getStringValue(KEY_USER_EMAIL));
+        model.setId(getIntegerValue(KEY_USER_ID));
+        model.setName(getStringValue(KEY_USER_NAME));
+        model.setLastname(getStringValue(KEY_USER_LAST_NAME));
+        model.setImage(getStringValue(KEY_USER_IMAGE));
+        return model;
+    }
+
+    public void removeUser() {
+        deleteValue(PreferencesManager.KEY_USER_EMAIL);
+        deleteValue(PreferencesManager.KEY_USER_ID);
+        deleteValue(PreferencesManager.KEY_USER_NAME);
+        deleteValue(PreferencesManager.KEY_USER_LAST_NAME);
+        deleteValue(PreferencesManager.KEY_USER_IMAGE);
+        saveValue(PreferencesManager.KEY_USER_IS_LOGGED, false);
+    }
+
+    public Boolean isLogged() {
+        return keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
+                && getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED);
     }
 
     public String getStringValue(String key) {

@@ -20,6 +20,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.equipo.superttapp.R;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.users.view.LoginActivity;
 import com.equipo.superttapp.users.view.ProfileFragment;
 import com.equipo.superttapp.util.PreferencesManager;
@@ -60,17 +61,15 @@ public class MainActivity extends AppCompatActivity implements
 
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
-            String email = preferencesManager.getStringValue(PreferencesManager.KEY_USER_EMAIL);
-            String nombre = preferencesManager.getStringValue(PreferencesManager.KEY_USER_NAME);
-            String image = preferencesManager.getStringValue(PreferencesManager.KEY_USER_IMAGE);
-            Log.d(TAG, "email " + email + " nombre " + nombre + " imagen " + image);
-            if (image.length() < 1)
-                image = "http://";
-            tvNombre.setText(nombre);
-            tvEmail.setText(email);
-            Picasso.get().load(image).error(R.drawable.usuario_defecto).into(imageView);
+        if (preferencesManager.isLogged()) {
+            UsuarioModel usuarioModel = preferencesManager.getUser();
+            Log.d(TAG, "email " + usuarioModel.getEmail() + " nombre "
+                    + usuarioModel.getName() + " imagen " + usuarioModel.getImage());
+            if (usuarioModel.getImage().length() < 1)
+                usuarioModel.setImage("http://");
+            tvNombre.setText(usuarioModel.getName());
+            tvEmail.setText(usuarioModel.getEmail());
+            Picasso.get().load(usuarioModel.getImage()).error(R.drawable.usuario_defecto).into(imageView);
         }
 
     }
@@ -106,14 +105,7 @@ public class MainActivity extends AppCompatActivity implements
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
                     PreferencesManager manager = new PreferencesManager(getApplicationContext(),
                             PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-                    if (manager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)) {
-                        manager.deleteValue(PreferencesManager.KEY_USER_EMAIL);
-                        manager.deleteValue(PreferencesManager.KEY_USER_ID);
-                        manager.deleteValue(PreferencesManager.KEY_USER_NAME);
-                        manager.deleteValue(PreferencesManager.KEY_USER_LAST_NAME);
-                        manager.deleteValue(PreferencesManager.KEY_USER_IMAGE);
-                        manager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, false);
-                    }
+                    manager.removeUser();
                     finish();
                     startActivity(new Intent(getApplicationContext(), LoginActivity.class));
                 })

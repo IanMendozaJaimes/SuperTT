@@ -28,7 +28,7 @@ DEBUG = True
 
 
 ALLOWED_HOSTS = [
-    '10.100.75.9',
+    '10.100.68.152',
     'localhost',
     '0.0.0.0',
     '127.0.0.1',
@@ -107,30 +107,36 @@ WSGI_APPLICATION = 'supertt.wsgi.application'
 #     }
 # }
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'tt_database',
+#         'USER': 'postgres',
+#         'PASSWORD': 'newcastle',
+#         'HOST': '127.0.0.1',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
+<<<<<<< HEAD
         'USER': 'postgres',
                 #'ianMJ',
         'PASSWORD': #'postgres',
                     #'postgres'
                     'newcastle',
+=======
+        'USER': 'ianMJ',
+        'PASSWORD': '',
+>>>>>>> 1dd16ae511678c37f9ac6efab23dc8b32ed9dedd
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
 }
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'tt_database',
-#         'USER': 'ianMJ',
-#         'PASSWORD': '',
-#         'HOST': '127.0.0.1',
-#         'PORT': '5432',
-#     }
-# }
 # AUTHENTICATION_BACKENDS = (
 #     'django.contrib.auth.backends.ModelBackend',
 # )
@@ -211,6 +217,7 @@ SMTP_USER = 'ttapplicacion@gmail.com'
 SMTP_PASSWORD = '#ContraDelTT1'
 SMTP_PORT = 587
 SITE_URL = str(ALLOWED_HOSTS[-1])+':8000/'
+IMG_DEFAULT = 'avatarDefault.png'
 
 
 

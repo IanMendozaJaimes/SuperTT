@@ -51,7 +51,7 @@ class User(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
     is_active = models.BooleanField(default=False)
     estudios = models.ForeignKey(Estudios, on_delete=models.SET_NULL, blank=True, null=True)
-    imagen_perfil = models.TextField(default='avatarDefault.png')
+    imagen_perfil = models.TextField(default=settings.IMG_DEFAULT)
 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = []

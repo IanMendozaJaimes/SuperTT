@@ -3,7 +3,6 @@ package com.equipo.superttapp.projects.view;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +18,7 @@ import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.adapter.ProjectRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.viewmodel.ProyectsListViewModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
@@ -39,8 +39,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     private FloatingActionButton fabCreate;
     private static final String TAG = ProjectListFragment.class.getCanonicalName();
     ProyectsListViewModel proyectsListViewModel;
-    private Integer idUsuario;
-    private String token;
+    private UsuarioModel usuarioModel;
 
     public ProjectListFragment() {
         // Required empty public constructor
@@ -67,17 +66,14 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
 
         PreferencesManager preferencesManager = new PreferencesManager(getContext(),
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
-            idUsuario = preferencesManager.getIntegerValue(PreferencesManager.KEY_USER_ID);
-            token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
-            Log.d(TAG, "onCreateView idUsuario=" + idUsuario + " token=" + token);
+        if (preferencesManager.isLogged()) {
+            usuarioModel = preferencesManager.getUser();
         }
 
         return view;
     }
 
-    public void crearProyecto() {
+    private void crearProyecto() {
         LayoutInflater inflater = this.getLayoutInflater();
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         final View view = inflater.inflate(R.layout.dialog_edit_proyecto, null);
@@ -88,8 +84,8 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
                     EditText etNombre = view.findViewById(R.id.et_nombre_proyecto);
                     ProyectoModel model = new ProyectoModel();
                     model.setName(etNombre.getText().toString());
-                    model.setIdUsuario(idUsuario);
-                    proyectsListViewModel.createProyecto(model, token).observe(this,
+                    model.setIdUsuario(usuarioModel.getId());
+                    proyectsListViewModel.createProyecto(model, usuarioModel.getKeyAuth()).observe(this,
                             proyectoModelBusinessResult -> {
                                 if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS))
                                     recuperarTodosProyectos();
@@ -109,7 +105,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     }
 
     private void recuperarTodosProyectos() {
-        proyectsListViewModel.findUserProyects(idUsuario, token).observe(this, proyectodata -> {
+        proyectsListViewModel.findUserProyects(usuarioModel.getId(), usuarioModel.getKeyAuth()).observe(this, proyectodata -> {
             if (proyectodata.getCode().equals(ResultCodes.SUCCESS)) {
                 proyectoModelList.clear();
                 proyectoModelList.addAll(proyectodata.getResults());

@@ -48,8 +48,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
         ButterKnife.bind(this);
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
+        if (preferencesManager.isLogged()) {
             goHome();
         }
         hideProgressBar();
@@ -142,12 +141,6 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
     public void saveUser(UsuarioModel model) {
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_IS_LOGGED, true);
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_ID, model.getId());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_TOKEN, "Token "+ model.getKeyAuth());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_IMAGE, model.getImage());
+        preferencesManager.saveUser(model);
     }
 }
