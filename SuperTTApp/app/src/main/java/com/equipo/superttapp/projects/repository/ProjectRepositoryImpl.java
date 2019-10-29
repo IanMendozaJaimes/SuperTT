@@ -12,7 +12,6 @@ import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.equipo.superttapp.util.ServiceGenerator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class ProjectRepositoryImpl implements ProjectRepository{
                 public void onResponse(Call<List<ProyectoData>> call, Response<List<ProyectoData>> response) {
                     BusinessResult<ProyectoModel> model = new BusinessResult<>();
                     List<ProyectoModel> modelos = new ArrayList<>();
-                    if (response.isSuccessful()) {
+                    if (response.isSuccessful() && response.body() != null) {
                         for (ProyectoData data : response.body()) {
                             ProyectoModel proyectoModel = new ProyectoModel();
                             proyectoModel.setRate(data.getCalificacion());
@@ -43,9 +42,12 @@ public class ProjectRepositoryImpl implements ProjectRepository{
                             proyectoModel.setTextDate(data.getFecha());
                             modelos.add(proyectoModel);
                         }
-                        model.setResults(modelos);
-                        model.setCode(ResultCodes.SUCCESS);
+                        if (response.body().size() > 0)
+                            model.setCode(ResultCodes.SUCCESS);
+                        else
+                            model.setCode(ResultCodes.RN008);
                     }
+                    model.setResults(modelos);
                     proyectoDataMutableLiveData.setValue(model);
                 }
                 @Override
@@ -106,12 +108,13 @@ public class ProjectRepositoryImpl implements ProjectRepository{
                 public void onFailure(Call<ProyectoData> call, Throwable t) {
                     Log.e(TAG, "updateProyecto-onFailure ", t);
                     BusinessResult<ProyectoModel> model = new BusinessResult<>();
-                    model.setCode(ResultCodes.ERROR);
                     resultado.setValue(model);
                 }
             });
         } catch (NetworkOnMainThreadException e) {
-            Log.e(TAG, "findAllProyectosByUser ", e);
+            Log.e(TAG, "updateProyecto ", e);
+            BusinessResult<ProyectoModel> model = new BusinessResult<>();
+            resultado.setValue(model);
         }
         return resultado;
     }

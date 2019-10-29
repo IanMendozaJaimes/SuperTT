@@ -124,7 +124,13 @@ DATABASES = {
         'NAME': 'tt_database',
         'USER': 'postgres',
                 #'ianMJ',
+<<<<<<< HEAD
         'PASSWORD': 'postgres',
+=======
+        'PASSWORD': #'postgres',
+                    #'postgres'
+                    'newcastle',
+>>>>>>> 44992c80d5230de41dffb120e379f6d0a01c5809
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 
 import com.equipo.superttapp.R;
 import com.equipo.superttapp.projects.model.TraduccionModel;
@@ -36,6 +37,8 @@ public class NewTraduccionActivity extends AppCompatActivity {
     ImageView imvPreview;
     @BindView(R.id.btnUpload)
     Button btnUpload;
+    @BindView(R.id.pbNewTraduccion)
+    ProgressBar pbLogin;
     private UsuarioModel usuarioModel;
 
     @Override
@@ -48,7 +51,7 @@ public class NewTraduccionActivity extends AppCompatActivity {
         if (bundle != null) {
             idProyecto = bundle.getInt(Constants.PROYECTO_ID);
             photoPath = bundle.getString(Constants.TRADUCCION_PATH);
-            Picasso.get().load("file:"+photoPath).into(imvPreview);
+            Picasso.get().load("file:" + photoPath).into(imvPreview);
         }
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
@@ -57,10 +60,12 @@ public class NewTraduccionActivity extends AppCompatActivity {
         }
         viewModel = ViewModelProviders.of(this).get(NewTraduccionViewModel.class);
         setTitle(R.string.title_activity_new_traduccion);
+        hideProgressBar();
     }
 
     @OnClick(R.id.btnUpload)
     public void onViewClicked(View view) {
+        showProgressBar();
         imvPreview.setDrawingCacheEnabled(true);
         imvPreview.buildDrawingCache();
         Bitmap bitmap = imvPreview.getDrawingCache();
@@ -70,10 +75,9 @@ public class NewTraduccionActivity extends AppCompatActivity {
         model.setIdProyecto(idProyecto);
 
         viewModel.uploadImage(model, usuarioModel.getKeyAuth(), bitmap).observe(this, result -> {
+            hideProgressBar();
             if (result.getCode().equals(ResultCodes.SUCCESS)) {
-                Intent intent = new Intent(this, TraduccionListActivity.class);
                 finish();
-                startActivity(intent);
             } else {
                 showMessage(result);
             }
@@ -84,5 +88,13 @@ public class NewTraduccionActivity extends AppCompatActivity {
         Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_new_traduccion),
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         snackbar.show();
+    }
+
+    public void hideProgressBar() {
+        pbLogin.setVisibility(View.GONE);
+    }
+
+    public void showProgressBar() {
+        pbLogin.setVisibility(View.VISIBLE);
     }
 }

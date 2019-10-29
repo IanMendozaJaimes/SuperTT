@@ -62,6 +62,7 @@ public class PreferencesManager {
         model.setName(getStringValue(KEY_USER_NAME));
         model.setLastname(getStringValue(KEY_USER_LAST_NAME));
         model.setImage(getStringValue(KEY_USER_IMAGE));
+        model.setKeyAuth(getStringValue(KEY_USER_TOKEN));
         return model;
     }
 
