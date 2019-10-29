@@ -122,16 +122,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
-<<<<<<< HEAD
         'USER': 'postgres',
                 #'ianMJ',
         'PASSWORD': #'postgres',
                     #'postgres'
                     'newcastle',
-=======
-        'USER': 'ianMJ',
-        'PASSWORD': '',
->>>>>>> 1dd16ae511678c37f9ac6efab23dc8b32ed9dedd
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

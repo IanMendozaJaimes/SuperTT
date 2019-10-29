@@ -200,9 +200,9 @@ def eliminarProyectoView(request):
     return JsonResponse({'err':{}})
 
 
+#============================ REST API VIEWS============================   
+#======================================================================= 
 
-#---------------- REST API VIEWS------------------   
- 
 #--------------------views projects
 @api_view(['POST', ])
 @permission_classes([IsAuthenticated])
@@ -363,9 +363,7 @@ def create_translation_view(request): #request must include idproyecto in body
                 image_file.close()
             return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
-  
- 
-
+        
 @api_view(['PUT', 'DELETE'])
 @permission_classes((permissions.IsAuthenticated,))
 def methods_translation_view(request, idtraduccion):
