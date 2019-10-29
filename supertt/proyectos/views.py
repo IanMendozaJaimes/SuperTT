@@ -393,13 +393,13 @@ def detail_translation_view(request, idpro):
     
     try:
         trans = Traduccion.objects.filter(proyecto = idpro)
-        if trans.count() > 0:
-            trans = trans[0]
     except:
         print("a")
         return Response(data = {"resultCode": -1},status=status.HTTP_404_NOT_FOUND)
     try:
-        proj = Proyecto.objects.get(id = idpro)[0]
+        print("jala pls")
+        proj = Proyecto.objects.get(id = idpro)
+        print("jalo")
         usr = proj.usuario
         print("----------->"+str(usr))
     except:
@@ -409,9 +409,22 @@ def detail_translation_view(request, idpro):
 
     path_img = ImageUtil()
     print("reaches2")
-    path = path_img.build_url(usr.id, str(idpro), str(trans.id) + "." + trans.nameFile)
+    #if trans.count() > 0:
+        #trans = trans[0]
+        
     print("reaches3")
-    print(path)
+    l = []
     if request.method == "GET":
+        print("third")
         serializer = SerializadorTraduccion(trans, many=True)
-        return Response(path)
+        #data = serializer.d
+        data = serializer.data
+        print(serializer.data)
+        count = 0
+
+        for elem in serializer.data:
+            path = path_img.build_url(usr.id, str(idpro), elem['archivo'])
+            elem.update({"imgUrl": path})
+        print("fourth")
+        
+        return Response(serializer.data)
