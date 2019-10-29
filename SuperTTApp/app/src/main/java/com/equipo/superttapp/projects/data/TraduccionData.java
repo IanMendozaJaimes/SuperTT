@@ -13,7 +13,7 @@ public class TraduccionData {
     private String ecuacion;
     @SerializedName("calificacion")
     private Double calificacion;
-    @SerializedName("archivo")
+    @SerializedName("imgUrl")
     private String url;
     @SerializedName("resultCode")
     private Integer resultCode;
