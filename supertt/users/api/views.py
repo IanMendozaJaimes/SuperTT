@@ -1,8 +1,9 @@
  
 from rest_framework.response import Response
 from rest_framework import status
-from rest_framework.decorators import api_view, permission_classes
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import permissions
+from rest_framework import authentication
 from users.api.serializers import SerializadorUsuario, SerializadorRegistro
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
@@ -21,6 +22,7 @@ from django.contrib.auth.hashers import check_password, make_password
 import hashlib
 from general.util import *
 
+import random
 @api_view(['POST',])
 @permission_classes([permissions.AllowAny])
 def registration_view(request):#correo usado 10003, error -1, suyccess 1
@@ -103,3 +105,43 @@ def login_view(request, *args, **kwargs):
             data['resultCode'] = -1
             #data = serializer.errors
         return Response(data, status = status.HTTP_400_BAD_REQUEST)
+
+@api_view(['POST'])
+@permission_classes([permissions.AllowAny])
+def recover_password_view(request, *args, **kwargs):
+    email = request.data.get('email')
+    try:
+        user = User.objects.get(email = email)
+    except User.DoesNotExist:
+        return Response({"resultCode": -1006})
+
+    hemail = email + str(random.randrange(0,1000))
+    
+    h = hashlib.sha1(hemail.encode('utf-8')).hexdigest()
+    
+    uh = UserHashes(user=user, hash=h, proposito=CHANGE_PASSWORD)
+    uh.save()
+
+    url = settings.SITE_URL + 'usuarios/contrasena?token=' + h
+
+    e = Email()
+    e.send_change_password_email(email, user.first_name, url)
+    e.close()
+    return Response({"resultCode": 1})
+
+
+    #m = Message()
+    #m.add_alert(SEND_EMAIL_PASSWORD, 'Éxito!')
+    #request.session['resp'] = m.get_messages()
+
+
+# def RecuperarContraView(request):
+# 	try:
+# 		token = request.GET['token']
+# 		uh = UserHashes.objects.get(hash=token)
+# 		request.session['erecuperacion'] = uh.user.email
+# 		uh.delete()
+# 		return redirect('/usuarios/cambiarC')
+# 	except Exception as e:
+# 		print('Un error:', e)
+# 		return redirect('/usuarios/login')    

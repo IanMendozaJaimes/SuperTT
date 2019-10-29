@@ -21,7 +21,7 @@ from rest_framework.permissions import IsAuthenticated
 
 import pytz
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 from rest_framework.response import Response
@@ -200,7 +200,6 @@ def eliminarProyectoView(request):
     return JsonResponse({'err':{}})
 
 
-
 def actualizarTraduccion(request):
     try:
         traduccion = Traduccion.objects.get(id=int(request.GET['id']))
@@ -214,9 +213,9 @@ def actualizarTraduccion(request):
         return JsonResponse({'err':'no se pudo'})
 
 
+#============================ REST API VIEWS============================   
+#======================================================================= 
 
-#---------------- REST API VIEWS------------------   
- 
 #--------------------views projects
 @api_view(['POST', ])
 @permission_classes([IsAuthenticated])
@@ -232,7 +231,7 @@ def create_project_view(request):
     
     if request.method == "POST":
         serializer = SerializadorProyecto(proj, data = request.data)
-
+    
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -287,6 +286,15 @@ def detail_project_view(request, usuario):
 
     if request.method == "GET":
         serializer = SerializadorProyecto(proj, many=True)
+        tz = pytz.timezone('America/Mexico_City')
+
+        for elem in serializer.data:
+            s = elem['fechaModificacion']
+            t = datetime.strptime(s.split(".")[0], '%Y-%m-%dT%H:%M:%S')
+            t = t + timedelta(microseconds=int(s.split(".")[1][:-1])/1000)
+            t = tz.localize(t)
+            t1 = timezone.localtime(t, tz)
+            elem.update({"fechaModificacion": str(str(t1).split('.')[0])})
         return Response(serializer.data)
 
 #--------------views translations
@@ -347,10 +355,7 @@ def create_translation_view(request): #request must include idproyecto in body
 
         if serializer.is_valid():
             trans.save()
-            print(type(trans.fechaCreacion))
             
-            #s = datetime.fromtimestamp(int(trans.fechaCreacion)
-            #trans.nombre = str(s)
             tz = pytz.timezone('America/Mexico_City')
             t = timezone.localtime(trans.fechaCreacion, tz)
 
@@ -371,9 +376,7 @@ def create_translation_view(request): #request must include idproyecto in body
                 image_file.close()
             return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
-  
- 
-
+        
 @api_view(['PUT', 'DELETE'])
 @permission_classes((permissions.IsAuthenticated,))
 def methods_translation_view(request, idtraduccion):
@@ -388,10 +391,6 @@ def methods_translation_view(request, idtraduccion):
     #validate user is the owner of the project/translation
     if request.user != trans.usuario:
         return Response("Translation with id {} does not belong to user with id {}".format(trans.id, user.id), status=status.HTTP_403_FORBIDDEN)
-
-    #if trans.usuario != user:
-        #return Response({"response": "Token: {} does not belong to user with id: {} ".format(request.Authorization, user)})
-
     if request.method == "PUT":
         serializer = SerializadorTraduccion(trans, data=request.data)
         data = {}
@@ -419,33 +418,18 @@ def detail_translation_view(request, idpro):
     try:
         trans = Traduccion.objects.filter(proyecto = idpro)
     except:
-        print("a")
         return Response(data = {"resultCode": -1},status=status.HTTP_404_NOT_FOUND)
     try:
-        print("jala pls")
         proj = Proyecto.objects.get(id = idpro)
-        print("jalo")
         usr = proj.usuario
-        print("----------->"+str(usr))
     except:
-        print("b")
         return Response(data = {"resultCode": -1}, status=status.HTTP_404_NOT_FOUND)
-    print("reaches")
 
     path_img = ImageUtil()
-    print("reaches2")
-    #if trans.count() > 0:
-        #trans = trans[0]
-        
-    print("reaches3")
 
     if request.method == "GET":
-        print("third")
         serializer = SerializadorTraduccion(trans, many=True)
-        #data = serializer.d
         data = serializer.data
-        print(serializer.data)
-        count = 0
 
         for elem in serializer.data:
             path = path_img.build_url(usr.id, str(idpro), elem['archivo'])
