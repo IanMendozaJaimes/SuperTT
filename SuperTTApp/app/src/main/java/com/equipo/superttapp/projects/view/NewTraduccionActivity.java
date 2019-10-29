@@ -1,8 +1,10 @@
 package com.equipo.superttapp.projects.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.view.View;
@@ -10,35 +12,31 @@ import android.widget.Button;
 import android.widget.ImageView;
 
 import com.equipo.superttapp.R;
-import com.equipo.superttapp.projects.repository.TraduccionRepository;
-import com.equipo.superttapp.projects.repository.TraduccionRepositoryImpl;
+import com.equipo.superttapp.projects.model.TraduccionModel;
+import com.equipo.superttapp.projects.viewmodel.NewTraduccionViewModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
+import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.Constants;
 import com.equipo.superttapp.util.PreferencesManager;
+import com.equipo.superttapp.util.ResultCodes;
+import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MediaType;
-import okhttp3.MultipartBody;
-import okhttp3.RequestBody;
 
 public class NewTraduccionActivity extends AppCompatActivity {
     private static final String TAG = NewTraduccionActivity.class.getName();
     private String photoPath;
     private Integer idProyecto;
-    TraduccionRepository repository = new TraduccionRepositoryImpl();
+    private NewTraduccionViewModel viewModel;
 
     @BindView(R.id.imvPreview)
     ImageView imvPreview;
     @BindView(R.id.btnUpload)
     Button btnUpload;
-    private String token;
+    private UsuarioModel usuarioModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,10 +52,10 @@ public class NewTraduccionActivity extends AppCompatActivity {
         }
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
-            token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
+        if (preferencesManager.isLogged()) {
+            usuarioModel = preferencesManager.getUser();
         }
+        viewModel = ViewModelProviders.of(this).get(NewTraduccionViewModel.class);
         setTitle(R.string.title_activity_new_traduccion);
     }
 
@@ -66,28 +64,25 @@ public class NewTraduccionActivity extends AppCompatActivity {
         imvPreview.setDrawingCacheEnabled(true);
         imvPreview.buildDrawingCache();
         Bitmap bitmap = imvPreview.getDrawingCache();
-        File file = new File(photoPath);
 
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
-        byte[] bitmapdata = bos.toByteArray();
+        TraduccionModel model = new TraduccionModel();
+        model.setUrl(photoPath);
+        model.setIdProyecto(idProyecto);
 
-        FileOutputStream fos = null;
-        try {
-            fos = new FileOutputStream(file);
-            fos.write(bitmapdata);
-            fos.flush();
-            fos.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        viewModel.uploadImage(model, usuarioModel.getKeyAuth(), bitmap).observe(this, result -> {
+            if (result.getCode().equals(ResultCodes.SUCCESS)) {
+                Intent intent = new Intent(this, TraduccionListActivity.class);
+                finish();
+                startActivity(intent);
+            } else {
+                showMessage(result);
+            }
+        });
+    }
 
-        RequestBody fileReqBody = RequestBody.create(file, MediaType.parse("image/*"));
-        MultipartBody.Part image = MultipartBody.Part.createFormData("file", file.getName(),
-                fileReqBody);
-
-        RequestBody proyecto = RequestBody.create(String.valueOf(idProyecto),
-                MediaType.parse("text/plain"));
-        repository.uploadTraduccion(proyecto, image, token);
+    public void showMessage(BusinessResult<TraduccionModel> result) {
+        Snackbar snackbar = Snackbar.make(findViewById(R.id.cl_activity_new_traduccion),
+                R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
+        snackbar.show();
     }
 }

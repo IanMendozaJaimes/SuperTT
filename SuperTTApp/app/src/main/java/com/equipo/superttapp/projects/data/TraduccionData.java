@@ -15,6 +15,8 @@ public class TraduccionData {
     private Double calificacion;
     @SerializedName("archivo")
     private String url;
+    @SerializedName("resultCode")
+    private Integer resultCode;
 
     public Integer getId() {
         return id;
@@ -62,5 +64,13 @@ public class TraduccionData {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public Integer getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(Integer resultCode) {
+        this.resultCode = resultCode;
     }
 }

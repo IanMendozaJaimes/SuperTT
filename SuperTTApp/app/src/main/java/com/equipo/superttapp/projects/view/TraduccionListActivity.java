@@ -28,6 +28,7 @@ import com.equipo.superttapp.projects.adapter.TraduccionRecyclerViewAdapter;
 import com.equipo.superttapp.projects.model.ProyectoModel;
 import com.equipo.superttapp.projects.model.TraduccionModel;
 import com.equipo.superttapp.projects.viewmodel.TraducccionListViewModel;
+import com.equipo.superttapp.users.model.UsuarioModel;
 import com.equipo.superttapp.util.Constants;
 import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.PreferencesManager;
@@ -54,7 +55,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private List<TraduccionModel> traduccionModels;
     TraducccionListViewModel traducionListViewModel;
     private String photoPathTemp;
-    private String token;
+    private UsuarioModel usuarioModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,9 +83,8 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
 
         PreferencesManager preferencesManager = new PreferencesManager(this,
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
-            token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
+        if (preferencesManager.isLogged()) {
+            usuarioModel = preferencesManager.getUser();
         }
     }
 
@@ -134,7 +134,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     }
 
     public void recuperarTraducciones() {
-        traducionListViewModel.findTraducciones(idProyecto, token).observe(this, traducciones -> {
+        traducionListViewModel.findTraducciones(idProyecto, usuarioModel.getKeyAuth()).observe(this, traducciones -> {
             if (traducciones.getCode().equals(ResultCodes.SUCCESS)) {
                 traduccionModels.clear();
                 traduccionModels.addAll(traducciones.getResults());
@@ -166,8 +166,8 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                    traducionListViewModel.deleteProyecto(idProyecto, token).observe(this,
-                            proyectoResult -> {
+                    traducionListViewModel.deleteProyecto(idProyecto, usuarioModel.getKeyAuth())
+                            .observe(this, proyectoResult -> {
                                 if (proyectoResult.getCode().equals(ResultCodes.SUCCESS))
                                     deleteProyectoSuccess();
                                 else
@@ -217,8 +217,8 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     model.setId(idProyecto);
                     model.setName(etNombre.getText().toString());
                     model.setRate(calificacionProyecto);
-                    traducionListViewModel.updateProyecto(model, token).observe(this,
-                            proyectoModelBusinessResult -> {
+                    traducionListViewModel.updateProyecto(model, usuarioModel.getKeyAuth())
+                            .observe(this, proyectoModelBusinessResult -> {
                         if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
                             changeProyectoSuccess(proyectoModelBusinessResult);
                         } else
@@ -237,9 +237,9 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         builder.setTitle(R.string.label_confirmar_operacion)
                 .setMessage(R.string.msg11_confirmacion_operacion_borrar_proyecto)
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
-                    traducionListViewModel.deleteTraduccion(idTraduccion, token).observe(this,
-                            traduccionModelBusinessResult -> {
-                                showMessage(traduccionModelBusinessResult);
+                    traducionListViewModel.deleteTraduccion(idTraduccion,
+                            usuarioModel.getKeyAuth()).observe(this, result -> {
+                                showMessage(result);
                                 recuperarTraducciones();
                             });
                     dialog.cancel();
