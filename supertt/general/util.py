@@ -5,15 +5,13 @@ import smtplib
 from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
 from django.utils import timezone
-from datetime import datetime
+from datetime import datetime, timedelta
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 
 from users.models import *
 from proyectos.models import *
-
-
 
 # Coinciden con la documentacion
 USER_IS_NOT_ACTIVE = """La cuenta aún no ha sido verificada."""
