@@ -338,8 +338,6 @@ def ValidarUsuarioView(request):
 	except:
 		return redirect('/usuarios/login')
 
-
-
 def EnviarCorreoRecuperacionView(request):
 	try:
 		email = request.POST['correo']

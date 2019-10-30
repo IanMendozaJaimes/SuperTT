@@ -59,8 +59,16 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
 def edit_user_view(request, idUsuario):
     if request.method == 'PUT':
         usr = User(id = idUsuario)
+        pass_ok = check_password(request.data['password'], usr.password)
+        if not pass_ok:
+            return Response({"resultCode": -1})
+        
+        if len(request.data.get('password2')) > 0:
+            usr.password = make_password(request.data.get('password2'))
+        
         serializer = SerializadorUsuario(usr, data = request.data)
-        data = {}
+        data = {}   
+
         if serializer.is_valid():
             account = serializer.save()
             data['resultCode'] = 1
@@ -68,7 +76,7 @@ def edit_user_view(request, idUsuario):
         else:
             data = serializer.errors 
         return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
-
+ 
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
 def login_view(request, *args, **kwargs):
@@ -128,20 +136,3 @@ def recover_password_view(request, *args, **kwargs):
     e.send_change_password_email(email, user.first_name, url)
     e.close()
     return Response({"resultCode": 1})
-
-
-    #m = Message()
-    #m.add_alert(SEND_EMAIL_PASSWORD, 'Éxito!')
-    #request.session['resp'] = m.get_messages()
-
-
-# def RecuperarContraView(request):
-# 	try:
-# 		token = request.GET['token']
-# 		uh = UserHashes.objects.get(hash=token)
-# 		request.session['erecuperacion'] = uh.user.email
-# 		uh.delete()
-# 		return redirect('/usuarios/cambiarC')
-# 	except Exception as e:
-# 		print('Un error:', e)
-# 		return redirect('/usuarios/login')    
