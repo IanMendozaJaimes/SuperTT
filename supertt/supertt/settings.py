@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
     '127.0.0.1',
     '192.168.1.82',
     '10.100.67.209',
-    'localhost'
+    'localhost',
+    '10.100.64.30'
 ]
 
 # Application definition
@@ -136,10 +137,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
-        'USER': #'ianMJ',
-                'postgres',
-        'PASSWORD': #'',
-                    'newcastle',
+        'USER': 'ianMJ',
+                #'postgres',
+        'PASSWORD': '',
+                    #'newcastle',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
