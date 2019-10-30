@@ -207,6 +207,17 @@ def actualizarTraduccion(request):
         if traduccion.usuario_id == user.id:
             traduccion.calificacion = float(request.GET['grade'])
             traduccion.save()
+            traducciones = Traduccion.objects.filter(proyecto=traduccion.proyecto)
+            p = Proyecto.objects.get(id=traduccion.proyecto_id)
+            promedio = 0
+            n = 0
+            for t in traducciones:
+                if t.calificacion > 0:
+                    promedio += t.calificacion
+                    n += 1
+            promedio /= n
+            p.calificacion = promedio
+            p.save()
             return JsonResponse({'err':{}})
         return JsonResponse({'err':'no se pudo'})
     except Exception as e:
