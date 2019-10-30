@@ -4,7 +4,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes, authentication_classes
 from rest_framework import permissions
 from rest_framework import authentication
-from users.api.serializers import SerializadorUsuario, SerializadorRegistro
+from users.api.serializers import SerializadorUsuario, SerializadorRegistro, SerializadorUsuarioEdit
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.authtoken.models import Token
 from users.models import User
@@ -58,24 +58,27 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
 @api_view(['PUT'])
 def edit_user_view(request, idUsuario):
     if request.method == 'PUT':
-        usr = User(id = idUsuario)
-        pass_ok = check_password(request.data['password'], usr.password)
-        if not pass_ok:
-            return Response({"resultCode": -1})
+        usr = request.user
+        if len(request.data['password2']) != 0:
+            pass_ok = check_password(request.data.get('password2'), usr.password)
+            if not pass_ok:
+                print("---------------------not pass")
+                return Response({"resultCode": -1001})
+            print("passed ----------------------")
         
-        if len(request.data.get('password2')) > 0:
-            usr.password = make_password(request.data.get('password2'))
-        
-        serializer = SerializadorUsuario(usr, data = request.data)
+        print("passed ----------------------2")
+        serializer = SerializadorUsuarioEdit(usr, data = request.data)
         data = {}   
-
+        print("passed ----------------------3")
         if serializer.is_valid():
-            account = serializer.save()
+            serializer.save(request.data, idUsuario)
+            print("abcd")
             data['resultCode'] = 1
-            return Response(data =data)
+            return Response(data = {"resultCode": 1})
         else:
-            data = serializer.errors 
-        return Response(serializer.errors, status = status.HTTP_400_BAD_REQUEST)
+            print("passed ----------------------4")
+            data = serializer.errors#data = {"resultCode": -1}
+        return Response(data= data, status = status.HTTP_400_BAD_REQUEST)
  
 @api_view(['POST'])
 @permission_classes([permissions.AllowAny])
@@ -101,11 +104,11 @@ def login_view(request, *args, **kwargs):
             token, created = Token.objects.get_or_create(user=usr)
             data.update({'email': usr.email})
             data.update({'token': token.key})
-
+            path = settings.SITE_URL + "media/imgUsuario/"
             data.update({'idUsuario': usr.id})
             data.update({'apellido': usr.last_name})
             data.update({'nombre': usr.first_name})
-            data.update({'urlImg': usr.imagen_perfil})
+            data.update({'urlImg': path + usr.imagen_perfil})
             #email, token, idusuario, apellido, nombre, urlImg
             data['resultCode'] = 1
             return Response(data =data)
