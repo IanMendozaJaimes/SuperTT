@@ -62,7 +62,7 @@ def edit_user_view(request, idUsuario):
         pass_ok = check_password(request.data['password2'], usr.password)
         if not pass_ok:
             print("---------------------not pass")
-            return Response({"resultCode": -1})
+            return Response({"resultCode": -1001})
         print("passed ----------------------")
         
         print("passed ----------------------2")
