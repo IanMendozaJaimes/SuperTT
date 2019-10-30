@@ -30,11 +30,10 @@ DEBUG = True
 ALLOWED_HOSTS = [
     '10.100.68.152',
     '0.0.0.0',
-    '127.0.0.1',
+    'localhost',
     '192.168.1.82',
     '10.100.67.209',
     'localhost',
-    '10.100.64.30'
 ]
 
 # Application definition
@@ -119,6 +118,23 @@ WSGI_APPLICATION = 'supertt.wsgi.application'
 #     }
 # }
 
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'tt_database',
+        'USER': 'postgres',
+                #'ianMJ',
+        'PASSWORD': #'postgres',
+                    'postgres',
+                    #'newcastle',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
+    }
+}
+
+# AUTHENTICATION_BACKENDS = (
+#     'django.contrib.auth.backends.ModelBackend',
+# )
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql_psycopg2',

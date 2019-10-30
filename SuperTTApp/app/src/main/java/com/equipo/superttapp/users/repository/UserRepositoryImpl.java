@@ -72,8 +72,9 @@ public class UserRepositoryImpl implements UserRepository {
                 public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
                     Log.i(TAG, "forgotPassword-onResponse " + response);
                     BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
-                    if (response.isSuccessful()) {
-                        businessResult.setCode(ResultCodes.SUCCESS);
+                    if (response.isSuccessful() && response.body() != null
+                            && response.body().getResponseCode() != null) {
+                        businessResult.setCode(response.body().getResponseCode());
                     }
                     resultado.setValue(businessResult);
                 }
@@ -130,24 +131,30 @@ public class UserRepositoryImpl implements UserRepository {
                 public void onResponse(Call<UsuarioData> call, Response<UsuarioData> response) {
                     Log.i(TAG, "updateAccount-onResponse " + response.body());
                     BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
-                    businessResult.setCode(ResultCodes.SUCCESS);
-                    UsuarioModel model = new UsuarioModel();
-                    model.setName(usuarioData.getNombre());
-                    model.setLastname(usuarioData.getApellidos());
-                    businessResult.setResult(model);
+                    if (response.isSuccessful() && response.body() != null
+                            && response.body().getResponseCode() != null) {
+                        businessResult.setCode(response.body().getResponseCode());
+                        UsuarioModel model = new UsuarioModel();
+                        model.setName(usuarioData.getNombre());
+                        model.setLastname(usuarioData.getApellidos());
+                        if (businessResult.getCode().equals(ResultCodes.RN001))
+                            model.setValidCurrentPassword(false);
+                        businessResult.setResult(model);
+                    }
                     resultado.setValue(businessResult);
                 }
 
                 @Override
                 public void onFailure(Call<UsuarioData> call, Throwable t) {
                     Log.e(TAG, "updateAccount-onFailure ", t);
-                    BusinessResult<UsuarioModel> model = new BusinessResult<>();
-                    model.setCode(ResultCodes.ERROR);
-                    resultado.setValue(model);
+                    BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
+                    resultado.setValue(businessResult);
                 }
             });
         } catch (NetworkOnMainThreadException e) {
             Log.e(TAG, "updateAccount ", e);
+            BusinessResult<UsuarioModel> businessResult = new BusinessResult<>();
+            resultado.setValue(businessResult);
         }
         return resultado;
     }

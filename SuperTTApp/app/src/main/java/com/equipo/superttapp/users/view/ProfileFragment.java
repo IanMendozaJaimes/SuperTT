@@ -69,10 +69,10 @@ public class ProfileFragment extends Fragment implements ProfileView {
         return view;
     }
 
-    public void actualizarPerfil() {
+    private void actualizarPerfil() {
         cleanErrors();
-        String token = "";
         UsuarioModel model = new UsuarioModel();
+        String token = preferencesManager.getStringValue(PreferencesManager.KEY_USER_TOKEN);
         model.setId(preferencesManager.getIntegerValue(PreferencesManager.KEY_USER_ID));
         model.setEmail(etEmail.getText().toString());
         model.setPassword(etPassword.getText().toString());
@@ -80,11 +80,11 @@ public class ProfileFragment extends Fragment implements ProfileView {
         model.setName(etName.getText().toString());
         model.setSecondPassword(etSecondPassword.getText().toString());
         model.setCurrentPassword(etCurrentPassword.getText().toString());
-        profileViewModel.updateAccount(model, token).observe(this, usuarioModelBusinessResult -> {
-            if(usuarioModelBusinessResult.getResult().equals(ResultCodes.SUCCESS)) {
-                saveUser(usuarioModelBusinessResult.getResult());
+        profileViewModel.updateAccount(model, token).observe(this, result -> {
+            if(result.getCode().equals(ResultCodes.SUCCESS)) {
+                saveUser(result.getResult());
             }
-            showMessage(usuarioModelBusinessResult);
+            showMessage(result);
         });
 
 
@@ -95,14 +95,11 @@ public class ProfileFragment extends Fragment implements ProfileView {
         if (preferencesManager == null)
             preferencesManager = new PreferencesManager(getContext(),
                     PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
-        if (preferencesManager.keyExists(PreferencesManager.KEY_USER_IS_LOGGED)
-                && preferencesManager.getBooleanValue(PreferencesManager.KEY_USER_IS_LOGGED)) {
-            String email = preferencesManager.getStringValue(PreferencesManager.KEY_USER_EMAIL);
-            String nombre = preferencesManager.getStringValue(PreferencesManager.KEY_USER_NAME);
-            String lastName = preferencesManager.getStringValue(PreferencesManager.KEY_USER_LAST_NAME);
-            etEmail.setText(email);
-            etLastname.setText(lastName);
-            etName.setText(nombre);
+        if (preferencesManager.isLogged()) {
+            UsuarioModel usuarioModel = preferencesManager.getUser();
+            etEmail.setText(usuarioModel.getEmail());
+            etLastname.setText(usuarioModel.getLastname());
+            etName.setText(usuarioModel.getName());
         }
     }
 
@@ -140,8 +137,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
                 R.string.msg10_operacion_fallida, Snackbar.LENGTH_LONG);
         if (result.getCode().equals(ResultCodes.SUCCESS))
             snackbar.setText(R.string.msg9_operacion_exitosa);
-        else if (result.getCode().equals(ResultCodes.RN001)
-                || result.getCode().equals(ResultCodes.RN002)) {
+        else if (result.getCode().equals(ResultCodes.RN002)) {
             snackbar.setText(R.string.msg1_datos_no_validos);
             if (!result.getResult().getValidEmail())
                 etEmail.setError(getText(R.string.msg1_datos_no_validos));
@@ -153,6 +149,7 @@ public class ProfileFragment extends Fragment implements ProfileView {
                 etName.setError(getText(R.string.msg1_datos_no_validos));
             if (!result.getResult().getValidLastName())
                 etLastname.setError(getText(R.string.msg1_datos_no_validos));
+        } else if (result.getCode().equals(ResultCodes.RN001)) {
             if (!result.getResult().getValidCurrentPassword())
                 etCurrentPassword.setError(getText(R.string.msg1_datos_no_validos));
         }
@@ -176,6 +173,5 @@ public class ProfileFragment extends Fragment implements ProfileView {
                 PreferencesManager.PREFERENCES_NAME, Context.MODE_PRIVATE);
         preferencesManager.saveValue(PreferencesManager.KEY_USER_NAME, model.getName());
         preferencesManager.saveValue(PreferencesManager.KEY_USER_LAST_NAME, model.getLastname());
-        preferencesManager.saveValue(PreferencesManager.KEY_USER_EMAIL, model.getEmail());
     }
 }

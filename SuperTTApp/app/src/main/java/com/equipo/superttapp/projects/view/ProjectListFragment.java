@@ -3,6 +3,7 @@ package com.equipo.superttapp.projects.view;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -105,6 +106,7 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
     }
 
     private void recuperarTodosProyectos() {
+        Log.d(TAG, usuarioModel.getId() + " " + usuarioModel.getKeyAuth());
         proyectsListViewModel.findUserProyects(usuarioModel.getId(), usuarioModel.getKeyAuth()).observe(this, proyectodata -> {
             if (proyectodata.getCode().equals(ResultCodes.SUCCESS)) {
                 proyectoModelList.clear();
@@ -123,6 +125,8 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
             snackbar.setText(R.string.msg7_no_existe_proyectos_para_mostrar);
         } else if (result.getCode().equals(ResultCodes.SUCCESS)) {
             snackbar.setText(R.string.msg9_operacion_exitosa);
+        } else if (result.getCode().equals(ResultCodes.RN001)) {
+            snackbar.setText(R.string.msg1_datos_no_validos);
         }
         snackbar.show();
     }
