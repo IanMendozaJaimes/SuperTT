@@ -153,10 +153,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'tt_database',
-        'USER': #'ianMJ',
-                'postgres',
-        'PASSWORD': #'',
-                    'newcastle',
+        'USER': 'ianMJ',
+                #'postgres',
+        'PASSWORD': '',
+                    #'newcastle',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }

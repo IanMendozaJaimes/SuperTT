@@ -27,7 +27,11 @@
 					<div class="Projects_container_project" onclick="go_to_translations({{ proyecto.id }});">
 						<p class="Projects_container_project_name">{{ proyecto.nombre }}</p>
 						<p class="Projects_container_project_date">{{ proyecto.fechaModificacion }}</p>
-						<div class="Projects_container_project_image"></div>
+						{% if proyecto.imagen != 'nada' %}
+							<div class="Projects_container_project_image" style="background-image: url('{{proyecto.imagen}}');"></div>
+						{% else %}
+							<div class="Projects_container_project_image"></div>
+						{% endif %}
 					</div>
 				{% endfor %}
 			</div>

@@ -45,6 +45,14 @@ class ProyectsView(LoginRequiredMixin, TemplateView):
 
         data = list(map(change_time_zone, data))
 
+        for d in data:
+            t = Traduccion.objects.filter(proyecto_id=d['id']).order_by('fechaCreacion')
+            if len(t) > 0:
+                d['imagen'] = settings.SITE_URL + 'media/proyectos/' + str(request.user.id) + '/' + str(d['id']) + '/' + t[0].archivo
+            else:
+                d['imagen'] = 'nada'
+
+
         return render(request, self.template_name, 
             {
                 'nombre': request.user.first_name,
@@ -81,6 +89,9 @@ class TranslationsView(LoginRequiredMixin, TemplateView):
             p = change_time_zone(p)
 
             translations = list(Traduccion.objects.filter(proyecto=project).order_by('id'))
+
+            for t in translations:
+                t.archivo = settings.SITE_URL + 'media/proyectos/' + str(request.user.id) + '/' + str(project.id) + '/' + t.archivo
 
             return render(request, self.template_name, {
                 'nombre': request.user.first_name,
