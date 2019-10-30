@@ -128,8 +128,9 @@ public class ProjectRepositoryImpl implements ProjectRepository{
                 public void onResponse(Call<ProyectoData> call, Response<ProyectoData> response) {
                     Log.i(TAG, "createProyecto-onResponse " + response.body());
                     BusinessResult<ProyectoModel> businessResult = new BusinessResult<>();
-                    if (response.isSuccessful()) {
-                        businessResult.setCode(ResultCodes.SUCCESS);
+                    if (response.isSuccessful() && response.body() != null
+                            && response.body().getResultCode() != null) {
+                        businessResult.setCode(response.body().getResultCode());
                     }
                     resultado.setValue(businessResult);
                 }

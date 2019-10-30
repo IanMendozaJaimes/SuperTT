@@ -52,7 +52,7 @@ public interface APIService {
     @POST("/users/login")
     Call<UsuarioData> loginUsuario(@Body UsuarioData usuarioData);
     // Para hacer la recuperacion de contra
-    @POST("/users/recuperar")
+    @POST("/recover")
     Call<UsuarioData> recuperarUsuario(@Body UsuarioData usuarioData);
     // Para editar usuarioData
     @PUT("/users/{idUsuario}")

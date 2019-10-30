@@ -13,6 +13,8 @@ public class ProyectoData {
     private Double calificacion;
     @SerializedName("usuario")
     private Integer idUsuario;
+    @SerializedName("resultCode")
+    private Integer resultCode;
 
     public ProyectoData() {
     }
@@ -63,5 +65,13 @@ public class ProyectoData {
 
     public void setIdUsuario(Integer idUsuario) {
         this.idUsuario = idUsuario;
+    }
+
+    public Integer getResultCode() {
+        return resultCode;
+    }
+
+    public void setResultCode(Integer resultCode) {
+        this.resultCode = resultCode;
     }
 }

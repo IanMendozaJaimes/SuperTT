@@ -52,7 +52,7 @@ public class SignInActivity extends AppCompatActivity implements SignInView {
             model.setLastname(etLastname.getText().toString());
             model.setSecondPassword(etSecondPassword.getText().toString());
             model.setPassword(etPassword.getText().toString());
-            model.setEmail(etEmail.getText().toString());
+            model.setEmail(etEmail.getText().toString().toLowerCase());
             showProgressBar();
             signInViewModel.createAccount(model).observe(this, usuarioModelBusinessResult -> {
                 showMessage(usuarioModelBusinessResult);

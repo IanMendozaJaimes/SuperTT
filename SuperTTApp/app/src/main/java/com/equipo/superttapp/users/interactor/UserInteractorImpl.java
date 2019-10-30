@@ -123,9 +123,6 @@ public class UserInteractorImpl implements UserInteractor {
             data.setPassword(model.getPassword());
             data.setCurrentPassword(model.getCurrentPassword());
             mutableLiveData = repository.updateAccount(data, token);
-            if (mutableLiveData.getValue().getCode().equals(ResultCodes.RN002)) {
-                mutableLiveData.getValue().getResult().setValidCurrentPassword(false);
-            }
         } else {
             result.setCode(ResultCodes.RN002);
             result.setResult(model);

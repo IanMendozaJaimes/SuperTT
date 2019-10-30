@@ -1,7 +1,7 @@
 #from django.shortcuts import render
 from rest_framework import generics, viewsets
 from .models import Proyecto, Traduccion
-from .serializers import SerializadorProyecto, SerializadorTraduccion
+from .serializers import SerializadorProyecto, SerializadorTraduccion, SerializadorProyectoNombre
 from django.shortcuts import get_object_or_404
 from django.views.generic import TemplateView
 from django.shortcuts import render, redirect
@@ -207,6 +207,17 @@ def actualizarTraduccion(request):
         if traduccion.usuario_id == user.id:
             traduccion.calificacion = float(request.GET['grade'])
             traduccion.save()
+            traducciones = Traduccion.objects.filter(proyecto=traduccion.proyecto)
+            p = Proyecto.objects.get(id=traduccion.proyecto_id)
+            promedio = 0
+            n = 0
+            for t in traducciones:
+                if t.calificacion > 0:
+                    promedio += t.calificacion
+                    n += 1
+            promedio /= n
+            p.calificacion = promedio
+            p.save()
             return JsonResponse({'err':{}})
         return JsonResponse({'err':'no se pudo'})
     except Exception as e:
@@ -223,18 +234,23 @@ def create_project_view(request):
 
     usr = request.user#Account.objects.get(pk=1) ##later request.user
 
-    ### Verify this validation
     try:
-        proj = Proyecto(usuario = User(id=usr), nombre=request.data.get('nombre') , calificacion = 0.0)
-    except not Proyecto.DoesNotExist: 
-        return Response({"resultCode": -1})
+        projTest = Proyecto.objects.get(nombre=request.data.get('nombre'), usuario = request.user)
+        return Response({"resultCode": -1001})
+    except Proyecto.DoesNotExist:
+        pass
+    
+
+    ### Verify this validation
+    
+    proj = Proyecto(usuario = User(id=usr), nombre=request.data.get('nombre') , calificacion = 0.0)
     
     if request.method == "POST":
         serializer = SerializadorProyecto(proj, data = request.data)
     
         if serializer.is_valid():
             serializer.save()
-            return Response(serializer.data, status=status.HTTP_201_CREATED)
+            return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1001}, status = status.HTTP_400_BAD_REQUEST)
     
 
@@ -249,7 +265,7 @@ def methods_project_view(request, idpro):
     if usr != proj.usuario:
         return Response("Project with id {} does not belong to user with id {}".format(proj.usuario, usr), status=status.HTTP_403_FORBIDDEN)
     if request.method == "PUT":
-        serializer = SerializadorProyecto(proj, data=request.data)
+        serializer = SerializadorProyectoNombre(proj, data=request.data)
         data = {}
        
         if serializer.is_valid():
@@ -314,6 +330,8 @@ def detail_project_view(request, usuario):
 #     song.save()
 #     return HttpResponse(content_type)
 
+def getTraduccion():
+    return "\\textbf{Aquí habrá una traducción en TT2} $\\theta{n}$"
 @api_view(['POST', ])
 @permission_classes([IsAuthenticated])
 def create_translation_view(request): #request must include idproyecto in body
@@ -348,7 +366,7 @@ def create_translation_view(request): #request must include idproyecto in body
     if not os.path.exists(path_file):
         os.mkdir(path_file)
     
-    trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr, archivo="" , calificacion = 0.0, traduccion="")
+    trans = Traduccion(proyecto = Proyecto(id=request.data.get('idproyecto')), usuario =usr, archivo="" , calificacion = 0.0, traduccion=getTraduccion())
 
     if request.method == "POST":
         serializer = SerializadorTraduccion(trans, data = request.data)

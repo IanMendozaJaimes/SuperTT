@@ -125,6 +125,8 @@ public class ProjectListFragment extends Fragment implements ProjectListView {
             snackbar.setText(R.string.msg7_no_existe_proyectos_para_mostrar);
         } else if (result.getCode().equals(ResultCodes.SUCCESS)) {
             snackbar.setText(R.string.msg9_operacion_exitosa);
+        } else if (result.getCode().equals(ResultCodes.RN001)) {
+            snackbar.setText(R.string.msg1_datos_no_validos);
         }
         snackbar.show();
     }

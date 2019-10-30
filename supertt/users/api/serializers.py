@@ -41,4 +41,30 @@ class SerializadorUsuario(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ('id', 'email', 'estudios', 'password', 'imagen_perfil')
-    
+class SerializadorUsuarioEdit(serializers.ModelSerializer):
+    #password2 = serializers.CharField(style = {'input_type': 'password'}, write_only= True)
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name',)
+    def save(self, data, idUsuario):
+
+        try:
+            usr = User.objects.get(id = idUsuario)
+        except User.DoesNotExist:
+            raise Response({"resultCode": -1})#pass
+        
+        if len(data['password']) > 0:
+            usr.password = make_password(data.get('password'))
+        else:
+            usr.password = str(usr.password)
+        usr.first_name = data.get('nombre')
+        usr.last_name = data.get('apellido')
+        
+
+        usr.save()
+        #, first_name = request.data.get('nombre')
+        #account = User( email = usr.email,password = encrypted_password, first_name = data.get('nombre'), last_name =  data.get('apellido')
+        #)
+        #account.set_password(encrypted_password)
+        #account.save()
+        return usr

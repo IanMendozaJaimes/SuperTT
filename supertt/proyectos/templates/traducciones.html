@@ -28,6 +28,7 @@
 				<div class="Translations_project_description">
 					<input type="hidden" value="{{ proyecto.id }}" id="project_id">
 					<input type="hidden" value="{{ proyecto.nombre }}" id="project_name">
+					<p>{{ proyecto.calificacion }} <span class="icon-star-full"></span></p>
 					<p class="Translations_project_description_name">{{ proyecto.nombre }}</p>
 					<p id="msg_badprojectname" class="msg_validation_error invisible"></p>
 					<input type="text" class="text_form Translations_project_description_nametxt invisible" placeholder="Nombre del proyecto">
@@ -53,7 +54,7 @@
 						<div class="Translations_project_container_image"></div>
 					</div>
 					<div class="Translations_project_container_info">
-						<p class="Translations_project_container_info_date">{{ traduccion.fechaCreacion }}</p>
+						<p class="Translations_project_container_info_date">{{ traduccion.fechaModificacion }}</p>
 						<div class="Translations_project_container_info_stars">
 							{% if traduccion.calificacion >= 1 %}
 								<span class="icon-star-empty star star-selected" id="star1_{{traduccion.id}}"></span>

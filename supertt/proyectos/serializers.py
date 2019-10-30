@@ -6,6 +6,11 @@ class SerializadorProyecto(serializers.ModelSerializer):
 	class Meta:
 	    model = Proyecto
 	    fields = ('id', 'usuario','nombre','fechaModificacion', 'fechaCreacion', 'calificacion')
+class SerializadorProyectoNombre(serializers.ModelSerializer):
+
+	class Meta:
+		model = Proyecto
+		fields = ('nombre', )
 class SerializadorTraduccion(serializers.ModelSerializer):
 	
 	class Meta:
