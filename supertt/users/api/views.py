@@ -59,11 +59,12 @@ def registration_view(request):#correo usado 10003, error -1, suyccess 1
 def edit_user_view(request, idUsuario):
     if request.method == 'PUT':
         usr = request.user
-        pass_ok = check_password(request.data['password2'], usr.password)
-        if not pass_ok:
-            print("---------------------not pass")
-            return Response({"resultCode": -1001})
-        print("passed ----------------------")
+        if len(request.data['password2']) != 0:
+            pass_ok = check_password(request.data.get('password2'), usr.password)
+            if not pass_ok:
+                print("---------------------not pass")
+                return Response({"resultCode": -1001})
+            print("passed ----------------------")
         
         print("passed ----------------------2")
         serializer = SerializadorUsuarioEdit(usr, data = request.data)
@@ -73,10 +74,10 @@ def edit_user_view(request, idUsuario):
             serializer.save(request.data, idUsuario)
             print("abcd")
             data['resultCode'] = 1
-            return Response(data =data)
+            return Response(data = {"resultCode": 1})
         else:
             print("passed ----------------------4")
-            data = {"resultCode": -1}
+            data = serializer.errors#data = {"resultCode": -1}
         return Response(data= data, status = status.HTTP_400_BAD_REQUEST)
  
 @api_view(['POST'])
@@ -103,11 +104,11 @@ def login_view(request, *args, **kwargs):
             token, created = Token.objects.get_or_create(user=usr)
             data.update({'email': usr.email})
             data.update({'token': token.key})
-
+            path = settings.SITE_URL + "media/imgUsuario/"
             data.update({'idUsuario': usr.id})
             data.update({'apellido': usr.last_name})
             data.update({'nombre': usr.first_name})
-            data.update({'urlImg': usr.imagen_perfil})
+            data.update({'urlImg': path + usr.imagen_perfil})
             #email, token, idusuario, apellido, nombre, urlImg
             data['resultCode'] = 1
             return Response(data =data)
