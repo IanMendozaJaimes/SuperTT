@@ -265,6 +265,12 @@ function change_password(event){
 				let req = JSON.parse(request.responseText);
 
 				if(Object.entries(req.err).length === 0){
+					contra.classList.remove('invalid_field');
+					contra.value = '';
+					contraDos.classList.remove('invalid_field');
+					contraDos.value = '';
+					document.getElementById('msg_contra').classList.add('invisible');
+					document.getElementById('msg_contraDos').classList.add('invisible');
 					show_aside_message('Cambios guardados.');
 				}
 				else{

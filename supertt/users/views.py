@@ -291,9 +291,17 @@ def CambiarContraView(request):
 
 	if not v.field(contra):
 		m.add_validation_error(REQUIRED_FIELD, 'contra')
+	elif not v.max_len(contra):
+		m.add_validation_error(MAX_LEN_EXCEEDED, 'contra')
+	elif not v.min_len(contra):
+		m.add_validation_error(MIN_LEN, 'contra')
 
 	if not v.field(contraDos):
 		m.add_validation_error(REQUIRED_FIELD, 'contraDos')
+	elif not v.max_len(contraDos):
+		m.add_validation_error(MAX_LEN_EXCEEDED, 'contraDos')
+	elif not v.min_len(contraDos):
+		m.add_validation_error(MIN_LEN, 'contraDos')
 
 	if not v.are_the_same(contra, contraDos):
 		m.add_validation_error(PASSWORDS_ARE_NOT_THE_SAME, 'contraDos')
