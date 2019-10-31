@@ -225,13 +225,20 @@ function save_profile_changes(event){
 
 				if(Object.entries(req.err).length === 0){
 					document.querySelector('#a_user_name').innerHTML = nombre.value + ' ' + apellidos.value;
+					nombre.classList.remove('invalid_field');
+					document.getElementById('msg_nombre').classList.add('invisible');
+					apellidos.classList.remove('invalid_field');
+					document.getElementById('msg_apellidos').classList.add('invisible');
 					show_aside_message('Cambios guardados.');
 				}
 				else{
-					let perr = document.getElementById('msg_nombre');
-					perr.classList.remove('invisible');
-					perr.innerHTML = req.err.messages[0].text;
-					nombre.classList.add('invalid_field');
+					console.log(req.err);
+					for(let i = 0; i < req.err.nMessages; i++){
+						let perr = document.getElementById('msg_'+req.err.messages[i].name);
+						perr.classList.remove('invisible');
+						perr.innerHTML = req.err.messages[0].text;
+						document.querySelector('#Projects_container_'+req.err.messages[i].name).classList.add('invalid_field');
+					}
 				}
 			}
 		}

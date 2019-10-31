@@ -34,6 +34,10 @@ USER_HAS_BEEN_VALIDATED = """Tu cuenta ha sido validada. Ahora puede iniciar ses
 
 PASSWORD_CHANGED = """La contraseña ha sido cambiada. Ahora puede iniciar sesión normalmente con su nueva contraseña."""
 
+MAX_LEN_EXCEEDED = """El campo es demasiado largo."""
+
+MIN_LEN = """El campo debe de tener al menos 8 caractéres."""
+
 VALIDATE = 1
 
 CHANGE_PASSWORD = 2
@@ -114,7 +118,7 @@ class Validator():
 
 	def user_exists(self, user):
 		try:
-			u = User.objects.get(email=user)
+			u = User.objects.get(email=user.lower())
 			return True
 		except ObjectDoesNotExist:
 			return False
@@ -127,15 +131,25 @@ class Validator():
 			return False
 
 	def name(self, name):
-		r = re.findall(r'[a-zA-Z ]+', name)
+		r = re.findall(r'[^a-zA-Z ]+', name)
 		if len(r) != 1:
-			return False
-		return True
+			return True
+		return False
 
 	def email(self, mail):
 		if ' ' in mail or len(mail) == 0:
 			return False
 		if re.search(r'\w+@\w+(\.\w+)+', mail) is None:
+			return False
+		return True
+
+	def max_len(self, field):
+		if len(field) > 45:
+			return False
+		return True
+
+	def min_len(self, password):
+		if len(password) < 8:
 			return False
 		return True
 

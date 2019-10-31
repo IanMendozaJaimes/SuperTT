@@ -92,22 +92,36 @@ class SignUpView(TemplateView):
 			m.add_validation_error(INVALID_EMAIL, 'correo')
 		elif v.user_exists(data['correo']):
 			m.add_validation_error(EMAIL_ALREADY_TAKEN, 'correo')
+		elif not v.max_len(data['correo']):
+			m.add_validation_error(MAX_LEN_EXCEEDED, 'correo')
 
 		if not v.field(data['nombre']):
 			m.add_validation_error(REQUIRED_FIELD, 'nombre')
 		elif not v.name(data['nombre']):
 			m.add_validation_error(INVALID_NAME, 'nombre')
+		elif not v.max_len(data['nombre']):
+			m.add_validation_error(MAX_LEN_EXCEEDED, 'nombre')
 
 		if not v.field(data['apellidos']):
 			m.add_validation_error(REQUIRED_FIELD, 'apellidos')
 		elif not v.name(data['apellidos']):
 			m.add_validation_error(INVALID_NAME, 'apellidos')
+		elif not v.max_len(data['apellidos']):
+			m.add_validation_error(MAX_LEN_EXCEEDED, 'apellidos')
 
 		if not v.field(data['contra']):
 			m.add_validation_error(REQUIRED_FIELD, 'contra')
+		elif not v.max_len(data['contra']):
+			m.add_validation_error(MAX_LEN_EXCEEDED, 'contra')
+		elif not v.min_len(data['contra']):
+			m.add_validation_error(MIN_LEN, 'contra')
 
 		if not v.field(data['contraConf']):
 			m.add_validation_error(REQUIRED_FIELD, 'contraConf')
+		elif not v.max_len(data['contraConf']):
+			m.add_validation_error(MAX_LEN_EXCEEDED, 'contraConf')
+		elif not v.min_len(data['contraConf']):
+			m.add_validation_error(MIN_LEN, 'contraConf')
 
 		if not v.are_the_same(data['contra'], data['contraConf']):
 			m.add_validation_error(PASSWORDS_ARE_NOT_THE_SAME, 'contraConf')
@@ -203,9 +217,17 @@ class CambiarCView(TemplateView):
 
 			if not v.field(data['contra']):
 				m.add_validation_error(REQUIRED_FIELD, 'contra')
+			elif not v.max_len(data['contra']):
+				m.add_validation_error(MAX_LEN_EXCEEDED, 'contra')
+			elif not v.min_len(data['contra']):
+				m.add_validation_error(MIN_LEN, 'contra')
 
 			if not v.field(data['contraDos']):
 				m.add_validation_error(REQUIRED_FIELD, 'contraDos')
+			elif not v.max_len(data['contraDos']):
+				m.add_validation_error(MAX_LEN_EXCEEDED, 'contraDos')
+			elif not v.min_len(data['contraDos']):
+				m.add_validation_error(MIN_LEN, 'contraDos')
 
 			if not v.are_the_same(data['contra'], data['contraDos']):
 				m.add_validation_error(PASSWORDS_ARE_NOT_THE_SAME, 'contraDos')
@@ -239,11 +261,15 @@ def CambiarUsuarioView(request):
 		m.add_validation_error(REQUIRED_FIELD, 'nombre')
 	elif not v.name(nom):
 		m.add_validation_error(INVALID_NAME, 'nombre')
+	elif not v.max_len(nom):
+		m.add_validation_error(MAX_LEN_EXCEEDED, 'nombre')
 
 	if not v.field(apellidos):
 		m.add_validation_error(REQUIRED_FIELD, 'apellidos')
 	elif not v.name(apellidos):
 		m.add_validation_error(INVALID_NAME, 'apellidos')
+	elif not v.max_len(apellidos):
+		m.add_validation_error(MAX_LEN_EXCEEDED, 'apellidos')
 
 	if m.get_len() == 0:
 		User.objects.filter(email=correo).update(first_name=nom,

@@ -88,7 +88,7 @@ class TranslationsView(LoginRequiredMixin, TemplateView):
             }
             p = change_time_zone(p)
 
-            translations = list(Traduccion.objects.filter(proyecto=project).order_by('id'))
+            translations = list(Traduccion.objects.filter(proyecto=project).order_by('-fechaCreacion'))
 
             for t in translations:
                 t.archivo = settings.SITE_URL + 'media/proyectos/' + str(request.user.id) + '/' + str(project.id) + '/' + t.archivo
