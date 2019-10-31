@@ -445,7 +445,8 @@ def methods_translation_view(request, idtraduccion):
 def detail_translation_view(request, idpro):
     
     try:
-        trans = Traduccion.objects.filter(proyecto = idpro)
+        trans = Traduccion.objects.filter(proyecto = idpro).order_by('-fechaCreacion')
+        
     except:
         return Response(data = {"resultCode": -1},status=status.HTTP_404_NOT_FOUND)
     try:
