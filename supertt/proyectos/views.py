@@ -427,6 +427,20 @@ def methods_translation_view(request, idtraduccion):
         if serializer.is_valid():
             serializer.save()
             data["resultCode"] = 1
+
+
+            traducciones = Traduccion.objects.filter(proyecto=trans.proyecto)
+            p = Proyecto.objects.get(id=trans.proyecto_id)
+            promedio = 0
+            n = 0
+            for t in traducciones:
+                if t.calificacion > 0:
+                    promedio += t.calificacion
+                    n += 1
+            promedio /= n
+            p.calificacion = promedio
+            p.save()
+
             return Response(data =data)
         data["resultCode"] = -1
         return Response(data = data, status = status.HTTP_400_BAD_REQUEST)
