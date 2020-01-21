@@ -1,6 +1,7 @@
 import inkml2img, glob, os
-
+import sys
 import os
+import shutil
 
 defult_folder_dataset = "./CROHME"
 defult_folder_converted = "converted_expressions"
@@ -17,10 +18,39 @@ class DatasetConverter:
 		#standard_name = "expression"
 
 		#count = 0
+		self.total_converted = len(files)
 		for filename in files:
 			#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + str(count) + ".png")
 			inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
 			#count += 1
+	def splitIntoFolders(self,testPercentage, trainPercentage):
+
+		if not os.path.exists("test"):
+			os.mkdir("test")
+
+		if not os.path.exists("train"):
+			os.mkdir("train")
+		
+		if not os.path.exists("validate"):
+			os.mkdir("validate")
+
+		try:
+			files =	os.listdir(defult_folder_converted)
+		except:
+			print( ("*" * 20) + "This folder does not exists" + ("*" * 20))	
+		total = len(files)
+		test_size = testPercentage * total // 100
+		train_size = trainPercentage * total // 100
+		total = total - test_size - train_size
+
+		for i in range(0, test_size):
+			shutil.copyfile(defult_folder_converted+"/"+files[i], "test/"+files[i])
+		
+		for i in range(test_size, train_size + test_size):
+			shutil.copyfile(defult_folder_converted+"/"+files[i], "train/"+files[i])
+
+		for i in range(train_size+test_size, total + train_size+test_size):
+			shutil.copyfile(defult_folder_converted+"/"+files[i], "validate/"+files[i])
 
 def main():
 	print("\nWARNING! make sure to have a valid folder with dataset in inkml format:")
@@ -35,7 +65,9 @@ def main():
 	print("converted mathematical expressions will be stored in [converted_expressions] folder ")
 
 	dc = DatasetConverter()
-	dc.make_conversion()
+	#dc.make_conversion()
+	dc.splitIntoFolders(int(sys.argv[1]), int(sys.argv[2]))
+
 
 if __name__ == "__main__":
 	main()
