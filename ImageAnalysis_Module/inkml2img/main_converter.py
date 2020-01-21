@@ -65,7 +65,7 @@ def main():
 	print("converted mathematical expressions will be stored in [converted_expressions] folder ")
 
 	dc = DatasetConverter()
-	#dc.make_conversion()
+	dc.make_conversion()
 	dc.splitIntoFolders(int(sys.argv[1]), int(sys.argv[2]))
 
 
