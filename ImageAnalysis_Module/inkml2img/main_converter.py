@@ -2,6 +2,8 @@ import inkml2img, glob, os
 import sys
 import os
 import shutil
+import xml.etree.ElementTree as ET
+import csv
 
 defult_folder_dataset = "./CROHME"
 defult_folder_converted = "converted_expressions"
@@ -9,6 +11,13 @@ class DatasetConverter:
 	def __init__(self):
 		if not os.path.exists(defult_folder_converted):
 			os.mkdir(defult_folder_converted)
+
+	def inkml2tag(self,  inkml_path):
+		tree = ET.parse(inkml_path)
+		root = tree.getroot()
+		prefix = "{http://www.w3.org/2003/InkML}"
+		GT_tag = [GT for GT in root.findall(prefix + 'annotation') if GT.attrib == {'type': 'truth'}]
+		return GT_tag[0].text
 
 	def make_conversion(self):
 		try:
@@ -19,10 +28,15 @@ class DatasetConverter:
 
 		#count = 0
 		self.total_converted = len(files)
-		for filename in files:
-			#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + str(count) + ".png")
-			inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
-			#count += 1
+		f = open('training.csv', 'w')
+		with f:
+			writer = csv.writer(f)
+			for filename in files:			
+				#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + str(count) + ".png")
+
+				inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
+				writer.writerow([defult_folder_converted + "/"+ filename[0: -4] + ".png", self.inkml2tag(defult_folder_dataset + "/"+ filename)])
+				#count += 1
 	def splitIntoFolders(self,testPercentage, trainPercentage):
 
 		if not os.path.exists("test"):
@@ -66,8 +80,9 @@ def main():
 
 	dc = DatasetConverter()
 	dc.make_conversion()
-	dc.splitIntoFolders(int(sys.argv[1]), int(sys.argv[2]))
+	#dc.splitIntoFolders(int(sys.argv[1]), int(sys.argv[2]))
 
 
 if __name__ == "__main__":
 	main()
+	#print(inkml2tag("test.inkml"))
