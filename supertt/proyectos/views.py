@@ -402,7 +402,7 @@ def create_translation_view(request): #request must include idproyecto in body
             
             for chunk in file.chunks():
                 image_file.write(chunk)
-                image_file.close()
+            image_file.close()
             return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
         
