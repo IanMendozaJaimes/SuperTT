@@ -48,10 +48,14 @@ def process_path(file_path):
     img = decode_img(img)
     return img, label
 
-print(CLASS_NAMES)
+#print(CLASS_NAMES)
 labeled_ds = list_ds.map(process_path, num_parallel_calls=AUTOTUNE)
-print('*'*20)
-print(list(labeled_ds.as_numpy_iterator())[0])
+#print('*'*20)
+#print(list(labeled_ds.as_numpy_iterator())[0])
 #for f in list_ds.take(1):
 #    print(f.numpy())
-#    print(process_path(f.numpy()))
+#    print(process_path(f))
+
+for element in list_ds:
+    print(element)
+    break
