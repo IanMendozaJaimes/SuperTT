@@ -55,7 +55,7 @@ labeled_ds = list_ds.map(process_path, num_parallel_calls=AUTOTUNE)
 #for f in list_ds.take(1):
 #    print(f.numpy())
 #    print(process_path(f))
-
-for element in list_ds:
-    print(element)
-    break
+for features, labels in labeled_ds.take(2):
+    print(features)
+    print()
+    print(labels)
