@@ -32,6 +32,7 @@ from users.models import User
 import os
 import pytz
 
+from utils.scriptCV import ImageProcessor
 # Create your views here.
 
 class ProyectsView(LoginRequiredMixin, TemplateView):
@@ -399,9 +400,16 @@ def create_translation_view(request): #request must include idproyecto in body
             print(idTraduccion)
             
             image_file = open(path_file +"/"+ idTraduccion+ "." + mediatype, "wb")
+            if not os.path.exists(path_file + "/" + "transformed"):
+                os.mkdir(path_file + "/" + "transformed")
             
+            #image_transformed = open(path_file + "/" + "transformed/" + idTraduccion+ "." + mediatype, "w")
             for chunk in file.chunks():
                 image_file.write(chunk)
+                #image_transformed.write(chunk)
+            ip = ImageProcessor(path_file +"/"+ idTraduccion+ "." + mediatype)
+            ip.GaussianTransform()
+            ip.saveImage(idTraduccion+ "." + mediatype, path_file + "/" + "transformed/")
             image_file.close()
             return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
