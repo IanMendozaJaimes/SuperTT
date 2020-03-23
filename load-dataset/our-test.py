@@ -5,20 +5,20 @@ IMG_HEIGHT = 155
 IMG_WIDTH = 515
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 
-dataset = tf.data.experimental.make_csv_dataset(
-      file_path,
-      batch_size=1, # Artificially small to make examples easier to show.
-      na_value="?",
-      num_epochs=1,
-      label_name='expresion',
-      ignore_errors=True)
-
 def show_batch(dataset):
 	for batch, label in dataset:
 		print(label)
 		for key, value in batch.items():
 			print("{:20s}: {}".format(key, value.numpy()))
 		print()
+
+dataset = tf.data.experimental.make_csv_dataset(
+      file_path,
+      batch_size=1,
+      na_value="?",
+      num_epochs=1,
+      label_name='expresion',
+      ignore_errors=True)
 
 def process_path(features, label):
 	prueba = features['imagen']
@@ -29,6 +29,3 @@ def process_path(features, label):
 	return img, label
 
 dataset = dataset.map(process_path, num_parallel_calls=AUTOTUNE)
-
-for element in dataset:
-	print(element)
