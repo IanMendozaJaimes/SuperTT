@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+.DS_Store
+ImageAnalysis_Module/.DS_Store
+ImageAnalysis_Module/inkml2img/
