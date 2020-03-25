@@ -1,0 +1,54 @@
+def t_C(t):
+	'C'
+	return t
+def t_B(t):
+	'B'
+	return t
+def t_X(t):
+	'X'
+	return t
+def t_A(t):
+	'A'
+	return t
+def t_F(t):
+	'F'
+	return t
+def t_R(t):
+	'R'
+	return t
+def t_E(t):
+	'E'
+	return t
+def t_L(t):
+	'L'
+	return t
+def t_N(t):
+	'N'
+	return t
+def t_S(t):
+	'S'
+	return t
+def t_P(t):
+	'P'
+	return t
+def t_V(t):
+	'V'
+	return t
+def t_T(t):
+	'T'
+	return t
+def t_M(t):
+	'M'
+	return t
+def t_Y(t):
+	'Y'
+	return t
+def t_H(t):
+	'H'
+	return t
+def t_G(t):
+	'G'
+	return t
+def t_I(t):
+	'I'
+	return t

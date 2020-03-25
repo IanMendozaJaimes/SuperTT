@@ -33,7 +33,7 @@ class DatasetConverter:
 			writer = csv.writer(f)
 			for filename in files:			
 				#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + str(count) + ".png")
-
+				print("*"*5+"current: "+ filename)
 				inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
 				writer.writerow([defult_folder_converted + "/"+ filename[0: -4] + ".png", self.inkml2tag(defult_folder_dataset + "/"+ filename)])
 				#count += 1

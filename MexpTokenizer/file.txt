@@ -1,0 +1,1411 @@
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$a(x-b) + b(y+a) + c = ax -ba +ba +by +c = 0$
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$u_n = o(v_n)$
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$z_3 = \frac{2 - 2\sqrt{2}}{2} = 1 - \sqrt{2}$
+\frac{\sin B + \sin C}{\cos B + \cos C}
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$a = b \cos C + c \cos B$
+$(2-s)(-1/2) +(n-1)(1-s/2) = 0$
+$ \int \limits ^ {b} _ {a} z + y d y $
+$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+$i = e$
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+"$s = 1\sqrt{2} \left( \frac{1}{\sqrt{2}} \sin x + \frac{1}{\sqrt{2}} \cos x \right)
+$(x+2)^3$
+$ \times \rightarrow \infty $
+$2a = b$
+$y^2=x^3+ax+b$
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+$\sin \theta = \frac{y}{\sqrt{x^2 + y^2}}$
+\int \left( 2^{x} - 3 e^{x} \right) d x
+$S^1 \times R^{n-1}$
+$y = \frac { 1}{Y}$
+\sqrt{b^{2} - 4 a c}
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+\sin ( \alpha + \beta ) \sin ( \alpha - \beta ) = \sin^2 \alpha - \sin^2 \beta
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$\sqrt[x]{\frac{a}{b}} = \frac{\sqrt[x]{a}}{\sqrt[x]{b}}$
+\lim_{x \rightarrow 0} \left( 1 + x \right)^{\frac{1}{x}}
+$y(t)$
+$\sum_{i=0}^{\infty} x^i = \frac{1}{1-x}$
+$x = \frac{-b \pm \sqrt{b^2 -4ac}}{2a}$
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+\sin x - \sin y - \sin \left( x - y \right)
+$10^{-4}$
+$g(a) = \alpha_n \neq 0$
+$\frac{b-a}{n}\leq\alpha$
+$y = r \sin \theta$
+\cos ( \frac \pi 2 + \alpha ) = - \sin \alpha
+$n_1 = 1$
+$ z_{1} = r_{1} ( \cos \theta_{1} + i \sin \theta_{1} ) $
+x_x^x + y_y^y + z_z^z - x - y - z
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$v_p(n)$
+$n_1+\ldots+n_j$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+\lim_{x \rightarrow \frac{\pi}{2} - 0} \tan x = \infty
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+\lim_{x \rightarrow 2} \frac{x - \sqrt{3 x - 2}}{\sqrt{x + 2} - 2}
+x_{i} - x_{i + 1} + x_{i + 2}
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+$\frac{\mathrm d}{\mathrm dt}$
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+( a^2 + b^2 ) ( c^2 + d^2 ) \geq ( a c + b d )^2
+$\mathrm{card}(B^A) = 2^{\mathrm{card}(A)}$
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+\sin ( \alpha + \beta ) \sin ( \alpha - \beta ) = \sin^2 \alpha - \sin^2 \beta
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$ \int \frac {1} {y} + \frac {1} {1 - y} d y = \int d x $
+$y_i = a x_i + b$
+$y = r \sin \theta$
+x_x^x + y_y^y + z_z^z - x - y - z
+x_x^x + y_y^y + z_z^z - x - y - z
+\sum^{n}_{k = 1} k = \frac{1}{2} \left( n^{2} + n \right)
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+$n! -1$
+$0 \pm 145 - 35$
+$\phi_A = \frac {M_0 L }{ 3 EI}$
+\log_{b} a = \frac{1}{\log_{a} b}
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$x^2 - dy^2 =\pm 1$
+$y = \frac{x\prime\sin\theta+y\prime\sin(w\prime+\theta)}{\sin w}$
+$x^\prime = x \cos \theta + y \sin \theta$
+$e_1 = 9$
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+\sqrt{2} \left( \frac{1}{\sqrt{2}} \sin x + \frac{1}{\sqrt{2}} \cos x \right)
+"$(v_1$x_{2}+v_{2}.\Delta t$
+x_{i} - x_{i + 1} + x_{i + 2}
+y_{4} - y_{5} - y_{6} + y_{a} - y_{b} - y_{c}
+$ 4 \sqrt {3} $
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+$\left| $\frac{a x_0 + b y_0 + c}{\sqrt{a^2 + b^2}} \right|$
+$42 - 85 - 18 \geq -25$
+x_1 \times x_2 \times x_3 \times x_4 = X
+$b= c \sin B = c \cos A$
+$2^{e} - 1$
+$132$
+\int_0^{\frac \pi 2} \{ ( \cos x + e^x ) - ( e^x - \cos x ) \} d x
+$c^2 = a^2 + b^2 - 2ab \cos C$
+$\sqrt{(5-x)d}$
+$ \frac {\sqrt {3}} {3} $
+$k_2 = k_1$
+$ L = \int ^ {\infty} _ {0} L _ {\lambda} d \lambda $
+$\frac{\pi-3}{\sqrt{2}}$
+$(a-d)^2+4bc$
+$y^4 + y + 1 = 0$
+$\mathrm ds^2 = \mathrm dr^2 + r^2\mathrm d\theta^2 + \mathrm dz^2$
+\left( a^{2} + b^{2} \right) \left( c^{2} + d^{2} \right) \geq \left( a c + b d \right)^{2}
+$ \forall a \in F $
+$n(n+2\alpha)$
+\log_{2} 8 = 3
+\sqrt{b^{2} - 4 a c}
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\frac{a + b + c + d + e}{a + b + c + d}
+$10x = 3$
+$ \frac {5} {3} $
+$I_c=f(V_{ce})$
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+\sin \alpha = \sqrt{1 - \cos^{2} \alpha}
+$y(0) = \alpha_1$
+\sin x - \sin y - \sin \left( x - y \right)
+$166 \pm 92 + 55 - 6$
+3 0 \times 2 9 x^{2 8}
+\lim_{x \rightarrow \infty} \int_0^x e^{- y^2} d y = \frac {\sqrt \pi} 2
+$x = r \cos \theta$
+$w_k^2 = |z|\mathrm{e}^{i\theta} \mathrm{e}^{2i\pi k} = z$
+$y = r \sin \theta$
+\log_{2} 8 = 3
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$a(e-a^{-1}(a-x))=x$
+$\cos (a - b) = \cos a \cos b + \sin a \sin b$
+$c_{e_i+1}$
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+$I_d = I_i k_d \sin \theta$
+$T_N = 100$
+\int \left( 2^{x} - 3 e^{x} \right) d x
+e^{i \pi} + 1 = 0
+$y=x^2+5x-3$
+$\cos(a+b)= \cos(a) \cos(b) -\sin(a) \sin(b)$
+$a^2 + 2ab + b^2 - 2ab$
+$ \frac {9} {5} $
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+$(x-\frac{a}{2})^2=-c^2$
+e = \sum^{\infty}_{k = 0} \frac{1}{k !}
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$\log_ca$
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$ \frac {7} {5} $
+e = \sum^{\infty}_{k = 0} \frac{1}{k !}
+$\frac{m+m^{\prime}}{n+n^{\prime}} \lt \frac{a}{b}$
+\tan z = \frac{\sin z}{\cos z}
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+$x^k - 1 = 0$
+$2=1+1$
+x_x^x + y_y^y + z_z^z - x - y - z
+$\sigma =\sqrt{\sigma ^2}$
+\lim_{x \rightarrow 0} \frac {( 1 - \cos x ) ( 1 + \cos x )} {x^2 ( 1 + \cos x )}
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$|B-\beta|$
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$(2i)^n$
+$g_{ij} = g^{ij}$
+$2 + 2^{4-\frac{k}{2}} + o(1)$
+$Li_s (z)$
+$n \log_2 n$
+x^{i} + x^{i + 1} + x^{i + 2}
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+z_1^2 + 1^z - z_2^2 + 2^z
+$(100 \div 198) \times (172 + 102 + 2) \geq 138$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+"$k_1$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$\frac{1}{\frac{1}{2}\Big( \frac{1}{a} + \frac{1}{b}\Big)} = \frac{2ab}{a+b}$
+x^{2} + y^{2} \lt 1
+$\frac{1}{\log_a(b)}$
+$r^{\prime} = B^n x + \alpha - (B y + \beta)^n$
+$\left| $\frac{a x_0 + b y_0 + c}{\sqrt{a^2 + b^2}} \right|$
+$(a + b)^2 = a^2 +2ab + b^2$
+$E_0$
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+$x = r \cos \theta$
+$126 - 48 = 78$
+$\sum_{k=1}^{\infty} \frac{a_{k}}{k!}$
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+$\sigma(0)=01$
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+a + b + c + d + e
+$z^2 - (2a - b)z + (a^2 - ab + b^2)$
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+\int \left( 2^{x} - 3 e^{x} \right) d x
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+$x_4 = -\sqrt{2}$
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+$y = \frac{x\prime\sin\theta+y\prime\sin(w\prime+\theta)}{\sin w}$
+$T = T_{0} + \Delta T$
+$x = a$
+$\sum_i d_i^2 = 168$
+$n=\pi(y)$
+$d \in EIC$
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+$ \beta \geq a $
+$2z^2 - 3z - 3 - 7i = 0$
+$y^4 + y + 1 = 0$
+\left( y + 1 \right)^{2} = y^{2} + 2 y + 1
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+\sin x - \sin y - \sin \left( x - y \right)
+$a_1 = \frac{r_1}{(r_1-r_2)(r_1-r_3)}$
+a + b + c + d + e
+\left( z^{\frac{n}{2}} + y^{\frac{n}{2}} \right) \left( z^{\frac{n}{2}} - y^{\frac{n}{2}} \right) = x
+$\sin(- x) = -\sin(x)$
+$10^n - k$
+$\sin \theta = \frac{y}{\sqrt{x^2 + y^2}}$
+$Y = y$
+\frac{1}{a} F \left( a x + b \right) + C
+x_x^x + y_y^y + z_z^z - x - y - z
+$ A . B = ( A_{1} i + A_{2} j + A_{3} k ) . ( B_{1} i + B_{2} j + B_{3} k ) $
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$1/v^2$
+\lim_{x \rightarrow 0} ( 1 + x )^{\frac 1 x}
+\pi \int_c^d \{ g ( y ) \}^2 d y
+\int_0^{\frac \pi 2} \{ ( \cos x + e^x ) - ( e^x - \cos x ) \} d x
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+a x^{2} + b x + c = 0
+$b= c \sin B = c \cos A$
+3 0 \times 2 9 x^{2 8}
+$\frac{3\pi}{7}$
+$T_{\mathrm{moy}}=10$
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$n=3$
+\int_0^{\frac \pi 2} \{ ( \cos x + e^x ) - ( e^x - \cos x ) \} d x
+$E \rightarrow E/F$
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+$\frac{\sqrt{3}}{2}+\frac{1}{2}i$
+$153 - 51 \neq 140$
+\lim_{x \rightarrow \infty} \int_0^x e^{- y^2} d y = \frac {\sqrt \pi} 2
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$d=1$
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+$(31 / (18 + 12)) + 36 = 37.03$
+$ \sum c _ {n} $
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+$a^xa^y = a^{x+y}$
+a \left( n \right) = \sum^{n}_{k = 1} \left( - 1 \right)^{n - k} k !
+$x\leq 0$
+[ \frac 2 3 ( 1 + \frac 9 4 x )^{\frac 3 2} \frac 4 9 ]_0^4
+$y=x^{n}$
+$d(x^n)$
+x = 2 n \pi \pm \frac{\pi}{3}
+$ \frac {2} {3} h $
+$ \theta + \frac {\pi} {2} $
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+\pi \int_c^d \{ g ( y ) \}^2 d y
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$x \neq y$
+$(69 + 177 \times 136) + (117 \div 140) > 5612$
+$y = \frac{x\prime\sin\theta+y\prime\sin(w\prime+\theta)}{\sin w}$
+$1 + \sqrt{2}$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$1 = \frac{p e^{\frac {p}{q}}}{q}$
+\cos ( \frac \pi 2 + \alpha ) = - \sin \alpha
+$\lim_{x \rightarrow +\infty}{g(x)} = 0$
+$a_1 = \frac{M_2}{M_1 + M_2} a$
+"  $\forall x \in A$(166 - 122 + 32) + ((106 \div 30) \div (30 \div 18)) \geq 77$
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+\sin x - \sin y - \sin ( x - y )
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$\lim_{x\rightarrow 0}\frac{\sin(x)}{x}=1$
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+\lim_{t \rightarrow 0} \frac {\cos ( \frac x 2 - t )} {- 2 t}
+$x = \frac{-b \pm \sqrt{b^2 -4ac}}{2a}$
+$a^2 + b^2 = (a+bi)(a-bi)$
+$g(\theta) = G(\theta) - G$
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$\frac {1 + \frac { 1}{4}x}{1 - \frac { 3}{4}x+ \frac { 1}{4}x^2 - \frac 1{24}x^3}$
+$\lim_{x \rightarrow a}f(x) = l$
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$ \sqrt {x +} y \leq \sqrt {x} + \sqrt {y} $
+$\Delta s^2 = c^2 \Delta t^2 - \left( \Delta x^2 + \Delta y^2 + \Delta z^2 \right) = c^2 \Delta t^2 -\Delta l^2$
+$ 9 ^ {9 ^ {9 ^ {9 ^ {9 ^ {9}}}}} $
+$\frac{\sqrt{3}}{2}+\frac{1}{2}i$
+$M=(\alpha_{ik}.\beta_{jl})$
+\sin^{2} \theta + \cos^{2} \theta = 1
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+$T(g)=0$
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+x_{i} - x_{i + 1} + x_{i + 2}
+$25 - 151 - 29 - 33 = -1$
+$R^{ij} - \frac{1}{2}g^{ij}R = 0$
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$dg = \frac{1}{|a|} da db$
+$x^\prime = x \cos \theta + y \sin \theta$
+\frac{1}{a} F \left( a x + b \right) + C
+$a^xa^y = a^{x+y}$
+x_{1} + x_{2} = x_{3}
+$e_3 = 15$
+$f(x)=x^n$
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+$\log(z) \leq z - 1$
+$S_2=S_0+f_2$
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+"$(s_1$L_0 = \int_0^{x_0} \sqrt {1 + \frac{9a^2}4 x} \mathrm d x$
+$\alpha 0 = 0\alpha = 0$
+$e^{-1}$
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$e = \frac{c}{a}$
+$ \sqrt {5 + 2 \sqrt {6}} $
+$b_0=1$
+\int_a^b \frac {\sqrt x} 2 d x
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$ \sqrt {x y z} $
+$\mu_n = E[X^n]$
+\pi \int_c^d \{ g ( y ) \}^2 d y
+( a^2 + b^2 ) ( c^2 + d^2 ) \geq ( a c + b d )^2
+$-2ab \cos\gamma$
+( y + 1 )^2 = y^2 + 2 y + 1
+$\frac{8\pi r}{q(r)}$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+A = \sqrt{a + \frac{1}{\sqrt{a + \frac{1}{\sqrt{a}}}}} + \sqrt{b}
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+\sum_{i = 2 n + 3 m}^{1 0} i x
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+$ - \sqrt {y} $
+x_1 \times x_2 \times x_3 \times x_4 = X
+$x^3 = 18x + 35$
+x_1 \times x_2 \times x_3 \times x_4 = X
+$10^{-12}$
+$s = \frac{1}{2} + it$
+$M\rightarrow N$
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$\alpha= 2 \sqrt { \frac {l(u)}{L}}$
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+\alpha_{n + 1} - 3 \beta = \frac{3}{2} \alpha_{n} + \beta - 3 \beta
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+"$(0\lim_{t \rightarrow \infty} ( 1 + \frac 1 t )^t = e
+$\sum_{i=1}^n y_i^2 = 1$
+$c^2 = a^2 + b^2 - 2ab \cos C$
+$0 < x < 1$
+$\sin \theta = \frac{y}{\sqrt{x^2 + y^2}}$
+$A = B \times C$
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+"$p = p(a\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$113 + (168 \div 86) \leq 115$
+$157 + 72 \geq 228$
+$n! -1$
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+$r(r_0 \sin(\theta - \theta_0)- r_1 \sin (\theta - \theta_1) ) = r_0 r_1 \sin (\theta_1 - \theta_0)$
+$(B\times C)$
+$\frac{n(n+1)}{2}$
+$P_o ( \cos \theta ) = 1$
+$C_{n+1}(E)=C_1 \left ( C_{n}(E)\right )$
+$f(z)=a (z-z_0)+b+o(z-z_0)$
+$b= c \sin B = c \cos A$
+$\sigma({A}_i)$
+$100 \pm 15 \times 16$
+$x^3 + 3x^2\sqrt{3} - 3x - \sqrt{3}$
+\sin \left( \alpha + \beta \right) \sin \left( \alpha - \beta \right) = \sin^{2} \alpha - \sin^{2} \beta
+$ a \rightarrow b $
+"$C(0$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+$(a_n + b_n)$
+$n-1$
+$1+2+3+\ldots+(n-1)+n$
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+$A = A_1 + A_2$
+$f(a_1) = f(a_2)$
+$(SM)$
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+e_1^2 + e_2^3 + e_3^4 + e_4^5
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+$a^2 + b^2 = (a+bi)(a-bi)$
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+\sin x - \sin y - \sin ( x - y )
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+\sqrt{b^{2} - 4 a c}
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$ 3 y ^ {3} $
+a ( n ) = \sum_{k = 1}^n ( - 1 )^{n - k} k !
+\lim_{t \rightarrow 0} \frac {\cos ( \frac x 2 - t )} {- 2 t}
+$a_3=1$
+$c^2 = a^2 + b^2 - 2ab \cos C$
+$x^{(k)}$
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+"$r^l Y_{l\lim_{z \rightarrow 0} \frac 1 {\log_a ( 1 + z )^{\frac 1 z}}
+$2^2 - 1$
+$\phi_i x_i$
+x_x^x + y_y^y + z_z^z - x - y - z
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+\pi \int_c^d \{ g ( y ) \}^2 d y
+$y^3 = x$
+\sin x - \sin y - \sin ( x - y )
+$\frac{4}{3}\pi a b^2$
+x_{1} + x_{2} = x_{3}
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+$j({q})$
+$\lim_{x \rightarrow +\infty}f(x) = l$
+$10^k r_0$
+\int ( 2^x - 3 e^x ) d x
+$c^2 = a^2 + b^2 - 2ab \cos C$
+$f(ab^{-1}) = f(cd^{-1})$
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+\sin x - \sin y - \sin ( x - y )
+$((31 \div 52) - (21 \div 120)) \times 102 \geq 42$
+$a^2 + b^2 = (a+bi)(a-bi)$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+$P(x) = \sum_{i=0}^{n} a_j x^j$
+\sqrt 2 ( \frac 1 {\sqrt 2} \sin x + \frac 1 {\sqrt 2} \cos x )
+$\sigma=1$
+\frac{1}{a} F \left( a x + b \right) + C
+x_x^x + y_y^y + z_z^z - x - y - z
+"$\forall x\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$138 \times 95 = 13110$
+$\frac{1}{-1} = \frac{-1}{1}$
+\frac{1}{a} F \left( a x + b \right) + C
+$P_{nmm}$
+\left( z^{\frac{n}{2}} + y^{\frac{n}{2}} \right) \left( z^{\frac{n}{2}} - y^{\frac{n}{2}} \right) = x
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+3 0 \times 2 9 x^{2 8}
+$\frac1{n^{k+2}}$
+\int \left( 2^{x} - 3 e^{x} \right) d x
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+( y + 1 )^2 = y^2 + 2 y + 1
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$ x ^ {y} + y ^ {x} $
+\left( y + 1 \right)^{2} = y^{2} + 2 y + 1
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$B_N(a)=\sum_{k=N}^ \infty \frac{16^{N-k}}{8k+a}$
+$y = \frac{x\prime\sin\theta+y\prime\sin(w\prime+\theta)}{\sin w}$
+$\left( M_i^j \right)$
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+a + b + c + d + e
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+$x - n$
+$ x ^ {4} - 4 x ^ {3} - 14 x ^ {2} - 4 x + 1 $
+$\sum_{i=1}^n (2i-1) = n^2$
+x_1 \times x_2 \times x_3 \times x_4 = X
+$ 9 ! ^ 9 $
+$59 + 53 \neq -65$
+e_1^2 + e_2^3 + e_3^4 + e_4^5
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$n=\sum_{i=1}^k n_i$
+\lim_{x \rightarrow \infty} \int_0^x e^{- y^2} d y = \frac {\sqrt \pi} 2
+$ a + h $
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$(BT_B)$
+$y^4 + y + 1 = 0$
+z_1^2 + 1^z - z_2^2 + 2^z
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$ i ^ {\prime} \lt 0 $
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+"$(k_2$12 \pm ((29 \times 6) + 22) + ((47 \times 133) - (86 - 187))$
+$\forall x \in X$
+$r(r_0 \sin(\theta - \theta_0)- r_1 \sin (\theta - \theta_1) ) = r_0 r_1 \sin (\theta_1 - \theta_0)$
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+\sin x - \sin y - \sin \left( x - y \right)
+$(\gamma )$
+\sum^{n}_{k = 1} k = \frac{1}{2} \left( n^{2} + n \right)
+z_1^2 + 1^z - z_2^2 + 2^z
+$H=\frac{(fd)}{c}$
+"$x_0$L_{\mu} = L_1$
+$0=\frac{d^2 y}{dx^2}$
+"$C_S = R(b$E(s^2_{n}) = E(X)^2+V(X) - E(X)^2-\frac{1}{n}V(X)=\frac{n-1}{n}V(X)$
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+$\sum_0^\infty \frac{1}{n^2}$
+( z^{\frac n 2} + y^{\frac n 2} ) ( z^{\frac n 2} - y^{\frac n 2} ) = x
+$ \lim _ {x \rightarrow \infty} x _ n $
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$c - w_i$
+$-\frac{i}{\sqrt{2}} \sin \theta$
+$\left|a-\frac{p}{q}\right| \geq \frac{C}{q^d}$
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$y^4 + y + 1 = 0$
+$y^4 + y + 1 = 0$
+$3 = \sqrt{6+\sqrt{6+\sqrt{6+\sqrt{6+\ldots}}}}$
+x_{1} + x_{2} = x_{3}
+$c_1(\alpha -E) + c_2(\beta) = 0$
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+$178 - 64 + 21 \leq 93$
+$\left| $\frac{a x_0 + b y_0 + c}{\sqrt{a^2 + b^2}} \right|$
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+$\frac{2}{3}n^3$
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+$y= a x^2 + b$
+$\frac{1}{1-c}$
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$\sqrt[x]{\frac{a}{b}} = \frac{\sqrt[x]{a}}{\sqrt[x]{b}}$
+e^{i \pi} + 1 = 0
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+$b= c \sin B = c \cos A$
+x_1 \times x_2 \times x_3 \times x_4 = X
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+\sin \left( \alpha + \beta \right) \sin \left( \alpha - \beta \right) = \sin^{2} \alpha - \sin^{2} \beta
+$\phi_j(k)$
+$\theta (0) = 1$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$4\pi^2 a^3$
+z_1^2 + 1^z - z_2^2 + 2^z
+$f(x)= \frac{1}{x-a}+a $
+"$\Bigg(a\frac{1-t^2}{1+t^2}\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+"$A(0$y = z x$
+$a^{p/q}$
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$3n-5$
+$\frac{1}{\frac{1}{2}\Big( \frac{1}{a} + \frac{1}{b}\Big)} = \frac{2ab}{a+b}$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+$(140 / (90 / 124)) \times (167 - 147) = 3857.78$
+$ b ^ {x} $
+$\{x P(x)\}$
+$a = b \cos C + c \cos B$
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} + z_{2}
+$47 \div (136 + 198) = 0.14$
+$ \frac {8 \sqrt {2}} {3} $
+3 0 \times 2 9 x^{2 8}
+\int_0^{\frac \pi 2} \{ ( \cos x + e^x ) - ( e^x - \cos x ) \} d x
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+( a^2 + b^2 ) ( c^2 + d^2 ) \geq ( a c + b d )^2
+x^{i + 2 j \times k^{3} - \frac{j}{2 i}}
+$[XY]=[X^{\prime}Y^{\prime}]$
+$a = b \cos C + c \cos B$
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+3 0 \times 2 9 x^{2 8}
+$\frac{\sqrt{3}}{{2}}$
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+$N = (n-1)\times  10^6$
+"$(v$3^3 + 4^3 + 5^3 = 6^3$
+$a^2 + b^2 = (a+bi)(a-bi)$
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$ \log x(t) = \sum_{k=1}^{\infty} \frac{a_{k}}{k!} ( i t )^{ k } - \frac{1}{2} (\sum_{k=1}^{\infty} \frac{a_{k}}{k!} ( i t )^{ k } )^{2} + \frac{1}{3} (\sum_{k=1}^{\infty} \frac{a_{k}}{k!} ( i t )^{ k } )^{3} - \ldots $
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+\sqrt{b^{2} - 4 a c}
+3 0 \times 2 9 x^{2 8}
+a ( n ) = \sum_{k = 1}^n ( - 1 )^{n - k} k !
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+"$S_{20x_{1} + x_{2} = x_{3}
+$6a^2$
+$p^{SA} \gt p^{AE}$
+\log_{2} 8 = 3
+\lim_{x \rightarrow 0} \frac{\left( 1 - \cos x \right) \left( 1 + \cos x \right)}{x^{2} \left( 1 + \cos x \right)}
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+$r(\theta)=a$
+$r_2 - r_1 = R$
+$\sin \theta = \frac{y}{\sqrt{x^2 + y^2}}$
+F_{n} = F_{n - 1} + F_{n - 2}
+$i=1$
+$x = r \cos \theta$
+$76 \pm (102 + 150) \times 56$
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$2^{n(n - 1)}$
+( x^3 - x^2 - x ) ( 2 x - 7 )
+$n! -1$
+$ \frac {2 x - 8} {4 x - 8} $
+"$(n_1e^{x^{- \left( \frac{x}{2} \right)^{n}}}
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+\sqrt{b^{2} - 4 a c}
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+$\frac{c}{d}-\frac{a}{b}=\frac{(bc-ad)}{bd}$
+$x^\prime = x \cos \theta + y \sin \theta$
+$\left| $\frac{a x_0 + b y_0 + c}{\sqrt{a^2 + b^2}} \right|$
+\sqrt{b^{2} - 4 a c}
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$u \in S$
+"$(p_1\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+\lim_{x \rightarrow \infty} \frac{1}{x^{2}} = 0
+$n! -1$
+$x+ (-x) = -x + x = 0$
+\lim_{x \rightarrow 2} \frac{x - \sqrt{3 x - 2}}{\sqrt{x + 2} - 2}
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$x =v_4+v_1$
+$u_n = u_p q^{n - p}$
+\lim_{z \rightarrow 0} \frac 1 {\log_a ( 1 + z )^{\frac 1 z}}
+e_1^2 + e_2^3 + e_3^4 + e_4^5
+$\frac{5}{2} \sqrt{5+2\sqrt{5}}$
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$S^{4m+1}$
+( y + 1 )^2 = y^2 + 2 y + 1
+a + b + c + d + e
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$\frac{7}{5}$
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$6 = 2^1(2^2-1)$
+"$\Bigg(a\frac{1-t^2}{1+t^2}\sqrt{b^{2} - 4 a c}
+x_x^x + y_y^y + z_z^z - x - y - z
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+$y^{n-1}$
+( x^3 - x^2 - x ) ( 2 x - 7 )
+$a(v^2)= a$
+\tan z = \frac{\sin z}{\cos z}
+$x^2 - x - 1 = 0$
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+$94 + 74 + 6 + 138 > 21$
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+A = \sqrt{a + \frac{1}{\sqrt{a + \frac{1}{\sqrt{a}}}}} + \sqrt{b}
+$e=1$
+$ \log _ {a} x $
+\int \left( 2^{x} - 3 e^{x} \right) d x
+$1024 \times  (10 + 256^1 + 256^2 + 256^3) = 17 247 250 432$
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+[ \frac 2 3 ( 1 + \frac 9 4 x )^{\frac 3 2} \frac 4 9 ]_0^4
+z_1^2 + 1^z - z_2^2 + 2^z
+$x + \ldots + y$
+\sum_{i = 2 n + 3 m}^{1 0} i x
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+$x = \frac{1}{3}$
+$c = \sqrt{a^2+b^2-2ab\cos\gamma}$
+$2^{-1}$
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+\sum^{n}_{k = 1} \frac{k + 1}{a_{k} a_{k + 1}}
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$d_{xz}$
+$x = r \cos \theta$
+$B_1 = S_1(A_1)$
+$x_{(k)}$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+( x^3 - x^2 - x ) ( 2 x - 7 )
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+$tw(G)$
+$I_{1} = I_{1_{mi}} + \frac{V_e}{L_1} t$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$\sum_{k=1}^{\infty} \frac{a_{k}}{k!}$
+a + b + c + d + e
+$ b \leq a $
+\lim_{x \rightarrow \infty} \frac{3 x - 2}{x + 3}
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+$\frac{1}{\frac{1}{2}\Big( \frac{1}{a} + \frac{1}{b}\Big)} = \frac{2ab}{a+b}$
+$y = \frac{1}{x}$
+"$G$2^{69}$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$c \leq ab$
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+$ \frac {\pi ^ {2}} {6} B ^ {2} $
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+$y = r \sin \theta$
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+x_x^x + y_y^y + z_z^z - x - y - z
+$(-a)^n = a^n$
+\sum^{n}_{k = 1} \frac{k + 1}{a_{k} a_{k + 1}}
+\int_1^2 ( \frac {x^2 - 1} {x^2} ) e^{x + \frac 1 x} d x
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+$ b _ {14} $
+$ \sum _ {k} 2 ^ {- k} $
+$\sqrt{2+\sqrt{2}}$
+$146 \times (101 + 157 - 181) = 11242$
+"$G(k[ \frac 2 3 x^{\frac 3 2} ]_0^1
+$y =x^2$
+a + b + c + d + e
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+\sin x - \sin y - \sin \left( x - y \right)
+$ \int d x $
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+\sin x - \sin y - \sin \left( x - y \right)
+x_1 \times x_2 \times x_3 \times x_4 = X
+$I_A \leq I_B \leq I_C$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\left( z^{\frac{n}{2}} + y^{\frac{n}{2}} \right) \left( z^{\frac{n}{2}} - y^{\frac{n}{2}} \right) = x
+$ lim _ {x \rightarrow + \infty} \log _ {a} x = - \infty $
+$v_1 = e^{\frac{-2i\pi}{9}}$
+\sum^{n}_{k = 1} k = \frac{1}{2} \left( n^{2} + n \right)
+$\log_aa = 1$
+a \left( n \right) = \sum^{n}_{k = 1} \left( - 1 \right)^{n - k} k !
+$V_i = \frac{v_i}{v} = \frac{p_i}{p}$
+$\Delta w_{ij}=f(y_i)\times g(y_j)$
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+\int_1^2 ( \frac {x^2 - 1} {x^2} ) e^{x + \frac 1 x} d x
+$\gamma_{jk}$
+$H_5=X^5-10X^3+15X$
+\lim_{x \rightarrow 0} \frac {( 1 - \cos x ) ( 1 + \cos x )} {x^2 ( 1 + \cos x )}
+$\frac{\frac {2}{1}}{\frac {3}{2}}=\frac{4}{3}$
+$-(2\alpha+1) x$
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+x_{i} - x_{i + 1} + x_{i + 2}
+$ a \neq b \neq c $
+$b = \sqrt{c^2-a^2}$
+x^{2} + y^{2} \lt 1
+"$\frac{dA}{dt}= \{A$z^2+w^2$
+$i^4 = 1$
+x_1 \times x_2 \times x_3 \times x_4 = X
+$a^2 + b^2 = (a+bi)(a-bi)$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+$x^2+x+1 = 0$
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$b= c \sin B = c \cos A$
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$TX_i=X_{i+1}$
+$G_u = 2 M_{u v} M_v$
+$t = x - n \pi$
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$10^{-pH_i}$
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$\left| $\frac{a x_0 + b y_0 + c}{\sqrt{a^2 + b^2}} \right|$
+y_{4} - y_{5} - y_{6} + y_{a} - y_{b} - y_{c}
+\pi \int_c^d \{ g ( y ) \}^2 d y
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+$f(x) = X^2 - 4X - 5$
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+3 0 \times 2 9 x^{2 8}
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$\cos \alpha = \frac{a}{\sqrt{a^2 + b^2 + c^2}}$
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+\sin x - \sin y - \sin \left( x - y \right)
+$I=a.A$
+$0\leq b<B$
+$anx^{n-1}$
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+$1 + z = \frac{1}{\sqrt{1 - \frac{2 G M}{R c^2}}}$
+$\frac{1}{\frac{1}{2}\Big( \frac{1}{a} + \frac{1}{b}\Big)} = \frac{2ab}{a+b}$
+e_1^2 + e_2^3 + e_3^4 + e_4^5
+\sum_{i = 2 n + 3 m}^{1 0} i x
+$ \sqrt {x ^ {2} + 6 x} + 4 $
+$12 \div 75 \geq 0$
+\int \frac{x^{2} - e^{2 x}}{x - e^{x}} d x
+$P(x) = \sum_{i=0}^{n} a_j x^j$
+$u\mathrm dv= \mathrm d(uv)-v\mathrm du$
+\tan z = \frac{\sin z}{\cos z}
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+\int_a^b \frac {\sqrt x} 2 d x
+$r=\sqrt{\theta}$
+$(A_2B_1)$
+\int \left( 2^{x} - 3 e^{x} \right) d x
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+$N = 3$
+x^{2} + y^{2} = z^{2}
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+\sqrt{b^{2} - 4 a c}
+$S_{n+1}=S_nS_{n-1}$
+$\tan \gamma_H=\tan H \sin \phi$
+$\cos \alpha = \frac{a}{\sqrt{a^2 + b^2 + c^2}}$
+a + b + c + d + e
+\sin^{2} \theta + \cos^{2} \theta = 1
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+\left( z^{\frac{n}{2}} + y^{\frac{n}{2}} \right) \left( z^{\frac{n}{2}} - y^{\frac{n}{2}} \right) = x
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+$G_{2k}$
+$f(x) = a_nx^n + a_{n-1}x^{n-1}+\cdots+a_1x + a_0$
+\lim_{x \rightarrow 0} ( 1 + x )^{\frac 1 x}
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$ + 7 \times 9 ^ {5} + 7 \times 9 ^ {4} + 7 \times 9 ^ {3} + 7 \times 9 ^ {2} + 7 \times 9 $
+a + b + c + d + e
+$n = 1$
+"$E_1$q=\sum_{i=1}^sl_i^2-\left(\sum_{i=s+1}^rl_i^2\right)$
+[ \frac 2 3 ( 1 + \frac 9 4 x )^{\frac 3 2} \frac 4 9 ]_0^4
+$\frac {1}{2\sqrt{x}}$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+$a_n = 1$
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+"$E$((138 + 42) \div 93) + (73 + 141 + 169) > 346$
+"$\Bigg(a\frac{1-t^2}{1+t^2}e = \sum^{\infty}_{k = 0} \frac{1}{k !}
+\pi \int_c^d \{ g ( y ) \}^2 d y
+\pi \int_c^d \{ g ( y ) \}^2 d y
+$1\leq i \leq n$
+$\Delta x=x^{\prime}-x$
+\lim_{x \rightarrow \infty} \int_0^x e^{- y^2} d y = \frac {\sqrt \pi} 2
+$ \frac {3} {7} $
+$b_{n}-a_{n}$
+$b= c \sin B = c \cos A$
+\log_{2} 8 = 3
+$\frac{1 + \sqrt{5}}{2}$
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+"$\forall t \in (0"$HCN_{n\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+$n=b-a+1$
+x_{1} + x_{2} = x_{3}
+$ a \lt x \leq b $
+$P = a_nX^n + a_{n-1}X^{n-1}+\ldots + a_1X + a_0$
+$\cos \alpha = \frac{a}{\sqrt{a^2 + b^2 + c^2}}$
+$1 - \frac {1 }{ 3} = \frac {2 }{ 3}$
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+"$\Delta S_{1$\Delta d = c.\Delta t$
+( z^{\frac n 2} + y^{\frac n 2} ) ( z^{\frac n 2} - y^{\frac n 2} ) = x
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+$ \frac {3} {4} $
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+$y^n<x B^k$
+"$u \in Ex^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+\cos \left( \frac{\pi}{2} + \alpha \right) = - \sin \alpha
+\lim_{x \rightarrow 0} ( 1 + x )^{\frac 1 x}
+\lim_{x \rightarrow \infty} \frac{1}{x^{2}} = 0
+$\frac{\beta}{\alpha-1}$
+$x^2 + 2x\sqrt{2} + 1$
+$x + x^2$
+x_1 \times x_2 \times x_3 \times x_4 = X
+$x(x^2 + y^2) - 10(x^2 - y^2) = 0$
+$ 5 div 3 \neq 3 div 5 $
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$a = r \sqrt{2 - \sqrt{ 3}}$
+$P(b/c)$
+"$\pm w( r$\gamma < B$
+$x = r \cos \theta$
+\frac{1}{a} F \left( a x + b \right) + C
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+$p = 2 \times l - q$
+$\theta = \frac {n \times 360} {60 \times 1000}$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$u\neq v$
+( z^{\frac n 2} + y^{\frac n 2} ) ( z^{\frac n 2} - y^{\frac n 2} ) = x
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+$(E_{0})$
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$c^2 = a^2 + b^2 - 2ab \cos C$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+$(x_1+b_1k)^2+(y_1-a_1k)^2$
+"$4$N_{n-1}$
+$179 \times ((10 - 77) \times (21 + 102)) \geq -1475139$
+z_1^2 + 1^z - z_2^2 + 2^z
+x_1 \times x_2 \times x_3 \times x_4 = X
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+\sum_{i = 2 n + 3 m}^{1 0} i x
+$c^2 = a^2 + b^2 - 2ab \cos C$
+\lim_{t \rightarrow 0} \frac {\cos ( \frac x 2 - t )} {- 2 t}
+x_x^x + y_y^y + z_z^z - x - y - z
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$y = \frac{x\prime\sin\theta+y\prime\sin(w\prime+\theta)}{\sin w}$
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+$\sin(1)$
+$e^{i\pi}= -1$
+\lim_{x \rightarrow 0} ( 1 + x )^{\frac 1 x}
+$\frac{-\sqrt{3}}{2}+\frac{1}{2}i$
+$E(P)$
+$ \sin 9 - \cos 9 $
+$x^5+x+a$
+$\sigma = \frac{1}{2}$
+\frac{1}{a} F \left( a x + b \right) + C
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+\sqrt 2 ( \frac 1 {\sqrt 2} \sin x + \frac 1 {\sqrt 2} \cos x )
+\lim_{z \rightarrow 0} \frac 1 {\log_a ( 1 + z )^{\frac 1 z}}
+$\Delta \theta = 0$
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+$a^2 + b^2 = (a+bi)(a-bi)$
+$P_d(u)$
+$n(p)$
+$-\frac{1}{\pi}$
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+\frac{\sin B + \sin C}{\cos B + \cos C}
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$(M_1M_3)$
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+$a = b \cos C + c \cos B$
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$E_iE_j = 0$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\sqrt 2 ( \frac 1 {\sqrt 2} \sin x + \frac 1 {\sqrt 2} \cos x )
+\log_{2} 8 = 3
+\sin x - \sin y - \sin \left( x - y \right)
+$q = w + x i + y j + z k$
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+$1 + a(p)p^{-s} + a(p^2)p^{-2s} + \ldots$
+3 0 \times 2 9 x^{2 8}
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+( a^2 + b^2 ) ( c^2 + d^2 ) \geq ( a c + b d )^2
+$c = \sum_{i=1}^{n} x_i a_i$
+$(Gz)$
+e_1^2 + e_2^3 + e_3^4 + e_4^5
+$i.M$
+$\sin \theta = \frac{y}{\sqrt{x^2 + y^2}}$
+$\mu_p = \left ( \frac{L}{t_r} \right )\left ( \frac{L_t}{V} \right )$
+$ a + 6 \sqrt {2} $
+$((144 + 159) - (176 \div 186)) + 196 \geq 497$
+F_{n} = F_{n - 1} + F_{n - 2}
+\sin x - \sin y - \sin ( x - y )
+$p=\sum_{i\leq d} a_i2^i$
+$2^{k - 1} + k$
+$x^3=x^2+x+1$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$\frac{1}{n(n+1)(n+2)}$
+$E = dg$
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+$y+16=x$
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+$x = r \cos \theta$
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+y_{4} - y_{5} - y_{6} + y_{a} - y_{b} - y_{c}
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+$a = \frac{8 R}{\sqrt{3}}$
+$a = 2$
+$\sin(x)=\sin(y)$
+a + b + c + d + e
+$b= c \sin B = c \cos A$
+$32 \pm 12 \times 15$
+$AB^2 + AC^2 = \frac {1 }{ 2} BC^2 + 2AI^2$
+$ \int ^ {1} _ {0} \int ^ {1} _ {0} \frac {1} {1 + x ^ {2} y ^ {2}} d x d y $
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$2^{43}$
+$\sum\frac{(-1)^n}n$
+$\frac{2s^2}{5t}x^5 + sx^4 + tx^3 + \frac{t^2}{2s}x^2 + \frac{t^3}{8s^2}x + a_0 = 0$
+$n(n+p)$
+a + b + c + d + e
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$e^{i\theta _{2}}$
+$\frac{n}{d}$
+$ b \leq x $
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+$x^\prime = x \cos \theta + y \sin \theta$
+- 1 \leq \cos \theta \leq 1
+$ lim _ {x \rightarrow 3} x ^ {2} = 9 $
+\sin x - \sin y - \sin \left( x - y \right)
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+$\sum_{k=1}^\infty X_k$
+\int_1^2 ( \frac {x^2 - 1} {x^2} ) e^{x + \frac 1 x} d x
+\int_a^b \frac {\sqrt x} 2 d x
+$\frac{4}{3}$
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$i^2 = -1$
+$ \cos x + 1 $
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+$x = \frac{m_{eau}}{m_{air sec}}$
+$E_1 = E_0/(16 \pi^2)$
+\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{5}}}}}
+[ \frac 2 3 ( 1 + \frac 9 4 x )^{\frac 3 2} \frac 4 9 ]_0^4
+$f = \frac{\sqrt{5}}{RC}$
+\frac{1}{a} F \left( a x + b \right) + C
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+x_{1} + x_{2} = x_{3}
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+\sin x - \sin y - \sin \left( x - y \right)
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$a^2 + b^2 = (a+bi)(a-bi)$
+\lim_{x \rightarrow 0} \frac {( 1 - \cos x ) ( 1 + \cos x )} {x^2 ( 1 + \cos x )}
+$M(R)$
+\pi \int_c^d \{ g ( y ) \}^2 d y
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+a + b + c + d + e
+3 0 \times 2 9 x^{2 8}
+$ax^2+bxy+cy^2$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+\sin ( \alpha + \beta ) \sin ( \alpha - \beta ) = \sin^2 \alpha - \sin^2 \beta
+$ \frac {a \vtop {\hbox {\sqrt {}} \hbox {3}}} {4} $
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+$\frac{9}{5}$
+( z^{\frac n 2} + y^{\frac n 2} ) ( z^{\frac n 2} - y^{\frac n 2} ) = x
+$\int_{a}^{b} X_t \mathrm dB_t$
+$c^2 = (a-b)^2+2ab$
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+"$E_13 0 \times 2 9 x^{2 8}
+\int ( 2^x - 3 e^x ) d x
+$a = b \cos C + c \cos B$
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+$x^3 + 3(2 - \sqrt{3})x^2 - 3x - 2 + \sqrt{3}$
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$S_{max}=P\frac{\alpha}{1-\alpha}$
+e^{x^{- \left( \frac{x}{2} \right)^{n}}}
+$(g^{-1})^{ij}$
+$x = \frac{-b \pm \sqrt{b^2 -4ac}}{2a}$
+\frac{\sin B + \sin C}{\cos B + \cos C}
+\left( a^{2} + b^{2} \right) \left( c^{2} + d^{2} \right) \geq \left( a c + b d \right)^{2}
+\sqrt{b^{2} - 4 a c}
+$a^xa^y = a^{x+y}$
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$n^3 = n^{\log_{2}8}$
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+$y = r \sin \theta$
+$Y^{(n)}$
+$S = \frac1{\frac {1}{E} - \frac {1}{P}}$
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+$X=R^2\frac{b_1-b_2}{a_1b_2-a_2b_1}$
+$ x + h $
+a + b + c + d + e
+\int \left( 2^{x} - 3 e^{x} \right) d x
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+\pi \int_c^d \{ g ( y ) \}^2 d y
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+( a^2 + b^2 ) ( c^2 + d^2 ) \geq ( a c + b d )^2
+x^{2} + y^{2} = z^{2}
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$z^2 - 2z - 1 = 0$
+\sqrt{a^{2} + b^{2} + c^{2}}
+$(147 \times 109) + 126 \neq -8422$
+F_{n} = F_{n - 1} + F_{n - 2}
+$a^xa^y = a^{x+y}$
+$\phi_a = \phi_b$
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+$x=1$
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+$u=x$
+$(X - r)$
+x = \frac{- b \pm \sqrt{b^{2} - 4 a c}}{2 a}
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$V_i-V_o$
+$a^xa^y = a^{x+y}$
+\lim_{x \rightarrow \infty} \int_0^x e^{- y^2} d y = \frac {\sqrt \pi} 2
+( y + 1 )^2 = y^2 + 2 y + 1
+$e(t)$
+$ a \sqrt {3} $
+$\Delta_r G^0_{T}$
+a ( n ) = \sum_{k = 1}^n ( - 1 )^{n - k} k !
+$\frac{1}{10}$
+$\sin \theta = \frac{y}{\sqrt{x^2 + y^2}}$
+$ \int ^ {b} _ {a} \phi $
+$ b \times h $
+$ \sqrt {3 + \sqrt {2}} $
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$S(f) = \frac{1}{R}sinc^2\frac{f}{2R}\sin^2\frac{\pi f}{2R}$
+$\sqrt[x]{\frac{a}{b}} = \frac{\sqrt[x]{a}}{\sqrt[x]{b}}$
+\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{5}}}}}
+$21-5\sqrt{21} + (15\sqrt{7}-21\sqrt{3})i$
+$x^\prime = x \cos \theta + y \sin \theta$
+$c = \sqrt{a^2-b^2}$
+\sum^{n}_{k = 1} k = \frac{1}{2} \left( n^{2} + n \right)
+\int \left( 2^{x} - 3 e^{x} \right) d x
+"$\Bigg(a\frac{1-t^2}{1+t^2}$x^\prime = x \cos \theta + y \sin \theta$
+$\int_{1}^{+\infty} \frac{1}{t^2} \mathrm dt$
+$ \frac {9} {7} $
+$x^\prime = x \cos \theta + y \sin \theta$
+\lim_{x \rightarrow 0} \frac {( 1 - \cos x ) ( 1 + \cos x )} {x^2 ( 1 + \cos x )}
+"$(S$\mu_i=d_i$
+$a^xa^y = a^{x+y}$
+\left( a^{2} + b^{2} \right) \left( c^{2} + d^{2} \right) \geq \left( a c + b d \right)^{2}
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+[ \frac 2 3 ( 1 + \frac 9 4 x )^{\frac 3 2} \frac 4 9 ]_0^4
+$x^3=x+1$
+$A ( B + C ) = A B + A C$
+$P(x) = \sum_{i=0}^{n} a_j x^j$
+$b= c \sin B = c \cos A$
+$y = mx$
+$E = \sqrt{p^2c^2 + m^2c^4}$
+$ 548834 = 5 ^ {6} + 4 ^ {6} + 8 ^ {6} + 3 ^ {6} + 4 ^ 6 $
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+e_1^2 + e_2^3 + e_3^4 + e_4^5
+$H_{2n}$
+"$5x_{1} + x_{2} = x_{3}
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+( y + 1 )^2 = y^2 + 2 y + 1
+"$a_n(f$n! -1$
+$\frac{\sqrt{3}}{3}$
+$Ext$
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+$ \int \frac {1} {\sqrt {a x ^ 2 + b x + c}} d x $
+x_{1} + x_{2} = x_{3}
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+$T_{n}(T_{m}(X))=T_{mn}(X) $
+x_1 \times x_2 \times x_3 \times x_4 = X
+$(x_n)$
+$\sqrt{1+x^2}$
+$\cos \alpha = \frac{a}{\sqrt{a^2 + b^2 + c^2}}$
+"$\forall x$2X^2 + X + 2$
+$179 - 158 - 4 - 130 = 155$
+$n-i$
+\sqrt{b^{2} - 4 a c}
+$121 + 56 = 177$
+\sum^{n}_{k = 1} \frac{k + 1}{a_{k} a_{k + 1}}
+$89 - 63 - 188 + 18 \geq -144$
+$S_n=X_1+X_2+\ldots+X_n$
+$\frac {9 }{ 4}$
+\int_1^2 ( \frac {x^2 - 1} {x^2} ) e^{x + \frac 1 x} d x
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+\sqrt{b^{2} - 4 a c}
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+a x^{2} + b x + c = 0
+$m = \frac{A.k.R}{g}$
+$2^{50}$
+$\cos(A+B)$
+$e = 2$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$ \int _ {1} ^ {2} x d x $
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$ \frac {\pi} {7} $
+$y^2 \pm \sqrt{u-p}\Bigg(y - \frac{q}{2(u-p)} \Bigg) + \frac{u}{2} = 0$
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$\pi (n)$
+$\frac{1}{r^2} = \frac{1}{(R - m)^2} + \frac{1}{(R + m)^2}$
+$||{ r} - { r}_2||$
+$k_n=1$
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+$s=n + \alpha$
+$\frac{1}{4}+\Bigg( \frac{1}{4} \Bigg)^2 + \Bigg( \frac{1}{4} \Bigg)^3+\cdots = \frac{1}{3}$
+\int_a^b \frac {\sqrt x} 2 d x
+$\frac{dx}{\pi \sqrt{x(1-x)}}$
+$m = \frac{1}{b-a} \times \int_{a}^{b} f(x) dx$
+$ \tan \theta = \frac {\sin \theta} {\cos \theta} $
+$ 4 ^ {4 ^ {4}} + 3 $
+$78 \pm 5 \times 47$
+$0\leq p\leq 2^n$
+a x^{2} + b x + c = 0
+\pi \int_c^d \{ g ( y ) \}^2 d y
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+$a = b \cos C + c \cos B$
+\frac{\sin B + \sin C}{\cos B + \cos C}
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$S_n = 12 S_{n-1} - 18 S_{n-2}$
+\lim_{t \rightarrow 0} \frac {\cos ( \frac x 2 - t )} {- 2 t}
+$ h \rightarrow x $
+$ \beta _ {2 n} $
+$y^{\prime}(a)$
+$ \int ^ {b} _ {a} x + z d z $
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+"$g(y)=f(x_{0}+t\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+$\frac{1}{2}\pi^2$
+$F((T))$
+\frac 1 a F ( a x + b ) + C
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$\lim_{T \rightarrow \infty}x_T(t) = x(t)$
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+3 0 \times 2 9 x^{2 8}
+$\frac{y_2x_2-y_1x_1}{n}$
+a ( n ) = \sum_{k = 1}^n ( - 1 )^{n - k} k !
+"$M_i(x_i$3-n = 1$
+$ \log z = \log r + i ( \theta + 2 n \pi ) $
+$(6\sqrt{21}-27 )x^2+3x+4\sqrt{21}-18 = 10\sqrt{21}-42$
+x_x^x + y_y^y + z_z^z - x - y - z
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$148 - 141 \neq -4$
+$c^2 = a^2 + b^2 - 2ab \cos C$
+$y^4 + y + 1 = 0$
+$ \cos 5 x = 16 \cos ^ {5} x - 20 \cos ^ {3} x + 5 $
+$8 \times 122 \geq 975$
+$22 + 77 \geq 98$
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+$y = \frac{d}{a}$
+$y = r \sin \theta$
+$n! -1$
+$y = r \sin \theta$
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+$0<\gamma_i < \alpha$
+$e^{i\pi}= -1$
+$2+\sqrt{2}$
+( a^2 + b^2 ) ( c^2 + d^2 ) \geq ( a c + b d )^2
+$ \lim_{n \rightarrow \infty} \frac{1}{n} \sum f ( \frac{r}{n} ) = \int_{0}^{1} f ( x ) dx $
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+$ \frac {6} {3} $
+\frac{\sin B + \sin C}{\cos B + \cos C}
+$67 - 132 - 181 - 194 = -52$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+\pi \int_c^d \{ g ( y ) \}^2 d y
+$|u_{n_0}-a|\lt\frac{1}{n}$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+z_1^2 + 1^z - z_2^2 + 2^z
+$| x - \frac{p_n}{q_n} | \leq \frac{1}{q_nq_{n+1}} \lt  \frac{1}{q_n^2}$
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+$\frac{1}{24}\pi^4$
+x_x^x + y_y^y + z_z^z - x - y - z
+$I(t) = I\sqrt{2}\cos{(wt+\phi)}$
+F_{n} = F_{n - 1} + F_{n - 2}
+$\sqrt{1-z^2}$
+$\cos(\pi) = -1$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+e^{i \pi} + 1 = 0
+$ \frac {a} {4} $
+$\frac{C_{pA}^kC_{qA}^{n-k}}{C_A^n}$
+$R_{3\times3}^T$
+$\frac{n^2}{2}+\frac{n}{2}+\frac{n^2}{2}-\frac{n}{2}$
+"$(x_1$x^3+ax+b$
+$ x ^ {3} - 3 x ^ {2} \sqrt {3} - 3 x + \sqrt {3} $
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$ - \sin x $
+x_{i} - x_{i + 1} + x_{i + 2}
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+$y = z^2 + pz - \frac{3}{2}$
+$\frac{(n+k-1)(n+k-2)\ldots(n+1)n}{k(k-1)\ldots 2\times 1}$
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+3 0 \times 2 9 x^{2 8}
+x^{2} + y^{2} \lt 1
+x_x^x + y_y^y + z_z^z - x - y - z
+z_1^2 + 1^z - z_2^2 + 2^z
+$|| y_n - y_m ||^2 = 2||y_n -x||^2 + 2||y_m -x||^2 - 4|| \frac{y_n + y_m}2 -x ||^2$
+\sum_{k = 1}^n k = \frac 1 2 ( n^2 + n )
+x_x^x + y_y^y + z_z^z - x - y - z
+$a^2 + b^2 = (a+bi)(a-bi)$
+$y^4 + y + 1 = 0$
+$s_{j}(t)$
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$x^3 + ax + b$
+$\pi_0(G)$
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+$E[X] = \mu E[(X-\mu)^2] = \sigma^2$
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$e_2 = 21$
+$q = 36\pi \frac {v^2}{s^3}$
+$z = x^2-y^2$
+$y_{1} = 55$
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$\cos \theta = \frac{x}{\sqrt{x^2 + y^2}}$
+$\sqrt[n]{1} = \cos \frac{2k\pi}{n} + i \sin \frac{2k\pi}{n}$
+$\sqrt[x]{\frac{a}{b}} = \frac{\sqrt[x]{a}}{\sqrt[x]{b}}$
+x^{2} + y^{2} \lt 1
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+\sqrt{x - y - z + x^{2} + y^{2} + z^{2}}
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+$1 - (-1)^d$
+$x = r \cos \theta$
+$r(r_0 \sin(\theta - \theta_0)- r_1 \sin (\theta - \theta_1) ) = r_0 r_1 \sin (\theta_1 - \theta_0)$
+$y^{(k)}$
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+$ s (f) $
+$a = p/q$
+\pi \int_c^d \{ g ( y ) \}^2 d y
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+\lim_{x \rightarrow \infty} \int_0^x e^{- y^2} d y = \frac {\sqrt \pi} 2
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$C^1(G)=G$
+$a + b$
+$a^{\prime} = \frac{a}{\sqrt 2}$
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+\frac 2 {\frac {3 m - 2 n \times 9^n - 9^m} {2 n - 1}}
+$P(x) = \sum_{i=0}^{n} a_j x^j$
+\int_a^b \frac {\sqrt x} 2 d x
+$ \sqrt {1 + \frac {1} {\sqrt {2}}} + \sqrt {1 - \frac {1} {\sqrt {2}}} $
+$v_3 = \frac{1}{4}(-1 - \sqrt{17}+\sqrt{34+2\sqrt17}) v_4 = \frac{1}{4}(-1 - \sqrt{17}-\sqrt{34+2\sqrt17})$
+$ x ! ^ y \times y ! ^ x $
+$(171 \times 137) \times 83 = 1944441$
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$x = r \cos \theta$
+\log_{b} a = \frac{1}{\log_{a} b}
+\lim_{x \rightarrow 0} \frac {( 1 - \cos x ) ( 1 + \cos x )} {x^2 ( 1 + \cos x )}
+\sum^{n}_{k = 1} \frac{k + 1}{a_{k} a_{k + 1}}
+$x^2=x$
+$a^2 + b^2 = (a+bi)(a-bi)$
+\sin \left( \alpha + \beta \right) \sin \left( \alpha - \beta \right) = \sin^{2} \alpha - \sin^{2} \beta
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$b = \sqrt{2}$
+\sin x - \sin y - \sin ( x - y )
+$ 6 \frac {\sqrt {3}} {4} $
+\lim_{z \rightarrow 0} \frac 1 {\log_a ( 1 + z )^{\frac 1 z}}
+$ \sqrt {a} \pm \sqrt {b} = \sqrt {a + b \pm 2 \sqrt {a b}} $
+\left( y + 1 \right)^{2} = y^{2} + 2 y + 1
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+y_{4} - y_{5} - y_{6} + y_{a} - y_{b} - y_{c}
+\sum_{i = 2 n + 3 m}^{1 0} i x
+$I_{moy}$
+$T_0(X)=1$
+[ b^x \{ ( \frac a b )^x + 1 \} ]^{\frac 1 x}
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$A_{2k} = \frac{2RA_k}{2R + \sqrt{4R^2 + A^2_k}}$
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+\sum_{i = 2 n + 3 m}^{1 0} i x
+[ \frac 2 3 x^{\frac 3 2} ]_0^1
+$(a_{n})$
+$a = b \cos C + c \cos B$
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+$\pm i a$
+"$\frac{a}{\sin A} = \frac{b}{\sin B} = \frac{c}{\sin C}$"
+$x^n=z$
+\sum_{i = 2 n + 3 m}^{1 0} i x
+( x^3 - x^2 - x ) ( 2 x - 7 )
+\lim_{t \rightarrow 0} \frac {\cos ( \frac x 2 - t )} {- 2 t}
+$y = x^2 + \frac1x$
+\sum_{i = 2 n + 3 m}^{1 0} i x
+$\left| $\frac{a x_0 + b y_0 + c}{\sqrt{a^2 + b^2}} \right|$
+\sin ( \alpha + \beta ) \sin ( \alpha - \beta ) = \sin^2 \alpha - \sin^2 \beta
+$ \frac {\sqrt {3}} {4} $
+\frac{a + b + c + d + e}{a + b + c + d}
+$b-a$
+$\left| q\right| \gt1$
+$a_{n}=n^{-\beta}$
+"$(x$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$15 \div ((76 \div 10) + (199 - 89)) > 0$
+x_1 \times x_2 \times x_3 \times x_4 = X
+\alpha_{n + 1} - 3 \beta = \frac{2}{3} \alpha_{n} + \beta - 3 \beta
+$N/M$
+\left( x^{3} - x^{2} - x \right) \left( 2 x - 7 \right)
+z_1^2 + 1^z - z_2^2 + 2^z
+x_{i} - x_{i + 1} + x_{i + 2}
+a^{1} + b^{2} + c^{3} + d^{4}
+$\sum_{i=1}^k \frac{x^{a_i}}{1-x^{b_i}} = \frac{1}{1-x}$
+x_{1} - x_{2} + y_{1} - y_{2} + z_{1} - z_{2}
+$n = 2 k$
+$pV = Nk_BT$
+x^{2} + y^{2} \lt 1
+\sin^{2} \theta + \cos^{2} \theta = 1
+1 + \frac{1}{1 !} + \frac{1}{2 !} + \frac{1}{3 !} + \frac{1}{4 !}
+$\phi=\frac{\pi}{2}$
+$(85 / 3) \times 44 \leq 1247$
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+$a^{b^{c}}$
+$\cos \alpha = \frac{a}{\sqrt{a^2 + b^2 + c^2}}$
+$(a-b)^2 = a^2 - 2ab + b^2$
+$x = r \cos \theta$
+\sqrt {1 + \sqrt {2 + \sqrt {3 + \sqrt 4}}}
+$x+k$
+$\frac{1}{\frac{1}{2}\Big( \frac{1}{a} + \frac{1}{b}\Big)} = \frac{2ab}{a+b}$
+$\theta = \frac{\pi}{2}$
+"$(c_0$19 \times 7 \leq 133$
+"$\forall t \in [0$((24 - 44) \times 61) - (64 \div (196 + 162)) > -992$
+$x = \sqrt{|a|} \times i$
+$q = \sqrt{(\frac{B-A}{C})^2 + 1} + \frac{B-A}{C}$
+$x^\prime = x \cos \theta + y \sin \theta$
+\frac{2 \tan \alpha}{1 - \tan^{2} \alpha}
+$\sigma_{F}( R )$
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+\sqrt{1 + \sqrt{2 + \sqrt{3 + \sqrt{4}}}}
+$x = \frac{-b \pm \sqrt{b^2 -4ac}}{2a}$
+$3 \times 126 \leq 378$
+x_{i} - x_{i + 1} + x_{i + 2}
+$c^2 = a^2 + b^2 - 2ab \cos C$
+$C_V \gt 0$
+\sum_{i = 2 n + 3 m}^{1 0} i x
+\sqrt{\sqrt{\sqrt{\sqrt{\sqrt{5}}}}}
+x_{1} + x_{2} = x_{3}
+$\sqrt[x]{\frac{a}{b}} = \frac{\sqrt[x]{a}}{\sqrt[x]{b}}$
+$S = \Bigg( \sum_{i=1}^{n} \theta_i - (n-2)\pi \Bigg)r^2$
+$n\times d$
+$ sin [x + y] = [sin x \cos y + \cos x sin y] $
+$p = \sqrt{a^2 + b^2 - 2ab \cos A}$
+e = \sum^{\infty}_{k = 0} \frac{1}{k !}
+$ z \rightarrow z ^ {n} $
+\frac{\tan \alpha - \tan \beta}{1 + \tan \alpha \tan \beta}
+$ 2 \sin x + \tan x $
+$x = r \cos \theta$
+A = \sqrt{a + \frac{1}{\sqrt{a + \frac{1}{\sqrt{a}}}}} + \sqrt{b}
+x_x^x + y_y^y + z_z^z - x - y - z
+\lim_{x \rightarrow 0} \left( 1 + x \right)^{\frac{1}{x}}
+$b=a^2+c^2$
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+x_1 \times x_2 \times x_3 \times x_4 = X
+\lim_{x \rightarrow - 1} \frac{x^{3} + 1}{x + 1}
+$ 7 ^ {7 ^ {7}} $
+$ a \leq x \leq 6 $
+$116 \pm ((75 + 78) \times 125) - (80 / 184)$
+$ x \leq y $
+$y = r \sin \theta$
+$(2 + 3i)$
+$x=\alpha_{1} y_{1}+\ldots+\alpha_{n+1}y_{n+1}$
+$\frac{1}{\frac{1}{2}\Big( \frac{1}{a} + \frac{1}{b}\Big)} = \frac{2ab}{a+b}$
+$y = a S(t) = a \int_0^{t} \sin(\frac{1}{2}\pi s^2) ds$
+\int_0^{\frac \pi 2} \{ ( \cos x + e^x ) - ( e^x - \cos x ) \} d x
+\sin^{2} \theta + \cos^{2} \theta = 1
+$ \sqrt {13 h} $
+\lim_{x \rightarrow \frac{1}{4}} \frac{1 - 4^{x - \frac{1}{4}}}{1 - 4 x}
+\frac{\sin \theta + \cos \theta + \tan \theta}{x + y + z}
+$c^2 = a^2 + b^2 - 2ab \cos C$
+\log_{2} 8 + \log_{3} 9 + \log_{4} 1 6
+\lim_{t \rightarrow \infty} ( 1 + \frac 1 t )^t = e
+\sin x - \sin y - \sin \left( x - y \right)
+$t_1= \frac{L}{c + V_p}$
+\log_2 \frac 1 2 + \log_4 \frac 2 4
+A = \sqrt {a + \frac 1 {\sqrt {a + \frac 1 {\sqrt a}}}} + \sqrt b
+\lim_{x \rightarrow \frac{\pi}{2} + 0} \tan x = - \infty
+\sin \left( \alpha + \beta \right) \sin \left( \alpha - \beta \right) = \sin^{2} \alpha - \sin^{2} \beta
+$e ^ {a (-1 + 2w)} = w ^ {\frac{3 \sqrt{3} a}{\pi}}$
+$ \frac {x} {x} $
+"$\sigma \in [\sigma_1$\frac{a}{b}= \frac{2^m5^ka}{2^m5^kb}=\frac{2^m5^ka}{10^{m+k}}$
+$1+2+\cdots+n = \frac{n(n+1)}{2}$
+$ \frac {b} {a} $
+x^{i + 2 j \times k^{3} - 2 \frac{j}{i}}
+\int_{\log 3}^0 \frac 1 {e^t + 1} d t
+"$[\frac{2u}{3}+\frac{v}{3}$69 + ((112 - 46) / 126) > 61$
+$\frac{b^2c^2 -4b^3d -4ac^3 +18abcd -27a^2d^2}{a^4}$
+\int_0^{\frac \pi 2} \{ ( \cos x + e^x ) - ( e^x - \cos x ) \} d x
