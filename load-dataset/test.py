@@ -33,15 +33,18 @@ def get_label(file_path):
 
 def decode_img(img):
     # convert the compressed string to a 3D uint8 tensor
-    img = tf.image.decode_jpeg(img, channels=3)
+    img = tf.image.decode_jpeg(img, channels=1)
     # Use `convert_image_dtype` to convert to floats in the [0,1] range.
     img = tf.image.convert_image_dtype(img, tf.float32)
+    #print(img)
     # resize the image to the desired size.
     return tf.image.resize(img, [IMG_WIDTH, IMG_HEIGHT])
 
 
 def process_path(file_path):
+    print(file_path)
     label = get_label(file_path)
+    #print(file_path)
     #print(label)
     # load the raw data from the file as a string
     img = tf.io.read_file(file_path)
@@ -50,12 +53,13 @@ def process_path(file_path):
 
 #print(CLASS_NAMES)
 labeled_ds = list_ds.map(process_path, num_parallel_calls=AUTOTUNE)
+#print(labeled_ds.take(1))
 #print('*'*20)
 #print(list(labeled_ds.as_numpy_iterator())[0])
 #for f in list_ds.take(1):
 #    print(f.numpy())
 #    print(process_path(f))
-for features, labels in labeled_ds.take(2):
-    print(features)
-    print()
-    print(labels)
+#for features, labels in labeled_ds.take(1):
+    #print(features)
+#    print()
+    #print(labels)
