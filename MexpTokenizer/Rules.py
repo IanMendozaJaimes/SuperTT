@@ -11,6 +11,7 @@ tokens = [
     'delta',
     'phi',
     'theta',
+    'Delta',
 
     'frac',
     'sqrt',
@@ -101,6 +102,7 @@ tokens = [
     'H',
     'G',
     'I',
+    'D',
 
     #short signs
     'minus',#-
@@ -131,11 +133,7 @@ tokens = [
     'explicit_rcurly',
     'Big',
     'explicit_gt', #>
-    'explicit_lt', #<
-    'vtop',
-    'hbox',
-
-    
+    'explicit_lt', #<   
 ]
 #math symbols
 def t_frac(t):
@@ -253,11 +251,15 @@ def t_pi(t):
     return t
 
 def t_delta(t):
-    r'\\Delta'#r'\\(d|D)elta'
+    r'\\delta'#r'\\(d|D)elta'
     return t
 
 def t_theta(t):
     r'\\theta'
+    return t
+
+def t_Delta(t):
+    r'\\Delta'
     return t
 
 def t_lparen(t):
@@ -430,6 +432,10 @@ def t_I(t):
 	'I'
 	return t
 
+def t_D(t):
+    'D'
+    return t
+
 def t_minus(t):
     r'\-'
     return t
@@ -542,14 +548,6 @@ def t_explicit_gt(t):
 def t_explicit_lt(t):
     r'<'
     return t
-
-def t_vtop(t):
-    r'\\vtop'
-    return t
-
-def t_hbox(t):
-    r'\\hbox'
-    return t
         
 """    
 def t_corta(t):
@@ -583,7 +581,7 @@ def t_IDENTIFICADOR(t):
     r'[a-zA-Z_]\w*'
     return t
 """
-t_ignore = ' \t$\'\"'
+t_ignore = ' \t$\'\"\\mbox\\vtop\\hbox'
 
 
 def t_error(t):
