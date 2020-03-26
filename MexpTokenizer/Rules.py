@@ -59,6 +59,7 @@ tokens = [
     'plus',#+
     'equal', #=
     'over', #/
+    'star', #*
 
     'zero',
     'one',
@@ -318,6 +319,10 @@ def t_equal(t):
     return t
 def t_over(t):
     r'\/'
+    return t
+
+def t_star(t):
+    r'\*'
     return t
 
 def t_zero(t):
@@ -602,7 +607,7 @@ def t_error(t):
     print ("Caracter ilegal '%s'" % t.value[0])
     print("-line "+str(t.lineno))
     t.lexer.skip(1)
-    exit(-1)
+    #exit(-1)
 
 def t_NEWLINE(t):
     r'\n+'
