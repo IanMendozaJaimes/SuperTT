@@ -11,7 +11,7 @@ class LexicalAnalyzer:
 
 	def __init__(self):
 		self.lexer = lex(module=Rules)
-
+	#deprecated, removed later
 	def analize(self, cadena):
 		arr = []
 		self.lexer.input(cadena)
@@ -31,18 +31,16 @@ class LexicalAnalyzer:
 		for line in file:
 			
 			self.lexer.input(line.split(",")[1])
-
+			#print(line.split(",")[1])
+			#print(repr(line.split(",")[1]))
 			token = self.lexer.token()
 			arr = []
-			if token is not None:
-				arr.append(Rules.tokens.index(token.type) )
-
 			while token is not None:
 				print(token)
 				arr.append(Rules.tokens.index(token.type) )
 				token = self.lexer.token()
 			
-			fileTokenized.write(line.split(",")[0]+","+toString(arr)+"\n")
+			fileTokenized.write(line.split(",")[0] + "," + toString(arr) + "\n")
 
 		fileTokenized.close()
 

@@ -54,6 +54,38 @@ tokens = [
     'mathrm',
 
 
+    #short signs
+    'minus',#-
+    'plus',#+
+    'equal', #=
+    'over', #/
+
+    'zero',
+    'one',
+    'two',
+    'three',
+    'four',
+    'five',
+    'six',
+    'seven',
+    'eight',
+    'nine',
+
+    'subindex',
+    'superindex',
+    'cdots',
+    'left',
+    'right',
+    'Bigg',
+    'prime',
+    
+    'explicit_lcurly',
+    'explicit_rcurly',
+    'Big',
+    'explicit_gt', #>
+    'explicit_lt', #<  
+
+
 
     #lower letters
     'x',
@@ -102,38 +134,11 @@ tokens = [
     'H',
     'G',
     'I',
-    'D',
+    'D', 
 
-    #short signs
-    'minus',#-
-    'plus',#+
-    'equal', #=
-    'over', #/
-
-    'zero',
-    'one',
-    'two',
-    'three',
-    'four',
-    'five',
-    'six',
-    'seven',
-    'eight',
-    'nine',
-
-    'subindex',
-    'superindex',
-    'cdots',
-    'left',
-    'right',
-    'Bigg',
-    'prime',
-    
-    'explicit_lcurly',
-    'explicit_rcurly',
-    'Big',
-    'explicit_gt', #>
-    'explicit_lt', #<   
+    'hbox', 
+    'mbox',
+    'vtop', 
 ]
 #math symbols
 def t_frac(t):
@@ -299,6 +304,120 @@ def t_rcurly(t):
     return t
 
 
+
+def t_minus(t):
+    r'\-'
+    return t
+    
+def t_plus(t):
+    r'\+'
+    return t
+
+def t_equal(t):
+    r'\='
+    return t
+def t_over(t):
+    r'\/'
+    return t
+
+def t_zero(t):
+    r'0'
+    return t
+
+def t_one(t):
+    r'1'
+    return t    
+
+def t_two(t):
+    r'2'
+    return t
+
+def t_three(t):
+    r'3'
+    return t
+
+def t_four(t):
+    r'4'
+    return t
+
+def t_five(t):
+    r'5'
+    return t
+
+def t_six(t):
+    r'6'
+    return t
+
+def t_seven(t):
+    r'7'
+    return t
+
+def t_eight(t):
+    r'8'
+    return t
+
+def t_nine(t):
+    r'9'
+    return t
+
+def t_subindex(t):
+    r'\_'
+    return t
+
+def t_superindex(t):
+    r'\^'
+    return t
+
+def t_cdots(t):
+    r'\\cdots'
+    return t
+
+def t_left(t):
+    r'\\left'
+    return t
+
+def t_right(t):
+    r'\\right'
+    return t
+def t_Bigg(t):
+    r'\\Bigg'
+    return t
+
+def t_ldots(t):
+    r'\\ldots'
+    return t
+
+def t_lt(t):
+    r'\\lt'
+    return t
+
+def t_mathrm(t):
+    r'\\mathrm'
+    return t
+
+def t_prime(t):
+    r'\\prime'
+    return t
+
+def t_explicit_lcurly(t):
+    r'\\{'
+    return t
+
+def t_explicit_rcurly(t):
+    r'\\}'
+    return t
+def t_Big(t):
+    r'\\Big'
+    return t
+
+def t_explicit_gt(t):
+    r'>'
+    return t
+
+def t_explicit_lt(t):
+    r'<'
+    return t
+
 def t_x(t):
 	'x'
 	return t
@@ -436,118 +555,6 @@ def t_D(t):
     'D'
     return t
 
-def t_minus(t):
-    r'\-'
-    return t
-    
-def t_plus(t):
-    r'\+'
-    return t
-
-def t_equal(t):
-    r'\='
-    return t
-def t_over(t):
-    r'\/'
-    return t
-
-def t_zero(t):
-    r'0'
-    return t
-
-def t_one(t):
-    r'1'
-    return t    
-
-def t_two(t):
-    r'2'
-    return t
-
-def t_three(t):
-    r'3'
-    return t
-
-def t_four(t):
-    r'4'
-    return t
-
-def t_five(t):
-    r'5'
-    return t
-
-def t_six(t):
-    r'6'
-    return t
-
-def t_seven(t):
-    r'7'
-    return t
-
-def t_eight(t):
-    r'8'
-    return t
-
-def t_nine(t):
-    r'9'
-    return t
-
-def t_subindex(t):
-    r'\_'
-    return t
-
-def t_superindex(t):
-    r'\^'
-    return t
-
-def t_cdots(t):
-    r'\\cdots'
-    return t
-
-def t_left(t):
-    r'\\left'
-    return t
-
-def t_right(t):
-    r'\\right'
-    return t
-def t_Bigg(t):
-    r'\\Bigg'
-    return t
-
-def t_ldots(t):
-    r'\\ldots'
-    return t
-
-def t_lt(t):
-    r'\\lt'
-    return t
-
-def t_mathrm(t):
-    r'\\mathrm'
-    return t
-
-def t_prime(t):
-    r'\\prime'
-    return t
-
-def t_explicit_lcurly(t):
-    r'\\{'
-    return t
-
-def t_explicit_rcurly(t):
-    r'\\}'
-    return t
-def t_Big(t):
-    r'\\Big'
-    return t
-
-def t_explicit_gt(t):
-    r'>'
-    return t
-
-def t_explicit_lt(t):
-    r'<'
-    return t
         
 """    
 def t_corta(t):
@@ -580,9 +587,16 @@ def t_GOOD(t):
 def t_IDENTIFICADOR(t):
     r'[a-zA-Z_]\w*'
     return t
-"""
-t_ignore = ' \t$\'\"\\mbox\\vtop\\hbox'
 
+"""
+def t_hbox(t):
+    r'\\hbox'
+def t_mbox(t):
+    r'\\mbox'
+def t_vtop(t):
+    r'\\vtop'
+t_ignore = ' \t$\'\"'
+###hbox, mbox, vtop, 
 
 def t_error(t):
     print ("Caracter ilegal '%s'" % t.value[0])
