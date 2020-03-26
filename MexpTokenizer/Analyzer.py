@@ -17,7 +17,6 @@ class LexicalAnalyzer:
 		self.lexer.input(cadena)
 
 		token = self.lexer.token()
-		arr.append(Rules.tokens.index(token.type) )
 		while token is not None:
 			print(token)
 			arr.append(Rules.tokens.index(token.type) )
@@ -47,12 +46,13 @@ class LexicalAnalyzer:
 			
 		
 if __name__ == '__main__':
+	
 	al = LexicalAnalyzer()
-
+	"""
 	f = open("training.csv", "r")
 	al.tokenizeDataset(f)
-	f.close()
-	"""
+	f.close()"""
+	
 
 	if int(sys.argv[1]) == 0:
 		f = open('file.txt','r')
@@ -64,4 +64,4 @@ if __name__ == '__main__':
 			if input('otra? s/N') != 's':
 				break
 
-	"""
+	
