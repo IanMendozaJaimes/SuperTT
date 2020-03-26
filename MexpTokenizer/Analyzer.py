@@ -2,6 +2,11 @@ from ply.lex import lex
 import Rules
 import sys
 
+def toString(arr):
+	s = ""
+	for elem in arr:
+		s += (str(elem)+" ")
+	return s
 class LexicalAnalyzer:
 
 	def __init__(self):
@@ -18,10 +23,38 @@ class LexicalAnalyzer:
 			arr.append(Rules.tokens.index(token.type) )
 			token = self.lexer.token()
 		return arr
+
+	def tokenizeDataset(self, file):
+
+		fileTokenized = open("tokenized.csv", "w")
+
+		for line in file:
+			
+			self.lexer.input(line.split(",")[1])
+
+			token = self.lexer.token()
+			arr = []
+			if token is not None:
+				arr.append(Rules.tokens.index(token.type) )
+
+			while token is not None:
+				print(token)
+				arr.append(Rules.tokens.index(token.type) )
+				token = self.lexer.token()
+			
+			fileTokenized.write(line.split(",")[0]+","+toString(arr)+"\n")
+
+		fileTokenized.close()
+
 			
 		
 if __name__ == '__main__':
 	al = LexicalAnalyzer()
+
+	f = open("training.csv", "r")
+	al.tokenizeDataset(f)
+	f.close()
+	"""
 
 	if int(sys.argv[1]) == 0:
 		f = open('file.txt','r')
@@ -33,3 +66,4 @@ if __name__ == '__main__':
 			if input('otra? s/N') != 's':
 				break
 
+	"""
