@@ -16,7 +16,7 @@ image_count = len(list(data_dir.glob('*/*.jpg')))
 
 CLASS_NAMES = np.array([item.name for item in data_dir.glob('*') if item.name != "LICENSE.txt"])
 
-BATCH_SIZE = 32
+BATCH_SIZE = 2
 IMG_HEIGHT = 224
 IMG_WIDTH = 224
 AUTOTUNE = tf.data.experimental.AUTOTUNE
@@ -44,19 +44,18 @@ def decode_img(img):
 def process_path(file_path):
     print(file_path)
     label = get_label(file_path)
-    #print(file_path)
-    #print(label)
     # load the raw data from the file as a string
     img = tf.io.read_file(file_path)
     img = decode_img(img)
     return img, label
 
 #print(CLASS_NAMES)
-labeled_ds = list_ds.map(process_path, num_parallel_calls=AUTOTUNE)
+labeled_ds = list_ds.map(process_path, num_parallel_calls=1)
 #print(labeled_ds.take(1))
 #print('*'*20)
 #print(list(labeled_ds.as_numpy_iterator())[0])
-#for f in list_ds.take(1):
+for f in labeled_ds.take(1):
+    break
 #    print(f.numpy())
 #    print(process_path(f))
 #for features, labels in labeled_ds.take(1):

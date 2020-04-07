@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+*.zip
 # C extensions
 *.so
 
@@ -108,3 +108,5 @@ ImageAnalysis_Module/.DS_Store
 ImageAnalysis_Module/inkml2img/
 
 *.jpg
+load-dataset/.vscode/
+load-dataset/CROHME_dataset_v1/
