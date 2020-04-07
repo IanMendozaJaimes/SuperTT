@@ -34,6 +34,7 @@ files = tf.data.Dataset.from_tensor_slices([training_file_path])
 dataset = files.interleave(tf.data.TextLineDataset)
 dataset = dataset.map(procesar_fila, num_parallel_calls=tf.data.experimental.AUTOTUNE)
 dataset = dataset.batch(BATCH_SIZE)
+
 for (batch, (img_tensor, target)) in enumerate(dataset):
     print(batch)
     print(img_tensor)
