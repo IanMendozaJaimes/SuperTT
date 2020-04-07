@@ -5,8 +5,8 @@ import shutil
 import xml.etree.ElementTree as ET
 import csv
 
-defult_folder_dataset = "./CROHME"
-defult_folder_converted = "converted_expressions"
+defult_folder_dataset = "./CROHME_testGT_v1"
+defult_folder_converted = "converted_expressions_test"
 class DatasetConverter:
 	def __init__(self):
 		if not os.path.exists(defult_folder_converted):
@@ -17,6 +17,10 @@ class DatasetConverter:
 		root = tree.getroot()
 		prefix = "{http://www.w3.org/2003/InkML}"
 		GT_tag = [GT for GT in root.findall(prefix + 'annotation') if GT.attrib == {'type': 'truth'}]
+		if GT_tag is None or len(GT_tag) == 0:
+			return ""
+		if GT_tag[0] is None or GT_tag[0].text is None:
+			return ""
 		return GT_tag[0].text
 
 	def make_conversion(self):
@@ -28,14 +32,16 @@ class DatasetConverter:
 
 		#count = 0
 		self.total_converted = len(files)
-		f = open('training.csv', 'w')
+		f = open('test.csv', 'w')
 		with f:
 			writer = csv.writer(f)
 			for filename in files:			
 				#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + str(count) + ".png")
 				print("*"*5+"current: "+ filename)
-				inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
-				writer.writerow([defult_folder_converted + "/"+ filename[0: -4] + ".png", self.inkml2tag(defult_folder_dataset + "/"+ filename)])
+				tag = self.inkml2tag(defult_folder_dataset + "/"+ filename)
+				if len(tag) > 0:
+					writer.writerow([defult_folder_converted + "/"+ filename[0: -4] + ".png", tag])
+					inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
 				#count += 1
 	def splitIntoFolders(self,testPercentage, trainPercentage):
 

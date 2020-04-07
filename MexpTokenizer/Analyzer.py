@@ -25,8 +25,9 @@ class LexicalAnalyzer:
 
 	def tokenizeDataset(self, file):
 
-		fileTokenized = open("tokenized.csv", "w")
+		fileTokenized = open("tokenized_test.csv", "w")
 
+		myMap = dict()
 		for line in file:
 			
 			self.lexer.input(line.split(",")[1])
@@ -36,24 +37,30 @@ class LexicalAnalyzer:
 			arr = []
 			while token is not None:
 				print(token)
-				arr.append(Rules.tokens.index(token.type) )
+				myMap[token.type]= token.value	#fileMap.write(token.type+","+token.value+"\n")
+				arr.append(Rules.tokens.index(token.type) + 1 )
 				token = self.lexer.token()
-			
 			fileTokenized.write(line.split(",")[0] + "," + toString(arr) + "\n")
-
 		fileTokenized.close()
+		#self.writeMap(myMap)
 
-			
+	def writeMap(self, myMap):
+		fileMap = open("map.in", "w")
+
+		for item in myMap.items():
+			fileMap.write(str(item[0])+","+str(item[1])+"\n")
+		fileMap.close()
+					
 		
 if __name__ == '__main__':
 	
 	al = LexicalAnalyzer()
-	"""
-	f = open("training.csv", "r")
-	al.tokenizeDataset(f)
-	f.close()"""
 	
-
+	f = open("test.csv", "r")
+	al.tokenizeDataset(f)
+	f.close()
+	
+	"""
 	if int(sys.argv[1]) == 0:
 		f = open('file.txt','r')
 		al.analize(f.read())
@@ -63,5 +70,5 @@ if __name__ == '__main__':
 			print(al.analize(line))
 			if input('otra? s/N') != 's':
 				break
-
+	"""			
 	
