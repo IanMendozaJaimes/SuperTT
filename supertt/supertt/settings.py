@@ -33,7 +33,8 @@ ALLOWED_HOSTS = [
     'localhost',
     '192.168.1.82',
     '10.100.67.209',
-    'localhost',
+    '10.0.0.5',
+    '192.168.1.70',
 ]
 
 # Application definition
@@ -126,7 +127,7 @@ DATABASES = {
                 #'ianMJ',
         'PASSWORD': #'postgres',
                     #'postgres',
-                    'newcastle',
+                    'postgres',
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
