@@ -37,6 +37,7 @@ import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.yalantis.ucrop.UCrop;
 
 import java.io.File;
 import java.io.IOException;
@@ -129,30 +130,21 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.TAKE_PICTURE_RESULT && resultCode == Activity.RESULT_OK) {
-            recortarImagen();
-        } else if (requestCode == Constants.CROP_RESULT && resultCode == Activity.RESULT_OK) {
+            Uri uri = Uri.parse("file:" + photoPathTemp);
+            openCropActivity(uri, uri);
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            Uri uri = UCrop.getOutput(data);
             Intent i = new Intent(this, NewTraduccionActivity.class);
-            i.putExtra(Constants.TRADUCCION_PATH, photoPathTemp);
+            i.putExtra(Constants.TRADUCCION_PATH, uri);
             i.putExtra(Constants.PROYECTO_ID, idProyecto);
             startActivity(i);
         }
     }
 
-    private void recortarImagen() {
-        try {
-            Intent intent = new Intent("com.android.camera.action.CROP");
-            intent.setDataAndType(photoUri, "image/*");
-            intent.putExtra("crop", "true");
-            intent.putExtra("aspectX", 1);
-            intent.putExtra("aspectY", 1);
-            intent.putExtra("outputX", 256);
-            intent.putExtra("outputY", 256);
-            intent.putExtra("return-data", true);
-            startActivityForResult(intent, Constants.CROP_RESULT);
-        } catch (ActivityNotFoundException ex) {
-            String errorMessage = "La opcion de recortar no esta disponible";
-            Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
-        }
+    private void openCropActivity(Uri sourceUri, Uri destinationUri) {
+        UCrop.of(sourceUri, destinationUri)
+                .withMaxResultSize(1000, 1000)
+                .start(this);
     }
 
     public void recuperarTraducciones() {

@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProviders;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +23,9 @@ import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.snackbar.Snackbar;
 import com.squareup.picasso.Picasso;
+import com.yalantis.ucrop.util.FileUtils;
+
+import java.io.File;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -50,7 +54,9 @@ public class NewTraduccionActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
             idProyecto = bundle.getInt(Constants.PROYECTO_ID);
-            photoPath = bundle.getString(Constants.TRADUCCION_PATH);
+            Uri uri = (Uri) bundle.get(Constants.TRADUCCION_PATH);
+            photoPath = FileUtils.getPath(this, uri);
+            //photoPath = bundle.getString(Constants.TRADUCCION_PATH);
             Picasso.get().load("file:" + photoPath).into(imvPreview);
         }
         PreferencesManager preferencesManager = new PreferencesManager(this,
