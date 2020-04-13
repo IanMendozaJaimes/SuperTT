@@ -69,6 +69,7 @@ public class LoginActivity extends AppCompatActivity implements LoginView {
                     loginError(usuarioModelBusinessResult);
                 }
                 hideProgressBar();
+
             });
             hideKeyboard();
         });
