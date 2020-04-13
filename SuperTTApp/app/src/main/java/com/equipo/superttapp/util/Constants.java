@@ -8,4 +8,5 @@ public class Constants {
     public static final String TRADUCCION_PATH = "IMAGE_PATH_TEMP";
     public static final String APP_DOMAIN_PROVIDER = "com.equipo.superttapp.fileprovider";
     public static final Integer TAKE_PICTURE_RESULT = 1;
+    public static final Integer CROP_RESULT = 2;
 }
