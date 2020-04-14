@@ -38,6 +38,7 @@ import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCropActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -142,8 +143,11 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     }
 
     private void openCropActivity(Uri sourceUri, Uri destinationUri) {
+        UCrop.Options options = new UCrop.Options();
+        //options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.NONE, UCropActivity.SCALE);
+        options.setFreeStyleCropEnabled(true);
         UCrop.of(sourceUri, destinationUri)
-                .withMaxResultSize(1000, 1000)
+                .withMaxResultSize(1000, 1000).withOptions(options)
                 .start(this);
     }
 
