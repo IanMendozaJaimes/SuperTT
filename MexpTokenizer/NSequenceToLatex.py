@@ -12,7 +12,7 @@ class Converter:
     def seq2Lat(self, seq):
         lat = ""
         for s in seq:
-            if not (s == 1000 or s == 101):
+            if not (s == 1000 or s == 1001):
                 lat += self.mapper[tokens[s-1]]
         return lat
 if __name__ == '__main__':
