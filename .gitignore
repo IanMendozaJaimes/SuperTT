@@ -105,7 +105,7 @@ venv.bak/
 
 .DS_Store
 ImageAnalysis_Module/.DS_Store
-ImageAnalysis_Module/inkml2img/
+ImageAnalysis_Module/inkml2img/*/*.png
 
 *.jpg
 load-dataset/.vscode/
