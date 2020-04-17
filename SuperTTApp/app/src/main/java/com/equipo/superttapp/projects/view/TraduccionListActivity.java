@@ -1,6 +1,7 @@
 package com.equipo.superttapp.projects.view;
 
 import android.app.Activity;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -35,6 +37,8 @@ import com.equipo.superttapp.util.PreferencesManager;
 import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
+import com.yalantis.ucrop.UCrop;
+import com.yalantis.ucrop.UCropActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,6 +49,7 @@ import java.util.List;
 
 public class TraduccionListActivity extends AppCompatActivity implements TraduccionListView {
     private static final String TAG = TraduccionListActivity.class.getCanonicalName();
+    TraducccionListViewModel traducionListViewModel;
     private RecyclerView recyclerView;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerView.Adapter traduccionAdapter;
@@ -53,9 +58,9 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private Integer idProyecto;
     private Double calificacionProyecto;
     private List<TraduccionModel> traduccionModels;
-    TraducccionListViewModel traducionListViewModel;
     private String photoPathTemp;
     private UsuarioModel usuarioModel;
+    private Uri photoUri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -93,6 +98,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
         super.onStart();
         recuperarTraducciones();
     }
+
     public void onFabTraduccionClick() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(this.getPackageManager()) != null) {
@@ -103,7 +109,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                 e.printStackTrace();
             }
             if (photoFile != null) {
-                Uri photoUri = FileProvider.getUriForFile(this, Constants.APP_DOMAIN_PROVIDER, photoFile);
+                photoUri = FileProvider.getUriForFile(this, Constants.APP_DOMAIN_PROVIDER, photoFile);
                 intent.putExtra(MediaStore.EXTRA_OUTPUT, photoUri);
                 Log.d(TAG, "photoPathTemp " + photoPathTemp);
                 Log.d(TAG, "photoUri " + photoUri);
@@ -125,11 +131,24 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == Constants.TAKE_PICTURE_RESULT && resultCode == Activity.RESULT_OK) {
+            Uri uri = Uri.parse("file:" + photoPathTemp);
+            openCropActivity(uri, uri);
+        } else if (requestCode == UCrop.REQUEST_CROP && resultCode == RESULT_OK) {
+            Uri uri = UCrop.getOutput(data);
             Intent i = new Intent(this, NewTraduccionActivity.class);
-            i.putExtra(Constants.TRADUCCION_PATH, photoPathTemp);
+            i.putExtra(Constants.TRADUCCION_PATH, uri);
             i.putExtra(Constants.PROYECTO_ID, idProyecto);
             startActivity(i);
         }
+    }
+
+    private void openCropActivity(Uri sourceUri, Uri destinationUri) {
+        UCrop.Options options = new UCrop.Options();
+        //options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.NONE, UCropActivity.SCALE);
+        options.setFreeStyleCropEnabled(true);
+        UCrop.of(sourceUri, destinationUri)
+                .withMaxResultSize(1000, 1000).withOptions(options)
+                .start(this);
     }
 
     public void recuperarTraducciones() {
@@ -218,11 +237,11 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                     model.setRate(calificacionProyecto);
                     traducionListViewModel.updateProyecto(model, usuarioModel.getKeyAuth())
                             .observe(this, proyectoModelBusinessResult -> {
-                        if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
-                            changeProyectoSuccess(proyectoModelBusinessResult);
-                        } else
-                            operationError();
-                    });
+                                if (proyectoModelBusinessResult.getCode().equals(ResultCodes.SUCCESS)) {
+                                    changeProyectoSuccess(proyectoModelBusinessResult);
+                                } else
+                                    operationError();
+                            });
                     dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_cancelar, (dialog, which) -> dialog.cancel());
@@ -238,9 +257,9 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
                 .setPositiveButton(R.string.label_si, (dialog, which) -> {
                     traducionListViewModel.deleteTraduccion(idTraduccion,
                             usuarioModel.getKeyAuth()).observe(this, result -> {
-                                showMessage(result);
-                                recuperarTraducciones();
-                            });
+                        showMessage(result);
+                        recuperarTraducciones();
+                    });
                     dialog.cancel();
                 })
                 .setNegativeButton(R.string.label_no, (dialog, which) -> dialog.cancel());
