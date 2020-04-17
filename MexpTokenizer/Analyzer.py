@@ -30,7 +30,7 @@ class LexicalAnalyzer:
 		myMap = dict()
 		for line in file:
 			
-			self.lexer.input(line.split(",")[1])
+			self.lexer.input(",".join(line.split(",")[1:]))
 			#print(line.split(",")[1])
 			#print(repr(line.split(",")[1]))
 			token = self.lexer.token()
@@ -38,7 +38,7 @@ class LexicalAnalyzer:
 			while token is not None:
 				print(token)
 				myMap[token.type]= token.value	#fileMap.write(token.type+","+token.value+"\n")
-				arr.append(Rules.tokens.index(token.type) + 1 )
+				arr.append(Rules.tokens.index(token.type) + 1 ) #+1 means shift one due to 0 is reserved
 				token = self.lexer.token()
 			fileTokenized.write(line.split(",")[0] + "," + toString(arr) + "\n")
 		fileTokenized.close()
