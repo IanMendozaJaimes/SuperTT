@@ -41,10 +41,10 @@ class DatasetConverter:
 			for filename in files:			
 				#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + str(count) + ".png")
 				#print("*"*5+"current: "+ filename)
-				tag = self.inkml2tag(defult_folder_dataset + "/"+ filename)
+				tag = self.inkml2tag(defult_folder_dataset + "/"+ filename).rstrip("\n")
 				if len(tag) > 0:
 					writer.writerow([defult_folder_converted + "/"+ filename[0: -4] + ".png", tag])
-					inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
+					#inkml2img.inkml2img(defult_folder_dataset + "/" + filename, defult_folder_converted + "/"+ filename[0: -4] + ".png")
 				#count += 1
 	def splitIntoFolders(self,testPercentage, trainPercentage):
 
