@@ -23,7 +23,7 @@ def load_image(image_path):
     img = tf.io.read_file(image_path)
     img = tf.image.decode_jpeg(img, channels=1)
     img = tf.image.convert_image_dtype(img, tf.float32)
-    img = tf.image.resize(img, (IMG_HEIGHT, IMG_WIDTH))
+    # img = tf.image.resize(img, (IMG_HEIGHT, IMG_WIDTH))
     return img
 
 
@@ -149,7 +149,7 @@ decoder.load_weights('SavedModels/model_decoder.h5')
 image_url = './exampleImages/4.png'
 temp_input = tf.expand_dims(load_image(image_url), 0)
 
-prediction = predict(encoder, decoder, temp_input, 3)
+prediction = predict(encoder, decoder, temp_input, 10)
 
 print(prediction)
 
