@@ -407,10 +407,11 @@ def create_translation_view(request): #request must include idproyecto in body
             for chunk in file.chunks():
                 image_file.write(chunk)
                 #image_transformed.write(chunk)
+            image_file.close()
             ip = ImageProcessor(path_file +"/"+ idTraduccion+ "." + mediatype)
             ip.GaussianTransform()
             ip.saveImage(idTraduccion+ "." + mediatype, path_file + "/" + "transformed/")
-            image_file.close()
+            
             return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
         
@@ -461,6 +462,8 @@ def methods_translation_view(request, idtraduccion):
         else:
             data["resultCode"] = -1
         return Response(data = data)
+
+
 
 @api_view(['GET'])
 @permission_classes((permissions.IsAuthenticated,))
