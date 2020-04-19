@@ -2,28 +2,29 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import tensorflow as tf
 import numpy as np
+import matplotlib.pyplot as plt
 
 from model import *
 
 BATCH_SIZE = 2
-UNITS = 256
-EMBEDDING_DIM = 256
-VOCAB_SIZE = 117
-ATTENTION_DIM = 256
+UNITS = 128
+EMBEDDING_DIM = 128
+VOCAB_SIZE = 111
+ATTENTION_DIM = 128
 K = 10
-Q_WIDTH = 200
+Q_WIDTH = 100
 END = VOCAB_SIZE + 1
 begin = tf.constant(1000)
 
-IMG_HEIGHT = 300
-IMG_WIDTH = 300
+IMG_HEIGHT = 480
+IMG_WIDTH = 640
 
 
 def load_image(image_path):
     img = tf.io.read_file(image_path)
     img = tf.image.decode_jpeg(img, channels=1)
     img = tf.image.convert_image_dtype(img, tf.float32)
-    # img = tf.image.resize(img, (IMG_HEIGHT, IMG_WIDTH))
+    img = tf.image.resize(img, (IMG_HEIGHT, IMG_WIDTH))
     return img
 
 
@@ -47,9 +48,65 @@ def sort_aux(candidate):
     return -candidate[0]
 
 
+
+def predict_greedy(encoder, decoder, image, plot_attention=False):
+
+    sequence = list()
+    attention_plot = list()
+    result = list()
+
+    print('greedy')
+
+    features = encoder(image, training=False)
+    features = features * 0.3
+
+    B = tf.zeros((1, features.shape[1], 1))
+    hidden = decoder.reset_state(batch_size=features.shape[0])
+    dec_input = get_one_hot(tf.zeros((features.shape[0]), dtype=tf.dtypes.int32), VOCAB_SIZE + 2)
+
+    output, ht, attention_weights = decoder([dec_input, hidden, features, B])
+
+    while True:
+        dec_input = np.argmax(output.numpy())
+        sequence.append(dec_input)
+
+        if plot_attention:
+            attention_plot.append(attention_weights)
+            result.append(dec_input)
+
+        if dec_input == END:
+
+            if attention_plot:
+                fig = plt.figure(figsize=(10, 10))
+
+                len_result = len(result)
+                for l in range(len_result):
+                    temp_att = attention_plot[l][0]
+                    # temp_att = tf.reshape(attention_plot[l][0], (22, 32)).numpy()
+                    temp_att = np.resize(attention_plot[l][0], (8,8))
+                    print(temp_att)
+                    ax = fig.add_subplot(len_result//2, len_result//2, l+1)
+                    ax.set_title(result[l])
+                    img = ax.imshow(tf.squeeze(image[0]))
+                    ax.imshow(temp_att, cmap='gray', alpha=0.6, extent=img.get_extent())
+
+                plt.tight_layout()
+                plt.show()
+
+            return sequence
+
+        B = B + attention_weights
+        hidden = ht
+        dec_input = get_one_hot_predict(dec_input, VOCAB_SIZE + 2)
+
+        output, ht, attention_weights = decoder([dec_input, hidden, features, B])
+
+
+
 def predict(encoder, decoder, image, beam_dim):
     
     features = encoder(image, training=False)
+    features = features * 0.4
 
     B = tf.zeros((1, features.shape[1], 1))
     hidden = decoder.reset_state(batch_size=features.shape[0])
@@ -87,6 +144,7 @@ def predict(encoder, decoder, image, beam_dim):
         candidates_probabilities.append(None)
 
     while True:
+        print('new option')
         possible_winners = list()
         for x in range(0, beam_dim):
             output, ht, attention_weights = decoder([beam_outputs[x], beam_hts[x], features, beam_bs[x]])
@@ -110,7 +168,7 @@ def predict(encoder, decoder, image, beam_dim):
             probabilities[x] = possible_winners[x][0]
             sequences[x].append(possible_winners[x][1])
 
-            if possible_winners[x][1] == 118:
+            if possible_winners[x][1] == END:
                 end_symbol_appears = True
 
         if end_symbol_appears:
@@ -146,10 +204,15 @@ encoder.load_weights('SavedModels/model_encoder.h5')
 decoder.load_weights('SavedModels/model_decoder.h5')
 
 
-image_url = './exampleImages/4.png'
+image_url = './exampleImages/1.png'
 temp_input = tf.expand_dims(load_image(image_url), 0)
 
-prediction = predict(encoder, decoder, temp_input, 10)
+# plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
+# plt.show()
+
+# prediction = predict(encoder, decoder, temp_input, 10)
+
+prediction = predict_greedy(encoder, decoder, temp_input, True)
 
 print(prediction)
 

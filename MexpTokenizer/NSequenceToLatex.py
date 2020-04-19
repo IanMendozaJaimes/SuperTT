@@ -23,5 +23,5 @@ class Converter:
 if __name__ == '__main__':
     #print(tokens.index('comma'))
     c = Converter()
-    print(c.seq2Lat([84, 61, 52, 40, 84, 61, 53, 40, 43, 40, 84, 61, 75 ]))
+    print(c.seq2Lat([13, 72, 45, 13, 75, 45]))
 

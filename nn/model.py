@@ -110,6 +110,7 @@ class Encoder(tf.keras.Model):
 		y = self.block3(y, training)
 		y = self.block4(y, training)
 		
+		print('1: ', y.shape[1], '2: ', y.shape[2])
 		y = tf.reshape(y, (y.shape[0], y.shape[1] * y.shape[2], y.shape[3]))
 		# y shape = (batch_size, L, D)
 		# L = W x H
