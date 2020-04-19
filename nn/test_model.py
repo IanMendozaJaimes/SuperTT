@@ -6,17 +6,17 @@ import numpy as np
 from model import *
 
 BATCH_SIZE = 2
-UNITS = 256
-EMBEDDING_DIM = 256
-VOCAB_SIZE = 117
-ATTENTION_DIM = 256
+UNITS = 128
+EMBEDDING_DIM = 128
+VOCAB_SIZE = 111
+ATTENTION_DIM = 128
 K = 10
-Q_WIDTH = 200
+Q_WIDTH = 100
 END = VOCAB_SIZE + 1
 begin = tf.constant(1000)
 
-IMG_HEIGHT = 300
-IMG_WIDTH = 300
+IMG_HEIGHT = 480
+IMG_WIDTH = 640
 
 
 def load_image(image_path):
