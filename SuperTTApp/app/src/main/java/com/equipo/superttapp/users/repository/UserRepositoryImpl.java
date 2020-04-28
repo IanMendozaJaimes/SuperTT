@@ -13,8 +13,6 @@ import com.equipo.superttapp.util.BusinessResult;
 import com.equipo.superttapp.util.ResultCodes;
 import com.equipo.superttapp.util.ServiceGenerator;
 
-import java.io.IOException;
-
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;

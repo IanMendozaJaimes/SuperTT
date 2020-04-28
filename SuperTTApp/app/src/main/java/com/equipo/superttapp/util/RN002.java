@@ -11,7 +11,6 @@ public class RN002 {
         if (email.contains("@")) {
             return Patterns.EMAIL_ADDRESS.matcher(email).matches();
         } else {
-            //return !email.trim().isEmpty();
             return false;
         }
     }
