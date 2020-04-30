@@ -1,5 +1,6 @@
 from Rules import tokens
-
+START_TAG_NUM = 1000
+END_TAG_NUM = 1001
 class Converter:
     def __init__(self):
         f = open("map.in", "r")
@@ -13,15 +14,15 @@ class Converter:
     def seq2Lat(self, seq):
         lat = ""
         for s in seq:
-            if not (s == 1000 or s == 1001):                
+            if not (s == START_TAG_NUM or s == END_TAG_NUM):                
                 if self.mapper.get(tokens[ s-1 ]) is None:
-                    lat += tokens[s-1]
+                    lat += (tokens[s-1] + " ")
                 else:
-                    lat += self.mapper[tokens[ s-1 ]]
+                    lat += (self.mapper[tokens[ s-1 ]] + " ")
 
         return lat
 if __name__ == '__main__':
     #print(tokens.index('comma'))
     c = Converter()
-    print(c.seq2Lat([76,62,53,48,73,62,54,47,74,73,47,77 ]))
+    print(c.seq2Lat([111, 72, 60, 51, 14, 72, 60, 52, 14, 72, 60, 53, 14, 72, 60, 54, 47, 100, 112]))
 
