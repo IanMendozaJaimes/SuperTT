@@ -5,8 +5,9 @@ training_path = './CROHME_dataset_v1'
 training_file_name = '/tokenizedV2.csv'
 training_file_path = training_path + training_file_name
 BATCH_SIZE = 100
-IMG_HEIGHT = 350
-IMG_WIDTH = 350
+IMG_WIDTH = 640
+IMG_HEIGHT = 480
+
 AUTOTUNE = tf.data.experimental.AUTOTUNE
 COLUMN_NAMES = ['imagen', 'label']
 LABEL_NAME = COLUMN_NAMES[-1]

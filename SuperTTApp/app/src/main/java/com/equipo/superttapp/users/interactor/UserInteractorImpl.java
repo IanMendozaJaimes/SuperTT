@@ -1,7 +1,5 @@
 package com.equipo.superttapp.users.interactor;
 
-import android.util.Log;
-
 import androidx.lifecycle.MutableLiveData;
 
 import com.equipo.superttapp.users.data.UsuarioData;

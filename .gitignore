@@ -112,4 +112,3 @@ load-dataset/.vscode/
 load-dataset/CROHME_dataset_v1/
 *.png
 supertt/media/proyectos/
-nn/EncoderSavedModel/
