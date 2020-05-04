@@ -1,191 +1,96 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import tensorflow as tf
+import numpy as np
+# import matplotlib.pyplot as plt
 
-from model import *
+# from model import *
 
-print('=======================================')
-print('==============  TESTING  ==============')
-print('=======================================')
 
-num_filters = 5
-kernel_shape = (3,3)
-training = True
-batch_size = 2
-w = 5
-h = 5
+# BATCH_SIZE = 2
+# UNITS = 256
+# EMBEDDING_DIM = 256
+# VOCAB_SIZE = 111
+# ATTENTION_DIM = 256
+# K = 10
+# Q_WIDTH = 100
+# END = VOCAB_SIZE + 1
+# begin = tf.constant(1000)
 
-image = tf.ones((batch_size,w,h,1))
-# print(image)
+# IMG_HEIGHT = 480
+# IMG_WIDTH = 640
 
-# encoder = Encoder()
 
-# y = encoder(image, training)
-# print(y[0])
+# def load_image(image_path):
+#     img = tf.io.read_file(image_path)
+#     img = tf.image.decode_png(img, channels=1)
+#     img = tf.image.convert_image_dtype(img, tf.float32)
 
-test_conv1 = tf.keras.layers.Conv2D(filters=num_filters, kernel_size=kernel_shape, strides=(1,1))
+#     img = tf.math.abs(img - 1)
 
-y = test_conv1(image)
+#     img = tf.image.resize(img, (IMG_HEIGHT, IMG_WIDTH))
+#     return img
 
-L = y.shape[1] * y.shape[2]
 
-y = tf.reshape(y, (batch_size, L, num_filters))
 
-print(y)
+# image_url = './exampleImages/1.png'
+# temp_input = tf.expand_dims(load_image(image_url), 0)
 
-# ATTENTION MECHANISM
+# plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
+# plt.show()
 
-attention_dim = 3
-Ua = tf.keras.layers.Dense(attention_dim)
-UaY = Ua(y)
-# UaY shape = (batch_size, L, attention_dim)
-print(UaY)
+# print(temp_input)
 
-print(Ua.weights)
 
-ht = tf.constant([[1., 2., 3., 4., 5., 6.], [1., 2., 3., 4., 5., 6.]])
-# ht shape = (batch_size, 1, units)
-ht = tf.expand_dims(ht,1)
+# encoder = Encoder(name='ENCODER')
+# decoder = Decoder(UNITS, EMBEDDING_DIM, VOCAB_SIZE + 2, ATTENTION_DIM, K, Q_WIDTH)
 
-Wa = tf.keras.layers.Dense(attention_dim)
+# y = encoder(temp_input, training=True)
 
-print('===================================')
-print('===================================')
-print('H(t-1):',ht)
+# a = y[0].numpy()
 
-WaH = Wa(ht)
-print(WaH)
+# for i in range(len(a)):
+#     print(str(i) + ':', end='')
+#     for j in range(len(a[0])):
+#         print(str(a[i][j]), end=' ')
+#     print('')
 
-print(Wa.weights)
 
-print('===================================')
-print('LOOK THE SUM:')
-# z = tf.math.add(WaH,UaY)
-z = WaH + UaY
-z = tf.nn.tanh(z)
 
-V = tf.keras.layers.Dense(1)
+# a = tf.expand_dims([2] * 3, 1)
+# print(a)
 
-print(z)
 
-print('===================================')
-print('LOOK AT THE V:')
-print(V)
 
-VZ = V(z)
+def get_positional_encoding_2d(height, width, d_model):
+    
+    pe = np.zeros((height, width, d_model))
+    d_model = int(d_model / 2)
+    h_vector = np.arange(height)
+    w_vector = np.expand_dims(np.arange(width), axis=1)
 
-print(V.weights)
+    div_term = np.arange(d_model) // 2
+    div_term = np.exp((-2*div_term / d_model) * np.log(10000.0))
+    
+    pe[:, :, 0:d_model:2] = np.sin((pe[:, :, 0:d_model:2] + div_term[0::2]) * w_vector)
+    pe[:, :, 1:d_model:2] = np.cos((pe[:, :, 1:d_model:2] + div_term[1::2]) * w_vector)
+    pe[:, :, d_model::2] = np.sin((pe[:, :, d_model::2] + div_term[0::2]) * h_vector[:, np.newaxis, np.newaxis])
+    pe[:, :, d_model+1::2] = np.cos((pe[:, :, d_model+1::2] + div_term[0::2]) * h_vector[:, np.newaxis, np.newaxis])
 
-print('===================================')
-print('LOOK AT THE VZ:')
-print(VZ)
+    return pe
 
-a = tf.reshape(VZ, (batch_size, VZ.shape[2], VZ.shape[1]))
-print('A:',a)
-a = tf.nn.softmax(a)
-a = tf.reshape(a, (batch_size, a.shape[2], a.shape[1]))
 
-print('a:', a)
+# a = tf.ones((2,1,3,4))
+# pe = get_positional_encoding_2d(1,3,4)
 
-print('===================================')
-print('CONVOLUTION FEATURES:')
+# print(a+pe)
 
-aa = a * .3
+a = tf.ones((1,6,1))
+print(a)
 
-print(aa)
+Q = tf.keras.layers.Conv1D(filters=2, kernel_size=5, padding="same", use_bias=False)
 
-Q = tf.keras.layers.Conv1D(filters=10, kernel_size=200, padding="same", use_bias=False)
-F = Q(aa)
-
-print('Q(aa):')
-print(F)
-print(Q.weights)
-
-Uf = tf.keras.layers.Dense(attention_dim)
-UfF = Uf(F)
-
-print('UfF:',UfF)
-
-print('===================================')
-print('RNN')
-
-# ht shape = (batch_size, units)
-# context_vector = (batch_size, D)
-# y_values = (batch_size,)
-
-vocab_size = 10
-embedding_dim = 6
-E = tf.keras.layers.Embedding(vocab_size, embedding_dim)
-
-y_values = tf.constant([[1., 2., 0.], [1., 2., 4.]])
-
-print(y_values[:,2])
-
-EYV = E(y_values[:,0])
-
-# Ey shape = (batch_size, embedding_dim)
-print(EYV)
-
-units = 7
-Wyz = tf.keras.layers.Dense(units)
-
-print(Wyz(EYV))
-
-print(Wyz.weights)
-
-h = tf.constant([[1., 2., 3., 4., 5., 6., 7.], [1., 2., 3., 4., 5., 6., 7.]])
-Uhz = tf.keras.layers.Dense(units)
-
-print('h:', h)
-
-print(Uhz(h))
-
-print(Uhz.weights)
-
-context_vector = tf.constant([[1., 2., 3.], [1., 2., 3.]])
-Ccz = tf.keras.layers.Dense(units)
-
-print('context_vector:', context_vector)
-
-print(Ccz(context_vector))
-
-print(Ccz.weights)
-
-# batch_normalization1 = tf.keras.layers.BatchNormalization()
-# pooling1 = tf.keras.layers.MaxPooling2D(pool_size=(2,2), strides=(2,2))
-
-# test_conv2 = tf.keras.layers.Conv2D(filters=num_filters+1, kernel_size=kernel_shape, strides=(1,1))
-# batch_normalization2 = tf.keras.layers.BatchNormalization()
-
-# test_conv3 = tf.keras.layers.Conv2D(filters=num_filters+2, kernel_size=kernel_shape, strides=(1,1))
-# batch_normalization3 = tf.keras.layers.BatchNormalization()
-
-# test_conv4 = tf.keras.layers.Conv2D(filters=num_filters+3, kernel_size=kernel_shape, strides=(1,1))
-# batch_normalization4 = tf.keras.layers.BatchNormalization()
-# dropout = tf.keras.layers.Dropout(0.2)
-
-# y = test_conv1(image)
-# y = batch_normalization1(y, training=training)
-# y = tf.nn.relu(y)
-
-# y = pooling1(y)
-
-# y = test_conv2(y)
-# y = batch_normalization2(y, training=training)
-# y = tf.nn.relu(y)
-
-# y = test_conv3(y)
-# y = batch_normalization3(y, training=training)
-# y = tf.nn.relu(y)
-
-# y = test_conv4(y)
-# y = batch_normalization4(y, training=training)
-# y = dropout(y, training=training)
-# y = tf.nn.relu(y)
-
-# print(y)
-
-
+print(Q(a))
 
 
 

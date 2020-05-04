@@ -1,6 +1,16 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
 
+import os
+import numpy as np
+
 import tensorflow as tf
+
+# You'll generate plots of attention in order to see which parts of an image
+# our model focuses on during captioning
+import matplotlib.pyplot as plt
+import time
+import math 
+
 
 
 class FCNN_last(tf.keras.Model):
@@ -8,16 +18,19 @@ class FCNN_last(tf.keras.Model):
 	def __init__(self, num_filters, kernel_size, dropout_factor):
 		super(FCNN_last, self).__init__()
 
-		self.conv = tf.keras.layers.Conv2D(filters=num_filters, kernel_size=kernel_size, strides=(1,1), use_bias=False)
+		self.conv = tf.keras.layers.Conv2D(filters=num_filters, kernel_size=kernel_size, 
+		                                   strides=(1,1), use_bias=False, kernel_regularizer=tf.keras.regularizers.l1_l2(l1=0.01, l2=0.01))
 		self.batch_normalization = tf.keras.layers.BatchNormalization()
 		self.dropout = tf.keras.layers.Dropout(dropout_factor)
-		# self.dropout_factor = dropout_factor
+		self.dropout_factor = dropout_factor
 
 	def __call__(self, x, training):
 
 		y = self.conv(x)
 		y = self.batch_normalization(inputs=y, training=training)
-		y = self.dropout(inputs=y, training=training)
+
+		if training:
+			y = self.dropout(inputs=y, training=training)
 
 		# if not training:
 		# 	y = self.dropout_factor * y
@@ -97,6 +110,7 @@ class Encoder(tf.keras.Model):
 	def __init__(self, name=None):
 		super(Encoder, self).__init__(name=name)
 
+		self.fc = tf.keras.layers.Dense(128)
 		self.block1 = CNN_block(32, (3,3))
 		self.block2 = CNN_block(64, (3,3))
 		self.block3 = CNN_block(64, (3,3))
@@ -109,12 +123,14 @@ class Encoder(tf.keras.Model):
 		y = self.block2(y, training)
 		y = self.block3(y, training)
 		y = self.block4(y, training)
-		
-		print('1: ', y.shape[1], '2: ', y.shape[2])
+
 		y = tf.reshape(y, (y.shape[0], y.shape[1] * y.shape[2], y.shape[3]))
 		# y shape = (batch_size, L, D)
 		# L = W x H
 		# D : size of context vector
+
+		y = self.fc(y)
+		y = tf.nn.relu(y)
 
 		return y
 
@@ -134,7 +150,7 @@ class AttentionMLP(tf.keras.Model):
 		self.Ua = tf.keras.layers.Dense(attention_dim, use_bias=False)
 		self.Va = tf.keras.layers.Dense(1, use_bias=False)
 		self.Uf = tf.keras.layers.Dense(attention_dim, use_bias=False)
-		self.Q = tf.keras.layers.Conv1D(filters=k, kernel_size=q_width, padding="same", use_bias=False)
+		# self.Q = tf.keras.layers.Conv1D(filters=k, kernel_size=q_width, padding="same", use_bias=False)
 		
 
 
@@ -145,10 +161,10 @@ class AttentionMLP(tf.keras.Model):
 
 		# B shape = (batch_size, L, 1)
 		# F shape = (batch_size, L, k)
-		F = self.Q(B)
+		# F = self.Q(B)
 
 		# e shape = (batch_size, L, 1)
-		e = self.Wa(previous_hidden_reshaped) + self.Ua(features) + self.Uf(F)
+		e = self.Wa(previous_hidden_reshaped) + self.Ua(features) # + self.Uf(F)
 		e = tf.nn.tanh(e)
 		e = self.Va(e)
 

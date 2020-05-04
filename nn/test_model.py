@@ -6,24 +6,26 @@ import matplotlib.pyplot as plt
 
 from model import *
 
+
 BATCH_SIZE = 2
-UNITS = 128
-EMBEDDING_DIM = 128
+UNITS = 256
+EMBEDDING_DIM = 256
 VOCAB_SIZE = 111
-ATTENTION_DIM = 128
+ATTENTION_DIM = 256
 K = 10
 Q_WIDTH = 100
 END = VOCAB_SIZE + 1
 begin = tf.constant(1000)
 
-IMG_HEIGHT = 480
-IMG_WIDTH = 640
+IMG_HEIGHT = 400
+IMG_WIDTH = 600
 
 
 def load_image(image_path):
     img = tf.io.read_file(image_path)
-    img = tf.image.decode_jpeg(img, channels=1)
+    img = tf.image.decode_png(img, channels=1)
     img = tf.image.convert_image_dtype(img, tf.float32)
+    # img = tf.math.abs(img - 1)
     img = tf.image.resize(img, (IMG_HEIGHT, IMG_WIDTH))
     return img
 
@@ -58,7 +60,8 @@ def predict_greedy(encoder, decoder, image, plot_attention=False):
     print('greedy')
 
     features = encoder(image, training=False)
-    features = features * 0.3
+
+    print('features:', features)
 
     B = tf.zeros((1, features.shape[1], 1))
     hidden = decoder.reset_state(batch_size=features.shape[0])
@@ -66,7 +69,7 @@ def predict_greedy(encoder, decoder, image, plot_attention=False):
 
     output, ht, attention_weights = decoder([dec_input, hidden, features, B])
 
-    while True:
+    for w in range(10):
         dec_input = np.argmax(output.numpy())
         sequence.append(dec_input)
 
@@ -74,7 +77,9 @@ def predict_greedy(encoder, decoder, image, plot_attention=False):
             attention_plot.append(attention_weights)
             result.append(dec_input)
 
-        if dec_input == END:
+        print('decoder:', dec_input)
+
+        if dec_input == END or w == 9:
 
             if attention_plot:
                 fig = plt.figure(figsize=(10, 10))
@@ -106,7 +111,6 @@ def predict_greedy(encoder, decoder, image, plot_attention=False):
 def predict(encoder, decoder, image, beam_dim):
     
     features = encoder(image, training=False)
-    features = features * 0.4
 
     B = tf.zeros((1, features.shape[1], 1))
     hidden = decoder.reset_state(batch_size=features.shape[0])
@@ -204,17 +208,18 @@ encoder.load_weights('SavedModels/model_encoder.h5')
 decoder.load_weights('SavedModels/model_decoder.h5')
 
 
-image_url = './exampleImages/1.png'
+image_url = './exampleImages/p.png'
 temp_input = tf.expand_dims(load_image(image_url), 0)
 
-# plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
-# plt.show()
+print(temp_input)
+
+plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
+plt.show()
 
 # prediction = predict(encoder, decoder, temp_input, 10)
+# prediction = predict_greedy(encoder, decoder, temp_input, True)
 
-prediction = predict_greedy(encoder, decoder, temp_input, True)
-
-print(prediction)
+# print(prediction)
 
 # import pathlib
 # image_url = './exampleImages/4.png'
