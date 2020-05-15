@@ -3,7 +3,10 @@ START_TAG_NUM = 1000
 END_TAG_NUM = 1001
 class Converter:
     def __init__(self):
-        f = open("map.in", "r")
+        try:
+            f = open("map.in", "r")
+        except:
+            f = open("../MexpTokenizer/map.in", "r")
         self.mapper = {}
 
         for line in f:
@@ -21,11 +24,3 @@ class Converter:
                     lat += (self.mapper[tokens[ s-1 ]] + " ")
 
         return lat
-if __name__ == '__main__':
-    #print(tokens.index('comma'))
-    c = Converter()
-
-    print(c.seq2Lat([111, 72, 60, 51, 14, 72, 60, 52, 14, 72, 60, 53, 14, 72, 60, 54, 47, 100, 112]))
-
-    print(c.seq2Lat([111, 13, 72, 45, 13, 75, 45, 13, 63, 32, 72, 64, 33, 112])
-
