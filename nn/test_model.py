@@ -91,7 +91,7 @@ def predict_greedy(encoder, decoder, image, plot_attention=False):
                     ax.imshow(temp_att, cmap='gray', alpha=0.6, extent=img.get_extent())
 
                 plt.tight_layout()
-                plt.show()
+                #plt.show()
 
             return sequence
 
@@ -203,23 +203,44 @@ output, ht, attention_weights = decoder([dec_input, hidden, features, B])
 encoder.load_weights('SavedModels/model_encoder.h5')
 decoder.load_weights('SavedModels/model_decoder.h5')
 
+########################## DO NOT DELETE THIS CHUNK OF CODE ###########
+#automatic script
+BASE_DIR = "../Integration_scripts/images"
+import time
+import subprocess
+import os
+import sys
+while True:
 
-image_url = './exampleImages/1.png'
-temp_input = tf.expand_dims(load_image(image_url), 0)
+    #image_url = './exampleImages/001-equation000.i.png'
 
-# plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
-# plt.show()
 
-# prediction = predict(encoder, decoder, temp_input, 10)
+    if len( os.listdir(BASE_DIR) ) > 0: #if there is a file in BASE_DIR
+        
+        image_url = BASE_DIR + "/" + os.listdir(BASE_DIR)[0]
+        print(image_url)
 
-prediction = predict_greedy(encoder, decoder, temp_input, True)
+        temp_input = tf.expand_dims(load_image(image_url), 0)
+        
+        # plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
+        # plt.show()
+        #prediction = predict(encoder, decoder, temp_input, 10)
 
-print(prediction)
+        prediction = predict_greedy(encoder, decoder, temp_input, True)
+        print(prediction)
+        
 
-# import pathlib
-# image_url = './exampleImages/4.png'
-# data_dir = tf.keras.utils.get_file(origin=image_url, fname='math_expressions', untar=False)
-# data_dir = pathlib.Path(data_dir)
+        print("type: "+str(type(prediction)))
+        prediction2 = [str(e) for e in prediction]
+        subprocess.call(["python", "../MexpTokenizer/main_seq2lat.py", ",".join(prediction2), os.listdir(BASE_DIR)[0].split(".")[0], sys.argv[1]])
+
+        os.remove(image_url) #once finished, delete image
+    time.sleep(1)
+######################################################3
+    # import pathlib
+    # image_url = './exampleImages/4.png'
+    # data_dir = tf.keras.utils.get_file(origin=image_url, fname='math_expressions', untar=False)
+    # data_dir = pathlib.Path(data_dir)
 
 
 
