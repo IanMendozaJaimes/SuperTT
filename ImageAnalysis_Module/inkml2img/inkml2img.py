@@ -233,7 +233,7 @@ def inkml2img(input_path, output_path):
             data = np.array(subls)
             x,y=zip(*data)
             plt.plot(x,y,linewidth=2,c='black')
-    plt.savefig(output_path, bbox_inches='tight', dpi=100)
+    plt.savefig(output_path, dpi=100)#plt.savefig(output_path, bbox_inches='tight', dpi=100)
     plt.gcf().clear()
     
 def latex2img(formula, fontsize=12, dpi=300, format_='svg'):
@@ -243,7 +243,8 @@ def latex2img(formula, fontsize=12, dpi=300, format_='svg'):
 #     fig.text(0, 0, u'${}$'.format(formula), fontsize=fontsize)
     fig.text(0, 0, formula, fontsize=fontsize,style='italic')
     buffer_ = StringIO()
-    fig.savefig(buffer_, dpi=dpi, transparent=False, format=format_, bbox_inches='tight', pad_inches=0.1)
+    #fig.savefig(buffer_, dpi=dpi, transparent=False, format=format_, bbox_inches='tight', pad_inches=0.1)
+    fig.savefig(buffer_, dpi=dpi, transparent=False, format=format_, pad_inches=0.1)
     plt.close(fig)
     return buffer_.getvalue()
     

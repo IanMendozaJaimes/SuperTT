@@ -9,20 +9,20 @@ restartPSQL(){
 	echo "starting PostgreSQL"
 	sudo systemctl restart postgresql.service
 }
-startLinkScript(){
-	echo "starting integration scripts..."
+
+startDB_Checker(){
+	echo "starting DB checking for new files..."
 	cd Integration_scripts
-	python main.py
+	python main_db.py
 	cd ..
 }
 startNNModel(){
 	echo "starting Neural network model..."
 	cd nn
-	python test_model.py $1
+	python test_model.py
 	cd ..
 }
 restartPSQL
-startLinkScript &
-startNNModel $1 &
+startDB_Checker &
+startNNModel &
 startDjango $1
-

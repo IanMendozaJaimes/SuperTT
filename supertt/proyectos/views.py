@@ -390,7 +390,7 @@ def create_translation_view(request): #request must include idproyecto in body
 
             trans.nombre = str(str(t).split('.')[0])
 
-            trans.save()
+            
             idTraduccion = str(trans.id)
             
             trans.archivo = str(idTraduccion) + "." + mediatype
@@ -407,15 +407,16 @@ def create_translation_view(request): #request must include idproyecto in body
                 image_file.write(chunk)
                 #image_transformed.write(chunk)
             image_file.close()
+            trans.save()
 
             #Noticing new image to process into file
-            newimage_data = open( settings.BASE_DIR+'/media'+"/proyectos/" + "imagespath.dat" , "w")
-            newimage_data.write( parentFolderName + "/" +folderName+"/"+ idTraduccion + "." + mediatype)
-            newimage_data.close()
+            #newimage_data = open( settings.BASE_DIR+'/media'+"/proyectos/" + "imagespath.dat" , "w")
+            #newimage_data.write( parentFolderName + "/" +folderName+"/"+ idTraduccion + "." + mediatype)
+            #newimage_data.close()
 
-            token_file = open("/".join(settings.BASE_DIR.split("/")[:-1]) + "/Integration_scripts/token.in", "w")
-            token_file.write(request.META.get('HTTP_AUTHORIZATION').split(" ")[1])
-            token_file.close()
+            #token_file = open("/".join(settings.BASE_DIR.split("/")[:-1]) + "/Integration_scripts/token.in", "w")
+            #token_file.write(request.META.get('HTTP_AUTHORIZATION').split(" ")[1])
+            #token_file.close()
 
 
             """ip = ImageProcessor(path_file +"/"+ idTraduccion+ "." + mediatype)

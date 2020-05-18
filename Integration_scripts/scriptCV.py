@@ -25,7 +25,7 @@ class ImageProcessor:
 		#ret3,th3 = cv.threshold(self.img,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
 
 		# Otsu's thresholding after Gaussian filtering
-			
+		print("processing image...")
 		blur = cv.GaussianBlur(self.img,(5,5),0)
 		ret3,th3 = cv.threshold(blur,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
 		self.imgTrans = th3
@@ -50,6 +50,7 @@ class ImageProcessor:
 			cv.imwrite(name, self.imgTrans)
 		else:
 			cv.imwrite(path+"/"+name, self.imgTrans)
+		print("saved")
 
 	def comparisonPlot(self):
 		titles = ['Original Image','Threshold']

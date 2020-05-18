@@ -181,10 +181,7 @@ def predict(encoder, decoder, image, beam_dim):
                     i = count
                 count += 1
             return sequences[i], probabilities[i]
-
             
-
-
 
 # init the models
 encoder = Encoder(name='ENCODER')
@@ -203,39 +200,44 @@ output, ht, attention_weights = decoder([dec_input, hidden, features, B])
 encoder.load_weights('SavedModels/model_encoder.h5')
 decoder.load_weights('SavedModels/model_decoder.h5')
 
+
+
+
+
 ########################## DO NOT DELETE THIS CHUNK OF CODE ###########
 #automatic script
-BASE_DIR = "../Integration_scripts/images"
+#BASE_DIR = "../Integration_scripts/images"
 import time
 import subprocess
 import os
 import sys
-while True:
 
-    #image_url = './exampleImages/001-equation000.i.png'
+sys.path.append("..")
+from accesodb.base import *
+from accesodb.traduccion import *
 
-
-    if len( os.listdir(BASE_DIR) ) > 0: #if there is a file in BASE_DIR
+BASE_DIR = "../Integration_scripts/processed_images"
+EXTENSION = ".png"
+if __name__ == "__main__":
+    
+    while True:
+        session = Session()
+        traducciones = session.query(Traduccion).filter(Traduccion.procesado==False).all()
         
-        image_url = BASE_DIR + "/" + os.listdir(BASE_DIR)[0]
-        print(image_url)
+        for trad in traducciones:
+            image_url = f"{BASE_DIR}/{trad.usuario_id}_{trad.proyecto_id}_{trad.id}{EXTENSION}"
 
-        temp_input = tf.expand_dims(load_image(image_url), 0)
-        
-        # plt.imshow(tf.squeeze(temp_input).numpy(), cmap='gray')
-        # plt.show()
-        #prediction = predict(encoder, decoder, temp_input, 10)
-
-        prediction = predict_greedy(encoder, decoder, temp_input, True)
-        print(prediction)
-        
-
-        print("type: "+str(type(prediction)))
-        prediction2 = [str(e) for e in prediction]
-        subprocess.call(["python", "../MexpTokenizer/main_seq2lat.py", ",".join(prediction2), os.listdir(BASE_DIR)[0].split(".")[0], sys.argv[1]])
-
-        os.remove(image_url) #once finished, delete image
-    time.sleep(1)
+            print(image_url)
+            if os.path.exists(image_url):
+                temp_input = tf.expand_dims(load_image(image_url), 0)
+                prediction = predict_greedy(encoder, decoder, temp_input, True)
+                print(prediction)
+                prediction2 = [str(e) for e in prediction]
+                subprocess.call(["python", "../MexpTokenizer/main_seq2lat.py", ",".join(prediction2), f"{trad.usuario_id}_{trad.proyecto_id}_{trad.id}"])
+                
+        session.commit()
+        session.close()
+        time.sleep(1)        
 ######################################################3
     # import pathlib
     # image_url = './exampleImages/4.png'
