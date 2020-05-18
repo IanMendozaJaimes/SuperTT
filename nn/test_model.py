@@ -4,7 +4,7 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-from model import *
+from nn.model import *
 
 BATCH_SIZE = 2
 UNITS = 128
@@ -184,65 +184,40 @@ def predict(encoder, decoder, image, beam_dim):
             
 
 # init the models
-encoder = Encoder(name='ENCODER')
-decoder = Decoder(UNITS, EMBEDDING_DIM, VOCAB_SIZE + 2, ATTENTION_DIM, K, Q_WIDTH)
+def initModels(parent_folder = "./"):
+    encoder = Encoder(name='ENCODER')
+    decoder = Decoder(UNITS, EMBEDDING_DIM, VOCAB_SIZE + 2, ATTENTION_DIM, K, Q_WIDTH)
 
-# we need to use the models first, in order to init its weights
-image = tf.random.uniform((1, 300, 300, 1))
-B = tf.zeros((1, 121, 1))
-hidden = decoder.reset_state(batch_size=1)
-dec_input = get_one_hot(tf.zeros((1), dtype=tf.dtypes.int32), VOCAB_SIZE + 2)
+    # we need to use the models first, in order to init its weights
+    image = tf.random.uniform((1, 300, 300, 1))
+    B = tf.zeros((1, 121, 1))
+    hidden = decoder.reset_state(batch_size=1)
+    dec_input = get_one_hot(tf.zeros((1), dtype=tf.dtypes.int32), VOCAB_SIZE + 2)
 
-features = encoder(image)
-output, ht, attention_weights = decoder([dec_input, hidden, features, B])
+    features = encoder(image)
+    output, ht, attention_weights = decoder([dec_input, hidden, features, B])
 
-# then we can load the real weights
-encoder.load_weights('SavedModels/model_encoder.h5')
-decoder.load_weights('SavedModels/model_decoder.h5')
+    # then we can load the real weights
+    encoder.load_weights(f'{parent_folder}/SavedModels/model_encoder.h5')
+    decoder.load_weights(f'{parent_folder}/SavedModels/model_decoder.h5')
 
-
+    return encoder, decoder
 
 
 
 ########################## DO NOT DELETE THIS CHUNK OF CODE ###########
-#automatic script
-#BASE_DIR = "../Integration_scripts/images"
 import time
 import subprocess
 import os
 import sys
 
-sys.path.append("..")
-from accesodb.base import *
-from accesodb.traduccion import *
-
-BASE_DIR = "../Integration_scripts/processed_images"
-EXTENSION = ".png"
-if __name__ == "__main__":
-    
-    while True:
-        session = Session()
-        traducciones = session.query(Traduccion).filter(Traduccion.procesado==False).all()
-        
-        for trad in traducciones:
-            image_url = f"{BASE_DIR}/{trad.usuario_id}_{trad.proyecto_id}_{trad.id}{EXTENSION}"
-
-            print(image_url)
-            if os.path.exists(image_url):
-                temp_input = tf.expand_dims(load_image(image_url), 0)
-                prediction = predict_greedy(encoder, decoder, temp_input, True)
-                print(prediction)
-                prediction2 = [str(e) for e in prediction]
-                subprocess.call(["python", "../MexpTokenizer/main_seq2lat.py", ",".join(prediction2), f"{trad.usuario_id}_{trad.proyecto_id}_{trad.id}"])
-                
-        session.commit()
-        session.close()
-        time.sleep(1)        
-######################################################3
-    # import pathlib
-    # image_url = './exampleImages/4.png'
-    # data_dir = tf.keras.utils.get_file(origin=image_url, fname='math_expressions', untar=False)
-    # data_dir = pathlib.Path(data_dir)
-
+def img2latSeqConverter(image_url, encoder, decoder):
+    print(image_url)
+    if os.path.exists(image_url):
+        temp_input = tf.expand_dims(load_image(image_url), 0)
+        prediction = predict_greedy(encoder, decoder, temp_input, True)
+        print(prediction)
+        prediction2 = [int(e) for e in prediction]
+        return prediction2
 
 

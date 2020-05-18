@@ -1,4 +1,4 @@
-from Rules import tokens
+from MexpTokenizer.Rules import tokens
 START_TAG_NUM = 1000
 END_TAG_NUM = 1001
 class Converter:
@@ -6,7 +6,7 @@ class Converter:
         try:
             f = open("map.in", "r")
         except:
-            f = open("../MexpTokenizer/map.in", "r")
+            f = open("MexpTokenizer/map.in", "r")
         self.mapper = {}
 
         for line in f:

@@ -62,17 +62,3 @@ class ImageProcessor:
 		    plt.xticks([]),plt.yticks([])
 
 		plt.show()
-
-"""
-if __name__ == '__main__':
-	dirs = os.listdir("./")
-
-	# This would print all the files and directories
-	for file in dirs:
-		if len(file.split(".")) > 1 and file.split(".")[1] == "jpg":
-			ip = ImageProcessor(file)
-			ip.GaussianTransform()
-			ip.saveImage("out_"+str(file.split(".")[0])+".png")
-			#ip.comparisonPlot()
-	#ip.comparisonPlot()
-"""
