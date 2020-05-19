@@ -1,14 +1,9 @@
-#from base import Session, engine, Base
-#from traduccion import Traduccion
-
-import sys
-#sys.path.append("..") #dirty trick
-from accesodb.base import Session, engine, Base
-from accesodb.traduccion import Traduccion
-
 import time
 import os
+import sys
 
+from accesodb.base import Session, engine, Base
+from accesodb.traduccion import Traduccion
 
 from ImageAnalysis_Module.ImagePreprocessor.scriptCV import ImageProcessor
 from nn.test_model import img2latSeqConverter, initModels
@@ -27,7 +22,7 @@ def procesar_traducciones(encoder, decoder, converter):
         #assert
         if os.path.exists(BASE_DIR + "/" + name_image):
             ip = ImageProcessor(BASE_DIR + "/" + name_image)
-            ip.GaussianTransform()
+            ip.processBinarization()
             name_image = name_image.replace("/", "_").replace(EXTENSION, ".png")
 
             if not os.path.exists(f"{BASE_DIR}/processed_images/{name_image}" ):

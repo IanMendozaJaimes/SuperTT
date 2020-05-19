@@ -6,11 +6,58 @@ import numpy as np
 import skimage
 import os, sys
 
+from skimage.filters import (threshold_otsu, threshold_niblack,
+                             threshold_sauvola)
+import skimage.io							 
+from skimage.viewer import ImageViewer
+from skimage.transform import resize
+
+from enum import Enum
+
+class ImageAlgorithm(Enum):
+	OTSU = 1
+	SAUVOLA = 2
 class ImageProcessor:
 
 	def __init__(self, pathImg):
-		self.img = cv.imread(pathImg, 0)
-		#self.img = cv.medianBlur(self.img, 9)
+		self.pathImg = pathImg
+		self.img = cv.imread(pathImg, cv.IMREAD_GRAYSCALE)
+
+	def processBinarization(self, algorithm = ImageAlgorithm.SAUVOLA):
+		if algorithm == ImageAlgorithm.SAUVOLA:
+			image = skimage.io.imread(fname=self.pathImg, as_gray=True)
+			thresh_sauvola = threshold_sauvola(image, window_size=51)
+			self.binary_sauvola = image > thresh_sauvola
+		else:
+			pass
+	def saveImage(self, name, algorithm = ImageAlgorithm.SAUVOLA):
+		if algorithm == ImageAlgorithm.SAUVOLA:
+			try:
+				image_resized = resize(self.binary_sauvola, (480, 640), anti_aliasing=False)
+				plt.imsave(name, image_resized, cmap = plt.cm.gray)
+			except Exception as e:
+				print(e)
+		else:
+			pass
+
+	"""
+	def saveImage(self, name, path = None):
+		if path == None:
+			cv.imwrite(name, self.imgTrans)
+		else:
+			cv.imwrite(path+"/"+name, self.imgTrans)
+		print("saved")
+
+	def comparisonPlot(self):
+		titles = ['Original Image','Threshold']
+		images = [self.img, self.imgTrans]
+
+		for i in range(0, 2):
+		    plt.subplot(2,2,i+1),plt.imshow(images[i],'gray')
+		    plt.title(titles[i])
+		    plt.xticks([]),plt.yticks([])
+
+		plt.show()
 
 	def GaussianTransform(self):
 		#self.imgTrans = cv.adaptiveThreshold(self.img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C,\
@@ -43,22 +90,4 @@ class ImageProcessor:
 		self.imgTrans = cv.resize(self.imgTrans, (640, 480))
 
 		#cv.imwrite("out4.png", opening2)
-	def getImage(self):
-		return self.imgTrans
-	def saveImage(self, name, path = None):
-		if path == None:
-			cv.imwrite(name, self.imgTrans)
-		else:
-			cv.imwrite(path+"/"+name, self.imgTrans)
-		print("saved")
-
-	def comparisonPlot(self):
-		titles = ['Original Image','Threshold']
-		images = [self.img, self.imgTrans]
-
-		for i in range(0, 2):
-		    plt.subplot(2,2,i+1),plt.imshow(images[i],'gray')
-		    plt.title(titles[i])
-		    plt.xticks([]),plt.yticks([])
-
-		plt.show()
+	"""

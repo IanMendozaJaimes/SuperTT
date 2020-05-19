@@ -184,7 +184,7 @@ def predict(encoder, decoder, image, beam_dim):
             
 
 # init the models
-def initModels(parent_folder = "./"):
+def initModels(parent_folder = "."):
     encoder = Encoder(name='ENCODER')
     decoder = Decoder(UNITS, EMBEDDING_DIM, VOCAB_SIZE + 2, ATTENTION_DIM, K, Q_WIDTH)
 
