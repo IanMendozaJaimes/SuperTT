@@ -16,7 +16,7 @@ from MexpTokenizer.NSequenceToLatex import Converter
 
 BASE_DIR = "supertt/media/proyectos"
 EXTENSION = ".jpg"
-TIME_STEP = 100 # Segundos
+TIME_STEP = 10 # Segundos
 
 def procesar_traducciones(encoder, decoder, converter):
     session = Session()
