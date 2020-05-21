@@ -234,7 +234,7 @@ def inkml2img(input_path, output_path):
             x,y=zip(*data)
             plt.plot(x,y,linewidth=1,c='black') # Modificamos el ancho del trazo
     figure = plt.gcf()
-    figure.set_size_inches(5, 3) # tam de la imagen 1=100px
+    figure.set_size_inches(5, 3.2) # tam de la imagen 1=100px
     plt.savefig(output_path, dpi=100)#plt.savefig(output_path, bbox_inches='tight', dpi=100)
     plt.gcf().clear()
     
