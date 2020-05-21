@@ -5,11 +5,11 @@ import shutil
 import xml.etree.ElementTree as ET
 import csv
 
-defult_folder_dataset = "./CROHME_testGT_v1"
-defult_folder_converted = "converted_expressions_test"
+#defult_folder_dataset = "./CROHME_testGT_v1"
+#defult_folder_converted = "converted_expressions_test"
 
-#defult_folder_dataset = "./CROHME"
-#defult_folder_converted = "converted_expressions"
+defult_folder_dataset = "./CROHME"
+defult_folder_converted = "converted_expressions"
 class DatasetConverter:
 	def __init__(self):
 		if not os.path.exists(defult_folder_converted):
