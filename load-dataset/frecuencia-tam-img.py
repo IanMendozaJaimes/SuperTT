@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 from itertools import islice
 from collections import OrderedDict 
 
-TRAINING_PATH='./CROHME_dataset_test_v3/converted_expressions_test/'
+TRAINING_PATH='./CROHME_dataset_v5/converted_expressions/'
 img_list = os.listdir(TRAINING_PATH)
 width_dict = {}
 height_dict = {}
@@ -27,13 +27,14 @@ for img in img_list:
 
 width_dict = OrderedDict(sorted(width_dict.items(), key = lambda kv:(kv[1], kv[0]), reverse=True))
 height_dict = OrderedDict(sorted(height_dict.items(), key = lambda kv:(kv[1], kv[0]), reverse=True))
+print(len(img_list))
 print('(width, frecuencia)')
-for i in height_dict:
-    print(i, height_dict[i])
+for i in width_dict:
+    print(i, width_dict[i])
 print('-'*20)
 print('(height, frecuencia)')
-#for i in height_dict:
-#    print(i, height_dict[i])
+for i in height_dict:
+    print(i, height_dict[i])
 #plt.bar(range(len(width_dict)), list(width_dict.values()), align='center')
 #plt.xticks(range(len(width_dict)), list(width_dict.keys()))
 #plt.show()

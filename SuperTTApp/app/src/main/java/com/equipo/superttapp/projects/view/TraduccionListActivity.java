@@ -1,7 +1,6 @@
 package com.equipo.superttapp.projects.view;
 
 import android.app.Activity;
-import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -15,7 +14,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -38,7 +36,6 @@ import com.equipo.superttapp.util.ResultCodes;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.yalantis.ucrop.UCrop;
-import com.yalantis.ucrop.UCropActivity;
 
 import java.io.File;
 import java.io.IOException;

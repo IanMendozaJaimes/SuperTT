@@ -62,22 +62,22 @@ import numpy as np
 
 
 
-def get_positional_encoding_2d(height, width, d_model):
+# def get_positional_encoding_2d(height, width, d_model):
     
-    pe = np.zeros((height, width, d_model))
-    d_model = int(d_model / 2)
-    h_vector = np.arange(height)
-    w_vector = np.expand_dims(np.arange(width), axis=1)
+#     pe = np.zeros((height, width, d_model))
+#     d_model = int(d_model / 2)
+#     h_vector = np.arange(height)
+#     w_vector = np.expand_dims(np.arange(width), axis=1)
 
-    div_term = np.arange(d_model) // 2
-    div_term = np.exp((-2*div_term / d_model) * np.log(10000.0))
+#     div_term = np.arange(d_model) // 2
+#     div_term = np.exp((-2*div_term / d_model) * np.log(10000.0))
     
-    pe[:, :, 0:d_model:2] = np.sin((pe[:, :, 0:d_model:2] + div_term[0::2]) * w_vector)
-    pe[:, :, 1:d_model:2] = np.cos((pe[:, :, 1:d_model:2] + div_term[1::2]) * w_vector)
-    pe[:, :, d_model::2] = np.sin((pe[:, :, d_model::2] + div_term[0::2]) * h_vector[:, np.newaxis, np.newaxis])
-    pe[:, :, d_model+1::2] = np.cos((pe[:, :, d_model+1::2] + div_term[0::2]) * h_vector[:, np.newaxis, np.newaxis])
+#     pe[:, :, 0:d_model:2] = np.sin((pe[:, :, 0:d_model:2] + div_term[0::2]) * w_vector)
+#     pe[:, :, 1:d_model:2] = np.cos((pe[:, :, 1:d_model:2] + div_term[1::2]) * w_vector)
+#     pe[:, :, d_model::2] = np.sin((pe[:, :, d_model::2] + div_term[0::2]) * h_vector[:, np.newaxis, np.newaxis])
+#     pe[:, :, d_model+1::2] = np.cos((pe[:, :, d_model+1::2] + div_term[0::2]) * h_vector[:, np.newaxis, np.newaxis])
 
-    return pe
+#     return pe
 
 
 # a = tf.ones((2,1,3,4))
@@ -85,12 +85,61 @@ def get_positional_encoding_2d(height, width, d_model):
 
 # print(a+pe)
 
-a = tf.ones((1,6,1))
-print(a)
+# a = tf.ones((1,6,1))
+# print(a)
 
-Q = tf.keras.layers.Conv1D(filters=2, kernel_size=5, padding="same", use_bias=False)
+# Q = tf.keras.layers.Conv1D(filters=2, kernel_size=5, padding="same", use_bias=False)
 
-print(Q(a))
+# print(Q(a))
 
 
+EMBEDDING_DIM = 5
+UNITS = 10
+VOCAB_SIZE = 4
+END = 4
+BEGIN = 4
+BATCH_SIZE = 2
 
+def get_num_token_end_expanded(values):
+  end_tensor = tf.expand_dims([END] * values.shape[0], 1)
+  return tf.where(tf.less_equal(values, end_tensor), values, end_tensor)
+
+def get_num_token_end(values):
+  end_tensor = tf.ones((values.shape[0]), dtype=tf.dtypes.int32) * END
+  return tf.where(tf.less_equal(values, end_tensor), values, end_tensor)
+
+
+embedding = tf.keras.layers.Embedding(5, 4)
+
+target = tf.constant([[1, 2, 4, 0], [2, 3, 3, 4]])
+t = target[:,0]
+
+
+is_done = tf.zeros((BATCH_SIZE,), dtype=tf.int32)
+
+end_tensor = tf.constant([4] * BATCH_SIZE)
+
+is_done = tf.where(tf.less(t, end_tensor), is_done, end_tensor)
+
+print(tf.constant([BEGIN] * BATCH_SIZE))
+
+# print(t)
+# print(is_done)
+# print(end_tensor)
+
+# t = target[:,2]
+# is_done = tf.where(tf.less(t, end_tensor), is_done, end_tensor)
+
+# print(t)
+# print(is_done)
+
+# t = target[:,3]
+# is_done = tf.where(tf.less(t, end_tensor), is_done, end_tensor)
+
+# print(is_done)
+# print(tf.reduce_mean(is_done))
+
+# if tf.reduce_mean(is_done) == tf.constant(4):
+#   print('simon')
+# else:
+#   print('nomon')
