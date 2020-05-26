@@ -52,158 +52,157 @@ INVALID_EMAIL = """El correo ingresado no es valido."""
 
 
 class ImageUtil:
-	def __init__(self):
-		self.pre = ""
-		self.HTTP_prefix = ""
-		if settings.SITE_URL[-1] != "/":
-			self.pre = "/" # pragma: no cover
-		self.relative_path = self.pre + "media/proyectos/"
-	def build_url(self, idUser, idProj, nameFile):
-		path = self.HTTP_prefix + settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)
-		
-		print(path)
-		return path
+    def __init__(self):
+        self.pre = ""
+        self.HTTP_prefix = ""
+        if settings.SITE_URL[-1] != "/":
+            self.pre = "/" # pragma: no cover
+        self.relative_path = self.pre + "media/proyectos/"
+    def build_url(self, idUser, idProj, nameFile):
+        path = self.HTTP_prefix + settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)
+        
+        print(path)
+        return path
 class Message():
 
-	def __init__(self):
-		self.messages = {'nMessages':0, 'messages':[]}
-		self.counter = 0
+    def __init__(self):
+        self.messages = {'nMessages':0, 'messages':[]}
+        self.counter = 0
 
-	
-	def get_messages(self):
-		return self.messages
-
-
-	def get_len(self):
-		return self.counter
+    
+    def get_messages(self):
+        return self.messages
 
 
-	def add_alert(self, text, header='', btn='Aceptar'):
-		self.counter += 1
-		self.messages['messages'].append({
-			'id': self.counter,
-			'type': 'alert',
-			'text': text,
-			'header': header,
-			'btn': btn,
-		})
-		self.messages['nMessages'] = self.counter
+    def get_len(self):
+        return self.counter
 
 
-	def add_validation_error(self, text, name):
-		self.counter += 1
-		self.messages['messages'].append({
-			'id': self.counter,
-			'type': 'validation_error',
-			'text': text,
-			'name': name,
-		})
-		self.messages['nMessages'] = self.counter
+    def add_alert(self, text, header='', btn='Aceptar'):
+        self.counter += 1
+        self.messages['messages'].append({
+            'id': self.counter,
+            'type': 'alert',
+            'text': text,
+            'header': header,
+            'btn': btn,
+        })
+        self.messages['nMessages'] = self.counter
+
+
+    def add_validation_error(self, text, name):
+        self.counter += 1
+        self.messages['messages'].append({
+            'id': self.counter,
+            'type': 'validation_error',
+            'text': text,
+            'name': name,
+        })
+        self.messages['nMessages'] = self.counter
 
 
 
 class Validator():
 
-	def are_the_same(self, a, b):
-		if a != b:
-			return False
-		return True 
+    def are_the_same(self, a, b):
+        if a != b:
+            return False
+        return True 
 
-	def field(self, field):
-		if field is None:
-			return False
-		if len(field) == 0:
-			return False
-		return True
+    def field(self, field):
+        if field is None:
+            return False
+        if len(field) == 0:
+            return False
+        return True
 
-	def user_exists(self, user):
-		try:
-			u = User.objects.get(email=user.lower())
-			return True
-		except ObjectDoesNotExist:
-			return False
+    def user_exists(self, user):
+        try:
+            u = User.objects.get(email=user.lower())
+            return True
+        except ObjectDoesNotExist:
+            return False
 
-	def proyect_exists(self, user, proyect_name):
-		try:
-			p = Proyecto.objects.get(usuario=user, nombre=proyect_name)
-			return True
-		except ObjectDoesNotExist:
-			return False
+    def proyect_exists(self, user, proyect_name):
+        try:
+            p = Proyecto.objects.get(usuario=user, nombre=proyect_name)
+            return True
+        except ObjectDoesNotExist:
+            return False
 
-	def name(self, name):
-		r = re.findall(r'[^a-zA-Z ]+', name)
-		if len(r) != 1:
-			return True
-		return False
+    def name(self, name):
+        r = re.findall(r'[^a-zA-Z ]+', name)
+        if len(r) != 1:
+            return True
+        return False
 
-	def email(self, mail):
-		if ' ' in mail or len(mail) == 0:
-			return False
-		if re.search(r'\w+@\w+(\.\w+)+', mail) is None:
-			return False
-		return True
+    def email(self, mail):
+        if ' ' in mail or len(mail) == 0:
+            return False
+        if re.search(r'\w+@\w+(\.\w+)+', mail) is None:
+            return False
+        return True
 
-	def max_len(self, field):
-		if len(field) > 45:
-			return False
-		return True
+    def max_len(self, field):
+        if len(field) > 45:
+            return False
+        return True
 
-	def min_len(self, password):
-		if len(password) < 8:
-			return False
-		return True
+    def min_len(self, password):
+        if len(password) < 8:
+            return False
+        return True
 
 
 
 class Email():
 
-	def __init__(self):
-		self.s = smtplib.SMTP(host=settings.SMTP_HOST, port=settings.SMTP_PORT)
-		self.s.ehlo()
-		self.s.starttls()
-		self.s.ehlo()
-		self.s.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
+    def __init__(self):
+        self.s = smtplib.SMTP(host=settings.SMTP_HOST, port=settings.SMTP_PORT)
+        self.s.ehlo()
+        self.s.starttls()
+        self.s.ehlo()
+        self.s.login(settings.SMTP_USER, settings.SMTP_PASSWORD)
 
 
-	def close(self):
-		self.s.quit()
+    def close(self):
+        self.s.quit()
 
 
-	def get_template(self, template):
-		tem = ''
-		
-		with open(template, 'r') as t:
-			tem = t.read()
+    def get_template(self, template):
+        tem = ''
+        
+        with open(template, 'r') as t:
+            tem = t.read()
 
-		return tem
+        return tem
 
-	def send_validation_email(self, addressee, aname, link):
-		msg = MIMEMultipart()
-		msg['From'] = settings.SMTP_USER
-		msg['To'] = addressee
-		msg['Subject'] = 'Validación de su cuenta.'
-		
-		message = self.get_template(settings.BASE_DIR+'/general/validation_message.html')
-		message = message.replace('PERSON_NAME', aname)
-		message = message.replace('LINK', link)
-		msg.attach(MIMEText(message, 'html'))
+    def send_validation_email(self, addressee, aname, link):
+        msg = MIMEMultipart()
+        msg['From'] = settings.SMTP_USER
+        msg['To'] = addressee
+        msg['Subject'] = 'Validación de su cuenta.'
+        
+        message = self.get_template(settings.BASE_DIR+'/general/validation_message.html')
+        message = message.replace('PERSON_NAME', aname)
+        message = message.replace('LINK', link)
+        msg.attach(MIMEText(message, 'html'))
 
-		self.s.send_message(msg)
+        self.s.send_message(msg)
 
 
-	def send_change_password_email(self, addressee, aname, link):
-		msg = MIMEMultipart()
-		msg['From'] = settings.SMTP_USER
-		msg['To'] = addressee
-		msg['Subject'] = 'Recuperación de contraseña.'
-		
-		message = self.get_template(settings.BASE_DIR+'/general/change_password.html')
-		message = message.replace('PERSON_NAME', aname)
-		message = message.replace('LINK', link)
-		print('message:', message)
-		msg.attach(MIMEText(message, 'html'))
+    def send_change_password_email(self, addressee, aname, link):
+        msg = MIMEMultipart()
+        msg['From'] = settings.SMTP_USER
+        msg['To'] = addressee
+        msg['Subject'] = 'Recuperación de contraseña.'
+        
+        message = self.get_template(settings.BASE_DIR+'/general/change_password.html')
+        message = message.replace('PERSON_NAME', aname)
+        message = message.replace('LINK', link)
+        msg.attach(MIMEText(message, 'html'))
 
-		self.s.send_message(msg)
+        self.s.send_message(msg)
 
 
 
