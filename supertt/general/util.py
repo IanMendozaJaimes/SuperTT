@@ -56,7 +56,7 @@ class ImageUtil:
 		self.pre = ""
 		self.HTTP_prefix = ""
 		if settings.SITE_URL[-1] != "/":
-			self.pre = "/"
+			self.pre = "/" # pragma: no cover
 		self.relative_path = self.pre + "media/proyectos/"
 	def build_url(self, idUser, idProj, nameFile):
 		path = self.HTTP_prefix + settings.SITE_URL + self.relative_path + str(idUser) + "/" + str(idProj) + "/" + str(nameFile)

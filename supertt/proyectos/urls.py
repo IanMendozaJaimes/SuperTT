@@ -15,7 +15,7 @@ urlpatterns = [
 def get_proyects_urls():
 	return [
 		#proyectos
-		path('proyectos/todos', ProyectsView.as_view()),
+		path('proyectos/todos', ProyectsView.as_view(), name="proyectos_todos"),
 		path('proyectos/traducciones', TranslationsView.as_view()),
 		path('proyectos/nuevo', crearProyectoView),
 		path('proyectos/descargar', CreateProyectFile),
