@@ -32,7 +32,6 @@ from users.models import User
 import os
 import pytz
 
-from utils.scriptCV import ImageProcessor
 # Create your views here.
 
 class ProyectsView(LoginRequiredMixin, TemplateView):
@@ -390,27 +389,17 @@ def create_translation_view(request): #request must include idproyecto in body
             t = timezone.localtime(trans.fechaCreacion, tz)
 
             trans.nombre = str(str(t).split('.')[0])
-
-            trans.save()
             idTraduccion = str(trans.id)
-            
             trans.archivo = str(idTraduccion) + "." + mediatype
+
             serializer.save()
- 
-            print(idTraduccion)
+            #print(idTraduccion)
             
             image_file = open(path_file +"/"+ idTraduccion+ "." + mediatype, "wb")
-            if not os.path.exists(path_file + "/" + "transformed"):
-                os.mkdir(path_file + "/" + "transformed")
-            
-            #image_transformed = open(path_file + "/" + "transformed/" + idTraduccion+ "." + mediatype, "w")
             for chunk in file.chunks():
                 image_file.write(chunk)
-                #image_transformed.write(chunk)
             image_file.close()
-            ip = ImageProcessor(path_file +"/"+ idTraduccion+ "." + mediatype)
-            ip.GaussianTransform()
-            ip.saveImage(idTraduccion+ "." + mediatype, path_file + "/" + "transformed/")
+            trans.save()
             
             return Response({"resultCode": 1}, status=status.HTTP_201_CREATED)
         return Response({"resultCode": -1}, status = status.HTTP_400_BAD_REQUEST)
@@ -446,10 +435,10 @@ def methods_translation_view(request, idtraduccion):
                 if t.calificacion > 0:
                     promedio += t.calificacion
                     n += 1
-            promedio /= n
+            if n != 0:
+                promedio /= n
             p.calificacion = promedio
             p.save()
-
             return Response(data =data)
         data["resultCode"] = -1
         return Response(data = data, status = status.HTTP_400_BAD_REQUEST)

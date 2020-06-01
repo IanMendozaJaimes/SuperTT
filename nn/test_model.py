@@ -4,7 +4,7 @@ import tensorflow as tf
 import numpy as np
 import matplotlib.pyplot as plt
 
-from model import *
+from nn.model import *
 
 
 BATCH_SIZE = 2
@@ -96,7 +96,7 @@ def predict_greedy(encoder, decoder, image, plot_attention=False):
                     ax.imshow(temp_att, cmap='gray', alpha=0.6, extent=img.get_extent())
 
                 plt.tight_layout()
-                plt.show()
+                #plt.show()
 
             return sequence
 
@@ -185,24 +185,20 @@ def predict(encoder, decoder, image, beam_dim):
                     i = count
                 count += 1
             return sequences[i], probabilities[i]
-
             
 
-
-
 # init the models
-encoder = Encoder(name='ENCODER')
-decoder = Decoder(UNITS, EMBEDDING_DIM, VOCAB_SIZE + 2, ATTENTION_DIM, K, Q_WIDTH)
+def initModels(parent_folder = "."):
+    encoder = Encoder(name='ENCODER')
+    decoder = Decoder(UNITS, EMBEDDING_DIM, VOCAB_SIZE + 2, ATTENTION_DIM, K, Q_WIDTH)
 
-# we need to use the models first, in order to init its weights
-image = tf.random.uniform((1, 300, 300, 1))
-B = tf.zeros((1, 121, 1))
-hidden = decoder.reset_state(batch_size=1)
-dec_input = get_one_hot(tf.zeros((1), dtype=tf.dtypes.int32), VOCAB_SIZE + 2)
+    # we need to use the models first, in order to init its weights
+    image = tf.random.uniform((1, 300, 300, 1))
+    B = tf.zeros((1, 121, 1))
+    hidden = decoder.reset_state(batch_size=1)
+    dec_input = get_one_hot(tf.zeros((1), dtype=tf.dtypes.int32), VOCAB_SIZE + 2)
 
-features = encoder(image)
-output, ht, attention_weights = decoder([dec_input, hidden, features, B])
-
+<<<<<<< HEAD
 # then we can load the real weights
 encoder.load_weights('SavedModels/model_encoder.h5')
 decoder.load_weights('SavedModels/model_decoder.h5')
@@ -220,11 +216,32 @@ plt.show()
 # prediction = predict_greedy(encoder, decoder, temp_input, True)
 
 # print(prediction)
+=======
+    features = encoder(image)
+    output, ht, attention_weights = decoder([dec_input, hidden, features, B])
 
-# import pathlib
-# image_url = './exampleImages/4.png'
-# data_dir = tf.keras.utils.get_file(origin=image_url, fname='math_expressions', untar=False)
-# data_dir = pathlib.Path(data_dir)
+    # then we can load the real weights
+    encoder.load_weights(f'{parent_folder}/SavedModels/model_encoder.h5')
+    decoder.load_weights(f'{parent_folder}/SavedModels/model_decoder.h5')
 
+    return encoder, decoder
+
+
+>>>>>>> 4f5dc73fae44113c2ed2f1e8b68ff9db4e18896e
+
+########################## DO NOT DELETE THIS CHUNK OF CODE ###########
+import time
+import subprocess
+import os
+import sys
+
+def img2latSeqConverter(image_url, encoder, decoder):
+    print(image_url)
+    if os.path.exists(image_url):
+        temp_input = tf.expand_dims(load_image(image_url), 0)
+        prediction = predict_greedy(encoder, decoder, temp_input, True)
+        print(prediction)
+        prediction2 = [int(e) for e in prediction]
+        return prediction2
 
 
