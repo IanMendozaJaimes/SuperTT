@@ -112,7 +112,7 @@ class TranslationsView(LoginRequiredMixin, TemplateView):
 
 
 
-class ProyectoLista(viewsets.ModelViewSet):
+class ProyectoLista(viewsets.ModelViewSet): # pragma: no cover 
     queryset = Proyecto.objects.all()
     serializer_class = SerializadorProyecto
 
