@@ -327,3 +327,85 @@ class TranslationsViewTest(TestCase):
         url = reverse("traducciones_list_view")
         response = self.client.post(url)
         self.assertEqual(response.status_code, 302)
+
+class CrearProyectoViewTest(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="cambiar@gmail.com", password="cambiar", is_active=True)
+        self.client.login(email="cambiar@gmail.com", password="cambiar")
+        Proyecto.objects.create(usuario=user, nombre="Proyecto", calificacion=0)
+
+    def test_get_response(self):
+        url = reverse("crear_proyecto_view")
+        response = self.client.get(url, {"nombre": "Proyecto 1"})
+        self.assertTrue("{}" in response.content.decode("utf-8"))
+
+    def test_get_response_proyecto_existe_error(self):
+        url = reverse("crear_proyecto_view")
+        response = self.client.get(url, {"nombre": "Proyecto"})
+        self.assertFalse("{}" in response.content.decode("utf-8"))
+
+    def test_get_response_nombre_invalido_error(self):
+        url = reverse("crear_proyecto_view")
+        response = self.client.get(url, {"nombre": ""})
+        self.assertFalse("{}" in response.content.decode("utf-8"))
+
+class CambiarProyectoViewTest(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="usuario@gmail.com", password="cambiar", is_active=True)
+        self.client.login(email="usuario@gmail.com", password="cambiar")
+        Proyecto.objects.create(usuario=user, nombre="Proyecto", calificacion=0)
+        Proyecto.objects.create(usuario=user, nombre="Proyecto prueba", calificacion=0)
+
+    def test_get_response(self):
+        url = reverse("cambiar_proyecto_view")
+        response = self.client.get(url, {"oldnombre": "Proyecto", "nombre": "Nuevo nombre"})
+        self.assertTrue("{}" in response.content.decode("utf-8"))
+
+    def test_get_response_nombre_invalido_error(self):
+        url = reverse("cambiar_proyecto_view")
+        response = self.client.get(url, {"oldnombre": "Proyecto", "nombre": ""})
+        self.assertFalse("{}" in response.content.decode("utf-8"))
+
+    def test_get_response_proyecto_existe_error(self):
+        url = reverse("cambiar_proyecto_view")
+        response = self.client.get(url, {"oldnombre": "Proyecto", "nombre": "Proyecto prueba"})
+        self.assertFalse("{}" in response.content.decode("utf-8"))
+
+class EliminarProyectoViewTest(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="usuario@gmail.com", password="cambiar", is_active=True)
+        self.client.login(email="usuario@gmail.com", password="cambiar")
+        self.proyecto = Proyecto.objects.create(usuario=user, nombre="Proyecto", calificacion=0)
+
+    def test_get_response(self):
+        url = reverse("eliminar_proyecto_view")
+        response = self.client.get(url, {"id": str(self.proyecto.id)})
+        self.assertTrue("{}" in response.content.decode("utf-8"))
+
+class ActualizarTraduccion(TestCase):
+    def setUp(self):
+        user = User.objects.create_user(email="cambiar@gmail.com", password="cambiar", is_active=True)
+        self.client.login(email="cambiar@gmail.com", password="cambiar")
+        self.proyecto = Proyecto.objects.create(usuario=user, nombre="Proyecto1", calificacion=0)
+        self.traduccion = Traduccion.objects.create(proyecto = self.proyecto, 
+            usuario =user, archivo="" , calificacion=0.0, traduccion="")
+        user_error = User.objects.create_user(email="usuario@gmail.com", password="usuario", is_active=True)
+        proyecto_error = Proyecto.objects.create(usuario=user_error, nombre="Proyecto1", calificacion=0)
+        self.traduccion_error = Traduccion.objects.create(proyecto = proyecto_error, 
+            usuario=user_error, archivo="" , calificacion=0.0, traduccion="")
+
+    def test_get_response(self):
+        url = reverse("actualizar_traduccion_view")
+        response = self.client.get(url, {"id": str(self.traduccion.id), "grade": str(5)})
+        self.assertTrue("{}" in response.content.decode("utf-8"))
+
+    def test_get_response_traduccion_error(self):
+        url = reverse("actualizar_traduccion_view")
+        response = self.client.get(url, {"id": str(self.traduccion_error.id), "grade": str(5)})
+        self.assertFalse("{}" in response.content.decode("utf-8"))
+
+    def test_get_response_error(self):
+        url = reverse("actualizar_traduccion_view")
+        response = self.client.get(url, {"id": str(99), "grade": str(5)})
+        self.assertFalse("{}" in response.content.decode("utf-8"))
+

@@ -17,11 +17,11 @@ def get_proyects_urls():
 		#proyectos
 		path('proyectos/todos', ProyectsView.as_view(), name="proyectos_todos"),
 		path('proyectos/traducciones', TranslationsView.as_view(), name="traducciones_list_view"),
-		path('proyectos/nuevo', crearProyectoView),
+		path('proyectos/nuevo', crearProyectoView, name="crear_proyecto_view"),
 		path('proyectos/descargar', CreateProyectFile),
-		path('proyectos/eliminar', eliminarProyectoView),
-		path('proyectos/cambiar', cambiarProyectoView),
-		path('proyectos/calificar_traduccion', actualizarTraduccion),
+		path('proyectos/eliminar', eliminarProyectoView, name="eliminar_proyecto_view"),
+		path('proyectos/cambiar', cambiarProyectoView, name="cambiar_proyecto_view"),
+		path('proyectos/calificar_traduccion', actualizarTraduccion, name="actualizar_traduccion_view"),
 
 		#-------------REST API VIEWS-------------
 		#proyectos
