@@ -12,7 +12,7 @@ def load_image(image_path, resize=False):
     img = tf.image.convert_image_dtype(img, tf.float32)
 
     if resize:
-      img = tf.image.resize(img, (60, 250))
+      img = tf.image.resize(img, (150, 300))
 
     return img
 
@@ -21,12 +21,12 @@ VOCAB_PATH = './vocab.txt'
 
 re = RecognizeMathExpressionsModel(WEIGHTS_PATH, VOCAB_PATH)
 
-image = load_image('./exampleImages/1.png', True)
+image = load_image('./exampleImages/2.png', True)
 
 print(re.predict(image))
 print('')
 
-#plt.imshow(tf.squeeze(image).numpy(), cmap='gray')
-#plt.show()
+plt.imshow(tf.squeeze(image).numpy(), cmap='gray')
+plt.show()
 
 

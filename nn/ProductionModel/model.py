@@ -1,4 +1,5 @@
 from __future__ import absolute_import, division, print_function, unicode_literals
+from NSequenceToLatex import Converter
 
 import numpy as np
 import tensorflow as tf
@@ -27,6 +28,9 @@ class Encoder(tf.keras.Model):
         self.batch_normalization2 = tf.keras.layers.BatchNormalization()
         self.batch_normalization3 = tf.keras.layers.BatchNormalization()
 
+        self.dropout1 = tf.keras.layers.Dropout(0.2)
+        self.dropout2 = tf.keras.layers.Dropout(0.2)
+
     def call(self, x, training=False):
         
         y = self.conv1(x)
@@ -37,10 +41,12 @@ class Encoder(tf.keras.Model):
         y = self.batch_normalization1(y, training)
         y = tf.nn.relu(y)
         y = self.conv4(y)
+        y = self.dropout1(y)
         y = self.pooling3(y)
         y = self.conv5(y)
         y = self.batch_normalization2(y, training)
         y = tf.nn.relu(y)
+        y = self.dropout2(y)
         y = self.pooling4(y)
         y = self.conv6(y)
         y = self.batch_normalization3(y, training)
@@ -81,7 +87,7 @@ class InitialHidden(tf.keras.Model):
   def __call__(self, x):
 
     x = tf.math.reduce_mean(x, axis=1)
-    return self.fc(x) 
+    return self.fc(x)
 
 
 class BahdanauAttention(tf.keras.layers.Layer):
@@ -92,15 +98,21 @@ class BahdanauAttention(tf.keras.layers.Layer):
     self.W2 = tf.keras.layers.Dense(units)
     self.V = tf.keras.layers.Dense(1)
 
-  def call(self, features, hidden):
+    self.Q = tf.keras.layers.Conv1D(filters=16, kernel_size=64, padding="same", use_bias=False)
+    self.Uf = tf.keras.layers.Dense(units, use_bias=False)
+
+
+  def call(self, features, hidden, B):
     # features(Encoder output) shape == (batch_size, L, 512)
 
     # hidden shape == (batch_size, hidden_size)
     # hidden_with_time_axis shape == (batch_size, 1, hidden_size)
     hidden_with_time_axis = tf.expand_dims(hidden, 1)
 
+    F = self.Q(B)
+
     # score shape == (batch_size, L, hidden_size)
-    score = tf.nn.tanh(self.W1(features) + self.W2(hidden_with_time_axis))
+    score = tf.nn.tanh(self.W1(features) + self.W2(hidden_with_time_axis) + self.Uf(F))
 
     # attention_weights shape == (batch_size, L, 1)
     # you get 1 at the last axis because you are applying score to self.V
@@ -126,7 +138,7 @@ class Decoder(tf.keras.Model):
     self.attention = BahdanauAttention(units)
   
 
-  def __call__(self, features, hidden, previous_y, previous_out):
+  def __call__(self, features, hidden, previous_y, previous_out, B):
 
     # embedding_previous_y shape == (batch_size, embedding_dim)
     embedding_previous_y = self.embedding(previous_y)
@@ -143,7 +155,7 @@ class Decoder(tf.keras.Model):
 
     # context_vector shape == (batch_size, hidden_size)
     # attention_weights == (batch_size, L, 1)
-    context_vector, attention_weights = self.attention(features, state)
+    context_vector, attention_weights = self.attention(features, state, B)
 
     # calculating the output
     out = self.o_t(tf.concat([output, context_vector], axis=1))
@@ -160,8 +172,8 @@ class RecognizeMathExpressionsModel():
 
         # this is fixed for this model
         self.UNITS = 512
-        self.EMBEDDING_DIM = 80
-        self.VOCAB_SIZE = 494
+        self.EMBEDDING_DIM = 128
+        self.VOCAB_SIZE = 117+2+1
         self.MAX_LENGTH = 150
 
         self.END = self.VOCAB_SIZE - 1
@@ -173,8 +185,9 @@ class RecognizeMathExpressionsModel():
         self.initial_carry = InitialHidden(self.UNITS)
         self.initial_out = InitialHidden(self.UNITS)
 
+        self.converter = Converter()
+
         self.load_weights(weights_path)
-        self.load_vocab(vocab_path)
 
 
     def load_weights(self, weights_path):
@@ -186,27 +199,15 @@ class RecognizeMathExpressionsModel():
         carry = self.initial_carry(features)
         out = self.initial_out(features)
         dec_input = tf.constant([self.BEGIN] * 1)
+        B = tf.zeros((features.shape[0], features.shape[1], 1))
             
-        predictions, out, attention_weights, hidden = self.decoder(features, [hidden, carry], dec_input, out)
+        predictions, out, attention_weights, hidden = self.decoder(features, [hidden, carry], dec_input, out, B)
 
         self.encoder.load_weights(weights_path + '/encoder.h5')
         self.decoder.load_weights(weights_path + '/decoder.h5')
         self.initial_state.load_weights(weights_path + '/state.h5')
         self.initial_carry.load_weights(weights_path + '/carry.h5')
         self.initial_out.load_weights(weights_path + '/out.h5')
-
-
-    def load_vocab(self, vocab_path):
-
-        tokens_file = open(vocab_path, 'r')
-        count = 0
-
-        for line in tokens_file:
-            count += 1
-            self.tokens[count] = line.strip()
-
-        self.tokens[count+1] = '<s>'
-        self.tokens[count+2] = '</s>'
 
     
     def predict(self, image):
@@ -227,19 +228,23 @@ class RecognizeMathExpressionsModel():
         dec_input = tf.constant([self.BEGIN] * 1)
 
         hidden_and_carry = [hidden, carry]
+        B = tf.zeros((features.shape[0], features.shape[1], 1))
 
-        expression = ''
+        expression = list()
 
         for i in range(0, self.MAX_LENGTH):
-            predictions, out, attention_weights, hidden_and_carry = self.decoder(features, hidden_and_carry, dec_input, out)
+            predictions, out, attention_weights, hidden_and_carry = self.decoder(features, hidden_and_carry, dec_input, out, B)
+            B += attention_weights
 
             predicted_id = tf.random.categorical(predictions, 1)[0][0].numpy()
 
             if predicted_id == self.END:
-                return expression[:-1]
+                break
 
             dec_input = tf.constant([predicted_id])
-            expression += self.tokens[predicted_id] + ' '
+            expression.append(predicted_id)
+        
+        return self.converter.seq2Lat(expression)
 
 
 
