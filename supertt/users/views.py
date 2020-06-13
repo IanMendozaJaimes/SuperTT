@@ -198,7 +198,7 @@ class PasswordRecoverView(TemplateView):
 
 
 
-class CambiarCView(TemplateView):
+class CambiarCView(TemplateView): 
 	template_name = 'cambiar_contra.html'
 
 	def get(self, request, *args, **kwargs):
@@ -318,7 +318,7 @@ def CambiarContraView(request):
 
 
 
-def CambiarFotoView(request):
+def CambiarFotoView(request): # pragma: no cover 
 
 	def get_tipo_archivo(archivo):
 		if '.png' in archivo:

@@ -7,6 +7,11 @@ class UserManagerTest(TestCase):
         user.save()
         self.assertEqual(user.email, "hola@gmail.com")
 
+    def test_create_superuser(self):
+        user = User.objects.create_superuser(email="hola@gmail.com", password="hola")
+        user.save()
+        self.assertEqual(user.email, "hola@gmail.com")
+
     def test_create_user_not_email(self):
         with self.assertRaises(ValueError):
             user = User.objects.create_user(email=None, password="hola")
@@ -18,8 +23,3 @@ class UserManagerTest(TestCase):
     def test_create_superuser_is_superuser_false(self):
         with self.assertRaises(ValueError):
             user = User.objects.create_superuser(email="hola", password="hola", is_superuser=False)
-
-    def test_create_superuser(self):
-        user = User.objects.create_superuser(email="hola@gmail.com", password="hola")
-        user.save()
-        self.assertEqual(user.email, "hola@gmail.com")
