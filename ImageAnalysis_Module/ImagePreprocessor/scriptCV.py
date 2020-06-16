@@ -57,7 +57,7 @@ class ImageProcessor:
 
 			self.binary_sauvola = erosion(self.binary_sauvola)
 
-			self.binary_sauvola = gaussian(self.binary_sauvola)
+			#self.binary_sauvola = gaussian(self.binary_sauvola)
 			
 		elif algorithm == ImageAlgorithm.OTSU:
 			self.otsuBinarization()

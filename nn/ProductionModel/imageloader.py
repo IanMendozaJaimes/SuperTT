@@ -13,8 +13,8 @@ class ImagePredict:
         self.img = tf.image.decode_png(self.img, channels=1)
         self.img = tf.image.convert_image_dtype(self.img, tf.float32)
 
-        plt.imshow(tf.squeeze(self.img).numpy(), cmap='gray')
-        plt.show()
+        #plt.imshow(tf.squeeze(self.img).numpy(), cmap='gray')
+        #plt.show()
 
 
 

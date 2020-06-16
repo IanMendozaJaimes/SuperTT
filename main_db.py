@@ -15,6 +15,7 @@ TIME_STEP = 10 # Segundos
 
 IMAGE_TEST_DATASET = "/home/qapolo/Escritorio/SuperTT/supertt/media/proyectos/processed_images/1_10_98.png"
 def procesar_traducciones(pred):
+    print("PROCESAR TRADUCCIONES")
     session = Session()
     traducciones = session.query(Traduccion).filter(Traduccion.procesado==False).all()
     for elemento in traducciones:
@@ -34,7 +35,7 @@ def procesar_traducciones(pred):
                 elemento.traduccion = pred.predict()
                 elemento.procesado = True
 
-    session.commit()
+                session.commit()
     session.close()
 
 if __name__ == "__main__":

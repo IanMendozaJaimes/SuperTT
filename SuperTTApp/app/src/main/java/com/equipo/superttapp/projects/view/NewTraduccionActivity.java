@@ -72,12 +72,13 @@ public class NewTraduccionActivity extends AppCompatActivity {
         imvPreview.setDrawingCacheEnabled(true);
         imvPreview.buildDrawingCache();
         Bitmap bitmap = imvPreview.getDrawingCache();
+        Bitmap b = Bitmap.createScaledBitmap(bitmap, 300, 250, false);
 
         TraduccionModel model = new TraduccionModel();
         model.setUrl(photoPath);
         model.setIdProyecto(idProyecto);
 
-        viewModel.uploadImage(model, usuarioModel.getKeyAuth(), bitmap).observe(this, result -> {
+        viewModel.uploadImage(model, usuarioModel.getKeyAuth(), b).observe(this, result -> {
             hideProgressBar();
             if (result.getCode().equals(ResultCodes.SUCCESS)) {
                 finish();

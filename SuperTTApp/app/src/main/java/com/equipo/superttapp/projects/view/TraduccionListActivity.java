@@ -142,7 +142,7 @@ public class TraduccionListActivity extends AppCompatActivity implements Traducc
     private void openCropActivity(Uri sourceUri, Uri destinationUri) {
         UCrop.Options options = new UCrop.Options();
         //options.setAllowedGestures(UCropActivity.SCALE, UCropActivity.NONE, UCropActivity.SCALE);
-        options.setFreeStyleCropEnabled(true);
+        options.setFreeStyleCropEnabled(false);
         UCrop.of(sourceUri, destinationUri)
                 .withMaxResultSize(1000, 1000).withOptions(options)
                 .start(this);
