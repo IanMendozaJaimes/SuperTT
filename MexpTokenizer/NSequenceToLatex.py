@@ -1,4 +1,4 @@
-from Rules import tokens
+from MexpTokenizer.Rules import tokens
 START_TAG_NUM = 1000
 END_TAG_NUM = 1001
 class Converter:

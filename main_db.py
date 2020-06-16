@@ -12,6 +12,8 @@ BASE_DIR = "supertt/media/proyectos"
 EXTENSION = ".jpg"
 TIME_STEP = 10 # Segundos
 
+
+IMAGE_TEST_DATASET = "/home/qapolo/Escritorio/SuperTT/supertt/media/proyectos/processed_images/1_10_98.png"
 def procesar_traducciones(pred):
     session = Session()
     traducciones = session.query(Traduccion).filter(Traduccion.procesado==False).all()
@@ -26,11 +28,10 @@ def procesar_traducciones(pred):
             name_image = name_image.replace("/", "_").replace(EXTENSION, ".png")
 
             if not os.path.exists(f"{BASE_DIR}/processed_images/{name_image}" ):
-                ip.saveImage(f"{BASE_DIR}/processed_images/{name_image}", algorithm=ImageAlgorithm.SAUVOLA)
-                pred.load_image(f"{BASE_DIR}/processed_images/{name_image}")
-                seq = pred.predict()
-                
-                elemento.traduccion = seq
+                ip.saveImage(f"{BASE_DIR}/processed_images/{name_image}", algorithm=ImageAlgorithm.SAUVOLA,res=False)                
+                pred.load_image(f"{BASE_DIR}/processed_images/{name_image}", True)
+                #pred.load_image(IMAGE_TEST_DATASET, True) #HARDCODED
+                elemento.traduccion = pred.predict()
                 elemento.procesado = True
 
     session.commit()

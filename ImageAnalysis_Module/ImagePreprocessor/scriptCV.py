@@ -7,10 +7,15 @@ import skimage
 import os, sys
 
 from skimage.filters import (threshold_otsu, threshold_niblack,
-                             threshold_sauvola)
+                             threshold_sauvola, gaussian)
 import skimage.io							 
 from skimage.viewer import ImageViewer
 from skimage.transform import resize
+
+from skimage.morphology import erosion
+from skimage.morphology import disk, skeletonize,thin
+from skimage.util import invert
+from skimage.morphology import convex_hull_image
 
 from enum import Enum
 
@@ -26,53 +31,41 @@ class ImageProcessor:
 	def processBinarization(self, algorithm = ImageAlgorithm.SAUVOLA):
 		if algorithm == ImageAlgorithm.SAUVOLA:
 			image = skimage.io.imread(fname=self.pathImg, as_gray=True)
-			thresh_sauvola = threshold_sauvola(image, window_size=51)
+			thresh_sauvola = threshold_sauvola(image, window_size=81)
 			self.binary_sauvola = image > thresh_sauvola
-		else:
-			pass
-	def saveImage(self, name, algorithm = ImageAlgorithm.SAUVOLA):
-		if algorithm == ImageAlgorithm.SAUVOLA:
-			try:
-				image_resized = resize(self.binary_sauvola, (480, 640), anti_aliasing=False)
-				plt.imsave(name, image_resized, cmap = plt.cm.gray)
-			except Exception as e:
-				print(e)
-		else:
-			pass
+			"""
+			self.binary_sauvola = invert(self.binary_sauvola)
+			chull = convex_hull_image(self.binary_sauvola)
+			[rows, columns] = np.where(chull)
+			EPS = 50
+			row1 = min(rows) - EPS
+			row2 = max(rows) + EPS
+			col1 = min(columns) - EPS
+			col2 = max(columns) + EPS
+			
+			self.binary_sauvola = self.binary_sauvola[row1:row2, col1:col2]
+			self.binary_sauvola = invert(self.binary_sauvola)
+			"""
+			self.binary_sauvola = invert(self.binary_sauvola)
+			#selem = disk(6)
+			
+			self.binary_sauvola = thin(self.binary_sauvola, np.int(15))
+			self.binary_sauvola = np.invert(self.binary_sauvola)
 
-	"""
-	def saveImage(self, name, path = None):
-		if path == None:
-			cv.imwrite(name, self.imgTrans)
-		else:
-			cv.imwrite(path+"/"+name, self.imgTrans)
-		print("saved")
+			#thresh_sauvola = threshold_sauvola(self.binary_sauvola, window_size=21)
+			#self.binary_sauvola = self.binary_sauvola > thresh_sauvola
 
-	def comparisonPlot(self):
-		titles = ['Original Image','Threshold']
-		images = [self.img, self.imgTrans]
+			self.binary_sauvola = erosion(self.binary_sauvola)
 
-		for i in range(0, 2):
-		    plt.subplot(2,2,i+1),plt.imshow(images[i],'gray')
-		    plt.title(titles[i])
-		    plt.xticks([]),plt.yticks([])
+			self.binary_sauvola = gaussian(self.binary_sauvola)
+			
+		elif algorithm == ImageAlgorithm.OTSU:
+			self.otsuBinarization()
 
-		plt.show()
 
-	def GaussianTransform(self):
-		#self.imgTrans = cv.adaptiveThreshold(self.img, 255, cv.ADAPTIVE_THRESH_GAUSSIAN_C,\
-            #cv.THRESH_BINARY, 23, 2)
-		#cv.imwrite("transformed.png", self.imgTrans)
+			
 
-		#kernel = np.ones((5,5),np.uint8)
-
-		#opening2 = cv.morphologyEx(self.imgTrans, cv.MORPH_OPEN, kernel)
-
-		#otsu's 2
-		#ret3,th3 = cv.threshold(self.img,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
-
-		# Otsu's thresholding after Gaussian filtering
-		print("processing image...")
+	def otsuBinarization(self):
 		blur = cv.GaussianBlur(self.img,(5,5),0)
 		ret3,th3 = cv.threshold(blur,0,255,cv.THRESH_BINARY+cv.THRESH_OTSU)
 		self.imgTrans = th3
@@ -81,13 +74,35 @@ class ImageProcessor:
 		At = self.imgTrans.shape[0] * self.imgTrans.shape[1]
 
 		scale_percent = (As * 100 // At)
-		print(scale_percent)
 		
 		width = int( self.img.shape[1] * scale_percent / 100 )
 		height = int( self.img.shape[0] * scale_percent / 100 )
 
-		print(str(width)+"," + str(height))
 		self.imgTrans = cv.resize(self.imgTrans, (640, 480))
 
-		#cv.imwrite("out4.png", opening2)
-	"""
+
+	def saveImage(self, name, algorithm = ImageAlgorithm.SAUVOLA, res = False):
+
+		"""
+		import numpy as np
+		[rows, columns] = np.where(chull)
+		row1 = min(rows)
+		row2 = max(rows)
+		col1 = min(columns)
+		col2 = max(columns)
+		newImage = original[row1:row2, col1:col2]
+		"""
+		if algorithm == ImageAlgorithm.SAUVOLA:
+			try:
+				if res:
+					self.binary_sauvola = resize(self.binary_sauvola, (480, 640), anti_aliasing=False)
+				
+				plt.imsave(name, self.binary_sauvola, cmap = plt.cm.gray)
+			except Exception as e:
+				print(e)
+		elif algorithm == ImageAlgorithm.OTSU:
+			try:
+				cv.imwrite(name, self.imgTrans)
+			except Exception as e:
+				print(e)
+		

@@ -21,7 +21,7 @@ VOCAB_PATH = './vocab.txt'
 
 re = RecognizeMathExpressionsModel(WEIGHTS_PATH, VOCAB_PATH)
 
-image = load_image('./exampleImages/2.png', True)
+image = load_image('./1_12_130.png', True)
 
 print(re.predict(image))
 print('')
