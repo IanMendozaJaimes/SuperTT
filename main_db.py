@@ -29,10 +29,10 @@ def procesar_traducciones(pred):
 
             if not os.path.exists(f"{BASE_DIR}/processed_images/{name_image}" ):
                 ip.saveImage(f"{BASE_DIR}/processed_images/{name_image}", algorithm=ImageAlgorithm.SAUVOLA,res=False)                
-                pred.load_image(f"{BASE_DIR}/processed_images/{name_image}", True)
-                #pred.load_image(IMAGE_TEST_DATASET, True) #HARDCODED
-                elemento.traduccion = pred.predict()
-                elemento.procesado = True
+            pred.load_image(f"{BASE_DIR}/processed_images/{name_image}", True)
+            #pred.load_image(IMAGE_TEST_DATASET, True) #HARDCODED
+            elemento.traduccion = pred.predict()
+            elemento.procesado = True
 
     session.commit()
     session.close()
