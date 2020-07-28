@@ -1,52 +1,51 @@
-# Prototipo de sistema para el reconocimiento de texto en imágenes y su traducción a LaTex.
+# System for Handwritten Mathematical expressions  extracted from smarthphone pictures and translation to LaTeX
+Original Title:  "Prototipo de sistema para el reconocimiento de texto en imágenes y su traducción a LaTex".
+## Description
+```
+This repo contains the capstone project developed during 1 year until June 2020.
+The project is a system for Mathematical expressions recognition given an image taken from a smartphone.
+```
 
-![Arquitectura](https://github.com/IanMendozaJaimes/SuperTT/blob/master/media_markdown/exmaple.PNG?raw=true)
+![Architecture](https://github.com/IanMendozaJaimes/SuperTT/blob/master/media_markdown/exmaple.PNG?raw=true)
 
-#### Alumnos: 
+#### Team Integrants: 
  * [Barrera Pérez Carlos Tonatihu](https://github.com/tonabarrera)
  * [García Medina Juan Carlos](https://github.com/QApolo)
  * [Mendoza Jaimes Ian](https://github.com/IanMendozaJaimes)
 #### Director: 
- * Cortés Galicia Jorge 
-```
-Agregar los archivos PDF a la carpeta en el drive llamada **Archivos** y posteriormente agregar el enlace
- local y el enlace en línea,
- esto con la finalidad de prevenir el caso de que se elimine el archivo del servidor.
-```
-## Pendientes
-* Acotamiento de trabajo (Incluyendo si se acota a solo texto o expresiones matemáticas)
-* Decidir modelo
-## Estado del arte
-[Mathpix](https://mathpix.com/) Muchas características extra
+ * [Cortés Galicia Jorge](https://ieeexplore.ieee.org/author/37086682631)
 
-## Información Útil:
-(21 de abril 2019)
-Breve explicación de las CNN, al final tiene enlaces a muchos papers sobre aplicaciones de las CNN en diferentes campos y muchos otros recursos útiles como un curso de Standford en computer vision
-[https://skymind.ai/wiki/convolutional-network](https://skymind.ai/wiki/convolutional-network)
 
-(14 de abril 2019)
- Puro ternsorflow
- [https://www.tensorflow.org/tutorials/eager/eager_basics](https://www.tensorflow.org/tutorials/eager/eager_basics)
+## State of the art
+* [Mathpix](https://mathpix.com/) 
+* MyScript Nebo
+* SESHAT
+
+## Papers and theory Behind:
 
 (09 abril 2019)
-* Paper esencial
-[Enlace PDF]( http://home.ustc.edu.cn/~xysszjs/paper/PR2017.pdf)
-[Enlace local](https://drive.google.com/open?id=1q7J-Fs8jnWT0yXSlXNXTd48s-dBytrxv)
-* Conjunto de datos que contiene imágenes y su respectiva equivalencia en Latex.
-[Enlace](http://www.iapr-tc11.org/mediawiki/index.php/CROHME:_Competition_on_Recognition_of_Online_Handwritten_Mathematical_Expressions)
+* Watch, attend and parse: An end-to-end neural network based approach to handwritten mathematical expression recognition
+[PDF Link]( http://home.ustc.edu.cn/~xysszjs/paper/PR2017.pdf)
+[local Link](https://drive.google.com/open?id=1q7J-Fs8jnWT0yXSlXNXTd48s-dBytrxv)
+* CHROME dataset desctiption.
+[link](http://www.iapr-tc11.org/mediawiki/index.php/CROHME:_Competition_on_Recognition_of_Online_Handwritten_Mathematical_Expressions)
 
-* Similar
-[Enlace PDF](https://arxiv.org/pdf/1609.04938.pdf)
-[Enlace local](https://drive.google.com/open?id=1NWzY9_ReEqHK6YaZpkt9tPM9srUDunNW)
-* Artículo de introducción a el tema la técnica que usan los papers de arriba (nuevos métodos)
-[Artículo](https://towardsdatascience.com/build-a-handwritten-text-recognition-system-using-tensorflow-2326a3487cd5)
+* Image-to-Markup Generation with Coarse-to-Fine Attention
+[PDF link](https://arxiv.org/pdf/1609.04938.pdf)
+[Local link](https://drive.google.com/open?id=1NWzY9_ReEqHK6YaZpkt9tPM9srUDunNW)
+* Introductory paper to the technique used in the above papers (newer methods)
+[Paper](https://towardsdatascience.com/build-a-handwritten-text-recognition-system-using-tensorflow-2326a3487cd5)
 
-<!--stackedit_data:
-eyJoaXN0b3J5IjpbLTM1NjQ0NTM1MSwtMjk5NzMyMTksMjE0Nj
-czNDczMiwxODUwODkyNzQ5LDM3Nzg0NjI5OCwxNjI1MDQ0NTM5
-LDk3NjAyNzA3LC0xOTg0MDIzNzQxLDMxMTczNjkzNCwxNjA4OD
-Q3NCwtNDYxMjMwMTk1LC05MDQ2OTQwODAsLTY4OTE4MjA1Mywt
-MTQ2NTg3MTU0MywtMTMzOTk2Njk4OSwtODgyNjE1ODMzLDIwMD
-c3NjczNjksLTcxNDM2NTM3OSwtMjA3OTc3MjI3NSwxODIwNDE4
-NDc4XX0=
--->
+## Specific Modules
+All of the modules are stored within this same repo well organized inside folders.
+*  [**Image analysis module**](https://github.com/IanMendozaJaimes/SuperTT/tree/master/ImageAnalysis_Module/ImagePreprocessor) This process the taken picture from the smartphone and transform it to be as close as possible to the images from the Dataset.
+
+* [**LaTeX Translation module**](https://github.com/IanMendozaJaimes/SuperTT/tree/master/nn) Deep Learning module developed using TensorFlow 2.0 that takes as input the image previously processed by the Image analysis module.
+
+* [**LaTeX tokenizer**](https://github.com/IanMendozaJaimes/SuperTT/tree/master/MexpTokenizer) Module developed using Lex in python that takes a LaTeX sequence and returns a numeric sequence to be loaded later as a Tensor in TensorFlow.
+
+*  [**Android app**](https://github.com/IanMendozaJaimes/SuperTT/tree/master/SuperTTApp) for taking pictures containing handwritten mathematical expressions
+
+* [**Web server**](https://github.com/IanMendozaJaimes/SuperTT/tree/master/supertt) Server that handles the above described modules communicating the android app with the database through a REST API.
+
+* **Users management module** This module allows to have in the UI the translations organized in projects giving the user the ability to login anywhere and see his previous projects. 
